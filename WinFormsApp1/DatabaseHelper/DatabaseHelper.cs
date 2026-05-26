@@ -7,7 +7,7 @@ namespace FinalProjek.DatabaseHelper
 {
     public class DatabaseHelper
     {
-        private static string connString = "Host=localhost;Port=5432;Database=PBO LAST;Username=postgres;Password=12345";
+        private static string connString = "Host=ep-wispy-river-aoxu1bki-pooler.c-2.ap-southeast-1.aws.neon.tech; Database=neondb; Username=neondb_owner; Password=npg_8sXeqj6NgdTE; SSL Mode=VerifyFull; Channel Binding=Require;";
 
         public static NpgsqlConnection GetConnection()
         {
