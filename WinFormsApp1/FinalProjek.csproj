@@ -9,6 +9,11 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Folder Include="Controler\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Npgsql" Version="10.0.2" />
     <Folder Include="Model\" />
     <Folder Include="DatabaseHelper\" />
   </ItemGroup>
