@@ -32,16 +32,17 @@
             label1 = new Label();
             label2 = new Label();
             label3 = new Label();
-            textBox1 = new TextBox();
+            npgsqlCommandBuilder1 = new Npgsql.NpgsqlCommandBuilder();
+            button1 = new Button();
             panel1.SuspendLayout();
             SuspendLayout();
             // 
             // panel1
             // 
             panel1.BackColor = Color.Transparent;
-            panel1.BackgroundImage = FinalProjek.Properties.Resources.login;
+            panel1.BackgroundImage = Properties.Resources.login__2_;
             panel1.BackgroundImageLayout = ImageLayout.Zoom;
-            panel1.Controls.Add(textBox1);
+            panel1.Controls.Add(button1);
             panel1.Controls.Add(label3);
             panel1.Controls.Add(label2);
             panel1.Controls.Add(label1);
@@ -78,25 +79,29 @@
             label3.AutoSize = true;
             label3.Font = new Font("Times New Roman", 8F, FontStyle.Regular, GraphicsUnit.Point, 0);
             label3.ForeColor = Color.FromArgb(128, 64, 64);
-            label3.Location = new Point(475, 262);
+            label3.Location = new Point(475, 250);
             label3.Name = "label3";
             label3.Size = new Size(69, 19);
             label3.TabIndex = 2;
             label3.Text = "Password";
             label3.Click += label3_Click;
             // 
-            // textBox1
+            // npgsqlCommandBuilder1
             // 
-            textBox1.BackColor = Color.BlanchedAlmond;
-            textBox1.Font = new Font("Times New Roman", 10F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            textBox1.ForeColor = Color.FromArgb(128, 64, 0);
-            textBox1.Location = new Point(479, 340);
-            textBox1.Name = "textBox1";
-            textBox1.Size = new Size(222, 30);
-            textBox1.TabIndex = 3;
-            textBox1.Text = "Masuk";
-            textBox1.TextAlign = HorizontalAlignment.Center;
-            textBox1.TextChanged += textBox1_TextChanged;
+            npgsqlCommandBuilder1.QuotePrefix = "\"";
+            npgsqlCommandBuilder1.QuoteSuffix = "\"";
+            // 
+            // button1
+            // 
+            button1.BackColor = Color.Wheat;
+            button1.Font = new Font("Times New Roman", 11F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            button1.ForeColor = Color.FromArgb(128, 64, 64);
+            button1.Location = new Point(477, 338);
+            button1.Name = "button1";
+            button1.Size = new Size(226, 45);
+            button1.TabIndex = 3;
+            button1.Text = "Login";
+            button1.UseVisualStyleBackColor = false;
             // 
             // Login
             // 
@@ -117,6 +122,7 @@
         private Label label2;
         private Label label1;
         private Label label3;
-        private TextBox textBox1;
+        private Button button1;
+        private Npgsql.NpgsqlCommandBuilder npgsqlCommandBuilder1;
     }
 }
