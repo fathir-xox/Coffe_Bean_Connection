@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Security.Cryptography;
 using System.Text;
 
-namespace FinalProjek.DatabaseHelper
+namespace FinalProjek.Helper
 {
     public static class PWhelper
     {
