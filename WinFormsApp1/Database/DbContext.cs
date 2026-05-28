@@ -1,17 +1,16 @@
-﻿using Npgsql;
-using System;
-using System.Collections.Generic;
-using System.Text;
-
+﻿using System;
+using DotNetEnv;
 namespace FinalProjek.Database
 {
-    internal class DbContext
+    public class DbContext
     {
-        private static string connString = "Host=ep-wispy-river-aoxu1bki-pooler.c-2.ap-southeast-1.aws.neon.tech; Database=neondb; Username=neondb_owner; Password=npg_8sXeqj6NgdTE; SSL Mode=VerifyFull; Channel Binding=Require;";
+        
+        public string? connStr;
 
-        public static NpgsqlConnection GetConnection()
+        public DbContext()
         {
-            return new NpgsqlConnection(connString);
+            Env.Load();
+            connStr = Environment.GetEnvironmentVariable("CONN_STR");
         }
-    }   
+    }
 }

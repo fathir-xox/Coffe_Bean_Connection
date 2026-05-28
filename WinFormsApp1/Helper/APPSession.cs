@@ -9,7 +9,7 @@ namespace FinalProjek.Helper
     public static class APPSession
     {
         public static User CurrentUser { get; private set; }
-        public static IsAuthenticated => CurrentUser != null;
+        public static bool IsAuthenticated => CurrentUser != null;
 
         public static void SetUser(User user)
         {

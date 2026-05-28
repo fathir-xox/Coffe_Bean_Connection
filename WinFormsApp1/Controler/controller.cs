@@ -9,20 +9,20 @@ using System.Text;
 
 namespace FinalProjek.Controler
 {
-    public class controler
+    public class controller
     {
         private DbContext dbHelper;
 
-        public controler()
+        public controller()
         {
             dbHelper = new DbContext();
         }
-        
+
         public User login(User user)
         {
             try
             {
-                using (var conn = new NpgsqlConnection(dbHelper.connString))
+                using NpgsqlConnection conn = new NpgsqlConnection(dbHelper.connStr);
                 {
                     conn.Open();
                     string query = @"
@@ -36,9 +36,9 @@ namespace FinalProjek.Controler
                         cmd.Parameters.AddWithValue("@username", user.username);
                         cmd.Parameters.AddWithValue("@password", hashedPassword);
 
-                        using(var read = cmd.ExecuteReader())
+                        using (var read = cmd.ExecuteReader())
                         {
-                            if (read.Read)
+                            if (read.Read())
                             {
                                 string role = read.GetString(0);
                                 UserRole roleEnum = (UserRole)Enum.Parse(typeof(UserRole), role, true);
@@ -55,7 +55,7 @@ namespace FinalProjek.Controler
 
                             return null;
                         }
-                    }                   
+                    }
                 }
             }
             catch (Exception ex)
@@ -69,7 +69,7 @@ namespace FinalProjek.Controler
         {
             try
             {
-                using (var conn = new NpgsqlConnection(dbHelper.connString))
+                using (var conn = new NpgsqlConnection(dbHelper.connStr))
                 {
                     conn.Open();
                     string query = @"
@@ -94,4 +94,5 @@ namespace FinalProjek.Controler
             }
 
         }
+    }
 }
