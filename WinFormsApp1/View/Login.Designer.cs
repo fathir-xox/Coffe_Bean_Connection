@@ -29,7 +29,7 @@
         private void InitializeComponent()
         {
             panel1 = new Panel();
-            button1 = new Button();
+            btLogin = new Button();
             label3 = new Label();
             label2 = new Label();
             label1 = new Label();
@@ -46,7 +46,7 @@
             panel1.BackgroundImageLayout = ImageLayout.Zoom;
             panel1.Controls.Add(textBox2);
             panel1.Controls.Add(textBox1);
-            panel1.Controls.Add(button1);
+            panel1.Controls.Add(btLogin);
             panel1.Controls.Add(label3);
             panel1.Controls.Add(label2);
             panel1.Controls.Add(label1);
@@ -55,17 +55,18 @@
             panel1.Size = new Size(801, 453);
             panel1.TabIndex = 0;
             // 
-            // button1
+            // btLogin
             // 
-            button1.BackColor = Color.Wheat;
-            button1.Font = new Font("Times New Roman", 11F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            button1.ForeColor = Color.FromArgb(128, 64, 64);
-            button1.Location = new Point(477, 338);
-            button1.Name = "button1";
-            button1.Size = new Size(226, 45);
-            button1.TabIndex = 3;
-            button1.Text = "Login";
-            button1.UseVisualStyleBackColor = false;
+            btLogin.BackColor = Color.Wheat;
+            btLogin.Font = new Font("Times New Roman", 11F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            btLogin.ForeColor = Color.FromArgb(128, 64, 64);
+            btLogin.Location = new Point(477, 338);
+            btLogin.Name = "btLogin";
+            btLogin.Size = new Size(226, 45);
+            btLogin.TabIndex = 3;
+            btLogin.Text = "Login";
+            btLogin.UseVisualStyleBackColor = false;
+            btLogin.Click += button1_Click;
             // 
             // label3
             // 
@@ -144,7 +145,7 @@
         private Label label2;
         private Label label1;
         private Label label3;
-        private Button button1;
+        private Button btLogin;
         private Npgsql.NpgsqlCommandBuilder npgsqlCommandBuilder1;
         private TextBox textBox1;
         private TextBox textBox2;
