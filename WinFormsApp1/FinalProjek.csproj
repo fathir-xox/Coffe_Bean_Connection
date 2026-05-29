@@ -9,6 +9,18 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="DotNetEnv" Version="3.2.0" />
+    <PackageReference Include="Npgsql" Version="10.0.3" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Update=".env">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="View\" />
     <PackageReference Include="Npgsql" Version="10.0.2" />
   </ItemGroup>
 

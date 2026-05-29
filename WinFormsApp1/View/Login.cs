@@ -1,23 +1,22 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Text;
-using System.Windows.Forms;
-using FinalProjek.Controler;
+﻿using FinalProjek.Controler;
 using FinalProjek.Helper;
 using FinalProjek.Model;
+using FinalProjek.View.Admin_View;
+using FinalProjek.View.Kasir_View;
 
 
 namespace FinalProjek.View
 {
     public partial class Login : Form
     {
+        private controller _controller;
         public Login()
         {
             InitializeComponent();
+            _controller = new controller();
+            tbPasswordLogin.UseSystemPasswordChar = true;
         }
+        
 
         private void Login_Load(object sender, EventArgs e)
         {
@@ -46,42 +45,43 @@ namespace FinalProjek.View
 
         private void button1_Click(object sender, EventArgs e)
         {
-            string username = textBox1.Text;
-            string password = textBox2.Text;
+            string username = tbUsernameLogin.Text;
+            string password = tbPasswordLogin.Text;
 
             if (string.IsNullOrEmpty(username) || string.IsNullOrWhiteSpace(password))
             {
                 MessageBox.Show("Username dan password tidak boleh kosong.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
             }
 
             try
             {
                 string hasPassword = PWhelper.HashPassword(password);
-                UserModel user = new UserModel
+                User user = new User
                 {
-                    UserName = username,
+                    username = username,
                     password = hasPassword
                 };
 
-                var auth = Controler.Login(user);
+                var auth = _controller.login(user);
                 if (auth != null)
                 {
-                    MessageBox.Show($"Login berhasil! Selamat datang {user.UserName}", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    MessageBox.Show($"Login berhasil! Selamat datang {user.username}", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     
-                    AppSession.SetUser(auth);
+                    APPSession.SetUser(auth);
 
-                    if (AppSession.CurrentUser.Role == UserRole.admin)
+                    if (APPSession.CurrentUser.role == UserRole.Admin)
                     {
-                        AdminDashboardView admin = new AdminDashboardView();
-                        admin.FormClosed += (s, args) => this.Close();
-                        admin.Show();
+                        AdminDashboardView adminView = new AdminDashboardView();
+                        adminView.FormClosed += (s, args) => this.Close();
+                        adminView.Show();
                         this.Hide();
                     }
                     else
                     {
-                        UserDashboardView userView = new UserDashboardView();
-                        admin.FormClosed += (s, args) => this.Close();
-                        admin.Show();
+                        KasirDashboardView kasirView = new KasirDashboardView();
+                        kasirView.FormClosed += (s, args) => this.Close();
+                        kasirView.Show();
                         this.Hide();
                     }
 

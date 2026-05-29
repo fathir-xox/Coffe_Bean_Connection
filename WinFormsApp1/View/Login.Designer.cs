@@ -29,8 +29,8 @@
         private void InitializeComponent()
         {
             panel1 = new Panel();
-            textBox2 = new TextBox();
-            textBox1 = new TextBox();
+            tbPasswordLogin = new TextBox();
+            tbUsernameLogin = new TextBox();
             btLogin = new Button();
             label3 = new Label();
             label2 = new Label();
@@ -44,8 +44,8 @@
             panel1.BackColor = Color.Transparent;
             panel1.BackgroundImage = Properties.Resources.login__3_;
             panel1.BackgroundImageLayout = ImageLayout.Zoom;
-            panel1.Controls.Add(textBox2);
-            panel1.Controls.Add(textBox1);
+            panel1.Controls.Add(tbPasswordLogin);
+            panel1.Controls.Add(tbUsernameLogin);
             panel1.Controls.Add(btLogin);
             panel1.Controls.Add(label3);
             panel1.Controls.Add(label2);
@@ -55,23 +55,23 @@
             panel1.Size = new Size(801, 453);
             panel1.TabIndex = 0;
             // 
-            // textBox2
+            // tbPasswordLogin
             // 
-            textBox2.BackColor = Color.White;
-            textBox2.ForeColor = Color.Black;
-            textBox2.Location = new Point(490, 285);
-            textBox2.Name = "textBox2";
-            textBox2.Size = new Size(198, 31);
-            textBox2.TabIndex = 5;
+            tbPasswordLogin.BackColor = Color.White;
+            tbPasswordLogin.ForeColor = Color.Black;
+            tbPasswordLogin.Location = new Point(490, 285);
+            tbPasswordLogin.Name = "tbPasswordLogin";
+            tbPasswordLogin.Size = new Size(198, 31);
+            tbPasswordLogin.TabIndex = 5;
             // 
-            // textBox1
+            // tbUsernameLogin
             // 
-            textBox1.BackColor = Color.White;
-            textBox1.ForeColor = Color.Black;
-            textBox1.Location = new Point(490, 206);
-            textBox1.Name = "textBox1";
-            textBox1.Size = new Size(198, 31);
-            textBox1.TabIndex = 4;
+            tbUsernameLogin.BackColor = Color.White;
+            tbUsernameLogin.ForeColor = Color.Black;
+            tbUsernameLogin.Location = new Point(490, 206);
+            tbUsernameLogin.Name = "tbUsernameLogin";
+            tbUsernameLogin.Size = new Size(198, 31);
+            tbUsernameLogin.TabIndex = 4;
             // 
             // btLogin
             // 
@@ -147,7 +147,7 @@
         private Label label3;
         private Button btLogin;
         private Npgsql.NpgsqlCommandBuilder npgsqlCommandBuilder1;
-        private TextBox textBox1;
-        private TextBox textBox2;
+        private TextBox tbUsernameLogin;
+        private TextBox tbPasswordLogin;
     }
 }
