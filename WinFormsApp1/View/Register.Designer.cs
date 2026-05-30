@@ -29,14 +29,14 @@
         private void InitializeComponent()
         {
             panel1 = new Panel();
-            btLogin = new Button();
+            tbPasswordRegister = new TextBox();
+            tbUsernameRegister = new TextBox();
+            tbFullNameRegister = new TextBox();
+            btRegister = new Button();
             label4 = new Label();
             label3 = new Label();
             label1 = new Label();
             label2 = new Label();
-            tbFullNameRegister = new TextBox();
-            tbUsernameRegister = new TextBox();
-            tbPasswordRegister = new TextBox();
             panel1.SuspendLayout();
             SuspendLayout();
             // 
@@ -48,7 +48,7 @@
             panel1.Controls.Add(tbPasswordRegister);
             panel1.Controls.Add(tbUsernameRegister);
             panel1.Controls.Add(tbFullNameRegister);
-            panel1.Controls.Add(btLogin);
+            panel1.Controls.Add(btRegister);
             panel1.Controls.Add(label4);
             panel1.Controls.Add(label3);
             panel1.Controls.Add(label1);
@@ -58,18 +58,45 @@
             panel1.Size = new Size(802, 452);
             panel1.TabIndex = 0;
             // 
-            // btLogin
+            // tbPasswordRegister
             // 
-            btLogin.BackColor = Color.Wheat;
-            btLogin.Font = new Font("Times New Roman", 11F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            btLogin.ForeColor = Color.FromArgb(128, 64, 64);
-            btLogin.Location = new Point(308, 358);
-            btLogin.Name = "btLogin";
-            btLogin.Size = new Size(226, 45);
-            btLogin.TabIndex = 4;
-            btLogin.Text = "Register";
-            btLogin.UseVisualStyleBackColor = false;
-            btLogin.Click += btLogin_Click;
+            tbPasswordRegister.BackColor = Color.White;
+            tbPasswordRegister.ForeColor = Color.Black;
+            tbPasswordRegister.Location = new Point(323, 299);
+            tbPasswordRegister.Name = "tbPasswordRegister";
+            tbPasswordRegister.Size = new Size(198, 31);
+            tbPasswordRegister.TabIndex = 7;
+            // 
+            // tbUsernameRegister
+            // 
+            tbUsernameRegister.BackColor = Color.White;
+            tbUsernameRegister.ForeColor = Color.Black;
+            tbUsernameRegister.Location = new Point(324, 225);
+            tbUsernameRegister.Name = "tbUsernameRegister";
+            tbUsernameRegister.Size = new Size(198, 31);
+            tbUsernameRegister.TabIndex = 6;
+            // 
+            // tbFullNameRegister
+            // 
+            tbFullNameRegister.BackColor = Color.White;
+            tbFullNameRegister.ForeColor = Color.Black;
+            tbFullNameRegister.Location = new Point(324, 151);
+            tbFullNameRegister.Name = "tbFullNameRegister";
+            tbFullNameRegister.Size = new Size(198, 31);
+            tbFullNameRegister.TabIndex = 5;
+            // 
+            // btRegister
+            // 
+            btRegister.BackColor = Color.Wheat;
+            btRegister.Font = new Font("Times New Roman", 11F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            btRegister.ForeColor = Color.FromArgb(128, 64, 64);
+            btRegister.Location = new Point(308, 358);
+            btRegister.Name = "btRegister";
+            btRegister.Size = new Size(226, 45);
+            btRegister.TabIndex = 4;
+            btRegister.Text = "Register";
+            btRegister.UseVisualStyleBackColor = false;
+            btRegister.Click += btLogin_Click;
             // 
             // label4
             // 
@@ -117,33 +144,6 @@
             label2.Text = "REGISTER";
             label2.Click += label2_Click;
             // 
-            // tbFullNameRegister
-            // 
-            tbFullNameRegister.BackColor = Color.White;
-            tbFullNameRegister.ForeColor = Color.Black;
-            tbFullNameRegister.Location = new Point(324, 151);
-            tbFullNameRegister.Name = "tbFullNameRegister";
-            tbFullNameRegister.Size = new Size(198, 31);
-            tbFullNameRegister.TabIndex = 5;
-            // 
-            // tbUsernameRegister
-            // 
-            tbUsernameRegister.BackColor = Color.White;
-            tbUsernameRegister.ForeColor = Color.Black;
-            tbUsernameRegister.Location = new Point(324, 225);
-            tbUsernameRegister.Name = "tbUsernameRegister";
-            tbUsernameRegister.Size = new Size(198, 31);
-            tbUsernameRegister.TabIndex = 6;
-            // 
-            // tbPasswordRegister
-            // 
-            tbPasswordRegister.BackColor = Color.White;
-            tbPasswordRegister.ForeColor = Color.Black;
-            tbPasswordRegister.Location = new Point(323, 299);
-            tbPasswordRegister.Name = "tbPasswordRegister";
-            tbPasswordRegister.Size = new Size(198, 31);
-            tbPasswordRegister.TabIndex = 7;
-            // 
             // Register
             // 
             AutoScaleDimensions = new SizeF(10F, 25F);
@@ -164,7 +164,7 @@
         private Label label1;
         private Label label4;
         private Label label3;
-        private Button btLogin;
+        private Button btRegister;
         private TextBox tbPasswordRegister;
         private TextBox tbUsernameRegister;
         private TextBox tbFullNameRegister;
