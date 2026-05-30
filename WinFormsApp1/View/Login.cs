@@ -16,7 +16,7 @@ namespace FinalProjek.View
             _controller = new controller();
             tbPasswordLogin.UseSystemPasswordChar = true;
         }
-        
+
 
         private void Login_Load(object sender, EventArgs e)
         {
@@ -67,10 +67,10 @@ namespace FinalProjek.View
                 if (auth != null)
                 {
                     MessageBox.Show($"Login berhasil! Selamat datang {user.username}", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                    
+
                     APPSession.SetUser(auth);
 
-                    if (APPSession.CurrentUser.role == UserRole.Admin)
+                    if (APPSession.CurrentUser.role == UserRole.Admin) //kalau admin, masuk ke dashboard admin, kalau user masuk ke dashboard kasir
                     {
                         AdminDashboardView adminView = new AdminDashboardView();
                         adminView.FormClosed += (s, args) => this.Close();
@@ -95,6 +95,16 @@ namespace FinalProjek.View
             {
                 MessageBox.Show($"Gagal Login: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
+        }
+
+        private void tbPasswordLogin_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void tbUsernameLogin_TextChanged(object sender, EventArgs e)
+        {
+
         }
     }
 }

@@ -42,7 +42,7 @@
             // panel1
             // 
             panel1.BackColor = Color.Transparent;
-            panel1.BackgroundImage = Properties.Resources.login__3_;
+            panel1.BackgroundImage = Properties.Resources.login__6_;
             panel1.BackgroundImageLayout = ImageLayout.Zoom;
             panel1.Controls.Add(tbPasswordLogin);
             panel1.Controls.Add(tbUsernameLogin);
@@ -50,37 +50,39 @@
             panel1.Controls.Add(label3);
             panel1.Controls.Add(label2);
             panel1.Controls.Add(label1);
-            panel1.Location = new Point(0, 0);
+            panel1.Location = new Point(0, -23);
             panel1.Name = "panel1";
-            panel1.Size = new Size(801, 453);
+            panel1.Size = new Size(1259, 708);
             panel1.TabIndex = 0;
             // 
             // tbPasswordLogin
             // 
             tbPasswordLogin.BackColor = Color.White;
             tbPasswordLogin.ForeColor = Color.Black;
-            tbPasswordLogin.Location = new Point(490, 285);
+            tbPasswordLogin.Location = new Point(781, 425);
             tbPasswordLogin.Name = "tbPasswordLogin";
-            tbPasswordLogin.Size = new Size(198, 31);
+            tbPasswordLogin.Size = new Size(280, 31);
             tbPasswordLogin.TabIndex = 5;
+            tbPasswordLogin.TextChanged += tbPasswordLogin_TextChanged;
             // 
             // tbUsernameLogin
             // 
             tbUsernameLogin.BackColor = Color.White;
             tbUsernameLogin.ForeColor = Color.Black;
-            tbUsernameLogin.Location = new Point(490, 206);
+            tbUsernameLogin.Location = new Point(782, 323);
             tbUsernameLogin.Name = "tbUsernameLogin";
-            tbUsernameLogin.Size = new Size(198, 31);
+            tbUsernameLogin.Size = new Size(280, 31);
             tbUsernameLogin.TabIndex = 4;
+            tbUsernameLogin.TextChanged += tbUsernameLogin_TextChanged;
             // 
             // btLogin
             // 
             btLogin.BackColor = Color.Wheat;
-            btLogin.Font = new Font("Times New Roman", 11F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            btLogin.ForeColor = Color.FromArgb(128, 64, 64);
-            btLogin.Location = new Point(477, 338);
+            btLogin.Font = new Font("Times New Roman", 14F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            btLogin.ForeColor = Color.FromArgb(100, 60, 20);
+            btLogin.Location = new Point(773, 506);
             btLogin.Name = "btLogin";
-            btLogin.Size = new Size(226, 45);
+            btLogin.Size = new Size(299, 55);
             btLogin.TabIndex = 3;
             btLogin.Text = "Login";
             btLogin.UseVisualStyleBackColor = false;
@@ -89,11 +91,11 @@
             // label3
             // 
             label3.AutoSize = true;
-            label3.Font = new Font("Times New Roman", 8F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            label3.ForeColor = Color.FromArgb(128, 64, 64);
-            label3.Location = new Point(477, 256);
+            label3.Font = new Font("Times New Roman", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            label3.ForeColor = Color.FromArgb(100, 60, 20);
+            label3.Location = new Point(779, 387);
             label3.Name = "label3";
-            label3.Size = new Size(69, 19);
+            label3.Size = new Size(104, 27);
             label3.TabIndex = 2;
             label3.Text = "Password";
             label3.Click += label3_Click;
@@ -101,11 +103,11 @@
             // label2
             // 
             label2.AutoSize = true;
-            label2.Font = new Font("Times New Roman", 8F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            label2.ForeColor = Color.FromArgb(128, 64, 64);
-            label2.Location = new Point(477, 179);
+            label2.Font = new Font("Times New Roman", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            label2.ForeColor = Color.FromArgb(100, 60, 20);
+            label2.Location = new Point(779, 286);
             label2.Name = "label2";
-            label2.Size = new Size(70, 19);
+            label2.Size = new Size(108, 27);
             label2.TabIndex = 1;
             label2.Text = "Username";
             label2.Click += label2_Click;
@@ -113,11 +115,11 @@
             // label1
             // 
             label1.AutoSize = true;
-            label1.Font = new Font("Times New Roman", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            label1.ForeColor = Color.FromArgb(128, 64, 64);
-            label1.Location = new Point(545, 119);
+            label1.Font = new Font("Times New Roman", 16F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            label1.ForeColor = Color.FromArgb(100, 60, 20);
+            label1.Location = new Point(863, 210);
             label1.Name = "label1";
-            label1.Size = new Size(91, 26);
+            label1.Size = new Size(119, 36);
             label1.TabIndex = 0;
             label1.Text = "LOGIN";
             // 
@@ -130,7 +132,7 @@
             // 
             AutoScaleDimensions = new SizeF(10F, 25F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(801, 451);
+            ClientSize = new Size(1258, 664);
             Controls.Add(panel1);
             Name = "Login";
             Text = "Login";

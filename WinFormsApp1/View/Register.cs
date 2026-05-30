@@ -51,6 +51,7 @@ namespace FinalProjek.View
                     {
                         MessageBox.Show("Registrasi berhasil", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
                         Login loginView = new Login(); // setelah registrasi berhasil, langsung arahkan ke halaman login
+                        loginView.FormClosed += (s, args) => this.Close(); // pastikan form register juga tertutup saat form login ditutup
                         this.Hide(); // sembunyikan form register
                         loginView.Show();
                     }
