@@ -42,7 +42,7 @@
             // panel1
             // 
             panel1.BackColor = Color.Transparent;
-            panel1.BackgroundImage = Properties.Resources.login__6_;
+            panel1.BackgroundImage = Properties.Resources.LoginView1;
             panel1.BackgroundImageLayout = ImageLayout.Zoom;
             panel1.Controls.Add(tbPasswordLogin);
             panel1.Controls.Add(tbUsernameLogin);

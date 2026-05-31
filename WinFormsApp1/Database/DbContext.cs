@@ -10,7 +10,7 @@ namespace FinalProjek.Database
         public DbContext()
         {
             Env.Load();
-            connStr = Environment.GetEnvironmentVariable("\"Host=ep-wispy-river-aoxu1bki-pooler.c-2.ap-southeast-1.aws.neon.tech; Database=neondb; Username=neondb_owner; Password=npg_8sXeqj6NgdTE; SSL Mode=VerifyFull; Channel Binding=Require;\"");
+            connStr = Environment.GetEnvironmentVariable("Host=ep-wispy-river-aoxu1bki-pooler.c-2.ap-southeast-1.aws.neon.tech; Database=neondb; Username=neondb_owner; Password=npg_8sXeqj6NgdTE; SSL Mode=VerifyFull; Channel Binding=Require;\"");
         }
     }
 }

@@ -23,7 +23,7 @@ namespace FinalProjek.Properties {
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
     internal class Resources {
-        
+        internal static Image login_6;
         private static global::System.Resources.ResourceManager resourceMan;
         
         private static global::System.Globalization.CultureInfo resourceCulture;
@@ -63,9 +63,9 @@ namespace FinalProjek.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap login__3_ {
+        internal static System.Drawing.Bitmap LoginView1 {
             get {
-                object obj = ResourceManager.GetObject("login (3)", resourceCulture);
+                object obj = ResourceManager.GetObject("LoginView1", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -73,9 +73,9 @@ namespace FinalProjek.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap login__4_ {
+        internal static System.Drawing.Bitmap RegisterView1 {
             get {
-                object obj = ResourceManager.GetObject("login (4)", resourceCulture);
+                object obj = ResourceManager.GetObject("RegisterView1", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -83,9 +83,20 @@ namespace FinalProjek.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap login__5_ {
+        internal static System.Drawing.Bitmap CardView {
             get {
-                object obj = ResourceManager.GetObject("login (5)", resourceCulture);
+                object obj = ResourceManager.GetObject("CardView", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap ArabikaC
+        {
+            get
+            {
+                object obj = ResourceManager.GetObject("ArabikaC", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

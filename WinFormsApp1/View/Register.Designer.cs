@@ -43,7 +43,7 @@
             // panel1
             // 
             panel1.BackColor = Color.Transparent;
-            panel1.BackgroundImage = Properties.Resources.login__7_;
+            panel1.BackgroundImage = Properties.Resources.RegisterView1;
             panel1.BackgroundImageLayout = ImageLayout.Zoom;
             panel1.Controls.Add(tbPasswordRegister);
             panel1.Controls.Add(tbUsernameRegister);

@@ -3,6 +3,7 @@ using FinalProjek.Helper;
 using FinalProjek.Model;
 
 
+
 namespace FinalProjek.View
 {
     public partial class Register : Form
