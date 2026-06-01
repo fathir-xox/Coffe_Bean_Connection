@@ -9,11 +9,11 @@ namespace FinalProjek.View
 {
     public partial class Login : Form
     {
-        private controller _controller;
+        private AuthController _controller;
         public Login()
         {
             InitializeComponent();
-            _controller = new controller();
+            _controller = new AuthController();
             tbPasswordLogin.UseSystemPasswordChar = true;
         }
 

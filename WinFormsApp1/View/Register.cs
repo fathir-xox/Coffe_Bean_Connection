@@ -8,11 +8,11 @@ namespace FinalProjek.View
 {
     public partial class Register : Form
     {
-        private controller _controller;
+        private AuthController _controller;
         public Register()
         {
             InitializeComponent();
-            _controller = new controller();
+            _controller = new AuthController();
         }
 
         private void label2_Click(object sender, EventArgs e)

@@ -10,11 +10,11 @@ using System.Windows.Forms;
 
 namespace FinalProjek.Controler
 {
-    public class controller
+    public class AuthController
     {
         private DbContext dbHelper;
 
-        public controller()
+        public AuthController()
         {
            dbHelper = new DbContext();
         }
@@ -74,8 +74,8 @@ namespace FinalProjek.Controler
                 {
                     conn.Open();
                     string query = @"
-                            INSERT INTO user (username, password, role, full_name) 
-                            VALUES (@username, @password, @role, @full_name)";
+                            INSERT INTO user (username, password, role, full_name, isactive) 
+                            VALUES (@username, @password, @role, @full_name, @isactive)";
                     string hashedPassword = PWhelper.HashPassword(user.password);
                     using (var cmd = new NpgsqlCommand(query, conn))
                     {
@@ -83,6 +83,7 @@ namespace FinalProjek.Controler
                         cmd.Parameters.AddWithValue("@password", hashedPassword);
                         cmd.Parameters.AddWithValue("@role", user.role.ToString());
                         cmd.Parameters.AddWithValue("@full_name", user.full_name);
+                        cmd.Parameters.AddWithValue("@isactive", true);
                         int result = cmd.ExecuteNonQuery();
                         return result > 0;
                     }
@@ -90,7 +91,7 @@ namespace FinalProjek.Controler
             }
             catch (Exception ex)
             {
-                MessageBox.Show($"REGISTER ERROR: {ex.Message}", "Connection Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show($"REGISTER ERROR: {ex}", "Connection Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return false;
             }
 
