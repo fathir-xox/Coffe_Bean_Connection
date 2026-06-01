@@ -10,7 +10,7 @@ namespace FinalProjek
         static void Main()
         {
             ApplicationConfiguration.Initialize();
-            Application.Run(new Register());
+            Application.Run(new Login());
         }
     }
 }

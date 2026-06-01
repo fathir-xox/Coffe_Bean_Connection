@@ -36,6 +36,7 @@
             label2 = new Label();
             label1 = new Label();
             npgsqlCommandBuilder1 = new Npgsql.NpgsqlCommandBuilder();
+            linkLabelRegister = new LinkLabel();
             panel1.SuspendLayout();
             SuspendLayout();
             // 
@@ -44,6 +45,7 @@
             panel1.BackColor = Color.Transparent;
             panel1.BackgroundImage = Properties.Resources.LoginView1;
             panel1.BackgroundImageLayout = ImageLayout.Zoom;
+            panel1.Controls.Add(linkLabelRegister);
             panel1.Controls.Add(tbPasswordLogin);
             panel1.Controls.Add(tbUsernameLogin);
             panel1.Controls.Add(btLogin);
@@ -128,6 +130,18 @@
             npgsqlCommandBuilder1.QuotePrefix = "\"";
             npgsqlCommandBuilder1.QuoteSuffix = "\"";
             // 
+            // linkLabelRegister
+            // 
+            linkLabelRegister.AutoSize = true;
+            linkLabelRegister.Font = new Font("Times New Roman", 8F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            linkLabelRegister.Location = new Point(838, 471);
+            linkLabelRegister.Name = "linkLabelRegister";
+            linkLabelRegister.Size = new Size(176, 19);
+            linkLabelRegister.TabIndex = 6;
+            linkLabelRegister.TabStop = true;
+            linkLabelRegister.Text = "Belum punya  akun? Daftar.";
+            linkLabelRegister.LinkClicked += linkLabelRegister_LinkClicked;
+            // 
             // Login
             // 
             AutoScaleDimensions = new SizeF(10F, 25F);
@@ -151,5 +165,6 @@
         private Npgsql.NpgsqlCommandBuilder npgsqlCommandBuilder1;
         private TextBox tbUsernameLogin;
         private TextBox tbPasswordLogin;
+        private LinkLabel linkLabelRegister;
     }
 }

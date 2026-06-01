@@ -9,11 +9,11 @@ namespace FinalProjek.View
 {
     public partial class Login : Form
     {
-        private controller _controller;
+        private AuthController _controller;
         public Login()
         {
             InitializeComponent();
-            _controller = new controller();
+            _controller = new AuthController();
             tbPasswordLogin.UseSystemPasswordChar = true;
         }
 
@@ -105,6 +105,12 @@ namespace FinalProjek.View
         private void tbUsernameLogin_TextChanged(object sender, EventArgs e)
         {
 
+        }
+
+        private void linkLabelRegister_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            Register frmRegister = new Register();
+            frmRegister.ShowDialog();
         }
     }
 }
