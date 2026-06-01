@@ -16,7 +16,7 @@ namespace FinalProjek.Controler
 
         public controller()
         {
-            dbHelper = new DbContext();
+           dbHelper = new DbContext();
         }
 
         public User login(User user)
@@ -27,7 +27,7 @@ namespace FinalProjek.Controler
                 {
                     conn.Open();
                     string query = @"
-                            SELECT role,full_name, username, password FROM users 
+                            SELECT role,full_name, username, password FROM user 
                             WHERE username = @username AND password = @password LIMIT 1";
 
                     string hashedPassword = PWhelper.HashPassword(user.password);
@@ -74,7 +74,7 @@ namespace FinalProjek.Controler
                 {
                     conn.Open();
                     string query = @"
-                            INSERT INTO users (username, password, role, full_name) 
+                            INSERT INTO user (username, password, role, full_name) 
                             VALUES (@username, @password, @role, @full_name)";
                     string hashedPassword = PWhelper.HashPassword(user.password);
                     using (var cmd = new NpgsqlCommand(query, conn))

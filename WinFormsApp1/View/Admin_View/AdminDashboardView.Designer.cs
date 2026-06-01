@@ -29,7 +29,7 @@
         private void InitializeComponent()
         {
             panel1 = new Panel();
-            button1 = new Button();
+            btDashboar = new Button();
             panel3 = new Panel();
             label1 = new Label();
             panel2 = new Panel();
@@ -70,7 +70,7 @@
             // panel1
             // 
             panel1.BackColor = Color.FromArgb(100, 60, 20);
-            panel1.Controls.Add(button1);
+            panel1.Controls.Add(btDashboar);
             panel1.Controls.Add(panel3);
             panel1.Dock = DockStyle.Left;
             panel1.Location = new Point(0, 0);
@@ -79,17 +79,18 @@
             panel1.TabIndex = 0;
             panel1.Paint += panel1_Paint_1;
             // 
-            // button1
+            // btDashboar
             // 
-            button1.BackColor = Color.OldLace;
-            button1.Font = new Font("Times New Roman", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            button1.ForeColor = Color.FromArgb(100, 60, 20);
-            button1.Location = new Point(16, 99);
-            button1.Name = "button1";
-            button1.Size = new Size(156, 41);
-            button1.TabIndex = 2;
-            button1.Text = "Beranda";
-            button1.UseVisualStyleBackColor = false;
+            btDashboar.BackColor = Color.OldLace;
+            btDashboar.Font = new Font("Times New Roman", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            btDashboar.ForeColor = Color.FromArgb(100, 60, 20);
+            btDashboar.Location = new Point(16, 99);
+            btDashboar.Name = "btDashboar";
+            btDashboar.Size = new Size(156, 41);
+            btDashboar.TabIndex = 2;
+            btDashboar.Text = "Beranda";
+            btDashboar.UseVisualStyleBackColor = false;
+            btDashboar.Click += btDashboar_Click;
             // 
             // panel3
             // 
@@ -145,6 +146,7 @@
             // 
             // panel8
             // 
+            panel8.BackColor = Color.Transparent;
             panel8.BackgroundImage = Properties.Resources.CardView;
             panel8.BackgroundImageLayout = ImageLayout.Zoom;
             panel8.Controls.Add(button4);
@@ -406,7 +408,7 @@
         private Label label1;
         private Panel panel3;
         private Label label2;
-        private Button button1;
+        private Button btDashboar;
         private FlowLayoutPanel flowLayoutPanel1;
         private Panel panel4;
         private Label Label_totalProduk;
