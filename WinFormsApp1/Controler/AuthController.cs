@@ -9,11 +9,11 @@ using System.Text;
 
 namespace FinalProjek.Controler
 {
-    public class controller
+    public class AuthController
     {
         private DbContext dbHelper;
 
-        public controller()
+        public AuthController()
         {
             dbHelper = new DbContext();
         }
@@ -74,7 +74,7 @@ namespace FinalProjek.Controler
                     conn.Open();
                     string query = @"
                             INSERT INTO users (username, password, role, full_name) 
-                            VALUES (@username, @password, @role, @full_name)";
+                            VALUES (@username, @password, @role::role_enum, @full_name)";
                     string hashedPassword = PWhelper.HashPassword(user.password);
                     using (var cmd = new NpgsqlCommand(query, conn))
                     {
