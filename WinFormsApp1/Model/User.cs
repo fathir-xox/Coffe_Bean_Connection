@@ -6,22 +6,12 @@ namespace FinalProjek.Model
 {
     public class User
     {
-        public int idUser { get; set; }
-        public string username { get; set; }
-        public string password { get; set; }
-        public string role { get; set; }
-        public string namaLengkap { get; set; }
-        public bool isActive { get; set; }
-
-        public User(int idUser, string username, string password,
-                    string role, string namaLengkap, bool isActive)
-        {
-            this.idUser = idUser;
-            this.username = username;
-            this.password = password;
-            this.role = role;
-            this.namaLengkap = namaLengkap;
-            this.isActive = isActive;
-        }
+        public int IdUser { get; set; }
+        public string Username { get; set; }
+        public string Password { get; set; }
+        public string Role { get; set; }
+        public string NamaLengkap { get; set; }
+        public bool IsActive { get; set; }
+        public string StatusText => IsActive ? "Aktif" : "Nonaktif";
     }
 }
