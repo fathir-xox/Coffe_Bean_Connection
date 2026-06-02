@@ -13,10 +13,9 @@ namespace FinalProjek.View
         {
             InitializeComponent();
             _controller = new AuthController();
-<<<<<<< HEAD
-=======
+
             tbPasswordRegister.UseSystemPasswordChar = true;
->>>>>>> 2430eceb5a5b07e378109fe0e0b41e366520e1c2
+
         }
 
         private void label2_Click(object sender, EventArgs e)
