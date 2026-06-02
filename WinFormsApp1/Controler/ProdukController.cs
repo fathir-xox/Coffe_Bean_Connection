@@ -26,7 +26,7 @@ namespace FinalProjek.Controler
                 {
                     connection.Open();
                     string query = @"Insert Into produk (nama_produk,harga,stok,image,deskripsi,id_user) 
-                                     Values (@nama_produk,@harga,@stok,@image,@deskripsi,@id_user)";
+                                     Values (@nama_produk,@harga,@stok,@image,@deskripsi)";
 
                     // PERBAIKAN 2: Masukkan 'query' ke dalam NpgsqlCommand
                     using (NpgsqlCommand cmd = new NpgsqlCommand(query, connection))
@@ -36,7 +36,7 @@ namespace FinalProjek.Controler
                         cmd.Parameters.AddWithValue("@stok", produk.stok);
                         cmd.Parameters.AddWithValue("@image", produk.image ?? (object)DBNull.Value); // Mencegah error jika gambar kosong
                         cmd.Parameters.AddWithValue("@deskripsi", produk.deskripsi);
-                        cmd.Parameters.AddWithValue("@id_user", produk.id_user);
+                        
 
                         cmd.ExecuteNonQuery();
                     }
