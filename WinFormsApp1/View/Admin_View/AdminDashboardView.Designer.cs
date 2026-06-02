@@ -36,12 +36,12 @@
             label2 = new Label();
             flowLayoutPanel1 = new FlowLayoutPanel();
             panel8 = new Panel();
-            button4 = new Button();
-            label11 = new Label();
-            button3 = new Button();
-            label8 = new Label();
+            btHapus = new Button();
+            Stok = new Label();
+            btEdit = new Button();
+            NamaProduk = new Label();
             label10 = new Label();
-            label9 = new Label();
+            HargaProduk = new Label();
             pictureBox1 = new PictureBox();
             panel4 = new Panel();
             Label_totalProduk = new Label();
@@ -149,65 +149,65 @@
             panel8.BackColor = Color.Transparent;
             panel8.BackgroundImage = Properties.Resources.CardView;
             panel8.BackgroundImageLayout = ImageLayout.Zoom;
-            panel8.Controls.Add(button4);
-            panel8.Controls.Add(label11);
-            panel8.Controls.Add(button3);
-            panel8.Controls.Add(label8);
+            panel8.Controls.Add(btHapus);
+            panel8.Controls.Add(Stok);
+            panel8.Controls.Add(btEdit);
+            panel8.Controls.Add(NamaProduk);
             panel8.Controls.Add(label10);
-            panel8.Controls.Add(label9);
+            panel8.Controls.Add(HargaProduk);
             panel8.Controls.Add(pictureBox1);
             panel8.Location = new Point(3, 3);
             panel8.Name = "panel8";
             panel8.Size = new Size(175, 248);
             panel8.TabIndex = 6;
             // 
-            // button4
+            // btHapus
             // 
-            button4.BackColor = Color.Red;
-            button4.Font = new Font("Times New Roman", 9F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            button4.ForeColor = Color.White;
-            button4.Location = new Point(87, 200);
-            button4.Name = "button4";
-            button4.Size = new Size(76, 37);
-            button4.TabIndex = 8;
-            button4.Text = "Hapus";
-            button4.UseVisualStyleBackColor = false;
+            btHapus.BackColor = Color.Red;
+            btHapus.Font = new Font("Times New Roman", 9F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            btHapus.ForeColor = Color.White;
+            btHapus.Location = new Point(87, 200);
+            btHapus.Name = "btHapus";
+            btHapus.Size = new Size(76, 37);
+            btHapus.TabIndex = 8;
+            btHapus.Text = "Hapus";
+            btHapus.UseVisualStyleBackColor = false;
             // 
-            // label11
+            // Stok
             // 
-            label11.AutoSize = true;
-            label11.BackColor = Color.Transparent;
-            label11.Font = new Font("Times New Roman", 8F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            label11.ForeColor = Color.FromArgb(100, 60, 20);
-            label11.Location = new Point(92, 163);
-            label11.Name = "label11";
-            label11.Size = new Size(25, 19);
-            label11.TabIndex = 5;
-            label11.Text = "20";
+            Stok.AutoSize = true;
+            Stok.BackColor = Color.Transparent;
+            Stok.Font = new Font("Times New Roman", 8F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            Stok.ForeColor = Color.FromArgb(100, 60, 20);
+            Stok.Location = new Point(92, 163);
+            Stok.Name = "Stok";
+            Stok.Size = new Size(25, 19);
+            Stok.TabIndex = 5;
+            Stok.Text = "20";
             // 
-            // button3
+            // btEdit
             // 
-            button3.BackColor = Color.Wheat;
-            button3.Font = new Font("Times New Roman", 9F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            button3.Location = new Point(20, 200);
-            button3.Name = "button3";
-            button3.Size = new Size(59, 37);
-            button3.TabIndex = 7;
-            button3.Text = "Edit";
-            button3.UseVisualStyleBackColor = false;
-            button3.Click += button3_Click;
+            btEdit.BackColor = Color.Wheat;
+            btEdit.Font = new Font("Times New Roman", 9F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            btEdit.Location = new Point(20, 200);
+            btEdit.Name = "btEdit";
+            btEdit.Size = new Size(59, 37);
+            btEdit.TabIndex = 7;
+            btEdit.Text = "Edit";
+            btEdit.UseVisualStyleBackColor = false;
+            btEdit.Click += button3_Click;
             // 
-            // label8
+            // NamaProduk
             // 
-            label8.AutoSize = true;
-            label8.BackColor = Color.Transparent;
-            label8.Font = new Font("Times New Roman", 10F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            label8.Location = new Point(49, 114);
-            label8.Name = "label8";
-            label8.Size = new Size(78, 23);
-            label8.TabIndex = 2;
-            label8.Text = "Arabika";
-            label8.Click += label8_Click;
+            NamaProduk.AutoSize = true;
+            NamaProduk.BackColor = Color.Transparent;
+            NamaProduk.Font = new Font("Times New Roman", 10F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            NamaProduk.Location = new Point(49, 114);
+            NamaProduk.Name = "NamaProduk";
+            NamaProduk.Size = new Size(78, 23);
+            NamaProduk.TabIndex = 2;
+            NamaProduk.Text = "Arabika";
+            NamaProduk.Click += label8_Click;
             // 
             // label10
             // 
@@ -221,17 +221,17 @@
             label10.Text = "Stok:";
             label10.Click += label10_Click;
             // 
-            // label9
+            // HargaProduk
             // 
-            label9.AutoSize = true;
-            label9.BackColor = Color.Transparent;
-            label9.Font = new Font("Times New Roman", 8F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            label9.ForeColor = Color.FromArgb(100, 60, 20);
-            label9.Location = new Point(47, 140);
-            label9.Name = "label9";
-            label9.Size = new Size(81, 19);
-            label9.TabIndex = 4;
-            label9.Text = "Rp. 55.000";
+            HargaProduk.AutoSize = true;
+            HargaProduk.BackColor = Color.Transparent;
+            HargaProduk.Font = new Font("Times New Roman", 8F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            HargaProduk.ForeColor = Color.FromArgb(100, 60, 20);
+            HargaProduk.Location = new Point(47, 140);
+            HargaProduk.Name = "HargaProduk";
+            HargaProduk.Size = new Size(81, 19);
+            HargaProduk.TabIndex = 4;
+            HargaProduk.Text = "Rp. 55.000";
             // 
             // pictureBox1
             // 
@@ -424,11 +424,11 @@
         private Panel panel5;
         private Panel panel10;
         private PictureBox pictureBox1;
-        private Label label8;
-        private Label label9;
+        private Label NamaProduk;
+        private Label HargaProduk;
         private Label label10;
-        private Label label11;
-        private Button button3;
-        private Button button4;
+        private Label Stok;
+        private Button btEdit;
+        private Button btHapus;
     }
 }
