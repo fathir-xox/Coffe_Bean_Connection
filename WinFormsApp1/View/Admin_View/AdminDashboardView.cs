@@ -19,9 +19,11 @@ namespace FinalProjek.View.Admin_View
     public partial class AdminDashboardView : Form
     {
         private IProduk produkController;
-        public AdminDashboardView()
+        public AdminDashboardView(IProduk produkInterface)
         {
             InitializeComponent();
+            produkController = produkInterface;
+            LoadProducts();
         }
 
         private void label2_Click(object sender, EventArgs e)
@@ -155,8 +157,15 @@ namespace FinalProjek.View.Admin_View
 
             foreach (Produk produk in produks)
             {
-                
+                Panel panelProduk = CreateProductPanel(produk);
+                flowLayoutPanel1.Controls.Add(panelProduk);
             }
+        }
+
+        private void btTambahProduk_Click(object sender, EventArgs e)
+        {
+            AddProductWiew tambahProduk = new AddProductWiew();
+            tambahProduk.Show();
         }
     }
 }

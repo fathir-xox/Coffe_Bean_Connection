@@ -48,13 +48,11 @@
             label4 = new Label();
             label5 = new Label();
             label6 = new Label();
-            label7 = new Label();
             Label_totalPenjualan = new Label();
             Label_totalPenghasilan = new Label();
-            Label_keuntungan = new Label();
             panel9 = new Panel();
             panel5 = new Panel();
-            panel10 = new Panel();
+            btTambahProduk = new Button();
             panel1.SuspendLayout();
             panel3.SuspendLayout();
             panel2.SuspendLayout();
@@ -64,7 +62,6 @@
             panel4.SuspendLayout();
             panel9.SuspendLayout();
             panel5.SuspendLayout();
-            panel10.SuspendLayout();
             SuspendLayout();
             // 
             // panel1
@@ -294,16 +291,6 @@
             label6.TabIndex = 3;
             label6.Text = "Total Penghasilan";
             // 
-            // label7
-            // 
-            label7.AutoSize = true;
-            label7.Font = new Font("Times New Roman", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            label7.Location = new Point(5, 5);
-            label7.Name = "label7";
-            label7.Size = new Size(129, 27);
-            label7.TabIndex = 4;
-            label7.Text = "Keuntungan";
-            // 
             // Label_totalPenjualan
             // 
             Label_totalPenjualan.AutoSize = true;
@@ -326,17 +313,6 @@
             Label_totalPenghasilan.TabIndex = 3;
             Label_totalPenghasilan.Text = "Rp. 1.450.000";
             // 
-            // Label_keuntungan
-            // 
-            Label_keuntungan.AutoSize = true;
-            Label_keuntungan.Font = new Font("Times New Roman", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            Label_keuntungan.ForeColor = Color.FromArgb(100, 60, 20);
-            Label_keuntungan.Location = new Point(5, 40);
-            Label_keuntungan.Name = "Label_keuntungan";
-            Label_keuntungan.Size = new Size(126, 26);
-            Label_keuntungan.TabIndex = 4;
-            Label_keuntungan.Text = "Rp.835.000";
-            // 
             // panel9
             // 
             panel9.BackColor = Color.White;
@@ -357,23 +333,26 @@
             panel5.Size = new Size(231, 77);
             panel5.TabIndex = 5;
             // 
-            // panel10
+            // btTambahProduk
             // 
-            panel10.BackColor = Color.White;
-            panel10.Controls.Add(Label_keuntungan);
-            panel10.Controls.Add(label7);
-            panel10.Location = new Point(1015, 85);
-            panel10.Name = "panel10";
-            panel10.Size = new Size(231, 77);
-            panel10.TabIndex = 6;
+            btTambahProduk.BackColor = Color.OldLace;
+            btTambahProduk.Font = new Font("Times New Roman", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            btTambahProduk.ForeColor = Color.FromArgb(100, 60, 20);
+            btTambahProduk.Location = new Point(1041, 102);
+            btTambahProduk.Name = "btTambahProduk";
+            btTambahProduk.Size = new Size(156, 41);
+            btTambahProduk.TabIndex = 5;
+            btTambahProduk.Text = "Tambah Produk";
+            btTambahProduk.UseVisualStyleBackColor = false;
+            btTambahProduk.Click += btTambahProduk_Click;
             // 
             // AdminDashboardView
             // 
             AutoScaleDimensions = new SizeF(10F, 25F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(1258, 664);
-            Controls.Add(panel10);
             Controls.Add(panel5);
+            Controls.Add(btTambahProduk);
             Controls.Add(panel9);
             Controls.Add(panel4);
             Controls.Add(flowLayoutPanel1);
@@ -396,8 +375,6 @@
             panel9.PerformLayout();
             panel5.ResumeLayout(false);
             panel5.PerformLayout();
-            panel10.ResumeLayout(false);
-            panel10.PerformLayout();
             ResumeLayout(false);
         }
 
@@ -417,12 +394,9 @@
         private Label label5;
         private Label Label_totalPenghasilan;
         private Label label6;
-        private Label Label_keuntungan;
-        private Label label7;
         private Panel panel8;
         private Panel panel9;
         private Panel panel5;
-        private Panel panel10;
         private PictureBox pictureBox1;
         private Label NamaProduk;
         private Label HargaProduk;
@@ -430,5 +404,6 @@
         private Label Stok;
         private Button btEdit;
         private Button btHapus;
+        private Button btTambahProduk;
     }
 }

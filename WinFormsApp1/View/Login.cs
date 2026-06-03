@@ -1,5 +1,6 @@
 ﻿using FinalProjek.Controler;
 using FinalProjek.Helper;
+using FinalProjek.Interface;
 using FinalProjek.Model;
 using FinalProjek.View.Admin_View;
 using FinalProjek.View.Kasir_View;
@@ -10,11 +11,13 @@ namespace FinalProjek.View
     public partial class Login : Form
     {
         private AuthController _controller;
+        private readonly IProduk produkInterface;
         public Login()
         {
             InitializeComponent();
             _controller = new AuthController();
             tbPasswordLogin.UseSystemPasswordChar = true;
+            produkInterface = new ProdukController(); // Inisialisasi produkInterface dengan implementasi ProdukController
         }
 
 
@@ -72,7 +75,7 @@ namespace FinalProjek.View
 
                     if (APPSession.CurrentUser.role == UserRole.Admin) //kalau admin, masuk ke dashboard admin, kalau user masuk ke dashboard kasir
                     {
-                        AdminDashboardView adminView = new AdminDashboardView();
+                        AdminDashboardView adminView = new AdminDashboardView(produkInterface);
                         adminView.FormClosed += (s, args) => this.Close();
                         adminView.Show();
                         this.Hide();
