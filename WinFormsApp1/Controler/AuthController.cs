@@ -73,7 +73,8 @@ namespace FinalProjek.Controler
                 using (var conn = new NpgsqlConnection(dbHelper.connStr))
                 {
                     conn.Open();
-                    string query = @" INSERT INTO ""user"" (username, password, role, full_name, isactive) 
+                    string query = @"
+                    INSERT INTO ""user"" (username, password, role, full_name, isactive) 
                     VALUES (@username, @password, @role::role_enum, @full_name, @isactive)";
 
                     string hashedPassword = PWhelper.HashPassword(user.password);
