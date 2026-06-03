@@ -29,36 +29,144 @@
         private void InitializeComponent()
         {
             openFileDialog1 = new OpenFileDialog();
-            button1 = new Button();
+            btTambahGambar = new Button();
+            tbNamaProduk = new TextBox();
+            tbHargaProduk = new TextBox();
+            tbStokProduk = new TextBox();
+            btSIMPAN = new Button();
+            label1 = new Label();
+            label2 = new Label();
+            label3 = new Label();
+            gambarProduk = new PictureBox();
+            ((System.ComponentModel.ISupportInitialize)gambarProduk).BeginInit();
             SuspendLayout();
             // 
             // openFileDialog1
             // 
             openFileDialog1.FileName = "openFileDialog1";
             // 
-            // button1
+            // btTambahGambar
             // 
-            button1.Location = new Point(328, 45);
-            button1.Name = "button1";
-            button1.Size = new Size(112, 34);
-            button1.TabIndex = 0;
-            button1.Text = "button1";
-            button1.UseVisualStyleBackColor = true;
+            btTambahGambar.BackColor = Color.OldLace;
+            btTambahGambar.Font = new Font("Times New Roman", 14F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            btTambahGambar.ForeColor = Color.FromArgb(100, 60, 20);
+            btTambahGambar.Location = new Point(319, 493);
+            btTambahGambar.Name = "btTambahGambar";
+            btTambahGambar.Size = new Size(226, 49);
+            btTambahGambar.TabIndex = 0;
+            btTambahGambar.Text = "Tambah Gambar";
+            btTambahGambar.UseVisualStyleBackColor = false;
+            btTambahGambar.Click += btTambahGambar_Click;
+            // 
+            // tbNamaProduk
+            // 
+            tbNamaProduk.Location = new Point(694, 163);
+            tbNamaProduk.Name = "tbNamaProduk";
+            tbNamaProduk.Size = new Size(290, 31);
+            tbNamaProduk.TabIndex = 1;
+            // 
+            // tbHargaProduk
+            // 
+            tbHargaProduk.Location = new Point(694, 248);
+            tbHargaProduk.Name = "tbHargaProduk";
+            tbHargaProduk.Size = new Size(290, 31);
+            tbHargaProduk.TabIndex = 2;
+            // 
+            // tbStokProduk
+            // 
+            tbStokProduk.Location = new Point(694, 331);
+            tbStokProduk.Name = "tbStokProduk";
+            tbStokProduk.Size = new Size(290, 31);
+            tbStokProduk.TabIndex = 3;
+            // 
+            // btSIMPAN
+            // 
+            btSIMPAN.BackColor = Color.FromArgb(100, 60, 20);
+            btSIMPAN.Font = new Font("Times New Roman", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            btSIMPAN.ForeColor = Color.OldLace;
+            btSIMPAN.Location = new Point(773, 415);
+            btSIMPAN.Name = "btSIMPAN";
+            btSIMPAN.Size = new Size(140, 46);
+            btSIMPAN.TabIndex = 4;
+            btSIMPAN.Text = "SIMPAN";
+            btSIMPAN.UseVisualStyleBackColor = false;
+            btSIMPAN.Click += btSIMPAN_Click;
+            // 
+            // label1
+            // 
+            label1.AutoSize = true;
+            label1.Font = new Font("Times New Roman", 10F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            label1.ForeColor = Color.FromArgb(100, 60, 20);
+            label1.Location = new Point(699, 135);
+            label1.Name = "label1";
+            label1.Size = new Size(117, 22);
+            label1.TabIndex = 5;
+            label1.Text = "Nama Produk";
+            // 
+            // label2
+            // 
+            label2.AutoSize = true;
+            label2.Font = new Font("Times New Roman", 10F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            label2.ForeColor = Color.FromArgb(100, 60, 20);
+            label2.Location = new Point(700, 223);
+            label2.Name = "label2";
+            label2.Size = new Size(119, 22);
+            label2.TabIndex = 6;
+            label2.Text = "Harga Produk";
+            // 
+            // label3
+            // 
+            label3.AutoSize = true;
+            label3.Font = new Font("Times New Roman", 10F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            label3.ForeColor = Color.FromArgb(100, 60, 20);
+            label3.Location = new Point(700, 306);
+            label3.Name = "label3";
+            label3.Size = new Size(106, 22);
+            label3.TabIndex = 7;
+            label3.Text = "Stok Produk";
+            // 
+            // gambarProduk
+            // 
+            gambarProduk.BackColor = Color.Transparent;
+            gambarProduk.BackgroundImageLayout = ImageLayout.Zoom;
+            gambarProduk.Location = new Point(242, 102);
+            gambarProduk.Name = "gambarProduk";
+            gambarProduk.Size = new Size(381, 367);
+            gambarProduk.TabIndex = 8;
+            gambarProduk.TabStop = false;
             // 
             // AddProductWiew
             // 
             AutoScaleDimensions = new SizeF(10F, 25F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(800, 450);
-            Controls.Add(button1);
+            ClientSize = new Size(1258, 664);
+            Controls.Add(gambarProduk);
+            Controls.Add(label3);
+            Controls.Add(label2);
+            Controls.Add(label1);
+            Controls.Add(btSIMPAN);
+            Controls.Add(tbStokProduk);
+            Controls.Add(tbHargaProduk);
+            Controls.Add(tbNamaProduk);
+            Controls.Add(btTambahGambar);
             Name = "AddProductWiew";
             Text = "AddProductWiew";
+            ((System.ComponentModel.ISupportInitialize)gambarProduk).EndInit();
             ResumeLayout(false);
+            PerformLayout();
         }
 
         #endregion
 
         private OpenFileDialog openFileDialog1;
-        private Button button1;
+        private Button btTambahGambar;
+        private TextBox tbNamaProduk;
+        private TextBox tbHargaProduk;
+        private TextBox tbStokProduk;
+        private Button btSIMPAN;
+        private Label label1;
+        private Label label2;
+        private Label label3;
+        private PictureBox gambarProduk;
     }
 }

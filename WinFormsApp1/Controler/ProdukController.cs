@@ -59,7 +59,7 @@ namespace FinalProjek.Controler
                     connection.Open();
 
                     // PERBAIKAN 3: Ubah 'image' menjadi 'id_user' pada query SELECT
-                    string query = @"SELECT id_produk, nama_produk, harga, stok, deskripsi, id_user FROM produk WHERE id_user = @idUser";
+                    string query = @"SELECT id_produk, nama_produk, harga, stok, deskripsi, id_user, image FROM produk WHERE id_user = @idUser"; //tambah image
 
                     using (NpgsqlCommand cmd = new NpgsqlCommand(query, connection))
                     {
@@ -75,7 +75,8 @@ namespace FinalProjek.Controler
                                     harga = reader.GetDouble(2),
                                     stok = reader.GetInt32(3),
                                     deskripsi = reader.GetString(4),
-                                    id_user = reader.GetInt32(5) // Sekarang indeks ke-5 benar-benar id_user
+                                    id_user = reader.GetInt32(5), // Sekarang indeks ke-5 benar-benar id_user
+                                    image = reader["image"] as byte[] 
                                 };
                                 produks.Add(produk);
                             }
