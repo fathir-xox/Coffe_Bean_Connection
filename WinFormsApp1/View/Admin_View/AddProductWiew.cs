@@ -22,35 +22,43 @@ namespace FinalProjek.View.Admin_View
             if (openFileDialog.ShowDialog() == DialogResult.OK)
             {
                 string selectedItem = openFileDialog.FileName;
-                gambarProduk.BackgroundImageLayout = ImageLayout.Zoom;
+                //gambarProduk.BackgroundImageLayout = ImageLayout.Zoom;
+                gambarProduk.SizeMode = PictureBoxSizeMode.Zoom;
                 gambarProduk.Image = Image.FromFile(selectedItem);
             }
         }
 
-        private void btSIMPAN_Click(object sender, EventArgs e)
+        private void btSIMPAN_Click(object sender, EventArgs e, object tbKategoriProduk)
         {
             if (string.IsNullOrEmpty(openFileDialog.FileName))
             {
                 MessageBox.Show("Pilih gambar terlebih dahulu!!", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
             }
 
             Image GambarProduk = gambarProduk.Image;
             string namaProduk = tbNamaProduk.Text;
             int hargaProduk = int.Parse(tbHargaProduk.Text);
             int stokProduk = int.Parse(tbStokProduk.Text);
+            string deskripsiProduk = rtbDeskripsiProduk.Text;
 
             try
             {
                 Produk produk = new Produk
                 {
-                    image = Imagehelper.ImageToBinary(GambarProduk),
+                    imageproduk = Imagehelper.ImageToBinary(GambarProduk),
                     nama_produk = namaProduk,
                     harga = hargaProduk,
                     stok = stokProduk,
-                    id_user = APPSession.CurrentUser.id_user,
+                    deskripsi = deskripsiProduk,
+                    id_kategori = int.Parse(tbKategoriProduk.Text)
                 };
 
                 produkController.CreateProduk(produk);
+                MessageBox.Show("Produk berhasil ditambahkaan", "Berhasil", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                this.Close();
+
+                var adminDashboard = new AdminDashboardView(produkController);
             } catch (Exception ex)
             {
                 MessageBox.Show($"Gagal Menambahkan Produk {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);

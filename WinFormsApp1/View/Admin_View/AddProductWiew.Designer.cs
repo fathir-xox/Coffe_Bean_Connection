@@ -38,6 +38,8 @@
             label2 = new Label();
             label3 = new Label();
             gambarProduk = new PictureBox();
+            label4 = new Label();
+            rtbDeskripsiProduk = new RichTextBox();
             ((System.ComponentModel.ISupportInitialize)gambarProduk).BeginInit();
             SuspendLayout();
             // 
@@ -60,21 +62,21 @@
             // 
             // tbNamaProduk
             // 
-            tbNamaProduk.Location = new Point(694, 163);
+            tbNamaProduk.Location = new Point(690, 130);
             tbNamaProduk.Name = "tbNamaProduk";
             tbNamaProduk.Size = new Size(290, 31);
             tbNamaProduk.TabIndex = 1;
             // 
             // tbHargaProduk
             // 
-            tbHargaProduk.Location = new Point(694, 248);
+            tbHargaProduk.Location = new Point(690, 197);
             tbHargaProduk.Name = "tbHargaProduk";
             tbHargaProduk.Size = new Size(290, 31);
             tbHargaProduk.TabIndex = 2;
             // 
             // tbStokProduk
             // 
-            tbStokProduk.Location = new Point(694, 331);
+            tbStokProduk.Location = new Point(690, 264);
             tbStokProduk.Name = "tbStokProduk";
             tbStokProduk.Size = new Size(290, 31);
             tbStokProduk.TabIndex = 3;
@@ -84,7 +86,7 @@
             btSIMPAN.BackColor = Color.FromArgb(100, 60, 20);
             btSIMPAN.Font = new Font("Times New Roman", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
             btSIMPAN.ForeColor = Color.OldLace;
-            btSIMPAN.Location = new Point(773, 415);
+            btSIMPAN.Location = new Point(763, 496);
             btSIMPAN.Name = "btSIMPAN";
             btSIMPAN.Size = new Size(140, 46);
             btSIMPAN.TabIndex = 4;
@@ -97,7 +99,7 @@
             label1.AutoSize = true;
             label1.Font = new Font("Times New Roman", 10F, FontStyle.Regular, GraphicsUnit.Point, 0);
             label1.ForeColor = Color.FromArgb(100, 60, 20);
-            label1.Location = new Point(699, 135);
+            label1.Location = new Point(695, 102);
             label1.Name = "label1";
             label1.Size = new Size(117, 22);
             label1.TabIndex = 5;
@@ -108,7 +110,7 @@
             label2.AutoSize = true;
             label2.Font = new Font("Times New Roman", 10F, FontStyle.Regular, GraphicsUnit.Point, 0);
             label2.ForeColor = Color.FromArgb(100, 60, 20);
-            label2.Location = new Point(700, 223);
+            label2.Location = new Point(696, 172);
             label2.Name = "label2";
             label2.Size = new Size(119, 22);
             label2.TabIndex = 6;
@@ -119,7 +121,7 @@
             label3.AutoSize = true;
             label3.Font = new Font("Times New Roman", 10F, FontStyle.Regular, GraphicsUnit.Point, 0);
             label3.ForeColor = Color.FromArgb(100, 60, 20);
-            label3.Location = new Point(700, 306);
+            label3.Location = new Point(696, 239);
             label3.Name = "label3";
             label3.Size = new Size(106, 22);
             label3.TabIndex = 7;
@@ -135,11 +137,32 @@
             gambarProduk.TabIndex = 8;
             gambarProduk.TabStop = false;
             // 
+            // label4
+            // 
+            label4.AutoSize = true;
+            label4.Font = new Font("Times New Roman", 10F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            label4.ForeColor = Color.FromArgb(100, 60, 20);
+            label4.Location = new Point(696, 305);
+            label4.Name = "label4";
+            label4.Size = new Size(148, 22);
+            label4.TabIndex = 10;
+            label4.Text = "Deskripsi Produk";
+            // 
+            // rtbDeskripsiProduk
+            // 
+            rtbDeskripsiProduk.Location = new Point(690, 330);
+            rtbDeskripsiProduk.Name = "rtbDeskripsiProduk";
+            rtbDeskripsiProduk.Size = new Size(290, 139);
+            rtbDeskripsiProduk.TabIndex = 11;
+            rtbDeskripsiProduk.Text = "";
+            // 
             // AddProductWiew
             // 
             AutoScaleDimensions = new SizeF(10F, 25F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(1258, 664);
+            Controls.Add(rtbDeskripsiProduk);
+            Controls.Add(label4);
             Controls.Add(gambarProduk);
             Controls.Add(label3);
             Controls.Add(label2);
@@ -168,5 +191,7 @@
         private Label label2;
         private Label label3;
         private PictureBox gambarProduk;
+        private Label label4;
+        private RichTextBox rtbDeskripsiProduk;
     }
 }

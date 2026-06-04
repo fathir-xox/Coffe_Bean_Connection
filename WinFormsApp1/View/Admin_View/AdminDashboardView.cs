@@ -127,6 +127,7 @@ namespace FinalProjek.View.Admin_View
                 Size = new Size(59, 37),
                 Font = new Font("Times New Roman", 9, FontStyle.Regular),
                 BackColor = Color.Wheat,
+                Text = "Edit",
             };
             //buttonEdit.Click += (sender, e) => produkController.EditProduk();
 
@@ -137,7 +138,9 @@ namespace FinalProjek.View.Admin_View
                 Font = new Font("Times New Roman", 9, FontStyle.Regular),
                 BackColor = Color.Red,
                 ForeColor = Color.White,
+                Text = "Hapus",
             };
+            buttonHapus.Click += (sender, e) => produkController.GetAllProduk();
 
             panel.Controls.Add(displayProduct);
             panel.Controls.Add(namaProduk);
@@ -166,6 +169,11 @@ namespace FinalProjek.View.Admin_View
         {
             AddProductWiew tambahProduk = new AddProductWiew();
             tambahProduk.Show();
+        }
+
+        private void btRefreshData_Click(object sender, EventArgs e)
+        {
+            LoadProducts();
         }
     }
 }

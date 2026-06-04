@@ -25,8 +25,8 @@ namespace FinalProjek.Controler
                 using (NpgsqlConnection connection = new NpgsqlConnection(dbHelper.connStr))
                 {
                     connection.Open();
-                    string query = @"Insert Into produk (nama_produk,harga,stok,image,deskripsi,id_user) 
-                                     Values (@nama_produk,@harga,@stok,@image,@deskripsi)";
+                    string query = @"Insert Into produk (nama_produk,harga,stok,imageproduk,deskripsi,id_kategori) 
+                                     Values (@nama_produk,@harga,@stok,@imageproduk,@deskripsi,@id_kategori)";
 
                     // PERBAIKAN 2: Masukkan 'query' ke dalam NpgsqlCommand
                     using (NpgsqlCommand cmd = new NpgsqlCommand(query, connection))
@@ -34,9 +34,10 @@ namespace FinalProjek.Controler
                         cmd.Parameters.AddWithValue("@nama_produk", produk.nama_produk);
                         cmd.Parameters.AddWithValue("@harga", produk.harga);
                         cmd.Parameters.AddWithValue("@stok", produk.stok);
-                        cmd.Parameters.AddWithValue("@image", produk.image ?? (object)DBNull.Value); // Mencegah error jika gambar kosong
+                        cmd.Parameters.AddWithValue("@imageproduk", produk.imageproduk ?? (object)DBNull.Value); // Mencegah error jika gambar kosong
                         cmd.Parameters.AddWithValue("@deskripsi", produk.deskripsi);
-                        
+                        cmd.Parameters.AddWithValue("@id_kategori", produk.id_kategori);
+
 
                         cmd.ExecuteNonQuery();
                     }
@@ -59,7 +60,7 @@ namespace FinalProjek.Controler
                     connection.Open();
 
                     // PERBAIKAN 3: Ubah 'image' menjadi 'id_user' pada query SELECT
-                    string query = @"SELECT id_produk, nama_produk, harga, stok, deskripsi, id_user, image FROM produk WHERE id_user = @idUser"; //tambah image
+                    string query = @"SELECT id_produk, nama_produk, harga, stok, deskripsi, id_kategori, imageproduk FROM produk"; //tambah image
 
                     using (NpgsqlCommand cmd = new NpgsqlCommand(query, connection))
                     {
@@ -75,8 +76,8 @@ namespace FinalProjek.Controler
                                     harga = reader.GetDouble(2),
                                     stok = reader.GetInt32(3),
                                     deskripsi = reader.GetString(4),
-                                    id_user = reader.GetInt32(5), // Sekarang indeks ke-5 benar-benar id_user
-                                    image = reader["image"] as byte[] 
+                                    id_kategori = reader.GetInt32(5),
+                                    imageproduk = reader["imageproduk"] as byte[] 
                                 };
                                 produks.Add(produk);
                             }

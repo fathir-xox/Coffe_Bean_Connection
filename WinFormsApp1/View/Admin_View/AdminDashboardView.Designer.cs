@@ -53,6 +53,7 @@
             panel9 = new Panel();
             panel5 = new Panel();
             btTambahProduk = new Button();
+            btRefreshData = new Button();
             panel1.SuspendLayout();
             panel3.SuspendLayout();
             panel2.SuspendLayout();
@@ -67,6 +68,7 @@
             // panel1
             // 
             panel1.BackColor = Color.FromArgb(100, 60, 20);
+            panel1.Controls.Add(btRefreshData);
             panel1.Controls.Add(btDashboar);
             panel1.Controls.Add(panel3);
             panel1.Dock = DockStyle.Left;
@@ -346,6 +348,19 @@
             btTambahProduk.UseVisualStyleBackColor = false;
             btTambahProduk.Click += btTambahProduk_Click;
             // 
+            // btRefreshData
+            // 
+            btRefreshData.BackColor = Color.OldLace;
+            btRefreshData.Font = new Font("Times New Roman", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            btRefreshData.ForeColor = Color.FromArgb(100, 60, 20);
+            btRefreshData.Location = new Point(16, 164);
+            btRefreshData.Name = "btRefreshData";
+            btRefreshData.Size = new Size(156, 41);
+            btRefreshData.TabIndex = 5;
+            btRefreshData.Text = "Refresh Data";
+            btRefreshData.UseVisualStyleBackColor = false;
+            btRefreshData.Click += btRefreshData_Click;
+            // 
             // AdminDashboardView
             // 
             AutoScaleDimensions = new SizeF(10F, 25F);
@@ -405,5 +420,6 @@
         private Button btEdit;
         private Button btHapus;
         private Button btTambahProduk;
+        private Button btRefreshData;
     }
 }
