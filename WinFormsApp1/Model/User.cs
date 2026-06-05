@@ -6,12 +6,15 @@ namespace FinalProjek.Model
 {
     public class User
     {
-        public int IdUser { get; set; }
-        public string Username { get; set; }
-        public string Password { get; set; }
-        public string Role { get; set; }
-        public string NamaLengkap { get; set; }
-        public bool IsActive { get; set; }
-        public string StatusText => IsActive ? "Aktif" : "Nonaktif";
+        public int id_user { get; set; }
+        public string full_name { get; set; }
+        public string username { get; set; }
+        public string password { get; set; }
+        public UserRole role { get; set; }
+
+    }
+    public enum UserRole
+    {
+        Admin, Kasir
     }
 }
