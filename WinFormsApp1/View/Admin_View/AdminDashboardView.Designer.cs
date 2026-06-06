@@ -29,6 +29,7 @@
         private void InitializeComponent()
         {
             panel1 = new Panel();
+            btRefreshData = new Button();
             btDashboar = new Button();
             panel3 = new Panel();
             label1 = new Label();
@@ -53,7 +54,6 @@
             panel9 = new Panel();
             panel5 = new Panel();
             btTambahProduk = new Button();
-            btRefreshData = new Button();
             panel1.SuspendLayout();
             panel3.SuspendLayout();
             panel2.SuspendLayout();
@@ -68,7 +68,6 @@
             // panel1
             // 
             panel1.BackColor = Color.FromArgb(100, 60, 20);
-            panel1.Controls.Add(btRefreshData);
             panel1.Controls.Add(btDashboar);
             panel1.Controls.Add(panel3);
             panel1.Dock = DockStyle.Left;
@@ -77,6 +76,19 @@
             panel1.Size = new Size(192, 664);
             panel1.TabIndex = 0;
             panel1.Paint += panel1_Paint_1;
+            // 
+            // btRefreshData
+            // 
+            btRefreshData.BackColor = Color.OldLace;
+            btRefreshData.Font = new Font("Times New Roman", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            btRefreshData.ForeColor = Color.FromArgb(100, 60, 20);
+            btRefreshData.Location = new Point(1041, 129);
+            btRefreshData.Name = "btRefreshData";
+            btRefreshData.Size = new Size(156, 41);
+            btRefreshData.TabIndex = 5;
+            btRefreshData.Text = "Refresh Data";
+            btRefreshData.UseVisualStyleBackColor = false;
+            btRefreshData.Click += btRefreshData_Click;
             // 
             // btDashboar
             // 
@@ -340,7 +352,7 @@
             btTambahProduk.BackColor = Color.OldLace;
             btTambahProduk.Font = new Font("Times New Roman", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
             btTambahProduk.ForeColor = Color.FromArgb(100, 60, 20);
-            btTambahProduk.Location = new Point(1041, 102);
+            btTambahProduk.Location = new Point(1041, 83);
             btTambahProduk.Name = "btTambahProduk";
             btTambahProduk.Size = new Size(156, 41);
             btTambahProduk.TabIndex = 5;
@@ -348,24 +360,12 @@
             btTambahProduk.UseVisualStyleBackColor = false;
             btTambahProduk.Click += btTambahProduk_Click;
             // 
-            // btRefreshData
-            // 
-            btRefreshData.BackColor = Color.OldLace;
-            btRefreshData.Font = new Font("Times New Roman", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            btRefreshData.ForeColor = Color.FromArgb(100, 60, 20);
-            btRefreshData.Location = new Point(16, 164);
-            btRefreshData.Name = "btRefreshData";
-            btRefreshData.Size = new Size(156, 41);
-            btRefreshData.TabIndex = 5;
-            btRefreshData.Text = "Refresh Data";
-            btRefreshData.UseVisualStyleBackColor = false;
-            btRefreshData.Click += btRefreshData_Click;
-            // 
             // AdminDashboardView
             // 
             AutoScaleDimensions = new SizeF(10F, 25F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(1258, 664);
+            Controls.Add(btRefreshData);
             Controls.Add(panel5);
             Controls.Add(btTambahProduk);
             Controls.Add(panel9);
