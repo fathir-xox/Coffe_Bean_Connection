@@ -2,35 +2,39 @@
 using FinalProjek.Controler;
 using FinalProjek.Model;
 using FinalProjek.Helper;
+using System;
+using System.Drawing;
+using System.Windows.Forms;
 
 
 namespace FinalProjek.View.Admin_View
 {
     public partial class AddProductWiew : Form
     {
-        private OpenFileDialog openFileDialog;
+        // Use the designer-created openFileDialog1; do not redeclare a second field here
         private IProduk produkController;
         public AddProductWiew()
         {
             InitializeComponent();
-            openFileDialog = new OpenFileDialog();
+            // openFileDialog1 is initialized in InitializeComponent(); do not re-create it here
             produkController = new ProdukController(); // pastikan sudah ada implementasi ProdukController yang sesuai dengan IProduk
         }
 
         private void btTambahGambar_Click(object sender, EventArgs e)
         {
-            if (openFileDialog.ShowDialog() == DialogResult.OK)
+            if (openFileDialog1.ShowDialog() == DialogResult.OK)
             {
-                string selectedItem = openFileDialog.FileName;
+                string selectedItem = openFileDialog1.FileName;
                 //gambarProduk.BackgroundImageLayout = ImageLayout.Zoom;
                 gambarProduk.SizeMode = PictureBoxSizeMode.Zoom;
                 gambarProduk.Image = Image.FromFile(selectedItem);
             }
         }
 
-        private void btSIMPAN_Click(object sender, EventArgs e, object tbKategoriProduk)
+        // Fixed: standard event handler signature and use the form's tbKategoriProduk control (not an extra parameter)
+        private void BtSIMPAN_Click(object sender, EventArgs e)
         {
-            if (string.IsNullOrEmpty(openFileDialog.FileName))
+            if (string.IsNullOrEmpty(openFileDialog1.FileName))
             {
                 MessageBox.Show("Pilih gambar terlebih dahulu!!", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
@@ -42,6 +46,9 @@ namespace FinalProjek.View.Admin_View
             int stokProduk = int.Parse(tbStokProduk.Text);
             string deskripsiProduk = rtbDeskripsiProduk.Text;
 
+            // Use the Text property of the tbKategoriProduk control on the form
+            int idKategori = int.Parse(tbKategoriProduk.Text);
+
             try
             {
                 Produk produk = new Produk
@@ -51,7 +58,7 @@ namespace FinalProjek.View.Admin_View
                     harga = hargaProduk,
                     stok = stokProduk,
                     deskripsi = deskripsiProduk,
-                    id_kategori = int.Parse(tbKategoriProduk.Text)
+                    id_kategori = idKategori
                 };
 
                 produkController.CreateProduk(produk);
@@ -59,10 +66,16 @@ namespace FinalProjek.View.Admin_View
                 this.Close();
 
                 var adminDashboard = new AdminDashboardView(produkController);
-            } catch (Exception ex)
+            }
+            catch (Exception ex)
             {
                 MessageBox.Show($"Gagal Menambahkan Produk {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
+        }
+
+        private void tbKategoriProduk_TextChanged(object sender, EventArgs e)
+        {
+
         }
     }
 }

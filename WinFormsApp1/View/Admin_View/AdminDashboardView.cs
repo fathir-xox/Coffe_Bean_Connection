@@ -93,7 +93,7 @@ namespace FinalProjek.View.Admin_View
             {
                 Text = produk.nama_produk,
                 Location = new Point(49, 114),
-                Size = new Size(78, 23),
+                Size = new Size(78, 23), //GANTIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIII
                 BackColor = Color.Transparent,
                 Font = new Font("Times New Roman", 10, FontStyle.Bold),
                 TextAlign = ContentAlignment.MiddleCenter,

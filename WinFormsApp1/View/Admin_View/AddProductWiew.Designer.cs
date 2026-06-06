@@ -40,6 +40,8 @@
             gambarProduk = new PictureBox();
             label4 = new Label();
             rtbDeskripsiProduk = new RichTextBox();
+            label5 = new Label();
+            tbKategoriProduk = new TextBox();
             ((System.ComponentModel.ISupportInitialize)gambarProduk).BeginInit();
             SuspendLayout();
             // 
@@ -142,7 +144,7 @@
             label4.AutoSize = true;
             label4.Font = new Font("Times New Roman", 10F, FontStyle.Regular, GraphicsUnit.Point, 0);
             label4.ForeColor = Color.FromArgb(100, 60, 20);
-            label4.Location = new Point(696, 305);
+            label4.Location = new Point(696, 371);
             label4.Name = "label4";
             label4.Size = new Size(148, 22);
             label4.TabIndex = 10;
@@ -150,17 +152,38 @@
             // 
             // rtbDeskripsiProduk
             // 
-            rtbDeskripsiProduk.Location = new Point(690, 330);
+            rtbDeskripsiProduk.Location = new Point(690, 396);
             rtbDeskripsiProduk.Name = "rtbDeskripsiProduk";
-            rtbDeskripsiProduk.Size = new Size(290, 139);
+            rtbDeskripsiProduk.Size = new Size(290, 85);
             rtbDeskripsiProduk.TabIndex = 11;
             rtbDeskripsiProduk.Text = "";
+            // 
+            // label5
+            // 
+            label5.AutoSize = true;
+            label5.Font = new Font("Times New Roman", 10F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            label5.ForeColor = Color.FromArgb(100, 60, 20);
+            label5.Location = new Point(697, 305);
+            label5.Name = "label5";
+            label5.Size = new Size(140, 22);
+            label5.TabIndex = 13;
+            label5.Text = "Kategori Produk";
+            // 
+            // tbKategoriProduk
+            // 
+            tbKategoriProduk.Location = new Point(690, 330);
+            tbKategoriProduk.Name = "tbKategoriProduk";
+            tbKategoriProduk.Size = new Size(290, 31);
+            tbKategoriProduk.TabIndex = 12;
+            tbKategoriProduk.TextChanged += tbKategoriProduk_TextChanged;
             // 
             // AddProductWiew
             // 
             AutoScaleDimensions = new SizeF(10F, 25F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(1258, 664);
+            Controls.Add(label5);
+            Controls.Add(tbKategoriProduk);
             Controls.Add(rtbDeskripsiProduk);
             Controls.Add(label4);
             Controls.Add(gambarProduk);
@@ -179,6 +202,12 @@
             PerformLayout();
         }
 
+        private void btSIMPAN_Click(object sender, EventArgs e)
+        {
+            // Forward to the implemented handler in the other partial class
+            BtSIMPAN_Click(sender, e);
+        }
+
         #endregion
 
         private OpenFileDialog openFileDialog1;
@@ -193,5 +222,7 @@
         private PictureBox gambarProduk;
         private Label label4;
         private RichTextBox rtbDeskripsiProduk;
+        private Label label5;
+        private TextBox tbKategoriProduk;
     }
 }
