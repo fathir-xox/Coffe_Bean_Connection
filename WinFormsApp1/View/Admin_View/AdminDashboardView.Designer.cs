@@ -29,10 +29,10 @@
         private void InitializeComponent()
         {
             panel1 = new Panel();
-            btRefreshData = new Button();
             btDashboar = new Button();
             panel3 = new Panel();
             label1 = new Label();
+            btRefreshData = new Button();
             panel2 = new Panel();
             label2 = new Label();
             flowLayoutPanel1 = new FlowLayoutPanel();
@@ -41,7 +41,7 @@
             Stok = new Label();
             btEdit = new Button();
             NamaProduk = new Label();
-            label10 = new Label();
+            labelStok = new Label();
             HargaProduk = new Label();
             pictureBox1 = new PictureBox();
             panel4 = new Panel();
@@ -54,6 +54,7 @@
             panel9 = new Panel();
             panel5 = new Panel();
             btTambahProduk = new Button();
+            button1 = new Button();
             panel1.SuspendLayout();
             panel3.SuspendLayout();
             panel2.SuspendLayout();
@@ -68,6 +69,7 @@
             // panel1
             // 
             panel1.BackColor = Color.FromArgb(100, 60, 20);
+            panel1.Controls.Add(button1);
             panel1.Controls.Add(btDashboar);
             panel1.Controls.Add(panel3);
             panel1.Dock = DockStyle.Left;
@@ -76,19 +78,6 @@
             panel1.Size = new Size(192, 664);
             panel1.TabIndex = 0;
             panel1.Paint += panel1_Paint_1;
-            // 
-            // btRefreshData
-            // 
-            btRefreshData.BackColor = Color.OldLace;
-            btRefreshData.Font = new Font("Times New Roman", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            btRefreshData.ForeColor = Color.FromArgb(100, 60, 20);
-            btRefreshData.Location = new Point(1041, 129);
-            btRefreshData.Name = "btRefreshData";
-            btRefreshData.Size = new Size(156, 41);
-            btRefreshData.TabIndex = 5;
-            btRefreshData.Text = "Refresh Data";
-            btRefreshData.UseVisualStyleBackColor = false;
-            btRefreshData.Click += btRefreshData_Click;
             // 
             // btDashboar
             // 
@@ -124,6 +113,19 @@
             label1.TabIndex = 2;
             label1.Text = "CoffeeBean.id";
             label1.Click += label1_Click;
+            // 
+            // btRefreshData
+            // 
+            btRefreshData.BackColor = Color.OldLace;
+            btRefreshData.Font = new Font("Times New Roman", 10F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            btRefreshData.ForeColor = Color.FromArgb(100, 60, 20);
+            btRefreshData.Location = new Point(1041, 129);
+            btRefreshData.Name = "btRefreshData";
+            btRefreshData.Size = new Size(156, 41);
+            btRefreshData.TabIndex = 5;
+            btRefreshData.Text = "Refresh Data";
+            btRefreshData.UseVisualStyleBackColor = false;
+            btRefreshData.Click += btRefreshData_Click;
             // 
             // panel2
             // 
@@ -164,7 +166,7 @@
             panel8.Controls.Add(Stok);
             panel8.Controls.Add(btEdit);
             panel8.Controls.Add(NamaProduk);
-            panel8.Controls.Add(label10);
+            panel8.Controls.Add(labelStok);
             panel8.Controls.Add(HargaProduk);
             panel8.Controls.Add(pictureBox1);
             panel8.Location = new Point(3, 3);
@@ -200,6 +202,7 @@
             // 
             btEdit.BackColor = Color.Wheat;
             btEdit.Font = new Font("Times New Roman", 9F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            btEdit.ForeColor = Color.Black;
             btEdit.Location = new Point(20, 200);
             btEdit.Name = "btEdit";
             btEdit.Size = new Size(59, 37);
@@ -213,6 +216,7 @@
             NamaProduk.AutoSize = true;
             NamaProduk.BackColor = Color.Transparent;
             NamaProduk.Font = new Font("Times New Roman", 10F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            NamaProduk.ForeColor = Color.Black;
             NamaProduk.Location = new Point(49, 114);
             NamaProduk.Name = "NamaProduk";
             NamaProduk.Size = new Size(78, 23);
@@ -220,17 +224,18 @@
             NamaProduk.Text = "Arabika";
             NamaProduk.Click += label8_Click;
             // 
-            // label10
+            // labelStok
             // 
-            label10.AutoSize = true;
-            label10.BackColor = Color.Transparent;
-            label10.Font = new Font("Times New Roman", 9F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            label10.Location = new Point(53, 162);
-            label10.Name = "label10";
-            label10.Size = new Size(46, 20);
-            label10.TabIndex = 2;
-            label10.Text = "Stok:";
-            label10.Click += label10_Click;
+            labelStok.AutoSize = true;
+            labelStok.BackColor = Color.Transparent;
+            labelStok.Font = new Font("Times New Roman", 9F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            labelStok.ForeColor = Color.FromArgb(100, 60, 20);
+            labelStok.Location = new Point(53, 162);
+            labelStok.Name = "labelStok";
+            labelStok.Size = new Size(46, 20);
+            labelStok.TabIndex = 2;
+            labelStok.Text = "Stok:";
+            labelStok.Click += label10_Click;
             // 
             // HargaProduk
             // 
@@ -350,7 +355,7 @@
             // btTambahProduk
             // 
             btTambahProduk.BackColor = Color.OldLace;
-            btTambahProduk.Font = new Font("Times New Roman", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            btTambahProduk.Font = new Font("Times New Roman", 10F, FontStyle.Bold, GraphicsUnit.Point, 0);
             btTambahProduk.ForeColor = Color.FromArgb(100, 60, 20);
             btTambahProduk.Location = new Point(1041, 83);
             btTambahProduk.Name = "btTambahProduk";
@@ -359,6 +364,18 @@
             btTambahProduk.Text = "Tambah Produk";
             btTambahProduk.UseVisualStyleBackColor = false;
             btTambahProduk.Click += btTambahProduk_Click;
+            // 
+            // button1
+            // 
+            button1.BackColor = Color.OldLace;
+            button1.Font = new Font("Times New Roman", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            button1.ForeColor = Color.FromArgb(100, 60, 20);
+            button1.Location = new Point(18, 177);
+            button1.Name = "button1";
+            button1.Size = new Size(156, 41);
+            button1.TabIndex = 5;
+            button1.Text = "Beranda";
+            button1.UseVisualStyleBackColor = false;
             // 
             // AdminDashboardView
             // 
@@ -415,11 +432,12 @@
         private PictureBox pictureBox1;
         private Label NamaProduk;
         private Label HargaProduk;
-        private Label label10;
+        private Label labelStok;
         private Label Stok;
         private Button btEdit;
         private Button btHapus;
         private Button btTambahProduk;
         private Button btRefreshData;
+        private Button button1;
     }
 }

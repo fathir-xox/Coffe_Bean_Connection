@@ -110,6 +110,16 @@ namespace FinalProjek.View.Admin_View
                 TextAlign = ContentAlignment.MiddleCenter,
             };
 
+            Label labelStok = new Label
+            {
+                Location = new Point(53, 162),
+                Size = new Size(46, 20),
+                BackColor = Color.Transparent,
+                ForeColor = Color.FromArgb(100, 60, 20),
+                Font = new Font("Times New Roman", 8, FontStyle.Bold),
+                TextAlign = ContentAlignment.MiddleCenter,
+            };
+
             Label stokProduk = new Label
             {
                 Text = produk.stok.ToString(),
