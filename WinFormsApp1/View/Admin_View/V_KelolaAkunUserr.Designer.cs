@@ -1,6 +1,6 @@
 ﻿namespace FinalProjek.View.Admin_View
 {
-    partial class V_Kategori
+    partial class V_KelolaAkunUserr
     {
         /// <summary>
         /// Required designer variable.
@@ -40,7 +40,7 @@
             // 
             // panel1
             // 
-            panel1.BackgroundImage = Properties.Resources.Vkategori;
+            panel1.BackgroundImage = Properties.Resources.Vkelolauser;
             panel1.Controls.Add(btRiwayatTransaksi);
             panel1.Controls.Add(btMonitorStok);
             panel1.Controls.Add(btKategori);
@@ -49,7 +49,7 @@
             panel1.Controls.Add(btDashboar);
             panel1.Location = new Point(0, 0);
             panel1.Name = "panel1";
-            panel1.Size = new Size(1899, 1023);
+            panel1.Size = new Size(1898, 1025);
             panel1.TabIndex = 0;
             // 
             // btRiwayatTransaksi
@@ -130,14 +130,14 @@
             btDashboar.UseVisualStyleBackColor = false;
             btDashboar.Click += btDashboar_Click;
             // 
-            // V_Kategori
+            // V_KelolaAkunUserr
             // 
             AutoScaleDimensions = new SizeF(10F, 25F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(1898, 1024);
             Controls.Add(panel1);
-            Name = "V_Kategori";
-            Text = "V_Kategori";
+            Name = "V_KelolaAkunUserr";
+            Text = "V_KelolaAkunUserr";
             panel1.ResumeLayout(false);
             ResumeLayout(false);
         }

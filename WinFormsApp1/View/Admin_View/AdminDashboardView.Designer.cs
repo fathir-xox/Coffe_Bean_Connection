@@ -135,6 +135,7 @@
             btHapus.TabIndex = 8;
             btHapus.Text = "Hapus";
             btHapus.UseVisualStyleBackColor = false;
+            btHapus.Click += btHapus_Click;
             // 
             // Stok
             // 
@@ -340,6 +341,7 @@
             btMonitorStok.TabIndex = 8;
             btMonitorStok.Text = "Monitor Stok";
             btMonitorStok.UseVisualStyleBackColor = false;
+            btMonitorStok.Click += btMonitorStok_Click;
             // 
             // btKategori
             // 
@@ -352,6 +354,7 @@
             btKategori.TabIndex = 7;
             btKategori.Text = "Kategori";
             btKategori.UseVisualStyleBackColor = false;
+            btKategori.Click += btKategori_Click;
             // 
             // btProduk
             // 
@@ -364,6 +367,7 @@
             btProduk.TabIndex = 6;
             btProduk.Text = "Produk";
             btProduk.UseVisualStyleBackColor = false;
+            btProduk.Click += btProduk_Click;
             // 
             // AdminDashboardView
             // 

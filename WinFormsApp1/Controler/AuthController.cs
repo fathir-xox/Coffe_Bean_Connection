@@ -77,7 +77,7 @@ namespace FinalProjek.Controler
                     INSERT INTO ""user"" (username, password, role, full_name, isactive) 
                     VALUES (@username, @password, @role::role_enum, @full_name, @isactive)";
 
-                    string hashedPassword = PWhelper.HashPassword(user.password);
+                    string hashedPassword = PWhelper.HashPassword(user.password ?? string.Empty); //ada tambah an ?? string.Empty
                     using (var cmd = new NpgsqlCommand(query, conn))
                     {
                         cmd.Parameters.AddWithValue("@username", user.username);

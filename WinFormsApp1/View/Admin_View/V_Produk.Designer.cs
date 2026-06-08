@@ -28,12 +28,128 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.components = new System.ComponentModel.Container();
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(800, 450);
-            this.Text = "V_Produk";
+            panel1 = new Panel();
+            btRiwayatTransaksi = new Button();
+            btMonitorStok = new Button();
+            btKategori = new Button();
+            btProduk = new Button();
+            btKelolaAkunUser = new Button();
+            btDashboar = new Button();
+            panel1.SuspendLayout();
+            SuspendLayout();
+            // 
+            // panel1
+            // 
+            panel1.BackgroundImage = Properties.Resources.Vproduk;
+            panel1.Controls.Add(btRiwayatTransaksi);
+            panel1.Controls.Add(btMonitorStok);
+            panel1.Controls.Add(btKategori);
+            panel1.Controls.Add(btProduk);
+            panel1.Controls.Add(btKelolaAkunUser);
+            panel1.Controls.Add(btDashboar);
+            panel1.Location = new Point(0, 0);
+            panel1.Name = "panel1";
+            panel1.Size = new Size(1897, 1023);
+            panel1.TabIndex = 0;
+            // 
+            // btRiwayatTransaksi
+            // 
+            btRiwayatTransaksi.BackColor = Color.OldLace;
+            btRiwayatTransaksi.Font = new Font("Times New Roman", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            btRiwayatTransaksi.ForeColor = Color.FromArgb(100, 60, 20);
+            btRiwayatTransaksi.Location = new Point(77, 634);
+            btRiwayatTransaksi.Name = "btRiwayatTransaksi";
+            btRiwayatTransaksi.Size = new Size(224, 41);
+            btRiwayatTransaksi.TabIndex = 15;
+            btRiwayatTransaksi.Text = "Riwayat Transaksi";
+            btRiwayatTransaksi.UseVisualStyleBackColor = false;
+            btRiwayatTransaksi.Click += btRiwayatTransaksi_Click;
+            // 
+            // btMonitorStok
+            // 
+            btMonitorStok.BackColor = Color.OldLace;
+            btMonitorStok.Font = new Font("Times New Roman", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            btMonitorStok.ForeColor = Color.FromArgb(100, 60, 20);
+            btMonitorStok.Location = new Point(77, 510);
+            btMonitorStok.Name = "btMonitorStok";
+            btMonitorStok.Size = new Size(224, 41);
+            btMonitorStok.TabIndex = 14;
+            btMonitorStok.Text = "Monitor Stok";
+            btMonitorStok.UseVisualStyleBackColor = false;
+            btMonitorStok.Click += btMonitorStok_Click;
+            // 
+            // btKategori
+            // 
+            btKategori.BackColor = Color.OldLace;
+            btKategori.Font = new Font("Times New Roman", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            btKategori.ForeColor = Color.FromArgb(100, 60, 20);
+            btKategori.Location = new Point(77, 427);
+            btKategori.Name = "btKategori";
+            btKategori.Size = new Size(224, 41);
+            btKategori.TabIndex = 13;
+            btKategori.Text = "Kategori";
+            btKategori.UseVisualStyleBackColor = false;
+            btKategori.Click += btKategori_Click;
+            // 
+            // btProduk
+            // 
+            btProduk.BackColor = Color.OldLace;
+            btProduk.Font = new Font("Times New Roman", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            btProduk.ForeColor = Color.FromArgb(100, 60, 20);
+            btProduk.Location = new Point(77, 344);
+            btProduk.Name = "btProduk";
+            btProduk.Size = new Size(224, 41);
+            btProduk.TabIndex = 12;
+            btProduk.Text = "Produk";
+            btProduk.UseVisualStyleBackColor = false;
+            btProduk.Click += btProduk_Click;
+            // 
+            // btKelolaAkunUser
+            // 
+            btKelolaAkunUser.BackColor = Color.OldLace;
+            btKelolaAkunUser.Font = new Font("Times New Roman", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            btKelolaAkunUser.ForeColor = Color.FromArgb(100, 60, 20);
+            btKelolaAkunUser.Location = new Point(77, 758);
+            btKelolaAkunUser.Name = "btKelolaAkunUser";
+            btKelolaAkunUser.Size = new Size(224, 41);
+            btKelolaAkunUser.TabIndex = 11;
+            btKelolaAkunUser.Text = "Kelola Akun User";
+            btKelolaAkunUser.UseVisualStyleBackColor = false;
+            btKelolaAkunUser.Click += btKelolaAkunUser_Click;
+            // 
+            // btDashboar
+            // 
+            btDashboar.BackColor = Color.OldLace;
+            btDashboar.Font = new Font("Times New Roman", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            btDashboar.ForeColor = Color.FromArgb(100, 60, 20);
+            btDashboar.Location = new Point(77, 220);
+            btDashboar.Name = "btDashboar";
+            btDashboar.Size = new Size(224, 41);
+            btDashboar.TabIndex = 10;
+            btDashboar.Text = "Dashboard";
+            btDashboar.UseVisualStyleBackColor = false;
+            btDashboar.Click += btDashboar_Click;
+            // 
+            // V_Produk
+            // 
+            AutoScaleDimensions = new SizeF(10F, 25F);
+            AutoScaleMode = AutoScaleMode.Font;
+            ClientSize = new Size(1898, 1024);
+            Controls.Add(panel1);
+            Name = "V_Produk";
+            Text = "V_Produk";
+            panel1.ResumeLayout(false);
+            ResumeLayout(false);
         }
 
         #endregion
+
+        private Panel panel1;
+        private Button btRiwayatTransaksi;
+        private Button btMonitorStok;
+        private Button btKategori;
+        private Button btProduk;
+        private Button btKelolaAkunUser;
+        private Button btDashboar;
     }
 }

@@ -10,9 +10,9 @@ using System.Windows.Forms;
 
 namespace FinalProjek.View.Admin_View
 {
-    public partial class V_Produk : Form
+    public partial class V_KelolaAkunUserr : Form
     {
-        public V_Produk()
+        public V_KelolaAkunUserr()
         {
             InitializeComponent();
         }

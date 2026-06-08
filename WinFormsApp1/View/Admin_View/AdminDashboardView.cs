@@ -68,7 +68,10 @@ namespace FinalProjek.View.Admin_View
 
         private void btDashboar_Click(object sender, EventArgs e)
         {
-
+            this.Close();
+            IProduk produkController = new ProdukController(); // buat instance controller
+            AdminDashboardView frmDashboard = new AdminDashboardView(produkController);
+            frmDashboard.ShowDialog();
         }
 
         public Panel CreateProductPanel(Produk produk)
@@ -89,7 +92,7 @@ namespace FinalProjek.View.Admin_View
                 SizeMode = PictureBoxSizeMode.Zoom,
             };
 
-            
+
             if (produk.imageproduk != null && produk.imageproduk.Length > 0)
             {
                 using (var ms = new MemoryStream(produk.imageproduk))
@@ -202,8 +205,9 @@ namespace FinalProjek.View.Admin_View
 
         private void btKelolaAkunUser_Click(object sender, EventArgs e)
         {
-            KelolaAkunUser frmRegister = new KelolaAkunUser();
-            frmRegister.ShowDialog();
+            this.Close();
+            V_KelolaAkunUserr frmKelolaAkunUser = new V_KelolaAkunUserr();
+            frmKelolaAkunUser.ShowDialog();
         }
 
         private void Label_totalProduk_Click(object sender, EventArgs e)
@@ -222,6 +226,34 @@ namespace FinalProjek.View.Admin_View
         }
 
         private void btRiwayatTransaksi_Click(object sender, EventArgs e)
+        {
+            this.Close();
+            V_RiwayatTransaksi frmRiwayatTransaksi = new V_RiwayatTransaksi();
+            frmRiwayatTransaksi.ShowDialog();
+        }
+
+        private void btProduk_Click(object sender, EventArgs e)
+        {
+            this.Close();
+            V_Produk frmProduk = new V_Produk();
+            frmProduk.ShowDialog();
+        }
+
+        private void btMonitorStok_Click(object sender, EventArgs e)
+        {
+            this.Close();
+            V_MonitorStok frmMonitorStok = new V_MonitorStok();
+            frmMonitorStok.ShowDialog();
+        }
+
+        private void btKategori_Click(object sender, EventArgs e)
+        {
+            this.Close();
+            V_Kategori frmKategori = new V_Kategori();
+            frmKategori.ShowDialog();
+        }
+
+        private void btHapus_Click(object sender, EventArgs e)
         {
 
         }

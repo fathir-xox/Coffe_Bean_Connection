@@ -1,6 +1,6 @@
 ﻿namespace FinalProjek.View.Admin_View
 {
-    partial class V_Kategori
+    partial class V_MonitorStok
     {
         /// <summary>
         /// Required designer variable.
@@ -40,7 +40,7 @@
             // 
             // panel1
             // 
-            panel1.BackgroundImage = Properties.Resources.Vkategori;
+            panel1.BackgroundImage = Properties.Resources.Vmonitorstok;
             panel1.Controls.Add(btRiwayatTransaksi);
             panel1.Controls.Add(btMonitorStok);
             panel1.Controls.Add(btKategori);
@@ -49,7 +49,7 @@
             panel1.Controls.Add(btDashboar);
             panel1.Location = new Point(0, 0);
             panel1.Name = "panel1";
-            panel1.Size = new Size(1899, 1023);
+            panel1.Size = new Size(1898, 1027);
             panel1.TabIndex = 0;
             // 
             // btRiwayatTransaksi
@@ -57,7 +57,7 @@
             btRiwayatTransaksi.BackColor = Color.OldLace;
             btRiwayatTransaksi.Font = new Font("Times New Roman", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
             btRiwayatTransaksi.ForeColor = Color.FromArgb(100, 60, 20);
-            btRiwayatTransaksi.Location = new Point(77, 633);
+            btRiwayatTransaksi.Location = new Point(75, 633);
             btRiwayatTransaksi.Name = "btRiwayatTransaksi";
             btRiwayatTransaksi.Size = new Size(224, 41);
             btRiwayatTransaksi.TabIndex = 15;
@@ -70,7 +70,7 @@
             btMonitorStok.BackColor = Color.OldLace;
             btMonitorStok.Font = new Font("Times New Roman", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
             btMonitorStok.ForeColor = Color.FromArgb(100, 60, 20);
-            btMonitorStok.Location = new Point(77, 509);
+            btMonitorStok.Location = new Point(75, 509);
             btMonitorStok.Name = "btMonitorStok";
             btMonitorStok.Size = new Size(224, 41);
             btMonitorStok.TabIndex = 14;
@@ -83,7 +83,7 @@
             btKategori.BackColor = Color.OldLace;
             btKategori.Font = new Font("Times New Roman", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
             btKategori.ForeColor = Color.FromArgb(100, 60, 20);
-            btKategori.Location = new Point(77, 426);
+            btKategori.Location = new Point(75, 426);
             btKategori.Name = "btKategori";
             btKategori.Size = new Size(224, 41);
             btKategori.TabIndex = 13;
@@ -96,7 +96,7 @@
             btProduk.BackColor = Color.OldLace;
             btProduk.Font = new Font("Times New Roman", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
             btProduk.ForeColor = Color.FromArgb(100, 60, 20);
-            btProduk.Location = new Point(77, 343);
+            btProduk.Location = new Point(75, 343);
             btProduk.Name = "btProduk";
             btProduk.Size = new Size(224, 41);
             btProduk.TabIndex = 12;
@@ -109,7 +109,7 @@
             btKelolaAkunUser.BackColor = Color.OldLace;
             btKelolaAkunUser.Font = new Font("Times New Roman", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
             btKelolaAkunUser.ForeColor = Color.FromArgb(100, 60, 20);
-            btKelolaAkunUser.Location = new Point(77, 757);
+            btKelolaAkunUser.Location = new Point(75, 757);
             btKelolaAkunUser.Name = "btKelolaAkunUser";
             btKelolaAkunUser.Size = new Size(224, 41);
             btKelolaAkunUser.TabIndex = 11;
@@ -122,7 +122,7 @@
             btDashboar.BackColor = Color.OldLace;
             btDashboar.Font = new Font("Times New Roman", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
             btDashboar.ForeColor = Color.FromArgb(100, 60, 20);
-            btDashboar.Location = new Point(77, 219);
+            btDashboar.Location = new Point(75, 219);
             btDashboar.Name = "btDashboar";
             btDashboar.Size = new Size(224, 41);
             btDashboar.TabIndex = 10;
@@ -130,14 +130,14 @@
             btDashboar.UseVisualStyleBackColor = false;
             btDashboar.Click += btDashboar_Click;
             // 
-            // V_Kategori
+            // V_MonitorStok
             // 
             AutoScaleDimensions = new SizeF(10F, 25F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(1898, 1024);
             Controls.Add(panel1);
-            Name = "V_Kategori";
-            Text = "V_Kategori";
+            Name = "V_MonitorStok";
+            Text = "V_MonitorStok";
             panel1.ResumeLayout(false);
             ResumeLayout(false);
         }
