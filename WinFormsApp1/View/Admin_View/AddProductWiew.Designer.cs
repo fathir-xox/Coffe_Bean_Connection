@@ -132,7 +132,7 @@
             // gambarProduk
             // 
             gambarProduk.BackColor = Color.Transparent;
-            gambarProduk.BackgroundImageLayout = ImageLayout.Zoom;
+            gambarProduk.BackgroundImageLayout = ImageLayout.Stretch;
             gambarProduk.Location = new Point(242, 102);
             gambarProduk.Name = "gambarProduk";
             gambarProduk.Size = new Size(381, 367);
