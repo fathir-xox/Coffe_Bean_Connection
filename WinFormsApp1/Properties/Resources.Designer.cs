@@ -93,26 +93,6 @@ namespace FinalProjek.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        public static System.Drawing.Bitmap Kategori {
-            get {
-                object obj = ResourceManager.GetObject("Kategori", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
-        public static System.Drawing.Bitmap Kelola_User {
-            get {
-                object obj = ResourceManager.GetObject("Kelola User", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
         public static System.Drawing.Bitmap LoginView1 {
             get {
                 object obj = ResourceManager.GetObject("LoginView1", resourceCulture);
@@ -123,39 +103,9 @@ namespace FinalProjek.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        public static System.Drawing.Bitmap Monitor_Stok {
-            get {
-                object obj = ResourceManager.GetObject("Monitor Stok", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
-        public static System.Drawing.Bitmap Produk {
-            get {
-                object obj = ResourceManager.GetObject("Produk", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
         public static System.Drawing.Bitmap RegisterView1 {
             get {
                 object obj = ResourceManager.GetObject("RegisterView1", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
-        public static System.Drawing.Bitmap Riwayat_Transaksi {
-            get {
-                object obj = ResourceManager.GetObject("Riwayat Transaksi", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

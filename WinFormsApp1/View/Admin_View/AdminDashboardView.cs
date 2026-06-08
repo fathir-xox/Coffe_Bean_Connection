@@ -198,6 +198,11 @@ namespace FinalProjek.View.Admin_View
             tambahProduk.Show();
         }
 
+        private void btHapus_Click(object sender, EventArgs e)
+        {
+
+        }
+
         private void btRefreshData_Click(object sender, EventArgs e)
         {
             LoadProducts();
