@@ -29,10 +29,6 @@
     </None>
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="View\" />
-  </ItemGroup>
-
   <Target Name="UnblockOutput" AfterTargets="Build">
     <Exec Command="powershell -NoProfile -NonInteractive -Command &quot;Get-ChildItem -Path '$(TargetDir)' -Recurse -Include *.dll,*.exe | ForEach-Object { try { Unblock-File -Path $_.FullName -ErrorAction SilentlyContinue } catch { } }&quot;" />
   </Target>

@@ -29,6 +29,7 @@
         private void InitializeComponent()
         {
             panel1 = new Panel();
+            button1 = new Button();
             btDashboar = new Button();
             panel3 = new Panel();
             label1 = new Label();
@@ -54,7 +55,6 @@
             panel9 = new Panel();
             panel5 = new Panel();
             btTambahProduk = new Button();
-            button1 = new Button();
             panel1.SuspendLayout();
             panel3.SuspendLayout();
             panel2.SuspendLayout();
@@ -78,6 +78,18 @@
             panel1.Size = new Size(192, 664);
             panel1.TabIndex = 0;
             panel1.Paint += panel1_Paint_1;
+            // 
+            // button1
+            // 
+            button1.BackColor = Color.OldLace;
+            button1.Font = new Font("Times New Roman", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            button1.ForeColor = Color.FromArgb(100, 60, 20);
+            button1.Location = new Point(18, 177);
+            button1.Name = "button1";
+            button1.Size = new Size(156, 41);
+            button1.TabIndex = 5;
+            button1.Text = "Beranda";
+            button1.UseVisualStyleBackColor = false;
             // 
             // btDashboar
             // 
@@ -364,18 +376,6 @@
             btTambahProduk.Text = "Tambah Produk";
             btTambahProduk.UseVisualStyleBackColor = false;
             btTambahProduk.Click += btTambahProduk_Click;
-            // 
-            // button1
-            // 
-            button1.BackColor = Color.OldLace;
-            button1.Font = new Font("Times New Roman", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            button1.ForeColor = Color.FromArgb(100, 60, 20);
-            button1.Location = new Point(18, 177);
-            button1.Name = "button1";
-            button1.Size = new Size(156, 41);
-            button1.TabIndex = 5;
-            button1.Text = "Beranda";
-            button1.UseVisualStyleBackColor = false;
             // 
             // AdminDashboardView
             // 
