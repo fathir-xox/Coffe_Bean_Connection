@@ -77,7 +77,7 @@ namespace FinalProjek.View.Admin_View
             {
                 Size = new Size(175, 248),
                 Margin = new Padding(3),
-                BackgroundImage = Properties.Resources.CardView,
+                BackgroundImage = Properties.Resources.Card,
                 BackgroundImageLayout = ImageLayout.Zoom,
             };
 
@@ -88,6 +88,20 @@ namespace FinalProjek.View.Admin_View
                 BackColor = Color.Transparent,
                 SizeMode = PictureBoxSizeMode.Zoom,
             };
+
+            // ✅ TAMBAHKAN INI:
+            if (produk.imageproduk != null && produk.imageproduk.Length > 0)
+            {
+                using (var ms = new MemoryStream(produk.imageproduk))
+                {
+                    var original = Image.FromStream(ms);
+                    displayProduct.Image = new Bitmap(original);
+                }
+            }
+            else
+            {
+                displayProduct.Image = Properties.Resources.Card; // default
+            }
 
             Label namaProduk = new Label
             {
@@ -190,6 +204,21 @@ namespace FinalProjek.View.Admin_View
         {
             KelolaAkunUser frmRegister = new KelolaAkunUser();
             frmRegister.ShowDialog();
+        }
+
+        private void Label_totalProduk_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void panel6_Paint(object sender, PaintEventArgs e)
+        {
+
+        }
+
+        private void panel8_Paint(object sender, PaintEventArgs e)
+        {
+
         }
     }
 }
