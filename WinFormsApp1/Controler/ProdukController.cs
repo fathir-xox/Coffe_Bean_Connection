@@ -48,48 +48,6 @@ namespace FinalProjek.Controler
             }
         }
 
-        public List<Produk> GetByUserId(int id_user)
-        {
-            List<Produk> produks = new List<Produk>();
-
-            try
-            {
-                using (NpgsqlConnection connection = new NpgsqlConnection(dbHelper.connStr))
-                {
-                    connection.Open();
-
-                    // PERBAIKAN 3: Ubah 'image' menjadi 'id_user' pada query SELECT
-                    string query = @"SELECT id_produk, nama_produk, harga, stok, deskripsi, id_user FROM produk WHERE id_user = @idUser";
-
-                    using (NpgsqlCommand cmd = new NpgsqlCommand(query, connection))
-                    {
-                        cmd.Parameters.AddWithValue("@idUser", id_user);
-                        using (NpgsqlDataReader reader = cmd.ExecuteReader())
-                        {
-                            while (reader.Read())
-                            {
-                                Produk produk = new Produk
-                                {
-                                    id_produk = reader.GetInt32(0),
-                                    nama_produk = reader.GetString(1),
-                                    harga = reader.GetDouble(2),
-                                    stok = reader.GetInt32(3),
-                                    deskripsi = reader.GetString(4),
-                                    id_user = reader.GetInt32(5) // Sekarang indeks ke-5 benar-benar id_user
-                                };
-                                produks.Add(produk);
-                            }
-                        }
-                    }
-                }
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show($"Get Product By User ID Error: {ex.Message}", "Connection Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-            return produks;
-        }
-
         public List<Produk> GetAllProduk()
         {
             List<Produk> produks = new List<Produk>();
