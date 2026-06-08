@@ -77,5 +77,10 @@ namespace FinalProjek.View.Admin_View
         {
 
         }
+
+        private void gambarProduk_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }

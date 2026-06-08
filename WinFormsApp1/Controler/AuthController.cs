@@ -19,7 +19,7 @@ namespace FinalProjek.Controler
            dbHelper = new DbContext();
         }
 
-        public User login(User user)
+        public User? login(User user)
         {
             try
             {

@@ -93,16 +93,6 @@ namespace FinalProjek.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        public static System.Drawing.Bitmap Kelola_User {
-            get {
-                object obj = ResourceManager.GetObject("Kelola User", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
         public static System.Drawing.Bitmap LoginView1 {
             get {
                 object obj = ResourceManager.GetObject("LoginView1", resourceCulture);

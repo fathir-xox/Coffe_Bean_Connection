@@ -138,6 +138,7 @@
             gambarProduk.Size = new Size(381, 367);
             gambarProduk.TabIndex = 8;
             gambarProduk.TabStop = false;
+            gambarProduk.Click += gambarProduk_Click;
             // 
             // label4
             // 

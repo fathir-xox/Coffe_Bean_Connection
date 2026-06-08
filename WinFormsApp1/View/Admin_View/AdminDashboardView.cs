@@ -75,7 +75,7 @@ namespace FinalProjek.View.Admin_View
         {
             Panel panel = new Panel
             {
-                Size = new Size(175, 248),
+                Size = new Size(213, 305),
                 Margin = new Padding(3),
                 BackgroundImage = Properties.Resources.Card,
                 BackgroundImageLayout = ImageLayout.Zoom,
@@ -84,12 +84,12 @@ namespace FinalProjek.View.Admin_View
             PictureBox displayProduct = new PictureBox
             {
                 Location = new Point(32, 8),
-                Size = new Size(114, 103),
+                Size = new Size(147, 122),
                 BackColor = Color.Transparent,
                 SizeMode = PictureBoxSizeMode.Zoom,
             };
 
-            // ✅ TAMBAHKAN INI:
+            
             if (produk.imageproduk != null && produk.imageproduk.Length > 0)
             {
                 using (var ms = new MemoryStream(produk.imageproduk))
@@ -106,48 +106,48 @@ namespace FinalProjek.View.Admin_View
             Label namaProduk = new Label
             {
                 Text = produk.nama_produk,
-                Location = new Point(49, 114),
-                Size = new Size(78, 23), //GANTIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIII
+                Location = new Point(8, 136),
+                Size = new Size(197, 26),
                 BackColor = Color.Transparent,
-                Font = new Font("Times New Roman", 10, FontStyle.Bold),
+                Font = new Font("Times New Roman", 12, FontStyle.Bold),
                 TextAlign = ContentAlignment.MiddleCenter,
             };
 
             Label hargaProduk = new Label
             {
                 Text = produk.harga.ToString(),
-                Location = new Point(47, 140),
-                Size = new Size(81, 19),
+                Location = new Point(47, 167),
+                Size = new Size(112, 25),
                 BackColor = Color.Transparent,
                 ForeColor = Color.FromArgb(100, 60, 20),
-                Font = new Font("Times New Roman", 8, FontStyle.Bold),
+                Font = new Font("Times New Roman", 11, FontStyle.Bold),
                 TextAlign = ContentAlignment.MiddleCenter,
             };
 
             Label labelStok = new Label
             {
-                Location = new Point(53, 162),
-                Size = new Size(46, 20),
+                Location = new Point(53, 202),
+                Size = new Size(58, 25),
                 BackColor = Color.Transparent,
                 ForeColor = Color.FromArgb(100, 60, 20),
-                Font = new Font("Times New Roman", 8, FontStyle.Bold),
+                Font = new Font("Times New Roman", 11, FontStyle.Bold),
                 TextAlign = ContentAlignment.MiddleCenter,
             };
 
             Label stokProduk = new Label
             {
                 Text = produk.stok.ToString(),
-                Location = new Point(92, 163),
-                Size = new Size(25, 19),
+                Location = new Point(107, 202),
+                Size = new Size(34, 25),
                 BackColor = Color.Transparent,
                 ForeColor = Color.FromArgb(100, 60, 20),
-                Font = new Font("Times New Roman", 8, FontStyle.Bold),
+                Font = new Font("Times New Roman", 11, FontStyle.Bold),
                 TextAlign = ContentAlignment.MiddleCenter,
             };
 
             Button buttonEdit = new Button
             {
-                Location = new Point(20, 200),
+                Location = new Point(36, 246),
                 Size = new Size(59, 37),
                 Font = new Font("Times New Roman", 9, FontStyle.Regular),
                 BackColor = Color.Wheat,
@@ -157,7 +157,7 @@ namespace FinalProjek.View.Admin_View
 
             Button buttonHapus = new Button
             {
-                Location = new Point(87, 200),
+                Location = new Point(103, 246),
                 Size = new Size(76, 37),
                 Font = new Font("Times New Roman", 9, FontStyle.Regular),
                 BackColor = Color.Red,
@@ -217,6 +217,11 @@ namespace FinalProjek.View.Admin_View
         }
 
         private void panel8_Paint(object sender, PaintEventArgs e)
+        {
+
+        }
+
+        private void btRiwayatTransaksi_Click(object sender, EventArgs e)
         {
 
         }
