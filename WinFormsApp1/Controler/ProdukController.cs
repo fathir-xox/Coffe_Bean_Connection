@@ -9,11 +9,11 @@ using System.Windows.Forms;       // PERBAIKAN 1: Tambahan untuk MessageBox
 
 namespace FinalProjek.Controler
 {
-    public class ProdukController : IProduk
+    public class ProdukControler : IProduk
     {
         private DbContext dbHelper;
 
-        public ProdukController()
+        public ProdukControler()
         {
             dbHelper = new DbContext();
         }
@@ -49,6 +49,8 @@ namespace FinalProjek.Controler
             }
         }
 
+
+
         public List<Produk> GetAllProduk()
         {
             List<Produk> produks = new List<Produk>();
@@ -60,7 +62,7 @@ namespace FinalProjek.Controler
                     connection.Open();
 
                     // Saya sesuaikan juga di sini: tidak mengambil 'image' karena di bawahnya tidak ada reader untuk image
-                    string query = @"SELECT id_produk, nama_produk, harga, stok, deskripsi FROM produk";
+                    string query = @"SELECT id_produk, nama_produk, harga, stok, deskripsi, imageproduk FROM produk";
 
                     using (NpgsqlCommand cmd = new NpgsqlCommand(query, connection))
                     {
@@ -74,7 +76,8 @@ namespace FinalProjek.Controler
                                     nama_produk = reader.GetString(1),
                                     harga = reader.GetDouble(2),
                                     stok = reader.GetInt32(3),
-                                    deskripsi = reader.GetString(4)
+                                    deskripsi = reader.GetString(4),
+                                    imageproduk = reader.IsDBNull(5) ? null : (byte[])reader["imageproduk"]
                                 };
                                 produks.Add(produk);
                             }

@@ -17,7 +17,7 @@ namespace FinalProjek.View.Admin_View
         {
             InitializeComponent();
             // openFileDialog1 is initialized in InitializeComponent(); do not re-create it here
-            produkController = new ProdukController(); // pastikan sudah ada implementasi ProdukController yang sesuai dengan IProduk
+            produkController = new Model.Transaksi(); // pastikan sudah ada implementasi ProdukController yang sesuai dengan IProduk
         }
 
         private void btTambahGambar_Click(object sender, EventArgs e)

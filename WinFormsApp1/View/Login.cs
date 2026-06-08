@@ -17,7 +17,7 @@ namespace FinalProjek.View
             InitializeComponent();
             _controller = new AuthController();
             tbPasswordLogin.UseSystemPasswordChar = true;
-            produkInterface = new ProdukController(); // Inisialisasi produkInterface dengan implementasi ProdukController
+            produkInterface = new Model.Transaksi(); // Inisialisasi produkInterface dengan implementasi ProdukController
         }
 
 
