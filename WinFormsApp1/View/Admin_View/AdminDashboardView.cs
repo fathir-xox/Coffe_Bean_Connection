@@ -252,10 +252,5 @@ namespace FinalProjek.View.Admin_View
             V_Kategori frmKategori = new V_Kategori();
             frmKategori.ShowDialog();
         }
-
-        private void btHapus_Click(object sender, EventArgs e)
-        {
-
-        }
     }
 }
