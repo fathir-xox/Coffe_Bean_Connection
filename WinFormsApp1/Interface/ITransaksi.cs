@@ -1,20 +1,18 @@
-﻿using FinalProjek.Controler;
-using FinalProjek.Model;
-using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using System.Collections.Generic;
+using FinalProjek.Model; // Pastikan memanggil namespace Model
 
 namespace FinalProjek.Interface
 {
     public interface ITransaksi
     {
-        int CreateTransaksi(TransaksiController transaksi);
+        // Parameter dan return type wajib menggunakan Model (Transaksi dan DetailTransaksi)
+        int CreateTransaksi(Transaksi transaksi);
         void AddDetail(DetailTransaksi detail);
-        List<TransaksiController> GetAll();
-        List<DetailTransaksi> GetDetails(int transaksiId);
-        List<TransaksiController> GetRiwayatByKasir(int userId);
+        List<Transaksi> GetAll();
+        List<DetailTransaksi> GetDetails(int idTransaksi);
         int GetPemasukanHariIni();
         int GetJumlahTransaksiBulanIni();
         int GetTotalPemasukanBulanIni();
+        List<Transaksi> GetRiwayatByKasir(int idKasir);
     }
 }
