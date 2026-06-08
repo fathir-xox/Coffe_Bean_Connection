@@ -15,7 +15,6 @@ namespace FinalProjek.Model
     }
     public enum UserRole
     {
-        Admin,
-        User
+        Admin, Kasir
     }
 }

@@ -6,6 +6,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Windows.Forms;
 
 namespace FinalProjek.Controler
 {
@@ -15,7 +16,7 @@ namespace FinalProjek.Controler
 
         public AuthController()
         {
-            dbHelper = new DbContext();
+           dbHelper = new DbContext();
         }
 
         public User login(User user)
@@ -26,7 +27,7 @@ namespace FinalProjek.Controler
                 {
                     conn.Open();
                     string query = @"
-                            SELECT role,full_name, username, password FROM users 
+                            SELECT role,full_name, username, password FROM ""user"" 
                             WHERE username = @username AND password = @password LIMIT 1";
 
                     string hashedPassword = PWhelper.HashPassword(user.password);
@@ -82,6 +83,7 @@ namespace FinalProjek.Controler
                         cmd.Parameters.AddWithValue("@password", hashedPassword);
                         cmd.Parameters.AddWithValue("@role", user.role.ToString());
                         cmd.Parameters.AddWithValue("@full_name", user.full_name);
+                        cmd.Parameters.AddWithValue("@isactive", true);
                         int result = cmd.ExecuteNonQuery();
                         return result > 0;
                     }
@@ -89,7 +91,7 @@ namespace FinalProjek.Controler
             }
             catch (Exception ex)
             {
-                MessageBox.Show($"REGISTER ERROR: {ex.Message}", "Connection Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show($"REGISTER ERROR: {ex}", "Connection Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return false;
             }
 
