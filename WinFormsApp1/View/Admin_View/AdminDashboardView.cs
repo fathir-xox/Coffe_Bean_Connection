@@ -185,5 +185,11 @@ namespace FinalProjek.View.Admin_View
         {
             LoadProducts();
         }
+
+        private void btKelolaAkunUser_Click(object sender, EventArgs e)
+        {
+            KelolaAkunUser frmRegister = new KelolaAkunUser();
+            frmRegister.ShowDialog();
+        }
     }
 }

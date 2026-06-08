@@ -29,7 +29,7 @@
         private void InitializeComponent()
         {
             panel1 = new Panel();
-            button1 = new Button();
+            btKelolaAkunUser = new Button();
             btDashboar = new Button();
             panel3 = new Panel();
             label1 = new Label();
@@ -69,7 +69,7 @@
             // panel1
             // 
             panel1.BackColor = Color.FromArgb(100, 60, 20);
-            panel1.Controls.Add(button1);
+            panel1.Controls.Add(btKelolaAkunUser);
             panel1.Controls.Add(btDashboar);
             panel1.Controls.Add(panel3);
             panel1.Dock = DockStyle.Left;
@@ -79,17 +79,18 @@
             panel1.TabIndex = 0;
             panel1.Paint += panel1_Paint_1;
             // 
-            // button1
+            // btKelolaAkunUser
             // 
-            button1.BackColor = Color.OldLace;
-            button1.Font = new Font("Times New Roman", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            button1.ForeColor = Color.FromArgb(100, 60, 20);
-            button1.Location = new Point(18, 177);
-            button1.Name = "button1";
-            button1.Size = new Size(156, 41);
-            button1.TabIndex = 5;
-            button1.Text = "Beranda";
-            button1.UseVisualStyleBackColor = false;
+            btKelolaAkunUser.BackColor = Color.OldLace;
+            btKelolaAkunUser.Font = new Font("Times New Roman", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            btKelolaAkunUser.ForeColor = Color.FromArgb(100, 60, 20);
+            btKelolaAkunUser.Location = new Point(16, 595);
+            btKelolaAkunUser.Name = "btKelolaAkunUser";
+            btKelolaAkunUser.Size = new Size(156, 41);
+            btKelolaAkunUser.TabIndex = 5;
+            btKelolaAkunUser.Text = "Kelola Akun User";
+            btKelolaAkunUser.UseVisualStyleBackColor = false;
+            btKelolaAkunUser.Click += btKelolaAkunUser_Click;
             // 
             // btDashboar
             // 
@@ -438,6 +439,6 @@
         private Button btHapus;
         private Button btTambahProduk;
         private Button btRefreshData;
-        private Button button1;
+        private Button btKelolaAkunUser;
     }
 }
