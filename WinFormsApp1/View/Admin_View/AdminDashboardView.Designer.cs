@@ -295,7 +295,7 @@
             // 
             // panel6
             // 
-            panel6.BackgroundImage = Properties.Resources.Dashboard;
+            panel6.BackgroundImage = Properties.Resources.VDashboard;
             panel6.Controls.Add(btRiwayatTransaksi);
             panel6.Controls.Add(btMonitorStok);
             panel6.Controls.Add(btKategori);

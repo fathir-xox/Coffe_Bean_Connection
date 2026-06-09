@@ -40,7 +40,7 @@
             // 
             // panel1
             // 
-            panel1.BackgroundImage = Properties.Resources.Vmonitorstok;
+            panel1.BackgroundImage = Properties.Resources.VMonitorProduk;
             panel1.Controls.Add(btRiwayatTransaksi);
             panel1.Controls.Add(btMonitorStok);
             panel1.Controls.Add(btKategori);

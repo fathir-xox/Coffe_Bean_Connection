@@ -83,16 +83,6 @@ namespace FinalProjek.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        public static System.Drawing.Bitmap Dashboard {
-            get {
-                object obj = ResourceManager.GetObject("Dashboard", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
         public static System.Drawing.Bitmap LoginView1 {
             get {
                 object obj = ResourceManager.GetObject("LoginView1", resourceCulture);
@@ -113,9 +103,19 @@ namespace FinalProjek.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        public static System.Drawing.Bitmap Vkategori {
+        public static System.Drawing.Bitmap VDashboard {
             get {
-                object obj = ResourceManager.GetObject("Vkategori", resourceCulture);
+                object obj = ResourceManager.GetObject("VDashboard", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        public static System.Drawing.Bitmap VKategori {
+            get {
+                object obj = ResourceManager.GetObject("VKategori", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -133,9 +133,9 @@ namespace FinalProjek.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        public static System.Drawing.Bitmap Vmonitorstok {
+        public static System.Drawing.Bitmap VMonitorProduk {
             get {
-                object obj = ResourceManager.GetObject("Vmonitorstok", resourceCulture);
+                object obj = ResourceManager.GetObject("VMonitorProduk", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -153,9 +153,9 @@ namespace FinalProjek.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        public static System.Drawing.Bitmap Vriwayattransaksi {
+        public static System.Drawing.Bitmap VRiwayatTransaksi {
             get {
-                object obj = ResourceManager.GetObject("Vriwayattransaksi", resourceCulture);
+                object obj = ResourceManager.GetObject("VRiwayatTransaksi", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
