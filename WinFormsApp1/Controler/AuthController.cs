@@ -7,6 +7,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
+using FinalProjek.View.Admin_View;
 
 namespace FinalProjek.Controler
 {
@@ -18,6 +19,11 @@ namespace FinalProjek.Controler
         {
            dbHelper = new DbContext();
         }
+
+        //internal static void logout(AdminDashboardView adminDashboardView)
+        //{
+        //    throw new NotImplementedException();
+        //}
 
         public User? login(User user)
         {

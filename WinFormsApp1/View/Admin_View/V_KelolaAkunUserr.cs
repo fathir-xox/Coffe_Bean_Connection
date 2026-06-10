@@ -59,5 +59,10 @@ namespace FinalProjek.View.Admin_View
             V_KelolaAkunUserr frmKelolaAkunUser = new V_KelolaAkunUserr();
             frmKelolaAkunUser.ShowDialog();
         }
+
+        private void btLogout_Click(object sender, EventArgs e)
+        {
+            AuthController.logout(this);
+        }
     }
 }

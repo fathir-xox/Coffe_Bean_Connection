@@ -63,7 +63,9 @@ namespace FinalProjek.View.Admin_View
 
         private void button3_Click(object sender, EventArgs e)
         {
-
+            this.Close();
+            V_EditProduk frmEditProduk = new V_EditProduk();
+            frmEditProduk.ShowDialog();
         }
 
         private void btDashboar_Click(object sender, EventArgs e)
@@ -118,7 +120,7 @@ namespace FinalProjek.View.Admin_View
 
             Label hargaProduk = new Label
             {
-                Text = produk.harga.ToString(),
+                Text = "Rp" + produk.harga.ToString("N0"),
                 Location = new Point(47, 167),
                 Size = new Size(112, 25),
                 BackColor = Color.Transparent,
@@ -139,7 +141,7 @@ namespace FinalProjek.View.Admin_View
 
             Label stokProduk = new Label
             {
-                Text = produk.stok.ToString(),
+                Text = "Stok: " + produk.stok.ToString(),
                 Location = new Point(107, 202),
                 Size = new Size(34, 25),
                 BackColor = Color.Transparent,
@@ -175,6 +177,7 @@ namespace FinalProjek.View.Admin_View
             panel.Controls.Add(stokProduk);
             panel.Controls.Add(buttonEdit);
             panel.Controls.Add(buttonHapus);
+            //panel.Controls.Add()
 
             return panel;
         }
@@ -256,6 +259,17 @@ namespace FinalProjek.View.Admin_View
             this.Close();
             V_Kategori frmKategori = new V_Kategori();
             frmKategori.ShowDialog();
+        }
+
+        private void HargaProduk_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            //AuthController.logout(this);
+            this.Close();
         }
     }
 }

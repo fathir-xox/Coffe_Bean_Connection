@@ -46,6 +46,7 @@
             btProduk = new Button();
             btKelolaAkunUser = new Button();
             btDashboar = new Button();
+            btLogout = new Button();
             panel1.SuspendLayout();
             flowLayoutPanel1.SuspendLayout();
             panel8.SuspendLayout();
@@ -55,6 +56,7 @@
             // panel1
             // 
             panel1.BackgroundImage = Properties.Resources.Vproduk;
+            panel1.Controls.Add(btLogout);
             panel1.Controls.Add(flowLayoutPanel1);
             panel1.Controls.Add(btRefresh);
             panel1.Controls.Add(btTambahProduk);
@@ -200,6 +202,7 @@
             btTambahProduk.TabIndex = 17;
             btTambahProduk.Text = "Tambah Produk";
             btTambahProduk.UseVisualStyleBackColor = false;
+            btTambahProduk.Click += btTambahProduk_Click;
             // 
             // btRiwayatTransaksi
             // 
@@ -279,6 +282,19 @@
             btDashboar.UseVisualStyleBackColor = false;
             btDashboar.Click += btDashboar_Click;
             // 
+            // btLogout
+            // 
+            btLogout.BackColor = Color.Red;
+            btLogout.Font = new Font("Times New Roman", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            btLogout.ForeColor = Color.White;
+            btLogout.Location = new Point(38, 912);
+            btLogout.Name = "btLogout";
+            btLogout.Size = new Size(224, 41);
+            btLogout.TabIndex = 19;
+            btLogout.Text = "Logout";
+            btLogout.UseVisualStyleBackColor = false;
+            btLogout.Click += btLogout_Click;
+            // 
             // V_Produk
             // 
             AutoScaleDimensions = new SizeF(10F, 25F);
@@ -315,5 +331,6 @@
         private Label labelStok;
         private Label HargaProduk;
         private PictureBox pictureBox1;
+        private Button btLogout;
     }
 }

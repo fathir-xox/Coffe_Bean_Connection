@@ -28,7 +28,7 @@ namespace FinalProjek.View.Admin_View
         private void btProduk_Click(object sender, EventArgs e)
         {
             this.Close();
-            V_Produk frmProduk = new V_Produk();
+            V_Produk frmProduk = new();
             frmProduk.ShowDialog();
         }
 
@@ -58,6 +58,11 @@ namespace FinalProjek.View.Admin_View
             this.Close();
             V_KelolaAkunUserr frmKelolaAkunUser = new V_KelolaAkunUserr();
             frmKelolaAkunUser.ShowDialog();
+        }
+
+        private void btLogout_Click(object sender, EventArgs e)
+        {
+            AuthController.logout(this);
         }
     }
 }

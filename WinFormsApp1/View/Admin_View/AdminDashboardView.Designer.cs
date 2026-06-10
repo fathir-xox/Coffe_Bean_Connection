@@ -52,6 +52,7 @@
             btMonitorStok = new Button();
             btKategori = new Button();
             btProduk = new Button();
+            btLogout = new Button();
             flowLayoutPanel1.SuspendLayout();
             panel8.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
@@ -199,6 +200,7 @@
             HargaProduk.Size = new Size(112, 25);
             HargaProduk.TabIndex = 4;
             HargaProduk.Text = "Rp. 55.000";
+            HargaProduk.Click += HargaProduk_Click;
             // 
             // pictureBox1
             // 
@@ -297,6 +299,7 @@
             // 
             panel6.BackgroundImage = Properties.Resources.VDashboard;
             panel6.Controls.Add(btRiwayatTransaksi);
+            panel6.Controls.Add(btLogout);
             panel6.Controls.Add(btMonitorStok);
             panel6.Controls.Add(btKategori);
             panel6.Controls.Add(btProduk);
@@ -369,6 +372,19 @@
             btProduk.UseVisualStyleBackColor = false;
             btProduk.Click += btProduk_Click;
             // 
+            // btLogout
+            // 
+            btLogout.BackColor = Color.Red;
+            btLogout.Font = new Font("Times New Roman", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            btLogout.ForeColor = Color.White;
+            btLogout.Location = new Point(34, 911);
+            btLogout.Name = "btLogout";
+            btLogout.Size = new Size(224, 41);
+            btLogout.TabIndex = 10;
+            btLogout.Text = "Logout";
+            btLogout.UseVisualStyleBackColor = false;
+            btLogout.Click += button1_Click;
+            // 
             // AdminDashboardView
             // 
             AutoScaleDimensions = new SizeF(10F, 25F);
@@ -411,5 +427,6 @@
         private Button btKategori;
         private Button btProduk;
         private Button btRiwayatTransaksi;
+        private Button btLogout;
     }
 }

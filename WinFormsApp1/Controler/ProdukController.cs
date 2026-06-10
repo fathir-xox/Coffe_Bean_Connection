@@ -131,5 +131,10 @@ namespace FinalProjek.Controler
             }
             return produks;
         }
+
+        internal void UpdateProduk(Produk produk)
+        {
+            throw new NotImplementedException();
+        }
     }
 }
