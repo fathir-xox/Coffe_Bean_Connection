@@ -49,10 +49,10 @@
             btTambahProduk = new Button();
             panel6 = new Panel();
             btRiwayatTransaksi = new Button();
+            btLogout = new Button();
             btMonitorStok = new Button();
             btKategori = new Button();
             btProduk = new Button();
-            btLogout = new Button();
             flowLayoutPanel1.SuspendLayout();
             panel8.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
@@ -333,6 +333,19 @@
             btRiwayatTransaksi.UseVisualStyleBackColor = false;
             btRiwayatTransaksi.Click += btRiwayatTransaksi_Click;
             // 
+            // btLogout
+            // 
+            btLogout.BackColor = Color.Red;
+            btLogout.Font = new Font("Times New Roman", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            btLogout.ForeColor = Color.White;
+            btLogout.Location = new Point(38, 913);
+            btLogout.Name = "btLogout";
+            btLogout.Size = new Size(224, 41);
+            btLogout.TabIndex = 10;
+            btLogout.Text = "Logout";
+            btLogout.UseVisualStyleBackColor = false;
+            btLogout.Click += button1_Click;
+            // 
             // btMonitorStok
             // 
             btMonitorStok.BackColor = Color.OldLace;
@@ -371,19 +384,6 @@
             btProduk.Text = "Produk";
             btProduk.UseVisualStyleBackColor = false;
             btProduk.Click += btProduk_Click;
-            // 
-            // btLogout
-            // 
-            btLogout.BackColor = Color.Red;
-            btLogout.Font = new Font("Times New Roman", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            btLogout.ForeColor = Color.White;
-            btLogout.Location = new Point(34, 911);
-            btLogout.Name = "btLogout";
-            btLogout.Size = new Size(224, 41);
-            btLogout.TabIndex = 10;
-            btLogout.Text = "Logout";
-            btLogout.UseVisualStyleBackColor = false;
-            btLogout.Click += button1_Click;
             // 
             // AdminDashboardView
             // 

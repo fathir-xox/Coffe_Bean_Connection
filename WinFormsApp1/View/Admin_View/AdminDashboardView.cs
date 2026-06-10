@@ -268,8 +268,7 @@ namespace FinalProjek.View.Admin_View
 
         private void button1_Click(object sender, EventArgs e)
         {
-            //AuthController.logout(this);
-            this.Close();
+            AuthController.logout(this);
         }
     }
 }
