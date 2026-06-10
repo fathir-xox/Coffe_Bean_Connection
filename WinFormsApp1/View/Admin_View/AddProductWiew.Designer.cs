@@ -127,13 +127,15 @@
             panel1.Controls.Add(btTambahGambar);
             panel1.Location = new Point(-77, -22);
             panel1.Name = "panel1";
-            panel1.Size = new Size(1416, 706);
+            panel1.Size = new Size(1418, 706);
             panel1.TabIndex = 14;
+            panel1.Paint += panel1_Paint;
             // 
             // AddProductWiew
             // 
             AutoScaleDimensions = new SizeF(10F, 25F);
             AutoScaleMode = AutoScaleMode.Font;
+            BackgroundImage = Properties.Resources.VTambahProduk;
             ClientSize = new Size(1258, 664);
             Controls.Add(panel1);
             Name = "AddProductWiew";
