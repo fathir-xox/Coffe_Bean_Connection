@@ -118,7 +118,7 @@ namespace FinalProjek.Controler
                                     harga = reader.GetDouble(2),
                                     stok = reader.GetInt32(3),
                                     deskripsi = reader.GetString(4),
-                                    imageproduk = reader[5] as byte[]
+                                    imageproduk = reader["imageproduk"] as byte[]
                                 };
                                 produks.Add(produk);
                             }
@@ -133,98 +133,40 @@ namespace FinalProjek.Controler
             return produks;
         }
 
-
         internal void UpdateProduk(Produk produk)
         {
             throw new NotImplementedException();
         }
 
-        // method untuk menghapus produk dengan cara men-set is_active menjadi false
-        public bool DeleteProduk(int id_produk)
+
+        // PERBAIKAN 4: Implementasi soft delete dengan mengubah is_active menjadi false
+        // Signature changed to match IProduk.DeleteProduk(object)
+        public bool DeleteProduk(object id_produk)
         {
             try
             {
+                int id;
+                if (id_produk is int i) id = i;
+                else
+                {
+                    // Try to convert common types (string, long, etc.)
+                    id = Convert.ToInt32(id_produk);
+                }
+
                 using var conn = new NpgsqlConnection(dbHelper.connStr);
                 conn.Open();
-                string query = "UPDATE produk SET is_active = false WHERE id_produk = @id";
+                // Soft delete: set is_active = false
+                string query = "UPDATE produk SET is_active = false, updated_at = NOW() WHERE id_produk = @id";
                 using var cmd = new NpgsqlCommand(query, conn);
-                cmd.Parameters.AddWithValue("@id", id_produk);
-                int rows = cmd.ExecuteNonQuery();
-                return rows > 0;
+                cmd.Parameters.AddWithValue("@id", id);
+                int rowsAffected = cmd.ExecuteNonQuery();
+                return rowsAffected > 0;
             }
             catch (Exception ex)
             {
-                MessageBox.Show($"Delete error: {ex.Message}");
+                MessageBox.Show($"Error saat soft delete: {ex.Message}");
                 return false;
             }
-        }
-
-        // method untuk mengembalikan produk yang sudah dihapus (non-aktif)
-        public bool RestoreProduk(int id_produk)
-        {
-            try
-            {
-                using (NpgsqlConnection connection = new NpgsqlConnection(dbHelper.connStr))
-                {
-                    connection.Open();
-                    string query = "UPDATE produk SET is_active = true, updated_at = NOW() WHERE id_produk = @id";
-                    using (NpgsqlCommand cmd = new NpgsqlCommand(query, connection))
-                    {
-                        cmd.Parameters.AddWithValue("@id", id_produk);
-                        int rowsAffected = cmd.ExecuteNonQuery();
-                        return rowsAffected > 0;
-                    }
-                }
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show($"Restore produk error: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                return false;
-            }
-        }
-
-        // method untuk mengambil produk yang non-aktif
-        public List<Produk> GetNonActiveProducts()
-        {
-            List<Produk> produks = new List<Produk>();
-
-            try
-            {
-                using (NpgsqlConnection connection = new NpgsqlConnection(dbHelper.connStr))
-                {
-                    connection.Open();
-                    // Ambil produk dengan is_active = false
-                    string query = @"SELECT id_produk, nama_produk, harga, stok, deskripsi, imageproduk 
-                             FROM produk 
-                             WHERE is_active = false
-                             ORDER BY id_produk";
-
-                    using (NpgsqlCommand cmd = new NpgsqlCommand(query, connection))
-                    {
-                        using (NpgsqlDataReader reader = cmd.ExecuteReader())
-                        {
-                            while (reader.Read())
-                            {
-                                Produk produk = new Produk
-                                {
-                                    id_produk = reader.GetInt32(0),
-                                    nama_produk = reader.GetString(1),
-                                    harga = reader.GetDouble(2),
-                                    stok = reader.GetInt32(3),
-                                    deskripsi = reader.GetString(4),
-                                    imageproduk = reader[5] as byte[]
-                                };
-                                produks.Add(produk);
-                            }
-                        }
-                    }
-                }
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show($"Get non-active products error: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-            return produks;
         }
     }
 }

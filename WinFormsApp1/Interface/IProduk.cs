@@ -11,6 +11,6 @@ namespace FinalProjek.Interface
 
         List<Produk> GetByUserId(int id_user);
         List<Produk> GetAllProduk();
-
+        bool DeleteProduk(object id_produk);
     }
 }

@@ -203,7 +203,7 @@ namespace FinalProjek.View.Admin_View
 
         private void btHapus_Click(object sender, EventArgs e)
         {
-
+            
         }
 
         private void btRefreshData_Click(object sender, EventArgs e)
@@ -270,5 +270,6 @@ namespace FinalProjek.View.Admin_View
         {
             AuthController.logout(this);
         }
+
     }
 }
