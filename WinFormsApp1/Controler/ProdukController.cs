@@ -2,18 +2,18 @@
 using FinalProjek.Database;
 using FinalProjek.Interface;
 using FinalProjek.Model;
-using FinalProjek.Helper;
 using System;
-using System.Collections.Generic; // PERBAIKAN 1: Tambahan untuk List
-using System.Windows.Forms;       // PERBAIKAN 1: Tambahan untuk MessageBox
+using System.Collections.Generic;
+// Hapus System.Windows.Forms karena UI tidak boleh ada di Controller
 
 namespace FinalProjek.Controler
 {
-    public class ProdukControler : IProduk
+    // Typo diperbaiki menjadi dua L: Controller
+    public class ProdukController : IProduk
     {
         private DbContext dbHelper;
 
-        public ProdukControler()
+        public ProdukController()
         {
             dbHelper = new DbContext();
         }
@@ -25,19 +25,18 @@ namespace FinalProjek.Controler
                 using (NpgsqlConnection connection = new NpgsqlConnection(dbHelper.connStr))
                 {
                     connection.Open();
-                    string query = @"Insert Into produk (nama_produk,harga,stok,imageproduk,deskripsi,id_kategori) 
-                                     Values (@nama_produk,@harga,@stok,@imageproduk,@deskripsi,@id_kategori)";
+                    string query = @"INSERT INTO produk (nama_produk, harga, stok, imageproduk, deskripsi, id_kategori) 
+                                     VALUES (@nama_produk, @harga, @stok, @imageproduk, @deskripsi, @id_kategori)";
 
-                    // PERBAIKAN 2: Masukkan 'query' ke dalam NpgsqlCommand
                     using (NpgsqlCommand cmd = new NpgsqlCommand(query, connection))
                     {
+                        // Disesuaikan dengan PascalCase dari C# conventions
                         cmd.Parameters.AddWithValue("@nama_produk", produk.nama_produk);
                         cmd.Parameters.AddWithValue("@harga", produk.harga);
                         cmd.Parameters.AddWithValue("@stok", produk.stok);
-                        cmd.Parameters.AddWithValue("@imageproduk", produk.imageproduk ?? (object)DBNull.Value); // Mencegah error jika gambar kosong
+                        cmd.Parameters.AddWithValue("@imageproduk", produk.imageproduk ?? (object)DBNull.Value);
                         cmd.Parameters.AddWithValue("@deskripsi", produk.deskripsi);
                         cmd.Parameters.AddWithValue("@id_kategori", produk.id_kategori);
-
 
                         cmd.ExecuteNonQuery();
                     }
@@ -45,11 +44,10 @@ namespace FinalProjek.Controler
             }
             catch (Exception ex)
             {
-                MessageBox.Show($"Create Product Error: {ex.Message}", "Connection Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                // Melempar pesan error ke View (Form) agar form yang memunculkan MessageBox
+                throw new Exception($"Gagal menambah produk: {ex.Message}");
             }
         }
-
-
 
         public List<Produk> GetAllProduk()
         {
@@ -61,8 +59,7 @@ namespace FinalProjek.Controler
                 {
                     connection.Open();
 
-                    // Saya sesuaikan juga di sini: tidak mengambil 'image' karena di bawahnya tidak ada reader untuk image
-                    string query = @"SELECT id_produk, nama_produk, harga, stok, deskripsi, imageproduk FROM produk";
+                    string query = @"SELECT id_produk, nama_produk, harga, stok, deskripsi, imageproduk FROM produk ORDER BY id_produk DESC";
 
                     using (NpgsqlCommand cmd = new NpgsqlCommand(query, connection))
                     {
@@ -74,9 +71,10 @@ namespace FinalProjek.Controler
                                 {
                                     id_produk = reader.GetInt32(0),
                                     nama_produk = reader.GetString(1),
-                                    harga = reader.GetDouble(2),
+                                    // Menggunakan GetInt32 asumsikan Harga Rupiah utuh. Jika database pakai double/numeric, gunakan GetDecimal() atau GetDouble() dengan hati-hati.
+                                    harga = reader.GetInt32(2),
                                     stok = reader.GetInt32(3),
-                                    deskripsi = reader.GetString(4),
+                                    deskripsi = reader.IsDBNull(4) ? "" : reader.GetString(4), // Jaga-jaga jika deskripsi kosong
                                     imageproduk = reader.IsDBNull(5) ? null : (byte[])reader["imageproduk"]
                                 };
                                 produks.Add(produk);
@@ -87,8 +85,10 @@ namespace FinalProjek.Controler
             }
             catch (Exception ex)
             {
-                MessageBox.Show($"Get All Product Error: {ex.Message}", "Connection Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                // Melempar pesan error
+                throw new Exception($"Gagal mengambil data produk: {ex.Message}");
             }
+
             return produks;
         }
     }

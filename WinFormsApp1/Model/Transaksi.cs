@@ -12,7 +12,7 @@ namespace FinalProjek.Model
         public int total_harga { get; set; }
         public int jumlah_bayar { get; set; }
         public int kembalian { get; set; }
-        public string metode_pembayaran { get; set; }
+        public string metode_bayar { get; set; }
         public string status_transaksi { get; set; }
         public List<DetailTransaksi> Detail { get; set; }
     }

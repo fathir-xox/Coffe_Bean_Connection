@@ -23,21 +23,22 @@ namespace FinalProjek.Controler
                 using (NpgsqlConnection connection = new NpgsqlConnection(dbHelper.connStr))
                 {
                     connection.Open();
-                    // Query tetap menggunakan snake_case sesuai format kolom Database
+                    // PERBAIKAN 1: Hapus kolom "kembalian", biarkan PostgreSQL yang menghitungnya.
+                    // PERBAIKAN 2: Sesuaikan nama tabel "transaksi" dan enum-nya.
                     string query = @"
-                    INSERT INTO transaksi (id_kasir, total_harga, jumlah_bayar, kembalian, metode_bayar::metode_bayar, status_transaksi::status_transaksi) 
-                    VALUES (@id_kasir, @total_harga, @jumlah_bayar, @kembalian, @metode_bayar::metode_bayar, @status_transaksi::status_transaksi) 
-                    RETURNING id_transaksi";
+            INSERT INTO transaksi (id_kasir, total_harga, jumlah_bayar, metode_bayar, status_transaksi) 
+            VALUES (@id_kasir, @total_harga, @jumlah_bayar, @metode_bayar::metode_bayar_enum, @status_transaksi::status_transaksi_enum) 
+            RETURNING id_transaksi";
 
                     using (var command = new NpgsqlCommand(query, connection))
                     {
-                        // Parameter dan properti model sekarang menggunakan PascalCase
                         command.Parameters.AddWithValue("@id_kasir", transaksi.id_kasir);
-                        command.Parameters.AddWithValue("@total_harga", transaksi.total_harga);
-                        command.Parameters.AddWithValue("@jumlah_bayar", transaksi.jumlah_bayar);
-                        command.Parameters.AddWithValue("@kembalian", transaksi.kembalian);
-                        command.Parameters.AddWithValue("@metode_bayar", transaksi.metode_pembayaran);
-                        command.Parameters.AddWithValue("@status_transaksi", transaksi.status_transaksi);
+                        command.Parameters.AddWithValue("@total_harga", transaksi.total_harga); // Pastikan properti model sudah int
+                        command.Parameters.AddWithValue("@jumlah_bayar", transaksi.jumlah_bayar); // Pastikan properti model sudah int
+
+                        // Pastikan value string dari Model sesuai dengan ENUM database (huruf kecil: 'tunai', 'transfer', 'qris')
+                        command.Parameters.AddWithValue("@metode_bayar", transaksi.metode_bayar.ToLower());
+                        command.Parameters.AddWithValue("@status_transaksi", transaksi.status_transaksi.ToLower());
 
                         return Convert.ToInt32(command.ExecuteScalar());
                     }
@@ -45,7 +46,6 @@ namespace FinalProjek.Controler
             }
             catch (Exception ex)
             {
-                // Saran 2: Melempar error agar bisa ditangkap oleh Try-Catch di Form (UI)
                 throw new Exception("Gagal membuat transaksi baru: " + ex.Message);
             }
         }
@@ -57,11 +57,11 @@ namespace FinalProjek.Controler
                 using (NpgsqlConnection connection = new NpgsqlConnection(dbHelper.connStr))
                 {
                     connection.Open();
-                    
-                    // 1. Insert data rincian produk yang dibeli
+                    // PERBAIKAN 1: Nama tabel di database menjadi "detailtransaksi" (karena di DDL tidak diapit tanda kutip).
+                    // PERBAIKAN 2: Hapus kolom "subtotal", biarkan PostgreSQL yang mengalikannya.
                     string queryInsert = @"
-                    INSERT INTO detail_transaksi (id_transaksi, id_produk, nama_produk, harga, qty, subtotal) 
-                    VALUES (@id_transaksi, @id_produk, @nama_produk, @harga, @qty, @subtotal)";
+            INSERT INTO detailtransaksi (id_transaksi, id_produk, nama_produk, harga, qty) 
+            VALUES (@id_transaksi, @id_produk, @nama_produk, @harga, @qty)";
 
                     using (NpgsqlCommand commandInsert = new NpgsqlCommand(queryInsert, connection))
                     {
@@ -70,26 +70,23 @@ namespace FinalProjek.Controler
                         commandInsert.Parameters.AddWithValue("@nama_produk", detail.nama_produk);
                         commandInsert.Parameters.AddWithValue("@harga", detail.harga);
                         commandInsert.Parameters.AddWithValue("@qty", detail.qty);
-                        commandInsert.Parameters.AddWithValue("@subtotal", detail.subtotal);
 
                         commandInsert.ExecuteNonQuery();
                     }
 
-                    // Saran 4: Update stok produk berkurang sesuai quantity (Qty)
-                    string queryUpdateStok = "UPDATE produk SET stok = stok - @Qty WHERE id_produk = @IdProduk";
-                    
+                    // Update stok produk
+                    string queryUpdateStok = "UPDATE produk SET stok = stok - @qty WHERE id_produk = @id_produk";
                     using (NpgsqlCommand commandUpdate = new NpgsqlCommand(queryUpdateStok, connection))
                     {
-                        commandUpdate.Parameters.AddWithValue("@Qty", detail.qty);
-                        commandUpdate.Parameters.AddWithValue("@IdProduk", detail.id_produk);
-                        
+                        commandUpdate.Parameters.AddWithValue("@qty", detail.qty);
+                        commandUpdate.Parameters.AddWithValue("@id_produk", detail.id_produk);
                         commandUpdate.ExecuteNonQuery();
                     }
                 }
             }
             catch (Exception ex)
             {
-                throw new Exception("Gagal menambahkan detail pesanan atau mengurangi stok: " + ex.Message);
+                throw new Exception("Gagal menambahkan detail pesanan: " + ex.Message);
             }
         }
 

@@ -14,5 +14,10 @@ namespace FinalProjek.View.Kasir_View
         {
             InitializeComponent();
         }
+
+        private void KasirDashboardView_Load(object sender, EventArgs e)
+        {
+
+        }
     }
 }
