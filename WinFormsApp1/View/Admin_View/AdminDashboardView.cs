@@ -87,6 +87,7 @@ namespace FinalProjek.View.Admin_View
             };
 
             PictureBox displayProduct = new PictureBox
+
             {
                 Location = new Point(32, 8),
                 Size = new Size(147, 122),

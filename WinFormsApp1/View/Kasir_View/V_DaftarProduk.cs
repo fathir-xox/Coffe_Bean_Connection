@@ -8,16 +8,11 @@ using System.Windows.Forms;
 
 namespace FinalProjek.View.Kasir_View
 {
-    public partial class KasirDashboardView : Form
+    public partial class V_DaftarProduk : Form
     {
-        public KasirDashboardView()
+        public V_DaftarProduk()
         {
             InitializeComponent();
-        }
-
-        private void btDashboar_Click(object sender, EventArgs e)
-        {
-
         }
     }
 }

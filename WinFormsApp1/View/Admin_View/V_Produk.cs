@@ -199,5 +199,10 @@ namespace FinalProjek.View.Admin_View
         {
             AuthController.logout(this);
         }
+
+        private void panel1_Paint(object sender, PaintEventArgs e)
+        {
+
+        }
     }
 }

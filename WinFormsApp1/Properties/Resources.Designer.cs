@@ -83,6 +83,16 @@ namespace FinalProjek.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        public static System.Drawing.Bitmap CardRiwayatSaya {
+            get {
+                object obj = ResourceManager.GetObject("CardRiwayatSaya", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         public static System.Drawing.Bitmap LoginView1 {
             get {
                 object obj = ResourceManager.GetObject("LoginView1", resourceCulture);
@@ -96,6 +106,16 @@ namespace FinalProjek.Properties {
         public static System.Drawing.Bitmap RegisterView1 {
             get {
                 object obj = ResourceManager.GetObject("RegisterView1", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        public static System.Drawing.Bitmap VDaftarProduk {
+            get {
+                object obj = ResourceManager.GetObject("VDaftarProduk", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -153,6 +173,16 @@ namespace FinalProjek.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        public static System.Drawing.Bitmap VRiwayatSaya {
+            get {
+                object obj = ResourceManager.GetObject("VRiwayatSaya", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         public static System.Drawing.Bitmap VRiwayatTransaksi {
             get {
                 object obj = ResourceManager.GetObject("VRiwayatTransaksi", resourceCulture);
@@ -176,6 +206,16 @@ namespace FinalProjek.Properties {
         public static System.Drawing.Bitmap VTambahProduk {
             get {
                 object obj = ResourceManager.GetObject("VTambahProduk", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        public static System.Drawing.Bitmap VTransaksi {
+            get {
+                object obj = ResourceManager.GetObject("VTransaksi", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
