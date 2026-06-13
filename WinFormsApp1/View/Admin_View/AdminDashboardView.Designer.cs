@@ -37,7 +37,6 @@
             Stok = new Label();
             btEdit = new Button();
             NamaProduk = new Label();
-            labelStok = new Label();
             HargaProduk = new Label();
             pictureBox1 = new PictureBox();
             Label_totalProduk = new Label();
@@ -48,8 +47,8 @@
             Label_totalPenghasilan = new Label();
             btTambahProduk = new Button();
             panel6 = new Panel();
-            btRiwayatTransaksi = new Button();
             btLogout = new Button();
+            btRiwayatTransaksi = new Button();
             btMonitorStok = new Button();
             btKategori = new Button();
             btProduk = new Button();
@@ -116,7 +115,6 @@
             panel8.Controls.Add(Stok);
             panel8.Controls.Add(btEdit);
             panel8.Controls.Add(NamaProduk);
-            panel8.Controls.Add(labelStok);
             panel8.Controls.Add(HargaProduk);
             panel8.Controls.Add(pictureBox1);
             panel8.Location = new Point(3, 3);
@@ -144,11 +142,13 @@
             Stok.BackColor = Color.Transparent;
             Stok.Font = new Font("Times New Roman", 11F, FontStyle.Bold, GraphicsUnit.Point, 0);
             Stok.ForeColor = Color.FromArgb(100, 60, 20);
-            Stok.Location = new Point(107, 202);
+            Stok.Location = new Point(52, 204);
             Stok.Name = "Stok";
-            Stok.Size = new Size(34, 25);
+            Stok.RightToLeft = RightToLeft.Yes;
+            Stok.Size = new Size(101, 25);
             Stok.TabIndex = 5;
-            Stok.Text = "20";
+            Stok.Text = "Stok : 20 ";
+            Stok.Click += Stok_Click;
             // 
             // btEdit
             // 
@@ -175,19 +175,6 @@
             NamaProduk.TabIndex = 2;
             NamaProduk.Text = "Biji Kopi Arabika";
             NamaProduk.Click += label8_Click;
-            // 
-            // labelStok
-            // 
-            labelStok.AutoSize = true;
-            labelStok.BackColor = Color.Transparent;
-            labelStok.Font = new Font("Times New Roman", 11F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            labelStok.ForeColor = Color.FromArgb(100, 60, 20);
-            labelStok.Location = new Point(53, 202);
-            labelStok.Name = "labelStok";
-            labelStok.Size = new Size(58, 25);
-            labelStok.TabIndex = 2;
-            labelStok.Text = "Stok:";
-            labelStok.Click += label10_Click;
             // 
             // HargaProduk
             // 
@@ -320,19 +307,6 @@
             panel6.TabIndex = 6;
             panel6.Paint += panel6_Paint;
             // 
-            // btRiwayatTransaksi
-            // 
-            btRiwayatTransaksi.BackColor = Color.OldLace;
-            btRiwayatTransaksi.Font = new Font("Times New Roman", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            btRiwayatTransaksi.ForeColor = Color.FromArgb(100, 60, 20);
-            btRiwayatTransaksi.Location = new Point(75, 634);
-            btRiwayatTransaksi.Name = "btRiwayatTransaksi";
-            btRiwayatTransaksi.Size = new Size(224, 41);
-            btRiwayatTransaksi.TabIndex = 9;
-            btRiwayatTransaksi.Text = "Riwayat Transaksi";
-            btRiwayatTransaksi.UseVisualStyleBackColor = false;
-            btRiwayatTransaksi.Click += btRiwayatTransaksi_Click;
-            // 
             // btLogout
             // 
             btLogout.BackColor = Color.Red;
@@ -345,6 +319,19 @@
             btLogout.Text = "Logout";
             btLogout.UseVisualStyleBackColor = false;
             btLogout.Click += button1_Click;
+            // 
+            // btRiwayatTransaksi
+            // 
+            btRiwayatTransaksi.BackColor = Color.OldLace;
+            btRiwayatTransaksi.Font = new Font("Times New Roman", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            btRiwayatTransaksi.ForeColor = Color.FromArgb(100, 60, 20);
+            btRiwayatTransaksi.Location = new Point(75, 634);
+            btRiwayatTransaksi.Name = "btRiwayatTransaksi";
+            btRiwayatTransaksi.Size = new Size(224, 41);
+            btRiwayatTransaksi.TabIndex = 9;
+            btRiwayatTransaksi.Text = "Riwayat Transaksi";
+            btRiwayatTransaksi.UseVisualStyleBackColor = false;
+            btRiwayatTransaksi.Click += btRiwayatTransaksi_Click;
             // 
             // btMonitorStok
             // 
@@ -415,7 +402,6 @@
         private PictureBox pictureBox1;
         private Label NamaProduk;
         private Label HargaProduk;
-        private Label labelStok;
         private Label Stok;
         private Button btEdit;
         private Button btHapus;

@@ -27,10 +27,11 @@ namespace FinalProjek.View.Admin_View
 
         private void btDashboar_Click(object sender, EventArgs e)
         {
-            this.Close();
             IProduk produkController = new ProdukController(); // buat instance controller
             AdminDashboardView frmDashboard = new AdminDashboardView(produkController);
-            frmDashboard.ShowDialog();
+            frmDashboard.FormClosed += (s, args) => this.Close();
+            frmDashboard.Show();
+            this.Hide();
         }
 
         private void btProduk_Click(object sender, EventArgs e)
@@ -40,30 +41,34 @@ namespace FinalProjek.View.Admin_View
 
         private void btKategori_Click(object sender, EventArgs e)
         {
-            this.Close();
             V_Kategori frmKategori = new V_Kategori();
-            frmKategori.ShowDialog();
+            frmKategori.FormClosed += (s, args) => this.Close();
+            frmKategori.Show();
+            this.Hide();
         }
 
         private void btMonitorStok_Click(object sender, EventArgs e)
         {
-            this.Close();
             V_MonitorStok frmMonitorStok = new V_MonitorStok();
-            frmMonitorStok.ShowDialog();
+            frmMonitorStok.FormClosed += (s, args) => this.Close();
+            frmMonitorStok.Show();
+            this.Hide();
         }
 
         private void btRiwayatTransaksi_Click(object sender, EventArgs e)
         {
-            this.Close();
             V_RiwayatTransaksi frmRiwayatTransaksi = new V_RiwayatTransaksi();
-            frmRiwayatTransaksi.ShowDialog();
+            frmRiwayatTransaksi.FormClosed += (s, args) => this.Close();
+            frmRiwayatTransaksi.Show();
+            this.Hide();
         }
 
         private void btKelolaAkunUser_Click(object sender, EventArgs e)
         {
-            this.Close();
             V_KelolaAkunUserr frmKelolaAkunUser = new V_KelolaAkunUserr();
-            frmKelolaAkunUser.ShowDialog();
+            frmKelolaAkunUser.FormClosed += (s, args) => this.Close();
+            frmKelolaAkunUser.Show();
+            this.Hide();
         }
 
         private void NamaProduk_Click(object sender, EventArgs e)
@@ -197,7 +202,10 @@ namespace FinalProjek.View.Admin_View
 
         private void btLogout_Click(object sender, EventArgs e)
         {
-            AuthController.logout(this);
+            Login frmLogin = new Login();
+            frmLogin.FormClosed += (s, args) => this.Close();
+            frmLogin.Show();
+            this.Hide();
         }
 
         private void panel1_Paint(object sender, PaintEventArgs e)

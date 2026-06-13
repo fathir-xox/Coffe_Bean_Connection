@@ -35,6 +35,7 @@
             btProduk = new Button();
             btKelolaAkunUser = new Button();
             btDashboar = new Button();
+            btLogout = new Button();
             panel1.SuspendLayout();
             SuspendLayout();
             // 
@@ -42,6 +43,7 @@
             // 
             panel1.BackColor = Color.Transparent;
             panel1.BackgroundImage = Properties.Resources.VKategori;
+            panel1.Controls.Add(btLogout);
             panel1.Controls.Add(btRiwayatTransaksi);
             panel1.Controls.Add(btMonitorStok);
             panel1.Controls.Add(btKategori);
@@ -52,6 +54,7 @@
             panel1.Name = "panel1";
             panel1.Size = new Size(1899, 1023);
             panel1.TabIndex = 0;
+            panel1.Paint += panel1_Paint;
             // 
             // btRiwayatTransaksi
             // 
@@ -131,6 +134,19 @@
             btDashboar.UseVisualStyleBackColor = false;
             btDashboar.Click += btDashboar_Click;
             // 
+            // btLogout
+            // 
+            btLogout.BackColor = Color.Red;
+            btLogout.Font = new Font("Times New Roman", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            btLogout.ForeColor = Color.White;
+            btLogout.Location = new Point(36, 912);
+            btLogout.Name = "btLogout";
+            btLogout.Size = new Size(224, 41);
+            btLogout.TabIndex = 20;
+            btLogout.Text = "Logout";
+            btLogout.UseVisualStyleBackColor = false;
+            btLogout.Click += btLogout_Click;
+            // 
             // V_Kategori
             // 
             AutoScaleDimensions = new SizeF(10F, 25F);
@@ -152,5 +168,6 @@
         private Button btProduk;
         private Button btKelolaAkunUser;
         private Button btDashboar;
+        private Button btLogout;
     }
 }

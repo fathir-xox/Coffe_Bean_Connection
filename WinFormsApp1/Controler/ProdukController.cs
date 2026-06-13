@@ -103,7 +103,7 @@ namespace FinalProjek.Controler
                     connection.Open();
 
                     // Saya sesuaikan juga di sini: tidak mengambil 'image' karena di bawahnya tidak ada reader untuk image
-                    string query = @"SELECT id_produk, nama_produk, harga, stok, deskripsi, imageproduk FROM produk WHERE is_active = true"; //tambah image dan is_active untuk hanya menampilkan produk yang aktif
+                    string query = @"SELECT id_produk, nama_produk, harga, stok, deskripsi, imageproduk FROM produk WHERE isactive = true"; //tambah image dan is_active untuk hanya menampilkan produk yang aktif
 
                     using (NpgsqlCommand cmd = new NpgsqlCommand(query, connection))
                     {
@@ -156,7 +156,7 @@ namespace FinalProjek.Controler
                 using var conn = new NpgsqlConnection(dbHelper.connStr);
                 conn.Open();
                 // Soft delete: set is_active = false
-                string query = "UPDATE produk SET is_active = false, updated_at = NOW() WHERE id_produk = @id";
+                string query = "UPDATE produk SET isactive = false, updated_at = NOW() WHERE id_produk = @id";
                 using var cmd = new NpgsqlCommand(query, conn);
                 cmd.Parameters.AddWithValue("@id", id);
                 int rowsAffected = cmd.ExecuteNonQuery();

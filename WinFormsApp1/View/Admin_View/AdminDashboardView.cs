@@ -63,17 +63,12 @@ namespace FinalProjek.View.Admin_View
 
         private void button3_Click(object sender, EventArgs e)
         {
-            this.Close();
-            V_EditProduk frmEditProduk = new V_EditProduk();
-            frmEditProduk.ShowDialog();
+
         }
 
         private void btDashboar_Click(object sender, EventArgs e)
         {
-            this.Close();
-            IProduk produkController = new ProdukController(); // buat instance controller
-            AdminDashboardView frmDashboard = new AdminDashboardView(produkController);
-            frmDashboard.ShowDialog();
+            
         }
 
         public Panel CreateProductPanel(Produk produk)
@@ -143,8 +138,8 @@ namespace FinalProjek.View.Admin_View
             Label stokProduk = new Label
             {
                 Text = "Stok: " + produk.stok.ToString(),
-                Location = new Point(107, 202),
-                Size = new Size(34, 25),
+                Location = new Point(52, 204),
+                Size = new Size(101, 25),
                 BackColor = Color.Transparent,
                 ForeColor = Color.FromArgb(100, 60, 20),
                 Font = new Font("Times New Roman", 11, FontStyle.Bold),
@@ -204,7 +199,7 @@ namespace FinalProjek.View.Admin_View
 
         private void btHapus_Click(object sender, EventArgs e)
         {
-            
+
         }
 
         private void btRefreshData_Click(object sender, EventArgs e)
@@ -214,9 +209,10 @@ namespace FinalProjek.View.Admin_View
 
         private void btKelolaAkunUser_Click(object sender, EventArgs e)
         {
-            this.Close();
             V_KelolaAkunUserr frmKelolaAkunUser = new V_KelolaAkunUserr();
-            frmKelolaAkunUser.ShowDialog();
+            frmKelolaAkunUser.FormClosed += (s, args) => this.Close();
+            frmKelolaAkunUser.Show();
+            this.Hide();
         }
 
         private void Label_totalProduk_Click(object sender, EventArgs e)
@@ -236,30 +232,34 @@ namespace FinalProjek.View.Admin_View
 
         private void btRiwayatTransaksi_Click(object sender, EventArgs e)
         {
-            this.Close();
             V_RiwayatTransaksi frmRiwayatTransaksi = new V_RiwayatTransaksi();
-            frmRiwayatTransaksi.ShowDialog();
+            frmRiwayatTransaksi.FormClosed += (s, args) => this.Close();
+            frmRiwayatTransaksi.Show();
+            this.Hide();
         }
 
         private void btProduk_Click(object sender, EventArgs e)
         {
-            this.Close();
             V_Produk frmProduk = new V_Produk();
-            frmProduk.ShowDialog();
+            frmProduk.FormClosed += (s, args) => this.Close();
+            frmProduk.Show();
+            this.Hide();
         }
 
         private void btMonitorStok_Click(object sender, EventArgs e)
         {
-            this.Close();
             V_MonitorStok frmMonitorStok = new V_MonitorStok();
-            frmMonitorStok.ShowDialog();
+            frmMonitorStok.FormClosed += (s, args) => this.Close();
+            frmMonitorStok.Show();
+            this.Hide();
         }
 
         private void btKategori_Click(object sender, EventArgs e)
         {
-            this.Close();
             V_Kategori frmKategori = new V_Kategori();
-            frmKategori.ShowDialog();
+            frmKategori.FormClosed += (s, args) => this.Close();
+            frmKategori.Show();
+            this.Hide();
         }
 
         private void HargaProduk_Click(object sender, EventArgs e)
@@ -267,10 +267,17 @@ namespace FinalProjek.View.Admin_View
 
         }
 
-        private void button1_Click(object sender, EventArgs e)
+        private void button1_Click(object sender, EventArgs e) //LOGOUT
         {
-            AuthController.logout(this);
+            Login frmLogin = new Login();
+            frmLogin.FormClosed += (s, args) => this.Close();
+            frmLogin.Show();
+            this.Hide();
         }
 
+        private void Stok_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }
