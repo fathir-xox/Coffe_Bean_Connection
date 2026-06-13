@@ -9,6 +9,6 @@ namespace FinalProjek.Interface
     {
         void CreateProduk(Produk produk);
         List<Produk> GetAllProduk();
-
+        bool DeleteProduk(object id_produk);
     }
 }

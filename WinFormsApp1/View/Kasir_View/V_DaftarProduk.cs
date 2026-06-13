@@ -6,11 +6,11 @@ using System.Drawing;
 using System.Text;
 using System.Windows.Forms;
 
-namespace FinalProjek.View.Admin_View
+namespace FinalProjek.View.Kasir_View
 {
-    public partial class KelolaAkunUser : Form
+    public partial class V_DaftarProduk : Form
     {
-        public KelolaAkunUser()
+        public V_DaftarProduk()
         {
             InitializeComponent();
         }
