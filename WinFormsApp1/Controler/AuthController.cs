@@ -33,11 +33,10 @@ namespace FinalProjek.Controler
                 {
                     conn.Open();
 
-                    // Gunakan role::text agar database mengirimkan enum sebagai string
-                    // Asumsi nama tabel di database adalah "users"
+                    // TAMBAHKAN id_user DI SINI
                     string query = @"
-                            SELECT ""role""::text, full_name, username, password FROM ""user"" 
-                            WHERE username = @username AND password = @password LIMIT 1";
+                    SELECT id_user, ""role""::text, full_name, username, password FROM users 
+                    WHERE username = @username AND password = @password LIMIT 1";
 
                     string hashedPassword = PWhelper.HashPassword(user.password);
 
@@ -50,22 +49,22 @@ namespace FinalProjek.Controler
                         {
                             if (read.Read())
                             {
-                                // Ambil string role dari database ("Admin" atau "Kasir")
-                                string roleStr = read.GetString(0);
+                                // Urutan harus sama dengan SELECT di atas
+                                int idUserDb = read.GetInt32(0);     // 0: id_user
+                                string roleStr = read.GetString(1);  // 1: role
 
-                                // Konversi string tersebut menjadi Enum UserRole (true = mengabaikan huruf besar/kecil)
                                 UserRole roleEnum = (UserRole)Enum.Parse(typeof(UserRole), roleStr, true);
 
                                 User loggedInuser = new User
                                 {
-                                    role = roleEnum,  // Masukkan tipe Enum ke properti model
-                                    full_name = read.GetString(1),
-                                    username = read.GetString(2),
-                                    password = read.GetString(3)
+                                    id_user = idUserDb,              // Masukkan ID yang diambil dari DB
+                                    role = roleEnum,
+                                    full_name = read.GetString(2),   // 2: full_name
+                                    username = read.GetString(3),    // 3: username
+                                    password = read.GetString(4)     // 4: password
                                 };
                                 return loggedInuser;
                             }
-
                             return null;
                         }
                     }
@@ -77,6 +76,7 @@ namespace FinalProjek.Controler
             }
         }
 
+
         public bool Register(User user)
         {
             try
@@ -87,7 +87,7 @@ namespace FinalProjek.Controler
 
                     // Gunakan @role::role_enum agar parameter C# diterjemahkan ke Enum PostgreSQL
                     string query = @"
-                            INSERT INTO ""user"" (username, password, ""role"", full_name, isactive) 
+                            INSERT INTO users (username, password, ""role"", full_name, isactive) 
                             VALUES (@username, @password, @role::role_enum, @full_name, @isactive)";
 
                     string hashedPassword = PWhelper.HashPassword(user.password ?? string.Empty); //ada tambah an ?? string.Empty

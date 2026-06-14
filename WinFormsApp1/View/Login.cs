@@ -67,44 +67,37 @@ namespace FinalProjek.View
                 };
 
                 // 2. Lempar ke Controller untuk dicek di Database
-                // NOTE: AuthController defines 'login' (lowercase) in the project,
-                // so call the method using the exact case.
                 User loggedInUser = authcontroller.login(inputUser);
 
                 // 3. Jika berhasil login (data ditemukan)
                 if (loggedInUser != null)
                 {
-                    // (Opsional) Simpan data user ke Session jika Anda punya class APPSession
-                    // APPSession.SetUser(loggedInUser);
+                    // --- PERBAIKAN: Menambahkan penyimpanan sesi global ---
+                    APPSession.SetUser(loggedInUser);
 
                     MessageBox.Show($"Selamat datang, {loggedInUser.full_name}!", "Login Berhasil", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
                     // --- LOGIKA PEMBAGIAN DASHBOARD ---
                     if (loggedInUser.role == UserRole.Admin)
                     {
-                        // Buka Dashboard Admin
                         AdminDashboardView formAdmin = new AdminDashboardView(produkInterface);
                         formAdmin.Show();
                     }
                     else if (loggedInUser.role == UserRole.Kasir)
                     {
-                        // Buka Dashboard Kasir
                         KasirDashboardView formKasir = new KasirDashboardView();
                         formKasir.Show();
                     }
 
-                    // Sembunyikan form login agar pengguna fokus ke dashboard
                     this.Hide();
                 }
                 else
                 {
-                    // Jika dikembalikan null, berarti salah password/username
                     MessageBox.Show("Username atau Password salah!", "Login Gagal", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
             }
             catch (Exception ex)
             {
-                // Menangkap throw Exception yang ada di AuthController (Misal db mati)
                 MessageBox.Show(ex.Message, "Sistem Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
