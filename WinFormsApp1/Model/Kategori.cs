@@ -9,6 +9,11 @@ namespace FinalProjek.Model
         public int id_kategori { get; set; }
         public string nama_kategori { get; set; }
         public string deskripsi { get; set; }
+<<<<<<< HEAD
         public bool isactive { get; set; } 
+=======
+        public bool isactive { get; set; }
+
+>>>>>>> origin/controler
     }
 }

@@ -1,5 +1,12 @@
+<<<<<<< HEAD
 ﻿using System.Collections.Generic;
 using FinalProjek.Model;
+=======
+﻿using FinalProjek.Model;
+using System;
+using System.Collections.Generic;
+using System.Text;
+>>>>>>> origin/controler
 
 namespace FinalProjek.Interface
 {
@@ -13,4 +20,8 @@ namespace FinalProjek.Interface
         bool DeleteKategori(object id);    // soft delete (set is_active = false)
         bool RestoreKategori(int id);      // optional: set is_active = true
     }
+<<<<<<< HEAD
 }
+=======
+}
+>>>>>>> origin/controler
