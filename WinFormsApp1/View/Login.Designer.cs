@@ -29,6 +29,7 @@
         private void InitializeComponent()
         {
             panel1 = new Panel();
+            linkLabelRegister = new LinkLabel();
             tbPasswordLogin = new TextBox();
             tbUsernameLogin = new TextBox();
             btLogin = new Button();
@@ -36,7 +37,6 @@
             label2 = new Label();
             label1 = new Label();
             npgsqlCommandBuilder1 = new Npgsql.NpgsqlCommandBuilder();
-            linkLabelRegister = new LinkLabel();
             panel1.SuspendLayout();
             SuspendLayout();
             // 
@@ -56,6 +56,18 @@
             panel1.Name = "panel1";
             panel1.Size = new Size(1259, 708);
             panel1.TabIndex = 0;
+            // 
+            // linkLabelRegister
+            // 
+            linkLabelRegister.AutoSize = true;
+            linkLabelRegister.Font = new Font("Times New Roman", 8F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            linkLabelRegister.Location = new Point(838, 471);
+            linkLabelRegister.Name = "linkLabelRegister";
+            linkLabelRegister.Size = new Size(176, 19);
+            linkLabelRegister.TabIndex = 6;
+            linkLabelRegister.TabStop = true;
+            linkLabelRegister.Text = "Belum punya  akun? Daftar.";
+            linkLabelRegister.LinkClicked += linkLabelRegister_LinkClicked;
             // 
             // tbPasswordLogin
             // 
@@ -129,18 +141,6 @@
             // 
             npgsqlCommandBuilder1.QuotePrefix = "\"";
             npgsqlCommandBuilder1.QuoteSuffix = "\"";
-            // 
-            // linkLabelRegister
-            // 
-            linkLabelRegister.AutoSize = true;
-            linkLabelRegister.Font = new Font("Times New Roman", 8F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            linkLabelRegister.Location = new Point(838, 471);
-            linkLabelRegister.Name = "linkLabelRegister";
-            linkLabelRegister.Size = new Size(176, 19);
-            linkLabelRegister.TabIndex = 6;
-            linkLabelRegister.TabStop = true;
-            linkLabelRegister.Text = "Belum punya  akun? Daftar.";
-            linkLabelRegister.LinkClicked += linkLabelRegister_LinkClicked;
             // 
             // Login
             // 

@@ -103,7 +103,7 @@ namespace FinalProjek.Controler
                     connection.Open();
 
                     // Saya sesuaikan juga di sini: tidak mengambil 'image' karena di bawahnya tidak ada reader untuk image
-                    string query = @"SELECT id_produk, nama_produk, harga, stok, deskripsi FROM produk";
+                    string query = @"SELECT id_produk, nama_produk, harga, stok, deskripsi, imageproduk FROM produk WHERE isactive = true"; //tambah image dan is_active untuk hanya menampilkan produk yang aktif
 
                     using (NpgsqlCommand cmd = new NpgsqlCommand(query, connection))
                     {
@@ -117,7 +117,8 @@ namespace FinalProjek.Controler
                                     nama_produk = reader.GetString(1),
                                     harga = reader.GetDouble(2),
                                     stok = reader.GetInt32(3),
-                                    deskripsi = reader.GetString(4)
+                                    deskripsi = reader.GetString(4),
+                                    imageproduk = reader["imageproduk"] as byte[]
                                 };
                                 produks.Add(produk);
                             }
@@ -130,6 +131,42 @@ namespace FinalProjek.Controler
                 MessageBox.Show($"Get All Product Error: {ex.Message}", "Connection Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
             return produks;
+        }
+
+        internal void UpdateProduk(Produk produk)
+        {
+            throw new NotImplementedException();
+        }
+
+
+        // PERBAIKAN 4: Implementasi soft delete dengan mengubah is_active menjadi false
+        // Signature changed to match IProduk.DeleteProduk(object)
+        public bool DeleteProduk(object id_produk)
+        {
+            try
+            {
+                int id;
+                if (id_produk is int i) id = i;
+                else
+                {
+                    // Try to convert common types (string, long, etc.)
+                    id = Convert.ToInt32(id_produk);
+                }
+
+                using var conn = new NpgsqlConnection(dbHelper.connStr);
+                conn.Open();
+                // Soft delete: set is_active = false
+                string query = "UPDATE produk SET isactive = false, updated_at = NOW() WHERE id_produk = @id";
+                using var cmd = new NpgsqlCommand(query, conn);
+                cmd.Parameters.AddWithValue("@id", id);
+                int rowsAffected = cmd.ExecuteNonQuery();
+                return rowsAffected > 0;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Error saat soft delete: {ex.Message}");
+                return false;
+            }
         }
     }
 }

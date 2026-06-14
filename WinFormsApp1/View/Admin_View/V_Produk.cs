@@ -1,74 +1,85 @@
 ﻿using FinalProjek.Controler;
-using FinalProjek.Helper;
-using FinalProjek.Model;
 using FinalProjek.Interface;
-using FinalProjek.View;
-using FinalProjek.View.Admin_View;
-using FinalProjek.View.Kasir_View;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
-using System.DirectoryServices.ActiveDirectory;
 using System.Drawing;
 using System.Text;
 using System.Windows.Forms;
+using FinalProjek.Model;
 
 namespace FinalProjek.View.Admin_View
 {
-    public partial class AdminDashboardView : Form
+    public partial class V_Produk : Form
     {
-        private IProduk produkController;
-        public AdminDashboardView(IProduk produkInterface)
+        IProduk produkController;
+        public V_Produk(IProduk produkInterface)
         {
             InitializeComponent();
             produkController = produkInterface;
             LoadProducts();
         }
 
-        private void label2_Click(object sender, EventArgs e)
+        public V_Produk() : this(new ProdukController())
         {
-
-        }
-
-        private void panel1_Paint(object sender, PaintEventArgs e)
-        {
-
-        }
-
-        private void label1_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void label4_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void label8_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void panel1_Paint_1(object sender, PaintEventArgs e)
-        {
-
-        }
-
-        private void label10_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void button3_Click(object sender, EventArgs e)
-        {
-
         }
 
         private void btDashboar_Click(object sender, EventArgs e)
         {
-            
+            IProduk produkController = new ProdukController(); // buat instance controller
+            AdminDashboardView frmDashboard = new AdminDashboardView(produkController);
+            frmDashboard.FormClosed += (s, args) => this.Close();
+            frmDashboard.Show();
+            this.Hide();
+        }
+
+        private void btProduk_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void btKategori_Click(object sender, EventArgs e)
+        {
+            V_Kategori frmKategori = new V_Kategori();
+            frmKategori.FormClosed += (s, args) => this.Close();
+            frmKategori.Show();
+            this.Hide();
+        }
+
+        private void btMonitorStok_Click(object sender, EventArgs e)
+        {
+            V_MonitorStok frmMonitorStok = new V_MonitorStok();
+            frmMonitorStok.FormClosed += (s, args) => this.Close();
+            frmMonitorStok.Show();
+            this.Hide();
+        }
+
+        private void btRiwayatTransaksi_Click(object sender, EventArgs e)
+        {
+            V_RiwayatTransaksi frmRiwayatTransaksi = new V_RiwayatTransaksi();
+            frmRiwayatTransaksi.FormClosed += (s, args) => this.Close();
+            frmRiwayatTransaksi.Show();
+            this.Hide();
+        }
+
+        private void btKelolaAkunUser_Click(object sender, EventArgs e)
+        {
+            V_KelolaAkunUserr frmKelolaAkunUser = new V_KelolaAkunUserr();
+            frmKelolaAkunUser.FormClosed += (s, args) => this.Close();
+            frmKelolaAkunUser.Show();
+            this.Hide();
+        }
+
+        private void NamaProduk_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void btTambahProduk_Click(object sender, EventArgs e)
+        {
+            AddProductWiew tambahProduk = new AddProductWiew();
+            tambahProduk.Show();
         }
 
         public Panel CreateProductPanel(Produk produk)
@@ -82,7 +93,6 @@ namespace FinalProjek.View.Admin_View
             };
 
             PictureBox displayProduct = new PictureBox
-
             {
                 Location = new Point(32, 8),
                 Size = new Size(147, 122),
@@ -125,21 +135,21 @@ namespace FinalProjek.View.Admin_View
                 TextAlign = ContentAlignment.MiddleCenter,
             };
 
-            Label labelStok = new Label
-            {
-                Location = new Point(53, 202),
-                Size = new Size(58, 25),
-                BackColor = Color.Transparent,
-                ForeColor = Color.FromArgb(100, 60, 20),
-                Font = new Font("Times New Roman", 11, FontStyle.Bold),
-                TextAlign = ContentAlignment.MiddleCenter,
-            };
+            //Label labelStok = new Label
+            //{
+            //    Location = new Point(53, 202),
+            //    Size = new Size(58, 25),
+            //    BackColor = Color.Transparent,
+            //    ForeColor = Color.FromArgb(100, 60, 20),
+            //    Font = new Font("Times New Roman", 11, FontStyle.Bold),
+            //    TextAlign = ContentAlignment.MiddleCenter,
+            //};
 
             Label stokProduk = new Label
             {
                 Text = "Stok: " + produk.stok.ToString(),
-                Location = new Point(52, 204),
-                Size = new Size(101, 25),
+                Location = new Point(56, 204),
+                Size = new Size(95, 25),
                 BackColor = Color.Transparent,
                 ForeColor = Color.FromArgb(100, 60, 20),
                 Font = new Font("Times New Roman", 11, FontStyle.Bold),
@@ -191,83 +201,7 @@ namespace FinalProjek.View.Admin_View
             }
         }
 
-        private void btTambahProduk_Click(object sender, EventArgs e)
-        {
-            AddProductWiew tambahProduk = new AddProductWiew();
-            tambahProduk.Show();
-        }
-
-        private void btHapus_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void btRefreshData_Click(object sender, EventArgs e)
-        {
-            LoadProducts();
-        }
-
-        private void btKelolaAkunUser_Click(object sender, EventArgs e)
-        {
-            V_KelolaAkunUserr frmKelolaAkunUser = new V_KelolaAkunUserr();
-            frmKelolaAkunUser.FormClosed += (s, args) => this.Close();
-            frmKelolaAkunUser.Show();
-            this.Hide();
-        }
-
-        private void Label_totalProduk_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void panel6_Paint(object sender, PaintEventArgs e)
-        {
-
-        }
-
-        private void panel8_Paint(object sender, PaintEventArgs e)
-        {
-
-        }
-
-        private void btRiwayatTransaksi_Click(object sender, EventArgs e)
-        {
-            V_RiwayatTransaksi frmRiwayatTransaksi = new V_RiwayatTransaksi();
-            frmRiwayatTransaksi.FormClosed += (s, args) => this.Close();
-            frmRiwayatTransaksi.Show();
-            this.Hide();
-        }
-
-        private void btProduk_Click(object sender, EventArgs e)
-        {
-            V_Produk frmProduk = new V_Produk();
-            frmProduk.FormClosed += (s, args) => this.Close();
-            frmProduk.Show();
-            this.Hide();
-        }
-
-        private void btMonitorStok_Click(object sender, EventArgs e)
-        {
-            V_MonitorStok frmMonitorStok = new V_MonitorStok();
-            frmMonitorStok.FormClosed += (s, args) => this.Close();
-            frmMonitorStok.Show();
-            this.Hide();
-        }
-
-        private void btKategori_Click(object sender, EventArgs e)
-        {
-            V_Kategori frmKategori = new V_Kategori();
-            frmKategori.FormClosed += (s, args) => this.Close();
-            frmKategori.Show();
-            this.Hide();
-        }
-
-        private void HargaProduk_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void button1_Click(object sender, EventArgs e) //LOGOUT
+        private void btLogout_Click(object sender, EventArgs e)
         {
             Login frmLogin = new Login();
             frmLogin.FormClosed += (s, args) => this.Close();
@@ -275,9 +209,19 @@ namespace FinalProjek.View.Admin_View
             this.Hide();
         }
 
+        private void panel1_Paint(object sender, PaintEventArgs e)
+        {
+
+        }
+
         private void Stok_Click(object sender, EventArgs e)
         {
 
+        }
+
+        private void btRefresh_Click(object sender, EventArgs e)
+        {
+            LoadProducts();
         }
     }
 }

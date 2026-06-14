@@ -10,6 +10,6 @@ namespace FinalProjek.Model
         public int id_kategori { get; set; }
         public string nama_kategori { get; set; }
         public string deskripsi { get; set; }
-        public bool is_active { get; set; }
+        public bool isactive { get; set; } 
     }
 }

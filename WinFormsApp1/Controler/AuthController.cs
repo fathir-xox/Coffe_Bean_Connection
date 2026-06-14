@@ -7,6 +7,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
+using FinalProjek.View.Admin_View;
 
 namespace FinalProjek.Controler
 {
@@ -19,7 +20,12 @@ namespace FinalProjek.Controler
            dbHelper = new DbContext();
         }
 
-        public User login(User user)
+        //internal static void logout(AdminDashboardView adminDashboardView)
+        //{
+        //    throw new NotImplementedException();
+        //}
+
+        public User? login(User user)
         {
             try
             {
@@ -77,7 +83,7 @@ namespace FinalProjek.Controler
                     INSERT INTO ""user"" (username, password, role, full_name, isactive) 
                     VALUES (@username, @password, @role::role_enum, @full_name, @isactive)";
 
-                    string hashedPassword = PWhelper.HashPassword(user.password);
+                    string hashedPassword = PWhelper.HashPassword(user.password ?? string.Empty); //ada tambah an ?? string.Empty
                     using (var cmd = new NpgsqlCommand(query, conn))
                     {
                         cmd.Parameters.AddWithValue("@username", user.username);
@@ -98,4 +104,5 @@ namespace FinalProjek.Controler
 
         }
     }
+
 }
