@@ -1,4 +1,5 @@
-﻿using FinalProjek.Controler;
+﻿// WinFormsApp1\View\Login.cs
+using FinalProjek.Controler;
 using FinalProjek.Helper;
 using FinalProjek.Interface;
 using FinalProjek.Model;
@@ -10,14 +11,14 @@ namespace FinalProjek.View
 {
     public partial class Login : Form
     {
-        private AuthController _controller;
+        private AuthController authcontroller;
         private readonly IProduk produkInterface;
         public Login()
         {
             InitializeComponent();
-            _controller = new AuthController();
-            tbPasswordLogin.UseSystemPasswordChar = true;
-            produkInterface = new ProdukController(); // Inisialisasi produkInterface dengan implementasi ProdukController
+            authcontroller = new AuthController();
+            txtPassword.UseSystemPasswordChar = true;
+
         }
 
 
@@ -48,55 +49,62 @@ namespace FinalProjek.View
 
         private void button1_Click(object sender, EventArgs e)
         {
-            string username = tbUsernameLogin.Text;
-            string password = tbPasswordLogin.Text;
-
-            if (string.IsNullOrEmpty(username) || string.IsNullOrWhiteSpace(password))
+            // Validasi: Mengecek TextBox txtUsername dan txtPassword tidak boleh kosong
+            if (string.IsNullOrWhiteSpace(txtUsername.Text) || string.IsNullOrWhiteSpace(txtPassword.Text))
             {
-                MessageBox.Show("Username dan password tidak boleh kosong.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("Username dan Password tidak boleh kosong!", "Peringatan", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
 
             try
             {
-                string hasPassword = PWhelper.HashPassword(password);
-                User user = new User
+                // 1. Ambil teks dari TextBox UI dan masukkan ke Model
+                User inputUser = new User
                 {
-                    username = username,
-                    password = hasPassword
+                    username = txtUsername.Text,
+                    password = txtPassword.Text
                 };
 
-                var auth = _controller.login(user);
-                if (auth != null)
+                // 2. Lempar ke Controller untuk dicek di Database
+                // NOTE: AuthController defines 'login' (lowercase) in the project,
+                // so call the method using the exact case.
+                User loggedInUser = authcontroller.login(inputUser);
+
+                // 3. Jika berhasil login (data ditemukan)
+                if (loggedInUser != null)
                 {
-                    MessageBox.Show($"Login berhasil! Selamat datang {user.username}", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    // (Opsional) Simpan data user ke Session jika Anda punya class APPSession
+                    // APPSession.SetUser(loggedInUser);
 
-                    APPSession.SetUser(auth);
+                    MessageBox.Show($"Selamat datang, {loggedInUser.full_name}!", "Login Berhasil", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
-                    if (APPSession.CurrentUser.role == UserRole.Admin) //kalau admin, masuk ke dashboard admin, kalau user masuk ke dashboard kasir
+                    // --- LOGIKA PEMBAGIAN DASHBOARD ---
+                    if (loggedInUser.role == UserRole.Admin)
                     {
-                        AdminDashboardView adminView = new AdminDashboardView(produkInterface);
-                        adminView.FormClosed += (s, args) => this.Close();
-                        adminView.Show();
-                        this.Hide();
+                        // Buka Dashboard Admin
+                        AdminDashboardView formAdmin = new AdminDashboardView(produkInterface);
+                        formAdmin.Show();
                     }
-                    else
+                    else if (loggedInUser.role == UserRole.Kasir)
                     {
-                        KasirDashboardView kasirView = new KasirDashboardView();
-                        kasirView.FormClosed += (s, args) => this.Close();
-                        kasirView.Show();
-                        this.Hide();
+                        // Buka Dashboard Kasir
+                        KasirDashboardView formKasir = new KasirDashboardView();
+                        formKasir.Show();
                     }
 
+                    // Sembunyikan form login agar pengguna fokus ke dashboard
+                    this.Hide();
                 }
                 else
                 {
-                    MessageBox.Show("Login gagal. Periksa username dan password.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    // Jika dikembalikan null, berarti salah password/username
+                    MessageBox.Show("Username atau Password salah!", "Login Gagal", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
             }
             catch (Exception ex)
             {
-                MessageBox.Show($"Gagal Login: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                // Menangkap throw Exception yang ada di AuthController (Misal db mati)
+                MessageBox.Show(ex.Message, "Sistem Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 

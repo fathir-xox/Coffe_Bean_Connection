@@ -30,8 +30,8 @@
         {
             panel1 = new Panel();
             linkLabelRegister = new LinkLabel();
-            tbPasswordLogin = new TextBox();
-            tbUsernameLogin = new TextBox();
+            txtPassword = new TextBox();
+            txtUsername = new TextBox();
             btLogin = new Button();
             label3 = new Label();
             label2 = new Label();
@@ -46,8 +46,8 @@
             panel1.BackgroundImage = Properties.Resources.LoginView1;
             panel1.BackgroundImageLayout = ImageLayout.Zoom;
             panel1.Controls.Add(linkLabelRegister);
-            panel1.Controls.Add(tbPasswordLogin);
-            panel1.Controls.Add(tbUsernameLogin);
+            panel1.Controls.Add(txtPassword);
+            panel1.Controls.Add(txtUsername);
             panel1.Controls.Add(btLogin);
             panel1.Controls.Add(label3);
             panel1.Controls.Add(label2);
@@ -69,25 +69,25 @@
             linkLabelRegister.Text = "Belum punya  akun? Daftar.";
             linkLabelRegister.LinkClicked += linkLabelRegister_LinkClicked;
             // 
-            // tbPasswordLogin
+            // txtPassword
             // 
-            tbPasswordLogin.BackColor = Color.White;
-            tbPasswordLogin.ForeColor = Color.Black;
-            tbPasswordLogin.Location = new Point(781, 425);
-            tbPasswordLogin.Name = "tbPasswordLogin";
-            tbPasswordLogin.Size = new Size(280, 31);
-            tbPasswordLogin.TabIndex = 5;
-            tbPasswordLogin.TextChanged += tbPasswordLogin_TextChanged;
+            txtPassword.BackColor = Color.White;
+            txtPassword.ForeColor = Color.Black;
+            txtPassword.Location = new Point(781, 425);
+            txtPassword.Name = "txtPassword";
+            txtPassword.Size = new Size(280, 31);
+            txtPassword.TabIndex = 5;
+            txtPassword.TextChanged += tbPasswordLogin_TextChanged;
             // 
-            // tbUsernameLogin
+            // txtUsername
             // 
-            tbUsernameLogin.BackColor = Color.White;
-            tbUsernameLogin.ForeColor = Color.Black;
-            tbUsernameLogin.Location = new Point(782, 323);
-            tbUsernameLogin.Name = "tbUsernameLogin";
-            tbUsernameLogin.Size = new Size(280, 31);
-            tbUsernameLogin.TabIndex = 4;
-            tbUsernameLogin.TextChanged += tbUsernameLogin_TextChanged;
+            txtUsername.BackColor = Color.White;
+            txtUsername.ForeColor = Color.Black;
+            txtUsername.Location = new Point(782, 323);
+            txtUsername.Name = "txtUsername";
+            txtUsername.Size = new Size(280, 31);
+            txtUsername.TabIndex = 4;
+            txtUsername.TextChanged += tbUsernameLogin_TextChanged;
             // 
             // btLogin
             // 
@@ -163,8 +163,8 @@
         private Label label3;
         private Button btLogin;
         private Npgsql.NpgsqlCommandBuilder npgsqlCommandBuilder1;
-        private TextBox tbUsernameLogin;
-        private TextBox tbPasswordLogin;
+        private TextBox txtUsername;
+        private TextBox txtPassword;
         private LinkLabel linkLabelRegister;
     }
 }
