@@ -18,6 +18,7 @@ namespace FinalProjek.View
             InitializeComponent();
             authcontroller = new AuthController();
             txtPassword.UseSystemPasswordChar = true;
+            produkInterface = new ProdukController();
 
         }
 

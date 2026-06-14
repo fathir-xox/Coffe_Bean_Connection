@@ -29,6 +29,10 @@
         private void InitializeComponent()
         {
             panel1 = new Panel();
+            panel2 = new Panel();
+            btRefresh = new Button();
+            btTambahUser = new Button();
+            dataGridView1 = new DataGridView();
             btLogout = new Button();
             btRiwayatTransaksi = new Button();
             btMonitorStok = new Button();
@@ -37,11 +41,15 @@
             btKelolaAkunUser = new Button();
             btDashboar = new Button();
             panel1.SuspendLayout();
+            panel2.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)dataGridView1).BeginInit();
             SuspendLayout();
             // 
             // panel1
             // 
             panel1.BackgroundImage = Properties.Resources.Vkelolauser;
+            panel1.Controls.Add(panel2);
+            panel1.Controls.Add(dataGridView1);
             panel1.Controls.Add(btLogout);
             panel1.Controls.Add(btRiwayatTransaksi);
             panel1.Controls.Add(btMonitorStok);
@@ -53,6 +61,51 @@
             panel1.Name = "panel1";
             panel1.Size = new Size(1898, 1025);
             panel1.TabIndex = 0;
+            // 
+            // panel2
+            // 
+            panel2.BackgroundImage = Properties.Resources.Tambah_dan_refresh;
+            panel2.BackgroundImageLayout = ImageLayout.Zoom;
+            panel2.Controls.Add(btRefresh);
+            panel2.Controls.Add(btTambahUser);
+            panel2.Location = new Point(374, 153);
+            panel2.Name = "panel2";
+            panel2.Size = new Size(385, 55);
+            panel2.TabIndex = 17;
+            // 
+            // btRefresh
+            // 
+            btRefresh.BackColor = Color.OldLace;
+            btRefresh.Font = new Font("Times New Roman", 10F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            btRefresh.ForeColor = Color.FromArgb(100, 60, 20);
+            btRefresh.Location = new Point(279, 7);
+            btRefresh.Name = "btRefresh";
+            btRefresh.Size = new Size(101, 41);
+            btRefresh.TabIndex = 18;
+            btRefresh.Text = "Refresh";
+            btRefresh.UseVisualStyleBackColor = false;
+            // 
+            // btTambahUser
+            // 
+            btTambahUser.BackColor = Color.OldLace;
+            btTambahUser.Font = new Font("Times New Roman", 10F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            btTambahUser.ForeColor = Color.FromArgb(100, 60, 20);
+            btTambahUser.Location = new Point(53, 7);
+            btTambahUser.Name = "btTambahUser";
+            btTambahUser.Size = new Size(164, 41);
+            btTambahUser.TabIndex = 19;
+            btTambahUser.Text = "Tambah User";
+            btTambahUser.UseVisualStyleBackColor = false;
+            btTambahUser.Click += btTambahUser_Click;
+            // 
+            // dataGridView1
+            // 
+            dataGridView1.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            dataGridView1.Location = new Point(374, 224);
+            dataGridView1.Name = "dataGridView1";
+            dataGridView1.RowHeadersWidth = 62;
+            dataGridView1.Size = new Size(1479, 774);
+            dataGridView1.TabIndex = 16;
             // 
             // btLogout
             // 
@@ -154,6 +207,8 @@
             Name = "V_KelolaAkunUserr";
             Text = "V_KelolaAkunUserr";
             panel1.ResumeLayout(false);
+            panel2.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)dataGridView1).EndInit();
             ResumeLayout(false);
         }
 
@@ -167,5 +222,9 @@
         private Button btKelolaAkunUser;
         private Button btDashboar;
         private Button btLogout;
+        private DataGridView dataGridView1;
+        private Panel panel2;
+        private Button btRefresh;
+        private Button btTambahUser;
     }
 }

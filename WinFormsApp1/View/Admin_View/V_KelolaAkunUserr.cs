@@ -1,5 +1,7 @@
 ﻿using FinalProjek.Controler;
 using FinalProjek.Interface;
+using FinalProjek.View;
+using FinalProjek.Model;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -12,9 +14,17 @@ namespace FinalProjek.View.Admin_View
 {
     public partial class V_KelolaAkunUserr : Form
     {
+        private AuthController kelolauser = new AuthController();
         public V_KelolaAkunUserr()
         {
             InitializeComponent();
+            this.FormClosed += (s, e) => Application.Exit();
+            LoadData();
+        }
+
+        private void LoadData()
+        {
+            //TableUser.DataSource = kelolauser.GetAllUsers();
         }
 
         private void btDashboar_Click(object sender, EventArgs e)
@@ -60,7 +70,7 @@ namespace FinalProjek.View.Admin_View
 
         private void btKelolaAkunUser_Click(object sender, EventArgs e)
         {
-            
+
         }
 
         private void btLogout_Click(object sender, EventArgs e)
@@ -69,6 +79,12 @@ namespace FinalProjek.View.Admin_View
             frmLogin.FormClosed += (s, args) => this.Close();
             frmLogin.Show();
             this.Hide();
+        }
+
+        private void btTambahUser_Click(object sender, EventArgs e)
+        {
+            Register frmRegister = new Register();
+            frmRegister.Show();
         }
     }
 }
