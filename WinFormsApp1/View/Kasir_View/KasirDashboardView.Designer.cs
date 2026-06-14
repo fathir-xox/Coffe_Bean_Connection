@@ -33,12 +33,14 @@
             btDaftarProduk = new Button();
             btRiwayatTransaksi = new Button();
             btTransaksi = new Button();
+            panel2 = new Panel();
             panel1.SuspendLayout();
             SuspendLayout();
             // 
             // panel1
             // 
             panel1.BackgroundImage = Properties.Resources.VTransaksi;
+            panel1.Controls.Add(panel2);
             panel1.Controls.Add(btLogout);
             panel1.Controls.Add(btDaftarProduk);
             panel1.Controls.Add(btRiwayatTransaksi);
@@ -83,7 +85,6 @@
             btRiwayatTransaksi.TabIndex = 4;
             btRiwayatTransaksi.Text = "Riwayat Transaksi";
             btRiwayatTransaksi.UseVisualStyleBackColor = false;
-            btRiwayatTransaksi.Click += btRiwayatTransaksi_Click;
             // 
             // btTransaksi
             // 
@@ -97,6 +98,15 @@
             btTransaksi.Text = "Transaksi";
             btTransaksi.UseVisualStyleBackColor = false;
             btTransaksi.Click += btDashboar_Click;
+            // 
+            // panel2
+            // 
+            panel2.BackgroundImage = Properties.Resources.CardTransaksi;
+            panel2.BackgroundImageLayout = ImageLayout.Zoom;
+            panel2.Location = new Point(1432, 170);
+            panel2.Name = "panel2";
+            panel2.Size = new Size(453, 783);
+            panel2.TabIndex = 12;
             // 
             // KasirDashboardView
             // 
@@ -117,5 +127,6 @@
         private Button btRiwayatTransaksi;
         private Button btTransaksi;
         private Button btLogout;
+        private Panel panel2;
     }
 }
