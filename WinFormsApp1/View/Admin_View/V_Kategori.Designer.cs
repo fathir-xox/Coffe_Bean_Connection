@@ -29,15 +29,15 @@
         private void InitializeComponent()
         {
             panel1 = new Panel();
+            btRefresh = new Button();
             btLogout = new Button();
+            btTambahKategori = new Button();
             btRiwayatTransaksi = new Button();
             btMonitorStok = new Button();
             btKategori = new Button();
             btProduk = new Button();
             btKelolaAkunUser = new Button();
             btDashboar = new Button();
-            btRefresh = new Button();
-            btTambahKategori = new Button();
             panel1.SuspendLayout();
             SuspendLayout();
             // 
@@ -60,6 +60,18 @@
             panel1.TabIndex = 0;
             panel1.Paint += panel1_Paint;
             // 
+            // btRefresh
+            // 
+            btRefresh.BackColor = Color.OldLace;
+            btRefresh.Font = new Font("Times New Roman", 10F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            btRefresh.ForeColor = Color.FromArgb(100, 60, 20);
+            btRefresh.Location = new Point(657, 167);
+            btRefresh.Name = "btRefresh";
+            btRefresh.Size = new Size(101, 41);
+            btRefresh.TabIndex = 6;
+            btRefresh.Text = "Refresh";
+            btRefresh.UseVisualStyleBackColor = false;
+            // 
             // btLogout
             // 
             btLogout.BackColor = Color.Red;
@@ -72,6 +84,19 @@
             btLogout.Text = "Logout";
             btLogout.UseVisualStyleBackColor = false;
             btLogout.Click += btLogout_Click;
+            // 
+            // btTambahKategori
+            // 
+            btTambahKategori.BackColor = Color.OldLace;
+            btTambahKategori.Font = new Font("Times New Roman", 10F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            btTambahKategori.ForeColor = Color.FromArgb(100, 60, 20);
+            btTambahKategori.Location = new Point(433, 167);
+            btTambahKategori.Name = "btTambahKategori";
+            btTambahKategori.Size = new Size(164, 41);
+            btTambahKategori.TabIndex = 7;
+            btTambahKategori.Text = "Tambah Kategori";
+            btTambahKategori.UseVisualStyleBackColor = false;
+            btTambahKategori.Click += btTambahKategori_Click;
             // 
             // btRiwayatTransaksi
             // 
@@ -150,30 +175,6 @@
             btDashboar.Text = "Dashboard";
             btDashboar.UseVisualStyleBackColor = false;
             btDashboar.Click += btDashboar_Click;
-            // 
-            // btRefresh
-            // 
-            btRefresh.BackColor = Color.OldLace;
-            btRefresh.Font = new Font("Times New Roman", 10F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            btRefresh.ForeColor = Color.FromArgb(100, 60, 20);
-            btRefresh.Location = new Point(657, 167);
-            btRefresh.Name = "btRefresh";
-            btRefresh.Size = new Size(101, 41);
-            btRefresh.TabIndex = 6;
-            btRefresh.Text = "Refresh";
-            btRefresh.UseVisualStyleBackColor = false;
-            // 
-            // btTambahKategori
-            // 
-            btTambahKategori.BackColor = Color.OldLace;
-            btTambahKategori.Font = new Font("Times New Roman", 10F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            btTambahKategori.ForeColor = Color.FromArgb(100, 60, 20);
-            btTambahKategori.Location = new Point(433, 167);
-            btTambahKategori.Name = "btTambahKategori";
-            btTambahKategori.Size = new Size(164, 41);
-            btTambahKategori.TabIndex = 7;
-            btTambahKategori.Text = "Tambah Kategori";
-            btTambahKategori.UseVisualStyleBackColor = false;
             // 
             // V_Kategori
             // 

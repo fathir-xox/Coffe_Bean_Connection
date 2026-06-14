@@ -15,6 +15,7 @@ namespace FinalProjek.View.Admin_View
         public V_Kategori()
         {
             InitializeComponent();
+
         }
 
         private void btDashboar_Click(object sender, EventArgs e)
@@ -36,7 +37,7 @@ namespace FinalProjek.View.Admin_View
 
         private void btKategori_Click(object sender, EventArgs e)
         {
-            
+
         }
 
         private void btMonitorStok_Click(object sender, EventArgs e)
@@ -74,6 +75,11 @@ namespace FinalProjek.View.Admin_View
             frmLogin.FormClosed += (s, args) => this.Close();
             frmLogin.Show();
             this.Hide();
+        }
+
+        private void btTambahKategori_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

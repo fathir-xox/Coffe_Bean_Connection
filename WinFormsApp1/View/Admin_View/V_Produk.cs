@@ -21,7 +21,7 @@ namespace FinalProjek.View.Admin_View
             LoadProducts();
         }
 
-        public V_Produk()
+        public V_Produk() : this(new ProdukController())
         {
         }
 
@@ -78,7 +78,8 @@ namespace FinalProjek.View.Admin_View
 
         private void btTambahProduk_Click(object sender, EventArgs e)
         {
-
+            AddProductWiew tambahProduk = new AddProductWiew();
+            tambahProduk.Show();
         }
 
         public Panel CreateProductPanel(Produk produk)
@@ -134,21 +135,21 @@ namespace FinalProjek.View.Admin_View
                 TextAlign = ContentAlignment.MiddleCenter,
             };
 
-            Label labelStok = new Label
-            {
-                Location = new Point(53, 202),
-                Size = new Size(58, 25),
-                BackColor = Color.Transparent,
-                ForeColor = Color.FromArgb(100, 60, 20),
-                Font = new Font("Times New Roman", 11, FontStyle.Bold),
-                TextAlign = ContentAlignment.MiddleCenter,
-            };
+            //Label labelStok = new Label
+            //{
+            //    Location = new Point(53, 202),
+            //    Size = new Size(58, 25),
+            //    BackColor = Color.Transparent,
+            //    ForeColor = Color.FromArgb(100, 60, 20),
+            //    Font = new Font("Times New Roman", 11, FontStyle.Bold),
+            //    TextAlign = ContentAlignment.MiddleCenter,
+            //};
 
             Label stokProduk = new Label
             {
                 Text = "Stok: " + produk.stok.ToString(),
-                Location = new Point(107, 202),
-                Size = new Size(34, 25),
+                Location = new Point(56, 204),
+                Size = new Size(95, 25),
                 BackColor = Color.Transparent,
                 ForeColor = Color.FromArgb(100, 60, 20),
                 Font = new Font("Times New Roman", 11, FontStyle.Bold),
@@ -211,6 +212,16 @@ namespace FinalProjek.View.Admin_View
         private void panel1_Paint(object sender, PaintEventArgs e)
         {
 
+        }
+
+        private void Stok_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void btRefresh_Click(object sender, EventArgs e)
+        {
+            LoadProducts();
         }
     }
 }

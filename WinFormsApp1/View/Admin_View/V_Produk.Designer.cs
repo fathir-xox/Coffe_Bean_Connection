@@ -36,7 +36,6 @@
             Stok = new Label();
             btEdit = new Button();
             NamaProduk = new Label();
-            labelStok = new Label();
             HargaProduk = new Label();
             pictureBox1 = new PictureBox();
             btRefresh = new Button();
@@ -103,7 +102,6 @@
             panel8.Controls.Add(Stok);
             panel8.Controls.Add(btEdit);
             panel8.Controls.Add(NamaProduk);
-            panel8.Controls.Add(labelStok);
             panel8.Controls.Add(HargaProduk);
             panel8.Controls.Add(pictureBox1);
             panel8.Location = new Point(3, 3);
@@ -129,11 +127,12 @@
             Stok.BackColor = Color.Transparent;
             Stok.Font = new Font("Times New Roman", 11F, FontStyle.Bold, GraphicsUnit.Point, 0);
             Stok.ForeColor = Color.FromArgb(100, 60, 20);
-            Stok.Location = new Point(107, 202);
+            Stok.Location = new Point(56, 204);
             Stok.Name = "Stok";
-            Stok.Size = new Size(34, 25);
+            Stok.Size = new Size(95, 25);
             Stok.TabIndex = 5;
-            Stok.Text = "20";
+            Stok.Text = "Stok : 20";
+            Stok.Click += Stok_Click;
             // 
             // btEdit
             // 
@@ -159,18 +158,6 @@
             NamaProduk.TabIndex = 2;
             NamaProduk.Text = "Biji Kopi Arabika";
             NamaProduk.Click += NamaProduk_Click;
-            // 
-            // labelStok
-            // 
-            labelStok.AutoSize = true;
-            labelStok.BackColor = Color.Transparent;
-            labelStok.Font = new Font("Times New Roman", 11F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            labelStok.ForeColor = Color.FromArgb(100, 60, 20);
-            labelStok.Location = new Point(53, 202);
-            labelStok.Name = "labelStok";
-            labelStok.Size = new Size(58, 25);
-            labelStok.TabIndex = 2;
-            labelStok.Text = "Stok:";
             // 
             // HargaProduk
             // 
@@ -204,6 +191,7 @@
             btRefresh.TabIndex = 16;
             btRefresh.Text = "Refresh";
             btRefresh.UseVisualStyleBackColor = false;
+            btRefresh.Click += btRefresh_Click;
             // 
             // btTambahProduk
             // 
@@ -329,7 +317,6 @@
         private Label Stok;
         private Button btEdit;
         private Label NamaProduk;
-        private Label labelStok;
         private Label HargaProduk;
         private PictureBox pictureBox1;
         private Button btLogout;
