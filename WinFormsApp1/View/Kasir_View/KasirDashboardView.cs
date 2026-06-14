@@ -2,6 +2,7 @@
 using FinalProjek.Interface;
 using FinalProjek.Model;
 using FinalProjek.Helper;
+using System.Drawing.Printing;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
@@ -11,7 +12,6 @@ namespace FinalProjek.View.Kasir_View
 {
     public partial class KasirDashboardView : Form
     {
-        // 1. DEKLARASI VARIABEL KELAS (Harus ada di dalam kurung kurawal class)
         private IProduk produkController;
         private TransaksiController transaksiController;
         private List<DetailTransaksi> keranjangBelanja;
@@ -26,8 +26,12 @@ namespace FinalProjek.View.Kasir_View
             keranjangBelanja = new List<DetailTransaksi>();
         }
 
-        private void FormTransaksi_Load(object sender, EventArgs e)
+        // =======================================================
+        // EVENT SAAT APLIKASI KASIR PERTAMA DIBUKA
+        // =======================================================
+        private void KasirDashboardView_Load(object sender, EventArgs e)
         {
+
             LoadDataProduk();
             RefreshKeranjang();
 
@@ -56,6 +60,7 @@ namespace FinalProjek.View.Kasir_View
                 txtUangDiterima.ReadOnly = false;
                 lblKembalian.Text = "Rp 0";
             }
+            // PERBAIKAN: Pemanggilan berulang (infinite loop) dihapus dari sini!
         }
 
         // =======================================================
@@ -63,9 +68,12 @@ namespace FinalProjek.View.Kasir_View
         // =======================================================
         private void RefreshKeranjang()
         {
-            // Pastikan Anda sudah mengubah nama komponen keranjang menjadi flpKeranjang
             flpKeranjang.Controls.Clear();
             totalBelanja = 0;
+
+            // PERBAIKAN FATAL: Kita kurangi 25 piksel (Jalur VIP untuk Scrollbar agar tidak menabrak tombol)
+            int lebarKartu = flpKeranjang.Width - 25;
+            if (lebarKartu < 200) lebarKartu = 320;
 
             foreach (var item in keranjangBelanja)
             {
@@ -73,33 +81,80 @@ namespace FinalProjek.View.Kasir_View
 
                 Panel pnlItem = new Panel
                 {
-                    Size = new Size(320, 70),
-                    Margin = new Padding(3, 3, 3, 8),
+                    Size = new Size(lebarKartu, 75),
+                    Margin = new Padding(3, 3, 3, 5),
                     BackColor = Color.White,
                     BorderStyle = BorderStyle.FixedSingle
                 };
 
-                Label lblNama = new Label { Text = item.nama_produk, Location = new Point(10, 10), AutoSize = true, Font = new Font("Segoe UI", 11, FontStyle.Bold) };
-                Label lblSubtotal = new Label { Text = $"Rp {item.subtotal:N0}", Location = new Point(10, 38), AutoSize = true, ForeColor = Color.DarkOrange, Font = new Font("Segoe UI", 10, FontStyle.Bold) };
-                Label lblQty = new Label { Text = item.qty.ToString(), Location = new Point(235, 25), Size = new Size(30, 20), TextAlign = ContentAlignment.MiddleCenter, Font = new Font("Segoe UI", 10, FontStyle.Bold) };
+                Label lblNama = new Label
+                {
+                    Text = item.nama_produk,
+                    Location = new Point(10, 12),
+                    Size = new Size(lebarKartu - 150, 25), // Ruang teks dikurangi agar tidak menabrak minus
+                    AutoEllipsis = true,
+                    Font = new Font("Segoe UI", 11, FontStyle.Bold)
+                };
 
-                Button btnMin = new Button { Text = "-", Location = new Point(200, 20), Size = new Size(30, 30), BackColor = Color.Crimson, ForeColor = Color.White, FlatStyle = FlatStyle.Flat, Font = new Font("Segoe UI", 12, FontStyle.Bold), Cursor = Cursors.Hand };
+                Label lblSubtotal = new Label
+                {
+                    Text = $"Rp {item.subtotal:N0}",
+                    Location = new Point(10, 40),
+                    AutoSize = true,
+                    ForeColor = Color.DarkOrange,
+                    Font = new Font("Segoe UI", 10, FontStyle.Bold)
+                };
+
+                // PERBAIKAN JARAK: Memberikan ruang napas yang sangat lega antar tombol
+                int posisiPlus = lebarKartu - 40;  // Tombol Plus aman 10px dari ujung kanan
+                int posisiQty = posisiPlus - 40;   // Jarak 40px untuk Angka Qty (Sangat Lega)
+                int posisiMin = posisiQty - 35;    // Tombol Minus
+
+                Button btnMin = new Button
+                {
+                    Text = "-",
+                    Location = new Point(posisiMin, 22),
+                    Size = new Size(30, 30),
+                    BackColor = Color.Crimson,
+                    ForeColor = Color.White,
+                    FlatStyle = FlatStyle.Flat,
+                    Font = new Font("Arial", 14, FontStyle.Bold),
+                    TextAlign = ContentAlignment.MiddleCenter,
+                    Padding = new Padding(0, 0, 0, 2),
+                    Cursor = Cursors.Hand
+                };
                 btnMin.FlatAppearance.BorderSize = 0;
                 btnMin.Click += (s, e) =>
                 {
-                    if (item.qty > 1)
-                    {
-                        item.qty -= 1;
-                        item.subtotal = item.qty * item.harga;
-                    }
-                    else
-                    {
-                        keranjangBelanja.Remove(item);
-                    }
+                    if (item.qty > 1) { item.qty -= 1; item.subtotal = item.qty * item.harga; }
+                    else { keranjangBelanja.Remove(item); }
                     RefreshKeranjang();
                 };
 
-                Button btnPlus = new Button { Text = "+", Location = new Point(270, 20), Size = new Size(30, 30), BackColor = Color.MediumSeaGreen, ForeColor = Color.White, FlatStyle = FlatStyle.Flat, Font = new Font("Segoe UI", 12, FontStyle.Bold), Cursor = Cursors.Hand };
+                // PERBAIKAN QTY: Lebar kotaknya dibesarkan dari 30 ke 35 agar angka tidak terpotong
+                Label lblQty = new Label
+                {
+                    Text = item.qty.ToString(),
+                    Location = new Point(posisiQty, 27),
+                    Size = new Size(35, 20), // LEBAR LEGA
+                    AutoSize = false, // Wajib false agar tetap di tengah
+                    TextAlign = ContentAlignment.MiddleCenter,
+                    Font = new Font("Segoe UI", 11, FontStyle.Bold)
+                };
+
+                Button btnPlus = new Button
+                {
+                    Text = "+",
+                    Location = new Point(posisiPlus, 22),
+                    Size = new Size(30, 30),
+                    BackColor = Color.MediumSeaGreen,
+                    ForeColor = Color.White,
+                    FlatStyle = FlatStyle.Flat,
+                    Font = new Font("Arial", 14, FontStyle.Bold),
+                    TextAlign = ContentAlignment.MiddleCenter,
+                    Padding = new Padding(0, 0, 0, 2),
+                    Cursor = Cursors.Hand
+                };
                 btnPlus.FlatAppearance.BorderSize = 0;
                 btnPlus.Click += (s, e) =>
                 {
@@ -108,20 +163,14 @@ namespace FinalProjek.View.Kasir_View
                     {
                         if (item.qty + 1 > produkAsli.stok)
                         {
-                            MessageBox.Show("Stok habis!", "Peringatan", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                            return;
+                            MessageBox.Show("Stok habis!", "Peringatan", MessageBoxButtons.OK, MessageBoxIcon.Warning); return;
                         }
-                        item.qty += 1;
-                        item.subtotal = item.qty * item.harga;
-                        RefreshKeranjang();
+                        item.qty += 1; item.subtotal = item.qty * item.harga; RefreshKeranjang();
                     }
                 };
 
-                pnlItem.Controls.Add(lblNama);
-                pnlItem.Controls.Add(lblSubtotal);
-                pnlItem.Controls.Add(btnMin);
-                pnlItem.Controls.Add(lblQty);
-                pnlItem.Controls.Add(btnPlus);
+                pnlItem.Controls.Add(lblNama); pnlItem.Controls.Add(lblSubtotal);
+                pnlItem.Controls.Add(btnMin); pnlItem.Controls.Add(lblQty); pnlItem.Controls.Add(btnPlus);
 
                 flpKeranjang.Controls.Add(pnlItem);
             }
@@ -129,6 +178,7 @@ namespace FinalProjek.View.Kasir_View
             lblSubTotal.Text = $"Rp {totalBelanja:N0}";
             cmbMetodeBayar_SelectedIndexChanged(null, null);
         }
+
 
         // =======================================================
         // MENGGAMBAR KARTU PRODUK (Desain Kustom Anda)
@@ -142,52 +192,52 @@ namespace FinalProjek.View.Kasir_View
 
                 foreach (var produk in listProduk)
                 {
+                    // Panel dibuat tinggi (130) dan lebar memadai (230)
                     Panel card = new Panel
                     {
-                        Size = new Size(373, 172),
-                        Margin = new Padding(3),
-                        BackgroundImage = Properties.Resources.CardKerTran,
-                        BackgroundImageLayout = ImageLayout.Zoom,
+                        Size = new Size(230, 130),
+                        Margin = new Padding(5),
+                        BackColor = Color.White,
+                        BorderStyle = BorderStyle.FixedSingle
                     };
 
+                    // Kotak teks nama dilegakan agar muat 2 baris jika namanya panjang
                     Label lblNama = new Label
                     {
                         Text = produk.nama_produk,
-                        Location = new Point(25, 31),
-                        Size = new Size(262, 36),
-                        BackColor = Color.Transparent,
-                        Font = new Font("Times New Roman", 16, FontStyle.Bold),
-                        TextAlign = ContentAlignment.MiddleCenter,
+                        Location = new Point(10, 10),
+                        Size = new Size(200, 40),
+                        AutoEllipsis = true,
+                        Font = new Font("Segoe UI", 11, FontStyle.Bold)
                     };
 
                     Label lblHarga = new Label
                     {
                         Text = $"Rp {produk.harga:N0}",
-                        Location = new Point(27, 73),
-                        Size = new Size(141, 32),
-                        BackColor = Color.Transparent,
-                        Font = new Font("Times New Roman", 14, FontStyle.Bold),
-                        TextAlign = ContentAlignment.MiddleCenter,
+                        Location = new Point(10, 60), // Posisi diturunkan
+                        AutoSize = true,
+                        ForeColor = Color.FromArgb(100, 60, 20),
+                        Font = new Font("Segoe UI", 11, FontStyle.Bold)
                     };
 
                     Label lblStok = new Label
                     {
                         Text = $"Stok: {produk.stok}",
-                        Location = new Point(23, 115),
-                        Size = new Size(108, 26),
-                        BackColor = Color.Transparent,
-                        Font = new Font("Times New Roman", 12, FontStyle.Bold),
-                        TextAlign = ContentAlignment.MiddleCenter,
+                        Location = new Point(10, 90), // Posisi diturunkan
+                        AutoSize = true,
+                        Font = new Font("Segoe UI", 9, FontStyle.Regular)
                     };
 
+                    // Tombol orange dibuat kotak besar yang nyaman diklik
                     Button btnAdd = new Button
                     {
                         Text = "+",
-                        Location = new Point(303, 111),
-                        Size = new Size(44, 41),
-                        BackColor = Color.Transparent,
-                        Font = new Font("Times New Roman", 14, FontStyle.Bold),
-                        TextAlign = ContentAlignment.MiddleCenter,
+                        Location = new Point(175, 80),
+                        Size = new Size(45, 40),
+                        BackColor = Color.DarkOrange,
+                        ForeColor = Color.White,
+                        FlatStyle = FlatStyle.Flat,
+                        Font = new Font("Segoe UI", 14, FontStyle.Bold),
                         Cursor = Cursors.Hand
                     };
                     btnAdd.FlatAppearance.BorderSize = 0;
@@ -207,6 +257,7 @@ namespace FinalProjek.View.Kasir_View
             }
             catch (Exception ex) { MessageBox.Show("Gagal memuat produk: " + ex.Message); }
         }
+      
 
         // =======================================================
         // FUNGSI MENAMBAH BARANG CERDAS
@@ -285,11 +336,11 @@ namespace FinalProjek.View.Kasir_View
             try
             {
                 string metodeTerpilih = cmbMetodeBayar.SelectedItem.ToString().ToLower();
-                int idKasirAktif = APPSession.CurrentUser != null ? APPSession.CurrentUser.id_user : 1;
+                int idUserAktif = APPSession.CurrentUser != null ? APPSession.CurrentUser.id_user : 1;
 
                 int idTrx = transaksiController.CreateTransaksi(new Transaksi
                 {
-                    id_kasir = idKasirAktif,
+                    id_user = idUserAktif,
                     total_harga = totalBelanja,
                     jumlah_bayar = uangDiterima,
                     metode_bayar = metodeTerpilih,
@@ -316,7 +367,7 @@ namespace FinalProjek.View.Kasir_View
         }
 
         // =======================================================
-        // EVENT KOSONG (Biarkan saja agar UI Designer tidak error)
+        // EVENT KOSONG (Kabel dari Designer agar tidak error)
         // =======================================================
         private void btDashboar_Click(object sender, EventArgs e) { }
         private void btRiwayatTransaksi_Click(object sender, EventArgs e) { }
@@ -330,5 +381,23 @@ namespace FinalProjek.View.Kasir_View
         private void lblQty_Click(object sender, EventArgs e) { }
         private void btnMinus_Click(object sender, EventArgs e) { }
         private void lblSubTotal_Click(object sender, EventArgs e) { }
+        private void FormTransaksi_Load(object sender, EventArgs e) { } // Kosongkan yang lama
+
+        // Teruskan fungsi double-click Anda yang salah alamat ke fungsi aslinya
+        private void label5_Click(object sender, EventArgs e) { }
+        private void btnCheckout_Click_1(object sender, EventArgs e)
+        {
+            btnCheckout_Click(sender, e);
+        }
+
+        private void btRiwayatTransaksi_Click_1(object sender, EventArgs e)
+        {
+            // Memanggil dan membuka halaman Riwayat Saya
+            V_RiwayatSaya frmRiwayat = new V_RiwayatSaya();
+            frmRiwayat.Show();
+
+            // Menyembunyikan halaman Kasir yang sekarang
+            this.Hide();
+        }
     }
 }
