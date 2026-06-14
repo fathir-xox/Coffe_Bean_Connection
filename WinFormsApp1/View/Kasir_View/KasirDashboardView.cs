@@ -257,7 +257,7 @@ namespace FinalProjek.View.Kasir_View
             }
             catch (Exception ex) { MessageBox.Show("Gagal memuat produk: " + ex.Message); }
         }
-      
+
 
         // =======================================================
         // FUNGSI MENAMBAH BARANG CERDAS
@@ -397,6 +397,26 @@ namespace FinalProjek.View.Kasir_View
             frmRiwayat.Show();
 
             // Menyembunyikan halaman Kasir yang sekarang
+            this.Hide();
+        }
+
+        private void btDaftarProduk_Click(object sender, EventArgs e)
+        {
+            // 1. Buat "cetakan" form Daftar Produk baru
+            V_DaftarProduk formDaftarProduk = new V_DaftarProduk();
+
+            // 2. Tampilkan form Daftar Produk
+            formDaftarProduk.Show();
+
+            // 3. Sembunyikan Dashboard Kasir (jangan di-Close agar sesinya tidak hilang)
+            this.Hide();
+        }
+
+        private void btLogout_Click(object sender, EventArgs e)
+        {
+            Login frmLogin = new Login();
+            frmLogin.FormClosed += (s, args) => this.Close();
+            frmLogin.Show();
             this.Hide();
         }
     }
