@@ -1,13 +1,12 @@
-﻿using Npgsql;
+﻿using FinalProjek.Database;
 using FinalProjek.Model;
-using FinalProjek.Interface;
-using FinalProjek.Database;
+using Npgsql;
 using System;
 using System.Collections.Generic;
 
 namespace FinalProjek.Controler
 {
-    public class TransaksiController : ITransaksi
+    public class TransaksiController
     {
         private DbContext dbHelper;
 
@@ -23,31 +22,25 @@ namespace FinalProjek.Controler
                 using (NpgsqlConnection connection = new NpgsqlConnection(dbHelper.connStr))
                 {
                     connection.Open();
-                    // PERBAIKAN 1: Hapus kolom "kembalian", biarkan PostgreSQL yang menghitungnya.
-                    // PERBAIKAN 2: Sesuaikan nama tabel "transaksi" dan enum-nya.
                     string query = @"
-            INSERT INTO transaksi (id_kasir, total_harga, jumlah_bayar, metode_bayar, status_transaksi) 
-            VALUES (@id_kasir, @total_harga, @jumlah_bayar, @metode_bayar::metode_bayar_enum, @status_transaksi::status_transaksi_enum) 
-            RETURNING id_transaksi";
+                        INSERT INTO transaksi (id_kasir, total_harga, jumlah_bayar, metode_bayar, status_transaksi) 
+                        VALUES (@IdKasir, @TotalHarga, @JumlahBayar, @MetodePembayaran::metode_bayar_enum, @StatusTransaksi::status_transaksi_enum) 
+                        RETURNING id_transaksi";
 
                     using (var command = new NpgsqlCommand(query, connection))
                     {
-                        command.Parameters.AddWithValue("@id_kasir", transaksi.id_kasir);
-                        command.Parameters.AddWithValue("@total_harga", transaksi.total_harga); // Pastikan properti model sudah int
-                        command.Parameters.AddWithValue("@jumlah_bayar", transaksi.jumlah_bayar); // Pastikan properti model sudah int
-
-                        // Pastikan value string dari Model sesuai dengan ENUM database (huruf kecil: 'tunai', 'transfer', 'qris')
-                        command.Parameters.AddWithValue("@metode_bayar", transaksi.metode_bayar.ToLower());
-                        command.Parameters.AddWithValue("@status_transaksi", transaksi.status_transaksi.ToLower());
+                        command.Parameters.AddWithValue("@IdKasir", transaksi.id_kasir);
+                        command.Parameters.AddWithValue("@TotalHarga", transaksi.total_harga);
+                        command.Parameters.AddWithValue("@JumlahBayar", transaksi.jumlah_bayar);
+                        // Data diambil langsung dari pilihan kasir di Form
+                        command.Parameters.AddWithValue("@MetodePembayaran", transaksi.metode_bayar.ToLower());
+                        command.Parameters.AddWithValue("@StatusTransaksi", transaksi.status_transaksi.ToLower());
 
                         return Convert.ToInt32(command.ExecuteScalar());
                     }
                 }
             }
-            catch (Exception ex)
-            {
-                throw new Exception("Gagal membuat transaksi baru: " + ex.Message);
-            }
+            catch (Exception ex) { throw new Exception("Gagal membuat transaksi: " + ex.Message); }
         }
 
         public void AddDetail(DetailTransaksi detail)
@@ -57,11 +50,10 @@ namespace FinalProjek.Controler
                 using (NpgsqlConnection connection = new NpgsqlConnection(dbHelper.connStr))
                 {
                     connection.Open();
-                    // PERBAIKAN 1: Nama tabel di database menjadi "detailtransaksi" (karena di DDL tidak diapit tanda kutip).
-                    // PERBAIKAN 2: Hapus kolom "subtotal", biarkan PostgreSQL yang mengalikannya.
+                    // Subtotal tidak di-insert karena GENERATED ALWAYS oleh PostgreSQL
                     string queryInsert = @"
-            INSERT INTO detailtransaksi (id_transaksi, id_produk, nama_produk, harga, qty) 
-            VALUES (@id_transaksi, @id_produk, @nama_produk, @harga, @qty)";
+                        INSERT INTO detailtransaksi (id_transaksi, id_produk, nama_produk, harga, qty) 
+                        VALUES (@id_transaksi, @id_produk, @nama_produk, @harga, @qty)";
 
                     using (NpgsqlCommand commandInsert = new NpgsqlCommand(queryInsert, connection))
                     {
@@ -70,11 +62,10 @@ namespace FinalProjek.Controler
                         commandInsert.Parameters.AddWithValue("@nama_produk", detail.nama_produk);
                         commandInsert.Parameters.AddWithValue("@harga", detail.harga);
                         commandInsert.Parameters.AddWithValue("@qty", detail.qty);
-
                         commandInsert.ExecuteNonQuery();
                     }
 
-                    // Update stok produk
+                    // Memotong stok
                     string queryUpdateStok = "UPDATE produk SET stok = stok - @qty WHERE id_produk = @id_produk";
                     using (NpgsqlCommand commandUpdate = new NpgsqlCommand(queryUpdateStok, connection))
                     {
@@ -84,209 +75,87 @@ namespace FinalProjek.Controler
                     }
                 }
             }
-            catch (Exception ex)
-            {
-                throw new Exception("Gagal menambahkan detail pesanan: " + ex.Message);
-            }
+            catch (Exception ex) { throw new Exception("Gagal menyimpan rincian pesanan: " + ex.Message); }
         }
 
-        public List<Transaksi> GetAll()
+        // --- FUNGSI RIWAYAT TETAP SAMA ---
+        public List<Transaksi> GetRiwayatLengkapByKasir(int idKasir)
         {
             List<Transaksi> list = new List<Transaksi>();
-
-            try
-            {
-                using (NpgsqlConnection conn = new NpgsqlConnection(dbHelper.connStr))
-                {
-                    conn.Open();
-
-                    string query = @"SELECT id_transaksi, id_kasir, tanggal, total_harga FROM transaksi ORDER BY id_transaksi DESC";
-
-                    using (NpgsqlCommand cmd = new NpgsqlCommand(query, conn))
-                    {
-                        using (NpgsqlDataReader reader = cmd.ExecuteReader())
-                        {
-                            while (reader.Read())
-                            {
-                                Transaksi transaksi = new Transaksi
-                                {
-                                    id_transaksi = reader.GetInt32(0),
-                                    id_kasir = reader.GetInt32(1),
-                                    tanggal = reader.GetDateTime(2),
-                                    total_harga = reader.GetInt32(3)
-                                };
-                                list.Add(transaksi);
-                            }
-                        }
-                    }
-                }
-            }
-            catch (Exception ex)
-            {
-                throw new Exception("Gagal mengambil semua data transaksi: " + ex.Message);
-            }
-
-            return list;
-        }
-
-        public List<DetailTransaksi> GetDetails(int idTransaksi)
-        {
-            List<DetailTransaksi> list = new List<DetailTransaksi>();
-
-            try
-            {
-                using (NpgsqlConnection connection = new NpgsqlConnection(dbHelper.connStr))
-                {
-                    connection.Open();
-                    string query = "SELECT id_detail_transaksi, id_transaksi, id_produk, qty, harga, subtotal, nama_produk FROM detail_transaksi WHERE id_transaksi = @IdTransaksi";
-
-                    using (var command = new NpgsqlCommand(query, connection))
-                    {
-                        command.Parameters.AddWithValue("@IdTransaksi", idTransaksi);
-
-                        using (NpgsqlDataReader reader = command.ExecuteReader())
-                        {
-                            while (reader.Read())
-                            {
-                                DetailTransaksi detail = new DetailTransaksi
-                                {
-                                    id_detail_transaksi = reader.GetInt32(0),
-                                    id_transaksi = reader.GetInt32(1),
-                                    id_produk = reader.GetInt32(2),
-                                    qty = reader.GetInt32(3),
-                                    harga = reader.GetInt32(4),
-                                    subtotal = reader.GetInt32(5),
-                                    nama_produk = reader.GetString(6)
-                                };
-                                list.Add(detail);
-                            }
-                        }
-                    }
-                }
-            }
-            catch (Exception ex)
-            {
-                throw new Exception("Gagal mengambil detail transaksi: " + ex.Message);
-            }
-
-            return list;
-        }
-
-        public int GetPemasukanHariIni()
-        {
             try
             {
                 using (NpgsqlConnection connection = new NpgsqlConnection(dbHelper.connStr))
                 {
                     connection.Open();
                     string query = @"
-                        SELECT COALESCE(SUM(total_harga), 0)
-                        FROM transaksi
-                        WHERE DATE(tanggal) = CURRENT_DATE";
-
-                    using (var command = new NpgsqlCommand(query, connection))
-                    {
-                        return Convert.ToInt32(command.ExecuteScalar());
-                    }
-                }
-            }
-            catch (Exception ex)
-            {
-                throw new Exception("Gagal mengambil data pemasukan hari ini: " + ex.Message);
-            }
-        }
-
-        public int GetJumlahTransaksiBulanIni()
-        {
-            try
-            {
-                using (NpgsqlConnection connection = new NpgsqlConnection(dbHelper.connStr))
-                {
-                    connection.Open();
-                    string query = @"
-                        SELECT COUNT(*)
-                        FROM transaksi
-                        WHERE EXTRACT(MONTH FROM tanggal) = EXTRACT(MONTH FROM CURRENT_DATE)
-                        AND EXTRACT(YEAR FROM tanggal) = EXTRACT(YEAR FROM CURRENT_DATE)";
-
-                    using (var command = new NpgsqlCommand(query, connection))
-                    {
-                        return Convert.ToInt32(command.ExecuteScalar());
-                    }
-                }
-            }
-            catch (Exception ex)
-            {
-                throw new Exception("Gagal mengambil jumlah transaksi bulan ini: " + ex.Message);
-            }
-        }
-
-        public int GetTotalPemasukanBulanIni()
-        {
-            try
-            {
-                using (NpgsqlConnection connection = new NpgsqlConnection(dbHelper.connStr))
-                {
-                    connection.Open();
-                    string query = @"
-                        SELECT COALESCE(SUM(total_harga), 0)
-                        FROM transaksi
-                        WHERE EXTRACT(MONTH FROM tanggal) = EXTRACT(MONTH FROM CURRENT_DATE)
-                        AND EXTRACT(YEAR FROM tanggal) = EXTRACT(YEAR FROM CURRENT_DATE)";
-
-                    using (var command = new NpgsqlCommand(query, connection))
-                    {
-                        return Convert.ToInt32(command.ExecuteScalar());
-                    }
-                }
-            }
-            catch (Exception ex)
-            {
-                throw new Exception("Gagal mengambil total pemasukan bulan ini: " + ex.Message);
-            }
-        }
-
-        public List<Transaksi> GetRiwayatByKasir(int idKasir)
-        {
-            List<Transaksi> list = new List<Transaksi>();
-
-            try
-            {
-                using (NpgsqlConnection connection = new NpgsqlConnection(dbHelper.connStr))
-                {
-                    connection.Open();
-                    string query = @"
-                        SELECT id_transaksi, tanggal, total_harga
-                        FROM transaksi
-                        WHERE id_kasir = @IdKasir
-                        ORDER BY tanggal DESC";
+                        SELECT t.id_transaksi, t.tanggal, COALESCE(SUM(dt.qty), 0) AS total_item, t.total_harga, t.metode_bayar::text
+                        FROM transaksi t
+                        LEFT JOIN detailtransaksi dt ON t.id_transaksi = dt.id_transaksi
+                        WHERE t.id_kasir = @IdKasir
+                        GROUP BY t.id_transaksi, t.tanggal, t.total_harga, t.metode_bayar
+                        ORDER BY t.tanggal DESC";
 
                     using (var command = new NpgsqlCommand(query, connection))
                     {
                         command.Parameters.AddWithValue("@IdKasir", idKasir);
-
                         using (NpgsqlDataReader reader = command.ExecuteReader())
                         {
                             while (reader.Read())
                             {
-                                Transaksi transaksi = new Transaksi
+                                Transaksi trx = new Transaksi
                                 {
                                     id_transaksi = reader.GetInt32(0),
                                     tanggal = reader.GetDateTime(1),
-                                    total_harga = reader.GetInt32(2)
+                                    total_item = Convert.ToInt32(reader.GetInt64(2)),
+                                    total_harga = reader.GetInt32(3),
+                                    metode_bayar = reader.GetString(4)
                                 };
-                                list.Add(transaksi);
+                                list.Add(trx);
                             }
                         }
                     }
                 }
             }
-            catch (Exception ex)
-            {
-                throw new Exception("Gagal mengambil riwayat transaksi kasir: " + ex.Message);
-            }
-
+            catch (Exception ex) { throw new Exception("Gagal mengambil riwayat: " + ex.Message); }
             return list;
+        }
+
+        public (int jumlahTransaksi, int totalItem, int omzet) GetStatistikRiwayat(int idKasir)
+        {
+            int jumlah = 0; int totalItem = 0; int omzet = 0;
+            try
+            {
+                using (NpgsqlConnection connection = new NpgsqlConnection(dbHelper.connStr))
+                {
+                    connection.Open();
+                    string queryTrx = "SELECT COUNT(id_transaksi), COALESCE(SUM(total_harga), 0) FROM transaksi WHERE id_kasir = @IdKasir";
+                    using (var cmdTrx = new NpgsqlCommand(queryTrx, connection))
+                    {
+                        cmdTrx.Parameters.AddWithValue("@IdKasir", idKasir);
+                        using (var reader = cmdTrx.ExecuteReader())
+                        {
+                            if (reader.Read())
+                            {
+                                jumlah = Convert.ToInt32(reader.GetInt64(0));
+                                omzet = Convert.ToInt32(reader.GetDecimal(1));
+                            }
+                        }
+                    }
+
+                    string queryItem = @"
+                        SELECT COALESCE(SUM(dt.qty), 0) 
+                        FROM detailtransaksi dt 
+                        JOIN transaksi t ON dt.id_transaksi = t.id_transaksi 
+                        WHERE t.id_kasir = @IdKasir";
+                    using (var cmdItem = new NpgsqlCommand(queryItem, connection))
+                    {
+                        cmdItem.Parameters.AddWithValue("@IdKasir", idKasir);
+                        totalItem = Convert.ToInt32(cmdItem.ExecuteScalar());
+                    }
+                }
+            }
+            catch (Exception ex) { throw new Exception("Gagal mengambil statistik: " + ex.Message); }
+            return (jumlah, totalItem, omzet);
         }
     }
 }

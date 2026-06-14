@@ -29,10 +29,10 @@
         private void InitializeComponent()
         {
             panel1 = new Panel();
-            btTransaksi = new Button();
-            btRiwayatTransaksi = new Button();
-            btDaftarProduk = new Button();
             btLogout = new Button();
+            btDaftarProduk = new Button();
+            btRiwayatTransaksi = new Button();
+            btTransaksi = new Button();
             panel1.SuspendLayout();
             SuspendLayout();
             // 
@@ -48,30 +48,17 @@
             panel1.Size = new Size(1900, 1026);
             panel1.TabIndex = 0;
             // 
-            // btTransaksi
+            // btLogout
             // 
-            btTransaksi.BackColor = Color.OldLace;
-            btTransaksi.Font = new Font("Times New Roman", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            btTransaksi.ForeColor = Color.FromArgb(100, 60, 20);
-            btTransaksi.Location = new Point(77, 220);
-            btTransaksi.Name = "btTransaksi";
-            btTransaksi.Size = new Size(224, 41);
-            btTransaksi.TabIndex = 3;
-            btTransaksi.Text = "Transaksi";
-            btTransaksi.UseVisualStyleBackColor = false;
-            btTransaksi.Click += btDashboar_Click;
-            // 
-            // btRiwayatTransaksi
-            // 
-            btRiwayatTransaksi.BackColor = Color.OldLace;
-            btRiwayatTransaksi.Font = new Font("Times New Roman", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            btRiwayatTransaksi.ForeColor = Color.FromArgb(100, 60, 20);
-            btRiwayatTransaksi.Location = new Point(77, 304);
-            btRiwayatTransaksi.Name = "btRiwayatTransaksi";
-            btRiwayatTransaksi.Size = new Size(224, 41);
-            btRiwayatTransaksi.TabIndex = 4;
-            btRiwayatTransaksi.Text = "Riwayat Transaksi";
-            btRiwayatTransaksi.UseVisualStyleBackColor = false;
+            btLogout.BackColor = Color.Red;
+            btLogout.Font = new Font("Times New Roman", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            btLogout.ForeColor = Color.White;
+            btLogout.Location = new Point(37, 912);
+            btLogout.Name = "btLogout";
+            btLogout.Size = new Size(224, 41);
+            btLogout.TabIndex = 11;
+            btLogout.Text = "Logout";
+            btLogout.UseVisualStyleBackColor = false;
             // 
             // btDaftarProduk
             // 
@@ -85,17 +72,31 @@
             btDaftarProduk.Text = "Daftar Produk";
             btDaftarProduk.UseVisualStyleBackColor = false;
             // 
-            // btLogout
+            // btRiwayatTransaksi
             // 
-            btLogout.BackColor = Color.Red;
-            btLogout.Font = new Font("Times New Roman", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            btLogout.ForeColor = Color.White;
-            btLogout.Location = new Point(37, 912);
-            btLogout.Name = "btLogout";
-            btLogout.Size = new Size(224, 41);
-            btLogout.TabIndex = 11;
-            btLogout.Text = "Logout";
-            btLogout.UseVisualStyleBackColor = false;
+            btRiwayatTransaksi.BackColor = Color.OldLace;
+            btRiwayatTransaksi.Font = new Font("Times New Roman", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            btRiwayatTransaksi.ForeColor = Color.FromArgb(100, 60, 20);
+            btRiwayatTransaksi.Location = new Point(77, 304);
+            btRiwayatTransaksi.Name = "btRiwayatTransaksi";
+            btRiwayatTransaksi.Size = new Size(224, 41);
+            btRiwayatTransaksi.TabIndex = 4;
+            btRiwayatTransaksi.Text = "Riwayat Transaksi";
+            btRiwayatTransaksi.UseVisualStyleBackColor = false;
+            btRiwayatTransaksi.Click += btRiwayatTransaksi_Click;
+            // 
+            // btTransaksi
+            // 
+            btTransaksi.BackColor = Color.OldLace;
+            btTransaksi.Font = new Font("Times New Roman", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            btTransaksi.ForeColor = Color.FromArgb(100, 60, 20);
+            btTransaksi.Location = new Point(77, 220);
+            btTransaksi.Name = "btTransaksi";
+            btTransaksi.Size = new Size(224, 41);
+            btTransaksi.TabIndex = 3;
+            btTransaksi.Text = "Transaksi";
+            btTransaksi.UseVisualStyleBackColor = false;
+            btTransaksi.Click += btDashboar_Click;
             // 
             // KasirDashboardView
             // 

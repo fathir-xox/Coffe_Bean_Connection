@@ -19,5 +19,10 @@ namespace FinalProjek.View.Kasir_View
         {
 
         }
+
+        private void btRiwayatTransaksi_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }
