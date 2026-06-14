@@ -135,16 +135,6 @@ namespace FinalProjek.View.Admin_View
                 TextAlign = ContentAlignment.MiddleCenter,
             };
 
-            //Label labelStok = new Label
-            //{
-            //    Location = new Point(53, 202),
-            //    Size = new Size(58, 25),
-            //    BackColor = Color.Transparent,
-            //    ForeColor = Color.FromArgb(100, 60, 20),
-            //    Font = new Font("Times New Roman", 11, FontStyle.Bold),
-            //    TextAlign = ContentAlignment.MiddleCenter,
-            //};
-
             Label stokProduk = new Label
             {
                 Text = "Stok: " + produk.stok.ToString(),
@@ -164,7 +154,6 @@ namespace FinalProjek.View.Admin_View
                 BackColor = Color.Wheat,
                 Text = "Edit",
             };
-            //buttonEdit.Click += (sender, e) => produkController.EditProduk();
 
             Button buttonHapus = new Button
             {
