@@ -83,9 +83,39 @@ namespace FinalProjek.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        public static System.Drawing.Bitmap CardKeranjang {
+            get {
+                object obj = ResourceManager.GetObject("CardKeranjang", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        public static System.Drawing.Bitmap CardKerTran {
+            get {
+                object obj = ResourceManager.GetObject("CardKerTran", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         public static System.Drawing.Bitmap CardRiwayatSaya {
             get {
                 object obj = ResourceManager.GetObject("CardRiwayatSaya", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        public static System.Drawing.Bitmap CardTransaksi {
+            get {
+                object obj = ResourceManager.GetObject("CardTransaksi", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

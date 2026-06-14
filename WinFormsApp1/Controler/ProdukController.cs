@@ -48,47 +48,6 @@ namespace FinalProjek.Controler
                 throw new Exception($"Gagal menambah produk: {ex.Message}");
             }
         }
-
-        public List<Produk> GetAllProduk()
-        {
-            List<Produk> produks = new List<Produk>();
-
-            try
-            {
-                using (NpgsqlConnection connection = new NpgsqlConnection(dbHelper.connStr))
-                {
-                    connection.Open();
-
-                    string query = @"SELECT id_produk, nama_produk, harga, stok, deskripsi, imageproduk FROM produk ORDER BY id_produk DESC";
-
-                    using (NpgsqlCommand cmd = new NpgsqlCommand(query, connection))
-                    {
-                        using (NpgsqlDataReader reader = cmd.ExecuteReader())
-                        {
-                            while (reader.Read())
-                            {
-                                Produk produk = new Produk
-                                {
-                                    id_produk = reader.GetInt32(0),
-                                    nama_produk = reader.GetString(1),
-                                    // Menggunakan GetInt32 asumsikan Harga Rupiah utuh. Jika database pakai double/numeric, gunakan GetDecimal() atau GetDouble() dengan hati-hati.
-                                    harga = reader.GetInt32(2),
-                                    stok = reader.GetInt32(3),
-                                    deskripsi = reader.IsDBNull(4) ? "" : reader.GetString(4), // Jaga-jaga jika deskripsi kosong
-                                    imageproduk = reader.IsDBNull(5) ? null : (byte[])reader["imageproduk"]
-                                };
-                                produks.Add(produk);
-                            }
-                        }
-                    }
-                }
-            }
-            catch (Exception ex)
-            {
-                // Melempar pesan error
-                throw new Exception($"Gagal mengambil data produk: {ex.Message}");
-            }
-
         public List<Produk> GetAllProduk()
         {
             List<Produk> produks = new List<Produk>();
@@ -112,7 +71,7 @@ namespace FinalProjek.Controler
                                 {
                                     id_produk = reader.GetInt32(0),
                                     nama_produk = reader.GetString(1),
-                                    harga = reader.GetDouble(2),
+                                    harga = reader.GetInt32(2),
                                     stok = reader.GetInt32(3),
                                     deskripsi = reader.GetString(4),
                                     imageproduk = reader["imageproduk"] as byte[]

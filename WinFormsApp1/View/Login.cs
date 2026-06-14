@@ -1,4 +1,5 @@
-﻿using FinalProjek.Controler;
+﻿// WinFormsApp1\View\Login.cs
+using FinalProjek.Controler;
 using FinalProjek.Helper;
 using FinalProjek.Interface;
 using FinalProjek.Model;
@@ -17,7 +18,7 @@ namespace FinalProjek.View
             InitializeComponent();
             authcontroller = new AuthController();
             txtPassword.UseSystemPasswordChar = true;
-            
+
         }
 
 
@@ -65,7 +66,9 @@ namespace FinalProjek.View
                 };
 
                 // 2. Lempar ke Controller untuk dicek di Database
-                User loggedInUser = authcontroller.Login(inputUser);
+                // NOTE: AuthController defines 'login' (lowercase) in the project,
+                // so call the method using the exact case.
+                User loggedInUser = authcontroller.login(inputUser);
 
                 // 3. Jika berhasil login (data ditemukan)
                 if (loggedInUser != null)
