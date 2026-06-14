@@ -3,6 +3,7 @@ using FinalProjek.Model;
 using Npgsql;
 using System;
 using System.Collections.Generic;
+using System.Data;
 
 namespace FinalProjek.Controler
 {
@@ -126,6 +127,45 @@ namespace FinalProjek.Controler
             catch (Exception ex) { throw new Exception("Gagal mengambil riwayat transaksi: " + ex.Message); }
             return list;
         }
+
+
+
+        /// Mengambil semua riwayat transaksi (untuk admin)
+        public DataTable GetAllRiwayatTransaksi()
+        {
+            DataTable dt = new DataTable();
+            try
+            {
+                using (NpgsqlConnection connection = new NpgsqlConnection(dbHelper.connStr))
+                {
+                    connection.Open();
+                    string query = @"
+                SELECT 
+                    t.id_transaksi AS ""NO. TRX"",
+                    t.tanggal AS ""TANGGAL"",
+                    COALESCE(SUM(dt.qty), 0) AS ""ITEM"",
+                    t.total_harga AS ""TOTAL"",
+                    t.metode_bayar::text AS ""METODE"",
+                    u.full_name AS ""KASIR""
+                FROM transaksi t
+                LEFT JOIN detailtransaksi dt ON t.id_transaksi = dt.id_transaksi
+                LEFT JOIN ""users"" u ON t.id_user = u.id_user
+                GROUP BY t.id_transaksi, t.tanggal, t.total_harga, t.metode_bayar, u.full_name
+                ORDER BY t.tanggal DESC";
+
+                    using (NpgsqlDataAdapter adapter = new NpgsqlDataAdapter(query, connection))
+                    {
+                        adapter.Fill(dt);
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Gagal mengambil semua riwayat transaksi: " + ex.Message);
+            }
+            return dt;
+        }
+
 
         public (int jumlahTransaksi, int totalItem, int omzet) GetStatistikRiwayat(int idUser)
         {

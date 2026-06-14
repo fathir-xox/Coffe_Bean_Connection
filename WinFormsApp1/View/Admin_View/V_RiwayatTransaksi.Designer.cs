@@ -29,19 +29,22 @@
         private void InitializeComponent()
         {
             panel1 = new Panel();
+            dgvRiwayat = new DataGridView();
+            btLogout = new Button();
             btRiwayatTransaksi = new Button();
             btMonitorStok = new Button();
             btKategori = new Button();
             btProduk = new Button();
             btKelolaAkunUser = new Button();
             btDashboar = new Button();
-            btLogout = new Button();
             panel1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)dgvRiwayat).BeginInit();
             SuspendLayout();
             // 
             // panel1
             // 
             panel1.BackgroundImage = Properties.Resources.VRiwayatTransaksi;
+            panel1.Controls.Add(dgvRiwayat);
             panel1.Controls.Add(btLogout);
             panel1.Controls.Add(btRiwayatTransaksi);
             panel1.Controls.Add(btMonitorStok);
@@ -53,6 +56,28 @@
             panel1.Name = "panel1";
             panel1.Size = new Size(1900, 1026);
             panel1.TabIndex = 0;
+            // 
+            // dgvRiwayat
+            // 
+            dgvRiwayat.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            dgvRiwayat.Location = new Point(354, 158);
+            dgvRiwayat.Name = "dgvRiwayat";
+            dgvRiwayat.RowHeadersWidth = 62;
+            dgvRiwayat.Size = new Size(1532, 854);
+            dgvRiwayat.TabIndex = 17;
+            // 
+            // btLogout
+            // 
+            btLogout.BackColor = Color.Red;
+            btLogout.Font = new Font("Times New Roman", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            btLogout.ForeColor = Color.White;
+            btLogout.Location = new Point(38, 912);
+            btLogout.Name = "btLogout";
+            btLogout.Size = new Size(224, 41);
+            btLogout.TabIndex = 16;
+            btLogout.Text = "Logout";
+            btLogout.UseVisualStyleBackColor = false;
+            btLogout.Click += btLogout_Click;
             // 
             // btRiwayatTransaksi
             // 
@@ -132,19 +157,6 @@
             btDashboar.UseVisualStyleBackColor = false;
             btDashboar.Click += btDashboar_Click;
             // 
-            // btLogout
-            // 
-            btLogout.BackColor = Color.Red;
-            btLogout.Font = new Font("Times New Roman", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            btLogout.ForeColor = Color.White;
-            btLogout.Location = new Point(38, 912);
-            btLogout.Name = "btLogout";
-            btLogout.Size = new Size(224, 41);
-            btLogout.TabIndex = 16;
-            btLogout.Text = "Logout";
-            btLogout.UseVisualStyleBackColor = false;
-            btLogout.Click += btLogout_Click;
-            // 
             // V_RiwayatTransaksi
             // 
             AutoScaleDimensions = new SizeF(10F, 25F);
@@ -154,6 +166,7 @@
             Name = "V_RiwayatTransaksi";
             Text = "V_RiwayatTransaksi";
             panel1.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)dgvRiwayat).EndInit();
             ResumeLayout(false);
         }
 
@@ -167,5 +180,6 @@
         private Button btKelolaAkunUser;
         private Button btDashboar;
         private Button btLogout;
+        private DataGridView dgvRiwayat;
     }
 }

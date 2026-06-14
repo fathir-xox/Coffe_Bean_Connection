@@ -1,25 +1,70 @@
 ﻿using FinalProjek.Controler;
 using FinalProjek.Interface;
+using FinalProjek.Helper;
+using FinalProjek.Model;
 using System;
-using System.Collections.Generic;
-using System.ComponentModel;
 using System.Data;
 using System.Drawing;
-using System.Text;
 using System.Windows.Forms;
 
 namespace FinalProjek.View.Admin_View
 {
     public partial class V_RiwayatTransaksi : Form
     {
+        private TransaksiController transaksiController;
+
         public V_RiwayatTransaksi()
         {
             InitializeComponent();
+            transaksiController = new TransaksiController();
+            // Pastikan event Load terhubung
+            this.Load += V_RiwayatTransaksi_Load;
         }
 
+        private void V_RiwayatTransaksi_Load(object sender, EventArgs e)
+        {
+            LoadAllRiwayat();
+        }
+
+        private void LoadAllRiwayat()
+        {
+            try
+            {
+                DataTable dt = transaksiController.GetAllRiwayatTransaksi();
+                if (dt == null || dt.Rows.Count == 0)
+                {
+                    dgvRiwayat.DataSource = null;
+                    MessageBox.Show("Belum ada data transaksi.", "Informasi", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    return;
+                }
+                SetupDesainTabel();
+                dgvRiwayat.DataSource = dt;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Gagal memuat riwayat transaksi: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        private void SetupDesainTabel()
+        {
+            dgvRiwayat.AutoGenerateColumns = true;
+            dgvRiwayat.BorderStyle = BorderStyle.None;
+            dgvRiwayat.BackgroundColor = Color.White;
+            dgvRiwayat.CellBorderStyle = DataGridViewCellBorderStyle.SingleHorizontal;
+            dgvRiwayat.RowHeadersVisible = false;
+            dgvRiwayat.AllowUserToAddRows = false;
+            dgvRiwayat.ReadOnly = true;
+            dgvRiwayat.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
+            dgvRiwayat.RowTemplate.Height = 45;
+            dgvRiwayat.ColumnHeadersHeight = 40;
+            dgvRiwayat.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+        }
+
+        // Tombol navigasi
         private void btDashboar_Click(object sender, EventArgs e)
         {
-            IProduk produkController = new ProdukController(); // buat instance controller
+            IProduk produkController = new ProdukController();
             AdminDashboardView frmDashboard = new AdminDashboardView(produkController);
             frmDashboard.FormClosed += (s, args) => this.Close();
             frmDashboard.Show();
@@ -52,7 +97,7 @@ namespace FinalProjek.View.Admin_View
 
         private void btRiwayatTransaksi_Click(object sender, EventArgs e)
         {
-            
+            LoadAllRiwayat(); // refresh data
         }
 
         private void btKelolaAkunUser_Click(object sender, EventArgs e)
