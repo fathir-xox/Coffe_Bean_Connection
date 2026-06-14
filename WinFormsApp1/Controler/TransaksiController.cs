@@ -32,7 +32,6 @@ namespace FinalProjek.Controler
                         command.Parameters.AddWithValue("@IdKasir", transaksi.id_kasir);
                         command.Parameters.AddWithValue("@TotalHarga", transaksi.total_harga);
                         command.Parameters.AddWithValue("@JumlahBayar", transaksi.jumlah_bayar);
-                        // Data diambil langsung dari pilihan kasir di Form
                         command.Parameters.AddWithValue("@MetodePembayaran", transaksi.metode_bayar.ToLower());
                         command.Parameters.AddWithValue("@StatusTransaksi", transaksi.status_transaksi.ToLower());
 
@@ -40,7 +39,7 @@ namespace FinalProjek.Controler
                     }
                 }
             }
-            catch (Exception ex) { throw new Exception("Gagal membuat transaksi: " + ex.Message); }
+            catch (Exception ex) { throw new Exception("Gagal membuat transaksi baru: " + ex.Message); }
         }
 
         public void AddDetail(DetailTransaksi detail)
@@ -50,27 +49,26 @@ namespace FinalProjek.Controler
                 using (NpgsqlConnection connection = new NpgsqlConnection(dbHelper.connStr))
                 {
                     connection.Open();
-                    // Subtotal tidak di-insert karena GENERATED ALWAYS oleh PostgreSQL
                     string queryInsert = @"
                         INSERT INTO detailtransaksi (id_transaksi, id_produk, nama_produk, harga, qty) 
-                        VALUES (@id_transaksi, @id_produk, @nama_produk, @harga, @qty)";
+                        VALUES (@IdTransaksi, @IdProduk, @NamaProduk, @Harga, @Qty)";
 
                     using (NpgsqlCommand commandInsert = new NpgsqlCommand(queryInsert, connection))
                     {
-                        commandInsert.Parameters.AddWithValue("@id_transaksi", detail.id_transaksi);
-                        commandInsert.Parameters.AddWithValue("@id_produk", detail.id_produk);
-                        commandInsert.Parameters.AddWithValue("@nama_produk", detail.nama_produk);
-                        commandInsert.Parameters.AddWithValue("@harga", detail.harga);
-                        commandInsert.Parameters.AddWithValue("@qty", detail.qty);
+                        commandInsert.Parameters.AddWithValue("@IdTransaksi", detail.id_transaksi);
+                        commandInsert.Parameters.AddWithValue("@IdProduk", detail.id_produk);
+                        commandInsert.Parameters.AddWithValue("@NamaProduk", detail.nama_produk);
+                        commandInsert.Parameters.AddWithValue("@Harga", detail.harga);
+                        commandInsert.Parameters.AddWithValue("@Qty", detail.qty);
                         commandInsert.ExecuteNonQuery();
                     }
 
-                    // Memotong stok
-                    string queryUpdateStok = "UPDATE produk SET stok = stok - @qty WHERE id_produk = @id_produk";
+                    // Logika otomatis untuk memotong kuantitas stok produk
+                    string queryUpdateStok = "UPDATE produk SET stok = stok - @Qty WHERE id_produk = @IdProduk";
                     using (NpgsqlCommand commandUpdate = new NpgsqlCommand(queryUpdateStok, connection))
                     {
-                        commandUpdate.Parameters.AddWithValue("@qty", detail.qty);
-                        commandUpdate.Parameters.AddWithValue("@id_produk", detail.id_produk);
+                        commandUpdate.Parameters.AddWithValue("@Qty", detail.qty);
+                        commandUpdate.Parameters.AddWithValue("@IdProduk", detail.id_produk);
                         commandUpdate.ExecuteNonQuery();
                     }
                 }
@@ -78,7 +76,6 @@ namespace FinalProjek.Controler
             catch (Exception ex) { throw new Exception("Gagal menyimpan rincian pesanan: " + ex.Message); }
         }
 
-        // --- FUNGSI RIWAYAT TETAP SAMA ---
         public List<Transaksi> GetRiwayatLengkapByKasir(int idKasir)
         {
             List<Transaksi> list = new List<Transaksi>();
@@ -116,7 +113,7 @@ namespace FinalProjek.Controler
                     }
                 }
             }
-            catch (Exception ex) { throw new Exception("Gagal mengambil riwayat: " + ex.Message); }
+            catch (Exception ex) { throw new Exception("Gagal mengambil riwayat transaksi: " + ex.Message); }
             return list;
         }
 
@@ -154,7 +151,7 @@ namespace FinalProjek.Controler
                     }
                 }
             }
-            catch (Exception ex) { throw new Exception("Gagal mengambil statistik: " + ex.Message); }
+            catch (Exception ex) { throw new Exception("Gagal mengambil akumulasi statistik: " + ex.Message); }
             return (jumlah, totalItem, omzet);
         }
     }

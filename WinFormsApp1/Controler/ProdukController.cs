@@ -71,7 +71,7 @@ namespace FinalProjek.Controler
                                 {
                                     id_produk = reader.GetInt32(0),
                                     nama_produk = reader.GetString(1),
-                                    harga = reader.GetDouble(2),
+                                    harga = reader.GetInt32(2),
                                     stok = reader.GetInt32(3),
                                     deskripsi = reader.GetString(4),
                                     imageproduk = reader["imageproduk"] as byte[]
