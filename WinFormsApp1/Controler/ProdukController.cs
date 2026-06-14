@@ -124,5 +124,30 @@ namespace FinalProjek.Controler
                 return false;
             }
         }
+        public bool UpdateStok(int idProduk, int jumlahPerubahan)
+        {
+            try
+            {
+                using (var conn = new NpgsqlConnection(dbHelper.connStr))
+                {
+                    conn.Open();
+                    // Query ini akan menambahkan stok. Jika jumlahPerubahan bernilai minus (misal -5), maka stok akan berkurang.
+                    string query = "UPDATE produk SET stok = stok + @Perubahan WHERE id_produk = @IdProduk";
+
+                    using (var cmd = new NpgsqlCommand(query, conn))
+                    {
+                        cmd.Parameters.AddWithValue("@Perubahan", jumlahPerubahan);
+                        cmd.Parameters.AddWithValue("@IdProduk", idProduk);
+
+                        int result = cmd.ExecuteNonQuery();
+                        return result > 0;
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Gagal mengupdate stok: " + ex.Message);
+            }
+        }
     }
 }
