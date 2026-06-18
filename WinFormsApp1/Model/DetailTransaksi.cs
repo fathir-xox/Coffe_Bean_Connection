@@ -16,7 +16,7 @@ namespace FinalProjek.Model
         public int qty { get; set; }
         public int subtotal { get; set; }
 
-        public double subtotal { get; set; }
+       
 
     }
 }
