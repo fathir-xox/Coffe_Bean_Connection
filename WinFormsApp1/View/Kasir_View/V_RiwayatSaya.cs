@@ -120,5 +120,30 @@ namespace FinalProjek.View.Kasir_View
         private void label3_Click(object sender, EventArgs e) { }
         private void label4_Click(object sender, EventArgs e) { }
         private void V_RiwayatSaya_Load_1(object sender, EventArgs e) { }
+
+        private void btLogout_Click(object sender, EventArgs e)
+        {
+            Login frmLogin = new Login();
+            frmLogin.FormClosed += (s, args) => this.Close();
+            frmLogin.Show();
+            this.Hide();
+        }
+
+        private void btDaftarProduk_Click(object sender, EventArgs e)
+        {
+            Form formProduk = Application.OpenForms["V_DaftarProduk"];
+
+            if (formProduk != null)
+            {
+                formProduk.Show();
+            }
+            else
+            {
+                V_DaftarProduk produkBaru = new V_DaftarProduk();
+                produkBaru.Show();
+            }
+
+            this.Hide();
+        }
     }
 }

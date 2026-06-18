@@ -187,6 +187,7 @@
             btLogout.TabIndex = 15;
             btLogout.Text = "Logout";
             btLogout.UseVisualStyleBackColor = false;
+            btLogout.Click += btLogout_Click;
             // 
             // btDaftarProduk
             // 
@@ -199,6 +200,7 @@
             btDaftarProduk.TabIndex = 14;
             btDaftarProduk.Text = "Daftar Produk";
             btDaftarProduk.UseVisualStyleBackColor = false;
+            btDaftarProduk.Click += btDaftarProduk_Click;
             // 
             // btRiwayatTransaksi
             // 

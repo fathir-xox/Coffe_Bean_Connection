@@ -23,14 +23,22 @@
             btProduk = new Button();
             btKelolaAkunUser = new Button();
             btDashboar = new Button();
+<<<<<<< HEAD
             dataGridView1 = new DataGridView();
+=======
+            flpMonitorStok = new FlowLayoutPanel();
+>>>>>>> origin/controler
             panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)dataGridView1).BeginInit();
             SuspendLayout();
 
             // panel1
             panel1.BackgroundImage = Properties.Resources.VMonitorProduk;
+<<<<<<< HEAD
             panel1.Controls.Add(dataGridView1);
+=======
+            panel1.Controls.Add(flpMonitorStok);
+>>>>>>> origin/controler
             panel1.Controls.Add(btLogout);
             panel1.Controls.Add(btRiwayatTransaksi);
             panel1.Controls.Add(btMonitorStok);
@@ -42,10 +50,18 @@
             panel1.Name = "panel1";
             panel1.Size = new Size(1898, 1027);
             panel1.TabIndex = 0;
+<<<<<<< HEAD
 
             // btLogout
             btLogout.BackColor = Color.Red;
             btLogout.Font = new Font("Times New Roman", 12F, FontStyle.Bold);
+=======
+            // 
+            // btLogout
+            // 
+            btLogout.BackColor = Color.Red;
+            btLogout.Font = new Font("Times New Roman", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
+>>>>>>> origin/controler
             btLogout.ForeColor = Color.White;
             btLogout.Location = new Point(38, 912);
             btLogout.Name = "btLogout";
@@ -54,10 +70,18 @@
             btLogout.Text = "Logout";
             btLogout.UseVisualStyleBackColor = false;
             btLogout.Click += btLogout_Click;
+<<<<<<< HEAD
 
             // btRiwayatTransaksi
             btRiwayatTransaksi.BackColor = Color.OldLace;
             btRiwayatTransaksi.Font = new Font("Times New Roman", 12F, FontStyle.Bold);
+=======
+            // 
+            // btRiwayatTransaksi
+            // 
+            btRiwayatTransaksi.BackColor = Color.OldLace;
+            btRiwayatTransaksi.Font = new Font("Times New Roman", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
+>>>>>>> origin/controler
             btRiwayatTransaksi.ForeColor = Color.FromArgb(100, 60, 20);
             btRiwayatTransaksi.Location = new Point(75, 633);
             btRiwayatTransaksi.Name = "btRiwayatTransaksi";
@@ -66,10 +90,18 @@
             btRiwayatTransaksi.Text = "Riwayat Transaksi";
             btRiwayatTransaksi.UseVisualStyleBackColor = false;
             btRiwayatTransaksi.Click += btRiwayatTransaksi_Click;
+<<<<<<< HEAD
 
             // btMonitorStok
             btMonitorStok.BackColor = Color.OldLace;
             btMonitorStok.Font = new Font("Times New Roman", 12F, FontStyle.Bold);
+=======
+            // 
+            // btMonitorStok
+            // 
+            btMonitorStok.BackColor = Color.OldLace;
+            btMonitorStok.Font = new Font("Times New Roman", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
+>>>>>>> origin/controler
             btMonitorStok.ForeColor = Color.FromArgb(100, 60, 20);
             btMonitorStok.Location = new Point(75, 509);
             btMonitorStok.Name = "btMonitorStok";
@@ -78,10 +110,18 @@
             btMonitorStok.Text = "Monitor Stok";
             btMonitorStok.UseVisualStyleBackColor = false;
             btMonitorStok.Click += btMonitorStok_Click;
+<<<<<<< HEAD
 
             // btKategori
             btKategori.BackColor = Color.OldLace;
             btKategori.Font = new Font("Times New Roman", 12F, FontStyle.Bold);
+=======
+            // 
+            // btKategori
+            // 
+            btKategori.BackColor = Color.OldLace;
+            btKategori.Font = new Font("Times New Roman", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
+>>>>>>> origin/controler
             btKategori.ForeColor = Color.FromArgb(100, 60, 20);
             btKategori.Location = new Point(75, 426);
             btKategori.Name = "btKategori";
@@ -90,10 +130,18 @@
             btKategori.Text = "Kategori";
             btKategori.UseVisualStyleBackColor = false;
             btKategori.Click += btKategori_Click;
+<<<<<<< HEAD
 
             // btProduk
             btProduk.BackColor = Color.OldLace;
             btProduk.Font = new Font("Times New Roman", 12F, FontStyle.Bold);
+=======
+            // 
+            // btProduk
+            // 
+            btProduk.BackColor = Color.OldLace;
+            btProduk.Font = new Font("Times New Roman", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
+>>>>>>> origin/controler
             btProduk.ForeColor = Color.FromArgb(100, 60, 20);
             btProduk.Location = new Point(75, 343);
             btProduk.Name = "btProduk";
@@ -102,10 +150,18 @@
             btProduk.Text = "Produk";
             btProduk.UseVisualStyleBackColor = false;
             btProduk.Click += btProduk_Click;
+<<<<<<< HEAD
 
             // btKelolaAkunUser
             btKelolaAkunUser.BackColor = Color.OldLace;
             btKelolaAkunUser.Font = new Font("Times New Roman", 12F, FontStyle.Bold);
+=======
+            // 
+            // btKelolaAkunUser
+            // 
+            btKelolaAkunUser.BackColor = Color.OldLace;
+            btKelolaAkunUser.Font = new Font("Times New Roman", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
+>>>>>>> origin/controler
             btKelolaAkunUser.ForeColor = Color.FromArgb(100, 60, 20);
             btKelolaAkunUser.Location = new Point(75, 757);
             btKelolaAkunUser.Name = "btKelolaAkunUser";
@@ -114,10 +170,18 @@
             btKelolaAkunUser.Text = "Kelola Akun User";
             btKelolaAkunUser.UseVisualStyleBackColor = false;
             btKelolaAkunUser.Click += btKelolaAkunUser_Click;
+<<<<<<< HEAD
 
             // btDashboar
             btDashboar.BackColor = Color.OldLace;
             btDashboar.Font = new Font("Times New Roman", 12F, FontStyle.Bold);
+=======
+            // 
+            // btDashboar
+            // 
+            btDashboar.BackColor = Color.OldLace;
+            btDashboar.Font = new Font("Times New Roman", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
+>>>>>>> origin/controler
             btDashboar.ForeColor = Color.FromArgb(100, 60, 20);
             btDashboar.Location = new Point(75, 219);
             btDashboar.Name = "btDashboar";
@@ -126,6 +190,7 @@
             btDashboar.Text = "Dashboard";
             btDashboar.UseVisualStyleBackColor = false;
             btDashboar.Click += btDashboar_Click;
+<<<<<<< HEAD
 
             // dataGridView1
             dataGridView1.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
@@ -153,6 +218,19 @@
             dataGridView1.Columns.Add(colKurangi);
             // ==============================================================
 
+=======
+            // 
+            // flpMonitorStok
+            // 
+            flpMonitorStok.AllowDrop = true;
+            flpMonitorStok.AutoScroll = true;
+            flpMonitorStok.BackColor = Color.Transparent;
+            flpMonitorStok.Location = new Point(351, 152);
+            flpMonitorStok.Name = "flpMonitorStok";
+            flpMonitorStok.Size = new Size(1535, 860);
+            flpMonitorStok.TabIndex = 17;
+            // 
+>>>>>>> origin/controler
             // V_MonitorStok
             AutoScaleDimensions = new SizeF(10F, 25F);
             AutoScaleMode = AutoScaleMode.Font;
@@ -173,7 +251,11 @@
         private Button btKelolaAkunUser;
         private Button btDashboar;
         private Button btLogout;
+<<<<<<< HEAD
         private DataGridView dataGridView1;
+=======
+        private FlowLayoutPanel flpMonitorStok;
+>>>>>>> origin/controler
     }
 }
 
