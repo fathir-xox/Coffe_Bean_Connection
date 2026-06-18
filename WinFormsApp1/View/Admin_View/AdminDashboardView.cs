@@ -24,8 +24,6 @@ namespace FinalProjek.View.Admin_View
         {
             InitializeComponent();
 
-            // ---> PERBAIKAN FATAL: Mencegah NullReferenceException <---
-            // Jika produkInterface dari Login null (kosong), kita buat instansi baru secara paksa.
             if (produkInterface != null)
             {
                 produkController = produkInterface;
@@ -50,8 +48,8 @@ namespace FinalProjek.View.Admin_View
 
             PictureBox displayProduct = new PictureBox
             {
-                Location = new Point(32, 8),
-                Size = new Size(147, 122),
+                Location = new Point(19, 25),
+                Size = new Size(173, 133),
                 BackColor = Color.Transparent,
                 SizeMode = PictureBoxSizeMode.Zoom,
             };
@@ -72,7 +70,7 @@ namespace FinalProjek.View.Admin_View
             Label namaProduk = new Label
             {
                 Text = produk.nama_produk,
-                Location = new Point(8, 136),
+                Location = new Point(8, 173),
                 Size = new Size(197, 26),
                 BackColor = Color.Transparent,
                 Font = new Font("Times New Roman", 12, FontStyle.Bold),
@@ -82,7 +80,7 @@ namespace FinalProjek.View.Admin_View
             Label hargaProduk = new Label
             {
                 Text = "Rp " + produk.harga.ToString("N0"),
-                Location = new Point(47, 167),
+                Location = new Point(47, 214),
                 Size = new Size(112, 25),
                 BackColor = Color.Transparent,
                 ForeColor = Color.FromArgb(100, 60, 20),
@@ -93,7 +91,7 @@ namespace FinalProjek.View.Admin_View
             Label stokProduk = new Label
             {
                 Text = "Stok: " + produk.stok.ToString(),
-                Location = new Point(52, 204),
+                Location = new Point(52, 250),
                 Size = new Size(101, 25),
                 BackColor = Color.Transparent,
                 ForeColor = Color.FromArgb(100, 60, 20),
@@ -101,58 +99,50 @@ namespace FinalProjek.View.Admin_View
                 TextAlign = ContentAlignment.MiddleCenter,
             };
 
-            Button buttonEdit = new Button
-            {
-                Location = new Point(36, 246),
-                Size = new Size(59, 37),
-                Font = new Font("Times New Roman", 9, FontStyle.Regular),
-                BackColor = Color.Wheat,
-                Text = "Edit",
-                Cursor = Cursors.Hand
-            };
+            //Button buttonEdit = new Button
+            //{
+            //    Location = new Point(36, 246),
+            //    Size = new Size(59, 37),
+            //    Font = new Font("Times New Roman", 9, FontStyle.Regular),
+            //    BackColor = Color.Wheat,
+            //    Text = "Edit",
+            //    Cursor = Cursors.Hand
+            //};
 
-            // Logika Edit (Contoh penerapan jika Anda sudah membuat Form Edit)
-            // buttonEdit.Click += (sender, e) => {
-            //     EditProductView formEdit = new EditProductView(produk);
-            //     formEdit.ShowDialog();
-            //     LoadProducts(); // Refresh setelah diedit
-            // };
+            //Button buttonHapus = new Button
+            //{
+            //    Location = new Point(103, 246),
+            //    Size = new Size(76, 37),
+            //    Font = new Font("Times New Roman", 9, FontStyle.Regular),
+            //    BackColor = Color.Red,
+            //    ForeColor = Color.White,
+            //    Text = "Hapus",
+            //    Cursor = Cursors.Hand
+            //};
 
-            Button buttonHapus = new Button
-            {
-                Location = new Point(103, 246),
-                Size = new Size(76, 37),
-                Font = new Font("Times New Roman", 9, FontStyle.Regular),
-                BackColor = Color.Red,
-                ForeColor = Color.White,
-                Text = "Hapus",
-                Cursor = Cursors.Hand
-            };
-
-            // ---> PERBAIKAN: Logika Tombol Hapus <---
-            buttonHapus.Click += (sender, e) =>
-            {
-                DialogResult dialogResult = MessageBox.Show($"Apakah Anda yakin ingin menghapus produk '{produk.nama_produk}'?", "Konfirmasi Hapus", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
-                if (dialogResult == DialogResult.Yes)
-                {
-                    try
-                    {
-                        produkController.DeleteProduk(produk.id_produk);
-                        LoadProducts(); // Refresh panel setelah dihapus
-                    }
-                    catch (Exception ex)
-                    {
-                        MessageBox.Show("Gagal menghapus produk: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    }
-                }
-            };
+            //buttonHapus.Click += (sender, e) =>
+            //{
+            //    DialogResult dialogResult = MessageBox.Show($"Apakah Anda yakin ingin menghapus produk '{produk.nama_produk}'?", "Konfirmasi Hapus", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+            //    if (dialogResult == DialogResult.Yes)
+            //    {
+            //        try
+            //        {
+            //            produkController.DeleteProduk(produk.id_produk);
+            //            LoadProducts(); // Refresh panel setelah dihapus
+            //        }
+            //        catch (Exception ex)
+            //        {
+            //            MessageBox.Show("Gagal menghapus produk: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            //        }
+            //    }
+            //};
 
             panel.Controls.Add(displayProduct);
             panel.Controls.Add(namaProduk);
             panel.Controls.Add(hargaProduk);
             panel.Controls.Add(stokProduk);
-            panel.Controls.Add(buttonEdit);
-            panel.Controls.Add(buttonHapus);
+            //panel.Controls.Add(buttonEdit);
+            //panel.Controls.Add(buttonHapus);
 
             return panel;
         }
@@ -178,9 +168,9 @@ namespace FinalProjek.View.Admin_View
 
         private void btTambahProduk_Click(object sender, EventArgs e)
         {
-            AddProductWiew tambahProduk = new AddProductWiew();
-            tambahProduk.ShowDialog(); // Gunakan ShowDialog agar form admin menunggu
-            LoadProducts(); // Refresh data otomatis setelah form tambah ditutup!
+            //AddProductWiew tambahProduk = new AddProductWiew();
+            //tambahProduk.ShowDialog(); // Gunakan ShowDialog agar form admin menunggu
+            //LoadProducts(); // Refresh data otomatis setelah form tambah ditutup!
         }
 
         private void btRefreshData_Click(object sender, EventArgs e)
@@ -246,10 +236,23 @@ namespace FinalProjek.View.Admin_View
         private void button3_Click(object sender, EventArgs e) { }
         private void btDashboar_Click(object sender, EventArgs e) { }
         private void btHapus_Click(object sender, EventArgs e) { }
-        private void Label_totalProduk_Click(object sender, EventArgs e) { }
+        private void Label_totalProduk_Click(object sender, EventArgs e)
+        {
+
+        }
         private void panel6_Paint(object sender, PaintEventArgs e) { }
         private void panel8_Paint(object sender, PaintEventArgs e) { }
         private void HargaProduk_Click(object sender, EventArgs e) { }
         private void Stok_Click(object sender, EventArgs e) { }
+
+        private void Label_totalPenjualan_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void Label_totalPenghasilan_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }

@@ -113,6 +113,26 @@ namespace FinalProjek.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        public static System.Drawing.Bitmap CardMonitorStok__1_ {
+            get {
+                object obj = ResourceManager.GetObject("CardMonitorStok (1)", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        public static System.Drawing.Bitmap CardMonitorStokdalam {
+            get {
+                object obj = ResourceManager.GetObject("CardMonitorStokdalam", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         public static System.Drawing.Bitmap CardRiwayatSaya {
             get {
                 object obj = ResourceManager.GetObject("CardRiwayatSaya", resourceCulture);

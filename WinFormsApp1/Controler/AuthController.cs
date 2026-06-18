@@ -113,6 +113,50 @@ namespace FinalProjek.Controler
                 throw new Exception("Gagal mendaftarkan akun baru: " + ex.Message);
             }
         }
+        public List<User> GetAllUsers()
+        {
+            List<User> listUser = new List<User>();
+            try
+            {
+                using (var conn = new NpgsqlConnection(dbHelper.connStr))
+                {
+                    conn.Open();
+
+                    // Ambil id_user, full_name, username, role, dan isactive
+                    string query = @"SELECT id_user, full_name, username, ""role""::text, isactive FROM users ORDER BY id_user ASC";
+
+                    using (var cmd = new NpgsqlCommand(query, conn))
+                    using (var reader = cmd.ExecuteReader())
+                    {
+                        while (reader.Read())
+                        {
+                            // Parsing Enum Role seperti yang Anda lakukan di fungsi Login
+                            string roleStr = reader.GetString(3);
+                            UserRole roleEnum = (UserRole)Enum.Parse(typeof(UserRole), roleStr, true);
+
+                            User usr = new User
+                            {
+                                id_user = reader.GetInt32(0),
+                                full_name = reader.GetString(1),
+                                username = reader.GetString(2),
+                                role = roleEnum,
+                                // Jika ada property isactive di class User, Anda bisa tambahkan:
+                                //isactive = reader.GetBoolean(4)
+                                isactive = !reader.IsDBNull(4) && reader.GetBoolean(4)
+                            };
+
+                            listUser.Add(usr);
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Gagal mengambil daftar user: " + ex.Message, "Sistem Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+
+            return listUser;
+        }
     }
 
 }

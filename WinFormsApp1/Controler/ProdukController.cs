@@ -124,26 +124,9 @@ namespace FinalProjek.Controler
                 return false;
             }
         }
-<<<<<<< HEAD
 
-        public bool UpdateStok(int id_produk, int perubahan) // perubahan bisa positif (restok) atau negatif (kurangi)
-        {
-            // perubahan bisa positif (restok) atau negatif (kurangi)
-            try
-            {
-                using (NpgsqlConnection conn = new NpgsqlConnection(dbHelper.connStr))
-                {
-                    conn.Open();
-                    string query = "UPDATE produk SET stok = stok + @perubahan, updated_at = NOW() WHERE id_produk = @id AND (stok + @perubahan) >= 0";
-                    using (NpgsqlCommand cmd = new NpgsqlCommand(query, conn))
-                    {
-                        cmd.Parameters.AddWithValue("@perubahan", perubahan);
-                        cmd.Parameters.AddWithValue("@id", id_produk);
-                        int rows = cmd.ExecuteNonQuery();
-                        if (rows == 0 && perubahan < 0)
-                            MessageBox.Show("Stok tidak boleh negatif!", "Peringatan", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                        return rows > 0;
-=======
+
+      
         public bool UpdateStok(int idProduk, int jumlahPerubahan)
         {
             try
@@ -161,18 +144,16 @@ namespace FinalProjek.Controler
 
                         int result = cmd.ExecuteNonQuery();
                         return result > 0;
->>>>>>> origin/controler
                     }
                 }
             }
             catch (Exception ex)
             {
-<<<<<<< HEAD
+
                 MessageBox.Show($"Update stok error: {ex.Message}");
                 return false;
-=======
+
                 throw new Exception("Gagal mengupdate stok: " + ex.Message);
->>>>>>> origin/controler
             }
         }
     }

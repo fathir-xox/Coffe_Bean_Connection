@@ -33,9 +33,7 @@
             btRefresh = new Button();
             flowLayoutPanel1 = new FlowLayoutPanel();
             panel8 = new Panel();
-            btHapus = new Button();
             Stok = new Label();
-            btEdit = new Button();
             NamaProduk = new Label();
             HargaProduk = new Label();
             pictureBox1 = new PictureBox();
@@ -111,9 +109,7 @@
             panel8.BackColor = Color.Transparent;
             panel8.BackgroundImage = Properties.Resources.Card;
             panel8.BackgroundImageLayout = ImageLayout.Zoom;
-            panel8.Controls.Add(btHapus);
             panel8.Controls.Add(Stok);
-            panel8.Controls.Add(btEdit);
             panel8.Controls.Add(NamaProduk);
             panel8.Controls.Add(HargaProduk);
             panel8.Controls.Add(pictureBox1);
@@ -123,26 +119,13 @@
             panel8.TabIndex = 6;
             panel8.Paint += panel8_Paint;
             // 
-            // btHapus
-            // 
-            btHapus.BackColor = Color.Red;
-            btHapus.Font = new Font("Times New Roman", 9F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            btHapus.ForeColor = Color.White;
-            btHapus.Location = new Point(103, 246);
-            btHapus.Name = "btHapus";
-            btHapus.Size = new Size(76, 37);
-            btHapus.TabIndex = 8;
-            btHapus.Text = "Hapus";
-            btHapus.UseVisualStyleBackColor = false;
-            btHapus.Click += btHapus_Click;
-            // 
             // Stok
             // 
             Stok.AutoSize = true;
             Stok.BackColor = Color.Transparent;
             Stok.Font = new Font("Times New Roman", 11F, FontStyle.Bold, GraphicsUnit.Point, 0);
             Stok.ForeColor = Color.FromArgb(100, 60, 20);
-            Stok.Location = new Point(52, 204);
+            Stok.Location = new Point(52, 250);
             Stok.Name = "Stok";
             Stok.RightToLeft = RightToLeft.Yes;
             Stok.Size = new Size(101, 25);
@@ -150,26 +133,13 @@
             Stok.Text = "Stok : 20 ";
             Stok.Click += Stok_Click;
             // 
-            // btEdit
-            // 
-            btEdit.BackColor = Color.Wheat;
-            btEdit.Font = new Font("Times New Roman", 9F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            btEdit.ForeColor = Color.Black;
-            btEdit.Location = new Point(36, 246);
-            btEdit.Name = "btEdit";
-            btEdit.Size = new Size(59, 37);
-            btEdit.TabIndex = 7;
-            btEdit.Text = "Edit";
-            btEdit.UseVisualStyleBackColor = false;
-            btEdit.Click += button3_Click;
-            // 
             // NamaProduk
             // 
             NamaProduk.AutoSize = true;
             NamaProduk.BackColor = Color.Transparent;
             NamaProduk.Font = new Font("Times New Roman", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
             NamaProduk.ForeColor = Color.Black;
-            NamaProduk.Location = new Point(8, 136);
+            NamaProduk.Location = new Point(8, 173);
             NamaProduk.Name = "NamaProduk";
             NamaProduk.Size = new Size(197, 26);
             NamaProduk.TabIndex = 2;
@@ -182,7 +152,7 @@
             HargaProduk.BackColor = Color.Transparent;
             HargaProduk.Font = new Font("Times New Roman", 11F, FontStyle.Bold, GraphicsUnit.Point, 0);
             HargaProduk.ForeColor = Color.FromArgb(100, 60, 20);
-            HargaProduk.Location = new Point(47, 167);
+            HargaProduk.Location = new Point(47, 214);
             HargaProduk.Name = "HargaProduk";
             HargaProduk.Size = new Size(112, 25);
             HargaProduk.TabIndex = 4;
@@ -192,9 +162,9 @@
             // pictureBox1
             // 
             pictureBox1.BackgroundImage = Properties.Resources.ArabikaC;
-            pictureBox1.Location = new Point(32, 8);
+            pictureBox1.Location = new Point(19, 25);
             pictureBox1.Name = "pictureBox1";
-            pictureBox1.Size = new Size(147, 122);
+            pictureBox1.Size = new Size(173, 133);
             pictureBox1.TabIndex = 0;
             pictureBox1.TabStop = false;
             // 
@@ -256,6 +226,7 @@
             Label_totalPenjualan.Size = new Size(36, 26);
             Label_totalPenjualan.TabIndex = 2;
             Label_totalPenjualan.Text = "55";
+            Label_totalPenjualan.Click += Label_totalPenjualan_Click;
             // 
             // Label_totalPenghasilan
             // 
@@ -268,6 +239,7 @@
             Label_totalPenghasilan.Size = new Size(150, 26);
             Label_totalPenghasilan.TabIndex = 3;
             Label_totalPenghasilan.Text = "Rp. 1.450.000";
+            Label_totalPenghasilan.Click += Label_totalPenghasilan_Click;
             // 
             // btTambahProduk
             // 
@@ -403,8 +375,6 @@
         private Label NamaProduk;
         private Label HargaProduk;
         private Label Stok;
-        private Button btEdit;
-        private Button btHapus;
         private Button btTambahProduk;
         private Button btRefresh;
         private Button btKelolaAkunUser;
