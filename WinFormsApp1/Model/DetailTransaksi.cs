@@ -6,12 +6,17 @@ namespace FinalProjek.Model
 {
     public class DetailTransaksi
     {
-        public int IdDetailTransaksi { get; set; }
-        public int IdTransaksi { get; set; }
-        public int IdProduk { get; set; }
-        public string NamaProduk { get; set; }
-        public int Harga { get; set; }
-        public int Qty { get; set; }
-        public int Subtotal { get; set; }
+        public int id_detail_transaksi { get; set; }
+
+        public int id_transaksi { get; set; }
+        public int id_produk { get; set; }
+
+        public string nama_produk { get; set; }
+
+        public double harga_produk { get; set; }
+        public int qty { get; set; }
+
+        public double subtotal { get; set; }
+
     }
 }

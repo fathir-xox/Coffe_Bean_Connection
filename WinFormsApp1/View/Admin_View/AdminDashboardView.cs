@@ -68,62 +68,87 @@ namespace FinalProjek.View.Admin_View
 
         private void btDashboar_Click(object sender, EventArgs e)
         {
-
+            
         }
 
         public Panel CreateProductPanel(Produk produk)
         {
             Panel panel = new Panel
             {
-                Size = new Size(175, 248),
+                Size = new Size(213, 305),
                 Margin = new Padding(3),
-                BackgroundImage = Properties.Resources.CardView,
+                BackgroundImage = Properties.Resources.Card,
                 BackgroundImageLayout = ImageLayout.Zoom,
             };
 
             PictureBox displayProduct = new PictureBox
+
             {
                 Location = new Point(32, 8),
-                Size = new Size(114, 103),
+                Size = new Size(147, 122),
                 BackColor = Color.Transparent,
                 SizeMode = PictureBoxSizeMode.Zoom,
             };
 
+
+            if (produk.imageproduk != null && produk.imageproduk.Length > 0)
+            {
+                using (var ms = new MemoryStream(produk.imageproduk))
+                {
+                    var original = Image.FromStream(ms);
+                    displayProduct.Image = new Bitmap(original);
+                }
+            }
+            else
+            {
+                displayProduct.Image = Properties.Resources.Card; // default
+            }
+
             Label namaProduk = new Label
             {
                 Text = produk.nama_produk,
-                Location = new Point(49, 114),
-                Size = new Size(78, 23),
+                Location = new Point(8, 136),
+                Size = new Size(197, 26),
                 BackColor = Color.Transparent,
-                Font = new Font("Times New Roman", 10, FontStyle.Bold),
+                Font = new Font("Times New Roman", 12, FontStyle.Bold),
                 TextAlign = ContentAlignment.MiddleCenter,
             };
 
             Label hargaProduk = new Label
             {
-                Text = produk.harga.ToString(),
-                Location = new Point(47, 140),
-                Size = new Size(81, 19),
+                Text = "Rp" + produk.harga.ToString("N0"),
+                Location = new Point(47, 167),
+                Size = new Size(112, 25),
                 BackColor = Color.Transparent,
                 ForeColor = Color.FromArgb(100, 60, 20),
-                Font = new Font("Times New Roman", 8, FontStyle.Bold),
+                Font = new Font("Times New Roman", 11, FontStyle.Bold),
+                TextAlign = ContentAlignment.MiddleCenter,
+            };
+
+            Label labelStok = new Label
+            {
+                Location = new Point(53, 202),
+                Size = new Size(58, 25),
+                BackColor = Color.Transparent,
+                ForeColor = Color.FromArgb(100, 60, 20),
+                Font = new Font("Times New Roman", 11, FontStyle.Bold),
                 TextAlign = ContentAlignment.MiddleCenter,
             };
 
             Label stokProduk = new Label
             {
-                Text = produk.stok.ToString(),
-                Location = new Point(92, 163),
-                Size = new Size(25, 19),
+                Text = "Stok: " + produk.stok.ToString(),
+                Location = new Point(52, 204),
+                Size = new Size(101, 25),
                 BackColor = Color.Transparent,
                 ForeColor = Color.FromArgb(100, 60, 20),
-                Font = new Font("Times New Roman", 8, FontStyle.Bold),
+                Font = new Font("Times New Roman", 11, FontStyle.Bold),
                 TextAlign = ContentAlignment.MiddleCenter,
             };
 
             Button buttonEdit = new Button
             {
-                Location = new Point(20, 200),
+                Location = new Point(36, 246),
                 Size = new Size(59, 37),
                 Font = new Font("Times New Roman", 9, FontStyle.Regular),
                 BackColor = Color.Wheat,
@@ -133,7 +158,7 @@ namespace FinalProjek.View.Admin_View
 
             Button buttonHapus = new Button
             {
-                Location = new Point(87, 200),
+                Location = new Point(103, 246),
                 Size = new Size(76, 37),
                 Font = new Font("Times New Roman", 9, FontStyle.Regular),
                 BackColor = Color.Red,
@@ -148,6 +173,7 @@ namespace FinalProjek.View.Admin_View
             panel.Controls.Add(stokProduk);
             panel.Controls.Add(buttonEdit);
             panel.Controls.Add(buttonHapus);
+            //panel.Controls.Add()
 
             return panel;
         }
@@ -171,9 +197,87 @@ namespace FinalProjek.View.Admin_View
             tambahProduk.Show();
         }
 
+        private void btHapus_Click(object sender, EventArgs e)
+        {
+
+        }
+
         private void btRefreshData_Click(object sender, EventArgs e)
         {
             LoadProducts();
+        }
+
+        private void btKelolaAkunUser_Click(object sender, EventArgs e)
+        {
+            V_KelolaAkunUserr frmKelolaAkunUser = new V_KelolaAkunUserr();
+            frmKelolaAkunUser.FormClosed += (s, args) => this.Close();
+            frmKelolaAkunUser.Show();
+            this.Hide();
+        }
+
+        private void Label_totalProduk_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void panel6_Paint(object sender, PaintEventArgs e)
+        {
+
+        }
+
+        private void panel8_Paint(object sender, PaintEventArgs e)
+        {
+
+        }
+
+        private void btRiwayatTransaksi_Click(object sender, EventArgs e)
+        {
+            V_RiwayatTransaksi frmRiwayatTransaksi = new V_RiwayatTransaksi();
+            frmRiwayatTransaksi.FormClosed += (s, args) => this.Close();
+            frmRiwayatTransaksi.Show();
+            this.Hide();
+        }
+
+        private void btProduk_Click(object sender, EventArgs e)
+        {
+            V_Produk frmProduk = new V_Produk();
+            frmProduk.FormClosed += (s, args) => this.Close();
+            frmProduk.Show();
+            this.Hide();
+        }
+
+        private void btMonitorStok_Click(object sender, EventArgs e)
+        {
+            V_MonitorStok frmMonitorStok = new V_MonitorStok();
+            frmMonitorStok.FormClosed += (s, args) => this.Close();
+            frmMonitorStok.Show();
+            this.Hide();
+        }
+
+        private void btKategori_Click(object sender, EventArgs e)
+        {
+            V_Kategori frmKategori = new V_Kategori();
+            frmKategori.FormClosed += (s, args) => this.Close();
+            frmKategori.Show();
+            this.Hide();
+        }
+
+        private void HargaProduk_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button1_Click(object sender, EventArgs e) //LOGOUT
+        {
+            Login frmLogin = new Login();
+            frmLogin.FormClosed += (s, args) => this.Close();
+            frmLogin.Show();
+            this.Hide();
+        }
+
+        private void Stok_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

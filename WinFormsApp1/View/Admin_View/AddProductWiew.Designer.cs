@@ -2,15 +2,18 @@
 {
     partial class AddProductWiew
     {
-        /// <summary>
-        /// Required designer variable.
-        /// </summary>
         private System.ComponentModel.IContainer components = null;
 
-        /// <summary>
-        /// Clean up any resources being used.
-        /// </summary>
-        /// <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
+        private TextBox tbNamaProduk;
+        private TextBox tbHargaProduk;
+        private TextBox tbStokProduk;
+        private ComboBox cbIdKategori;
+        private RichTextBox rtbDeskripsi;
+        private Button btnTambahGambar;
+        private Button btnSimpan;
+        private Panel panel1;
+        private PictureBox pbGambar;
+
         protected override void Dispose(bool disposing)
         {
             if (disposing && (components != null))
@@ -20,178 +23,115 @@
             base.Dispose(disposing);
         }
 
-        #region Windows Form Designer generated code
-
-        /// <summary>
-        /// Required method for Designer support - do not modify
-        /// the contents of this method with the code editor.
-        /// </summary>
         private void InitializeComponent()
         {
-            openFileDialog1 = new OpenFileDialog();
-            btTambahGambar = new Button();
             tbNamaProduk = new TextBox();
             tbHargaProduk = new TextBox();
             tbStokProduk = new TextBox();
-            btSIMPAN = new Button();
-            label1 = new Label();
-            label2 = new Label();
-            label3 = new Label();
-            gambarProduk = new PictureBox();
-            label4 = new Label();
-            rtbDeskripsiProduk = new RichTextBox();
-            ((System.ComponentModel.ISupportInitialize)gambarProduk).BeginInit();
+            cbIdKategori = new ComboBox();
+            rtbDeskripsi = new RichTextBox();
+            btnTambahGambar = new Button();
+            btnSimpan = new Button();
+            panel1 = new Panel();
+            pbGambar = new PictureBox();
+            panel1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)pbGambar).BeginInit();
             SuspendLayout();
-            // 
-            // openFileDialog1
-            // 
-            openFileDialog1.FileName = "openFileDialog1";
-            // 
-            // btTambahGambar
-            // 
-            btTambahGambar.BackColor = Color.OldLace;
-            btTambahGambar.Font = new Font("Times New Roman", 14F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            btTambahGambar.ForeColor = Color.FromArgb(100, 60, 20);
-            btTambahGambar.Location = new Point(319, 493);
-            btTambahGambar.Name = "btTambahGambar";
-            btTambahGambar.Size = new Size(226, 49);
-            btTambahGambar.TabIndex = 0;
-            btTambahGambar.Text = "Tambah Gambar";
-            btTambahGambar.UseVisualStyleBackColor = false;
-            btTambahGambar.Click += btTambahGambar_Click;
-            // 
+
+            // panel1
+            panel1.BackgroundImage = Properties.Resources.VTambahProduk;
+            panel1.BackgroundImageLayout = ImageLayout.Zoom;
+            panel1.Controls.Add(pbGambar);
+            panel1.Controls.Add(btnTambahGambar);
+            panel1.Controls.Add(rtbDeskripsi);
+            panel1.Controls.Add(cbIdKategori);
+            panel1.Controls.Add(tbStokProduk);
+            panel1.Controls.Add(tbHargaProduk);
+            panel1.Controls.Add(tbNamaProduk);
+            panel1.Controls.Add(btnSimpan);
+            panel1.Location = new Point(0, 0);
+            panel1.Name = "panel1";
+            panel1.Size = new Size(1328, 719);
+            panel1.TabIndex = 0;
+
             // tbNamaProduk
-            // 
-            tbNamaProduk.Location = new Point(690, 130);
+            tbNamaProduk.Location = new Point(500, 180);
             tbNamaProduk.Name = "tbNamaProduk";
-            tbNamaProduk.Size = new Size(290, 31);
-            tbNamaProduk.TabIndex = 1;
-            // 
+            tbNamaProduk.Size = new Size(300, 30);
+            tbNamaProduk.TabIndex = 0;
+            tbNamaProduk.Text = "Nama Produk";
+
             // tbHargaProduk
-            // 
-            tbHargaProduk.Location = new Point(690, 197);
+            tbHargaProduk.Location = new Point(500, 240);
             tbHargaProduk.Name = "tbHargaProduk";
-            tbHargaProduk.Size = new Size(290, 31);
-            tbHargaProduk.TabIndex = 2;
-            // 
+            tbHargaProduk.Size = new Size(300, 30);
+            tbHargaProduk.TabIndex = 1;
+            tbHargaProduk.Text = "Harga Produk";
+
             // tbStokProduk
-            // 
-            tbStokProduk.Location = new Point(690, 264);
+            tbStokProduk.Location = new Point(500, 300);
             tbStokProduk.Name = "tbStokProduk";
-            tbStokProduk.Size = new Size(290, 31);
-            tbStokProduk.TabIndex = 3;
-            // 
-            // btSIMPAN
-            // 
-            btSIMPAN.BackColor = Color.FromArgb(100, 60, 20);
-            btSIMPAN.Font = new Font("Times New Roman", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            btSIMPAN.ForeColor = Color.OldLace;
-            btSIMPAN.Location = new Point(763, 496);
-            btSIMPAN.Name = "btSIMPAN";
-            btSIMPAN.Size = new Size(140, 46);
-            btSIMPAN.TabIndex = 4;
-            btSIMPAN.Text = "SIMPAN";
-            btSIMPAN.UseVisualStyleBackColor = false;
-            btSIMPAN.Click += btSIMPAN_Click;
-            // 
-            // label1
-            // 
-            label1.AutoSize = true;
-            label1.Font = new Font("Times New Roman", 10F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            label1.ForeColor = Color.FromArgb(100, 60, 20);
-            label1.Location = new Point(695, 102);
-            label1.Name = "label1";
-            label1.Size = new Size(117, 22);
-            label1.TabIndex = 5;
-            label1.Text = "Nama Produk";
-            // 
-            // label2
-            // 
-            label2.AutoSize = true;
-            label2.Font = new Font("Times New Roman", 10F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            label2.ForeColor = Color.FromArgb(100, 60, 20);
-            label2.Location = new Point(696, 172);
-            label2.Name = "label2";
-            label2.Size = new Size(119, 22);
-            label2.TabIndex = 6;
-            label2.Text = "Harga Produk";
-            // 
-            // label3
-            // 
-            label3.AutoSize = true;
-            label3.Font = new Font("Times New Roman", 10F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            label3.ForeColor = Color.FromArgb(100, 60, 20);
-            label3.Location = new Point(696, 239);
-            label3.Name = "label3";
-            label3.Size = new Size(106, 22);
-            label3.TabIndex = 7;
-            label3.Text = "Stok Produk";
-            // 
-            // gambarProduk
-            // 
-            gambarProduk.BackColor = Color.Transparent;
-            gambarProduk.BackgroundImageLayout = ImageLayout.Zoom;
-            gambarProduk.Location = new Point(242, 102);
-            gambarProduk.Name = "gambarProduk";
-            gambarProduk.Size = new Size(381, 367);
-            gambarProduk.TabIndex = 8;
-            gambarProduk.TabStop = false;
-            // 
-            // label4
-            // 
-            label4.AutoSize = true;
-            label4.Font = new Font("Times New Roman", 10F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            label4.ForeColor = Color.FromArgb(100, 60, 20);
-            label4.Location = new Point(696, 305);
-            label4.Name = "label4";
-            label4.Size = new Size(148, 22);
-            label4.TabIndex = 10;
-            label4.Text = "Deskripsi Produk";
-            // 
-            // rtbDeskripsiProduk
-            // 
-            rtbDeskripsiProduk.Location = new Point(690, 330);
-            rtbDeskripsiProduk.Name = "rtbDeskripsiProduk";
-            rtbDeskripsiProduk.Size = new Size(290, 139);
-            rtbDeskripsiProduk.TabIndex = 11;
-            rtbDeskripsiProduk.Text = "";
-            // 
+            tbStokProduk.Size = new Size(300, 30);
+            tbStokProduk.TabIndex = 2;
+            tbStokProduk.Text = "Stok Produk";
+
+            // cbIdKategori
+            cbIdKategori.Location = new Point(500, 360);
+            cbIdKategori.Name = "cbIdKategori";
+            cbIdKategori.Size = new Size(300, 30);
+            cbIdKategori.TabIndex = 3;
+            cbIdKategori.Text = "Id Kategori";
+            cbIdKategori.DropDownStyle = ComboBoxStyle.DropDownList;
+
+            // rtbDeskripsi
+            rtbDeskripsi.Location = new Point(500, 420);
+            rtbDeskripsi.Name = "rtbDeskripsi";
+            rtbDeskripsi.Size = new Size(300, 100);
+            rtbDeskripsi.TabIndex = 4;
+            rtbDeskripsi.Text = "Deskripsi Produk";
+
+            // btnTambahGambar
+            btnTambahGambar.BackColor = Color.FromArgb(100, 60, 20);
+            btnTambahGambar.Font = new Font("Times New Roman", 10F, FontStyle.Bold);
+            btnTambahGambar.ForeColor = Color.White;
+            btnTambahGambar.Location = new Point(500, 540);
+            btnTambahGambar.Name = "btnTambahGambar";
+            btnTambahGambar.Size = new Size(140, 35);
+            btnTambahGambar.TabIndex = 5;
+            btnTambahGambar.Text = "Tambah Gambar";
+            btnTambahGambar.UseVisualStyleBackColor = false;
+
+            // pbGambar
+            pbGambar.Location = new Point(830, 180);
+            pbGambar.Name = "pbGambar";
+            pbGambar.Size = new Size(200, 200);
+            pbGambar.TabIndex = 6;
+            pbGambar.TabStop = false;
+            pbGambar.BackColor = Color.LightGray;
+            pbGambar.SizeMode = PictureBoxSizeMode.Zoom;
+
+            // btnSimpan
+            btnSimpan.BackColor = Color.FromArgb(100, 60, 20);
+            btnSimpan.Font = new Font("Times New Roman", 12F, FontStyle.Bold);
+            btnSimpan.ForeColor = Color.OldLace;
+            btnSimpan.Location = new Point(500, 600);
+            btnSimpan.Name = "btnSimpan";
+            btnSimpan.Size = new Size(300, 46);
+            btnSimpan.TabIndex = 7;
+            btnSimpan.Text = "SIMPAN";
+            btnSimpan.UseVisualStyleBackColor = false;
+
             // AddProductWiew
-            // 
             AutoScaleDimensions = new SizeF(10F, 25F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(1258, 664);
-            Controls.Add(rtbDeskripsiProduk);
-            Controls.Add(label4);
-            Controls.Add(gambarProduk);
-            Controls.Add(label3);
-            Controls.Add(label2);
-            Controls.Add(label1);
-            Controls.Add(btSIMPAN);
-            Controls.Add(tbStokProduk);
-            Controls.Add(tbHargaProduk);
-            Controls.Add(tbNamaProduk);
-            Controls.Add(btTambahGambar);
+            Controls.Add(panel1);
             Name = "AddProductWiew";
-            Text = "AddProductWiew";
-            ((System.ComponentModel.ISupportInitialize)gambarProduk).EndInit();
+            Text = "Tambah Produk";
+            panel1.ResumeLayout(false);
+            panel1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)pbGambar).EndInit();
             ResumeLayout(false);
-            PerformLayout();
         }
-
-        #endregion
-
-        private OpenFileDialog openFileDialog1;
-        private Button btTambahGambar;
-        private TextBox tbNamaProduk;
-        private TextBox tbHargaProduk;
-        private TextBox tbStokProduk;
-        private Button btSIMPAN;
-        private Label label1;
-        private Label label2;
-        private Label label3;
-        private PictureBox gambarProduk;
-        private Label label4;
-        private RichTextBox rtbDeskripsiProduk;
     }
 }

@@ -6,14 +6,17 @@ namespace FinalProjek.Model
 {
     public class Transaksi
     {
-        public int IdTransaksi { get; set; }
-        public int IdKasir { get; set; }
-        public DateTime Tanggal { get; set; }
-        public int TotalHarga { get; set; }
-        public int JumlahBayar { get; set; }
-        public int Kembalian { get; set; }
-        public string MetodePembayaran { get; set; }
-        public string StatusTransaksi { get; set; }
+        public int id_transaksi { get; set; }
+        public int id_kasir { get; set; }
+
+        public DateTime tanggal { get; set; }
+
+        public double total_harga { get; set; }
+        public double jumlah_bayar { get; set; }
+        public double kembalian { get; set; }
+
+        public string metode_bayar { get; set; }
+        public string status_transaksi { get; set; }
         public List<DetailTransaksi> Detail { get; set; }
     }
 }
