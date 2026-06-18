@@ -1,7 +1,7 @@
-﻿using FinalProjek.Model;
 using System;
 using System.Collections.Generic;
 using System.Text;
+using FinalProjek.Model;
 
 namespace FinalProjek.Interface
 {
@@ -12,7 +12,7 @@ namespace FinalProjek.Interface
         List<Kategori> GetActiveKategori();
         Kategori GetKategoriById(int id);
         bool UpdateKategori(Kategori kategori);
-        bool DeleteKategori(object id);    // soft delete (set is_active = false)
-        bool RestoreKategori(int id);      // optional: set is_active = true
+        bool DeleteKategori(object id);
+        bool RestoreKategori(int id);
     }
 }

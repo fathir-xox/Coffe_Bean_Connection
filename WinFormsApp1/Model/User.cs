@@ -11,6 +11,7 @@ namespace FinalProjek.Model
         public string? username { get; set; }
         public string? password { get; set; }
         public UserRole role { get; set; }
+        public bool isactive { get; set; }
 
     }
     public enum UserRole

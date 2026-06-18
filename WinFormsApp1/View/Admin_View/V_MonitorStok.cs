@@ -1,131 +1,114 @@
 ﻿using FinalProjek.Controler;
+using FinalProjek.Model;
 using FinalProjek.Interface;
-using FinalProjek.Model; // WAJIB: Untuk memanggil class Produk
 using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
 using System.Drawing;
-using System.Text;
 using System.Windows.Forms;
 
 namespace FinalProjek.View.Admin_View
 {
     public partial class V_MonitorStok : Form
     {
-        // 1. Deklarasikan Controller
         private ProdukController produkController;
 
         public V_MonitorStok()
         {
             InitializeComponent();
-
-            // 2. Inisialisasi controller dan jalankan pemuatan data
             produkController = new ProdukController();
             LoadDataStok();
         }
 
-        // ==============================================================
-        // BAGIAN 1: LOGIKA MONITOR STOK (TAMPILAN & UPDATE)
-        // ==============================================================
+        public Panel CreateProductPanel(Produk produk)
+        {
+            Panel panel = new Panel
+            {
+                Size = new Size(1053, 92),
+                Margin = new Padding(3),
+                BackgroundImage = Properties.Resources.CardMonitorStokdalam,
+                BackgroundImageLayout = ImageLayout.Zoom,
+            };
+
+            Label namaProduk = new Label
+            {
+                Text = produk.nama_produk,
+                Location = new Point(24, 30),
+                Size = new Size(454, 32),
+                BackColor = Color.Transparent,
+                Font = new Font("Times New Roman", 14, FontStyle.Bold),
+                TextAlign = ContentAlignment.MiddleLeft,
+            };
+
+            Label stokProduk = new Label
+            {
+                Text = produk.stok.ToString(),
+                Location = new Point(535, 29),
+                Size = new Size(49, 32),
+                BackColor = Color.Transparent,
+                ForeColor = Color.FromArgb(100, 60, 20),
+                Font = new Font("Times New Roman", 14, FontStyle.Bold),
+                TextAlign = ContentAlignment.MiddleCenter,
+            };
+
+            Button buttonRestok = new Button
+            {
+                Location = new Point(780, 25),
+                Size = new Size(125, 43),
+                Font = new Font("Times New Roman", 12, FontStyle.Regular),
+                BackColor = Color.DarkOrange,
+                ForeColor = Color.White,
+                Text = "Restok",
+                Cursor = Cursors.Hand
+            };
+            // REVISI: Menambahkan fungsi klik agar tombol Restok berfungsi
+            buttonRestok.Click += (sender, e) => ProsesUpdateStok(produk, "tambah");
+
+            Button buttonKurangi = new Button
+            {
+                Location = new Point(911, 25),
+                Size = new Size(125, 43),
+                Font = new Font("Times New Roman", 12, FontStyle.Regular),
+                BackColor = Color.Red,
+                ForeColor = Color.White,
+                Text = "Kurangi",
+                Cursor = Cursors.Hand
+            };
+            // REVISI: Menambahkan fungsi klik agar tombol Kurangi berfungsi
+            buttonKurangi.Click += (sender, e) => ProsesUpdateStok(produk, "kurang");
+
+            // panel.Controls.Add(displayProduct);
+            panel.Controls.Add(namaProduk);
+            // panel.Controls.Add(hargaProduk);
+            panel.Controls.Add(stokProduk);
+            panel.Controls.Add(buttonRestok);
+            panel.Controls.Add(buttonKurangi);
+
+            return panel;
+        }
+
         public void LoadDataStok()
         {
             try
             {
-                // Bersihkan memori dari baris yang lama (PENTING: Pastikan Anda punya FlowLayoutPanel bernama flpMonitorStok)
-                foreach (Control control in flpMonitorStok.Controls) control.Dispose();
+                // Bersihkan kontrol lama
                 flpMonitorStok.Controls.Clear();
 
-                flpMonitorStok.SuspendLayout();
-
-                List<Produk> produks = produkController.GetAllProduk();
+                var produks = produkController.GetAllProduk();
 
                 foreach (Produk produk in produks)
                 {
-                    Panel rowPanel = CreateStokRow(produk);
+                    Panel rowPanel = CreateProductPanel(produk);
                     flpMonitorStok.Controls.Add(rowPanel);
                 }
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Gagal memuat data stok: " + ex.Message, "Sistem Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("Gagal memuat data stok: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
-            finally
-            {
-                flpMonitorStok.ResumeLayout();
-            }
-        }
-
-        private Panel CreateStokRow(Produk produk)
-        {
-            // 1. Buat Baris Background
-            Panel row = new Panel
-            {
-                Size = new Size(750, 50), // Sesuaikan dengan lebar layar monitor stok Anda
-                Margin = new Padding(0, 0, 0, 10),
-                BackColor = Color.OldLace // Warna krem sesuai tema
-            };
-
-            // 2. Nama Produk
-            Label lblNama = new Label
-            {
-                Text = produk.nama_produk,
-                Location = new Point(20, 15),
-                Size = new Size(250, 25),
-                Font = new Font("Segoe UI", 11, FontStyle.Regular),
-                TextAlign = ContentAlignment.MiddleLeft
-            };
-
-            // 3. Stok Saat Ini (Warna Merah)
-            Label lblStok = new Label
-            {
-                Text = produk.stok + " kg",
-                Location = new Point(280, 15),
-                Size = new Size(100, 25),
-                Font = new Font("Segoe UI", 11, FontStyle.Bold),
-                ForeColor = Color.Crimson,
-                TextAlign = ContentAlignment.MiddleLeft
-            };
-
-            // 4. Tombol Restok (Orange)
-            Button btnRestok = new Button
-            {
-                Text = "Restok",
-                Location = new Point(500, 10),
-                Size = new Size(80, 30),
-                BackColor = Color.Chocolate,
-                ForeColor = Color.White,
-                FlatStyle = FlatStyle.Flat,
-                Cursor = Cursors.Hand
-            };
-            btnRestok.FlatAppearance.BorderSize = 0;
-            btnRestok.Click += (sender, e) => ProsesUpdateStok(produk, "tambah");
-
-            // 5. Tombol Kurangi (Merah)
-            Button btnKurangi = new Button
-            {
-                Text = "Kurangi",
-                Location = new Point(590, 10),
-                Size = new Size(80, 30),
-                BackColor = Color.Red,
-                ForeColor = Color.White,
-                FlatStyle = FlatStyle.Flat,
-                Cursor = Cursors.Hand
-            };
-            btnKurangi.FlatAppearance.BorderSize = 0;
-            btnKurangi.Click += (sender, e) => ProsesUpdateStok(produk, "kurang");
-
-            row.Controls.Add(lblNama);
-            row.Controls.Add(lblStok);
-            row.Controls.Add(btnRestok);
-            row.Controls.Add(btnKurangi);
-
-            return row;
         }
 
         private void ProsesUpdateStok(Produk produk, string aksi)
         {
-            // Popup Otomatis untuk Input Angka
+            // Form input sederhana
             Form prompt = new Form()
             {
                 Width = 350,
@@ -156,78 +139,101 @@ namespace FinalProjek.View.Admin_View
                         MessageBox.Show("Stok tidak bisa kurang dari 0!", "Peringatan", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                         return;
                     }
-                    nilaiInput = nilaiInput * -1; // Ubah jadi minus agar stok berkurang
+                    nilaiInput = nilaiInput * -1;
                 }
 
-                // Panggil fungsi UpdateStok di Controller
                 bool sukses = produkController.UpdateStok(produk.id_produk, nilaiInput);
 
                 if (sukses)
                 {
                     MessageBox.Show("Stok berhasil diperbarui!", "Sukses", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                    LoadDataStok(); // Refresh tampilan stok otomatis
+                    LoadDataStok(); // Refresh
+                }
+                else
+                {
+                    MessageBox.Show("Gagal memperbarui stok.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
             }
 
             prompt.Dispose();
         }
 
-
         // ==============================================================
-        // BAGIAN 2: LOGIKA NAVIGASI SIDEBAR
+        // BAGIAN 2: LOGIKA NAVIGASI SIDEBAR (sesuai dengan designer)
         // ==============================================================
         private void btDashboar_Click(object sender, EventArgs e)
         {
-            IProduk produkControllerInterface = new ProdukController();
-            AdminDashboardView frmDashboard = new AdminDashboardView(produkControllerInterface);
-            frmDashboard.FormClosed += (s, args) => this.Close();
-            frmDashboard.Show();
+            IProduk pc = new ProdukController();
+            AdminDashboardView frm = new AdminDashboardView(pc);
+            frm.FormClosed += (s, args) => this.Close();
+            frm.Show();
             this.Hide();
         }
 
         private void btProduk_Click(object sender, EventArgs e)
         {
-            V_Produk frmProduk = new V_Produk();
-            frmProduk.FormClosed += (s, args) => this.Close();
-            frmProduk.Show();
+            V_Produk frm = new V_Produk();
+            frm.FormClosed += (s, args) => this.Close();
+            frm.Show();
             this.Hide();
         }
 
         private void btKategori_Click(object sender, EventArgs e)
         {
-            V_Kategori frmKategori = new V_Kategori();
-            frmKategori.FormClosed += (s, args) => this.Close();
-            frmKategori.Show();
+            V_Kategori frm = new V_Kategori();
+            frm.FormClosed += (s, args) => this.Close();
+            frm.Show();
             this.Hide();
         }
 
         private void btMonitorStok_Click(object sender, EventArgs e)
         {
-            // Kosongkan saja. Karena ini adalah halaman Monitor Stok, tombol tidak perlu bereaksi jika diklik lagi.
+            // Refresh halaman
+            LoadDataStok();
         }
 
         private void btRiwayatTransaksi_Click(object sender, EventArgs e)
         {
-            V_RiwayatTransaksi frmRiwayatTransaksi = new V_RiwayatTransaksi();
-            frmRiwayatTransaksi.FormClosed += (s, args) => this.Close();
-            frmRiwayatTransaksi.Show();
+            V_RiwayatTransaksi frm = new V_RiwayatTransaksi();
+            frm.FormClosed += (s, args) => this.Close();
+            frm.Show();
             this.Hide();
         }
 
         private void btKelolaAkunUser_Click(object sender, EventArgs e)
         {
-            V_KelolaAkunUserr frmKelolaAkunUser = new V_KelolaAkunUserr();
-            frmKelolaAkunUser.FormClosed += (s, args) => this.Close();
-            frmKelolaAkunUser.Show();
+            V_KelolaAkunUserr frm = new V_KelolaAkunUserr();
+            frm.FormClosed += (s, args) => this.Close();
+            frm.Show();
             this.Hide();
         }
 
         private void btLogout_Click(object sender, EventArgs e)
         {
-            Login frmLogin = new Login();
-            frmLogin.FormClosed += (s, args) => this.Close();
-            frmLogin.Show();
+            Login frm = new Login();
+            frm.FormClosed += (s, args) => this.Close();
+            frm.Show();
             this.Hide();
+        }
+
+        private void btRestok_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void btKurangi_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void lbStok_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void lbNamaProduk_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

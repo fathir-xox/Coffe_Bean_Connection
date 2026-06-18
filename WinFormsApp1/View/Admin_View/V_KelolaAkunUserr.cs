@@ -1,25 +1,182 @@
 ﻿using FinalProjek.Controler;
 using FinalProjek.Interface;
+using FinalProjek.View;
+using FinalProjek.Model;
 using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
 using System.Drawing;
-using System.Text;
 using System.Windows.Forms;
 
 namespace FinalProjek.View.Admin_View
 {
     public partial class V_KelolaAkunUserr : Form
     {
+        private AuthController authController = new AuthController();
+
         public V_KelolaAkunUserr()
         {
             InitializeComponent();
+            this.FormClosed += (s, e) => Application.Exit();
+            LoadData();
         }
 
+        // ============================================================
+        // CREATE USER PANEL (Card per user)
+        // ============================================================
+        public Panel CreateUserPanel(User user)
+        {
+            Panel panel = new Panel
+            {
+                Size = new Size(1495, 92),
+                Margin = new Padding(3),
+                BackgroundImage = Properties.Resources.CardMonitorStokdalam,
+                BackgroundImageLayout = ImageLayout.Stretch,
+            };
+
+            Label lbUsername = new Label
+            {
+                Text = "@" + user.username,
+                Location = new Point(24, 30),
+                Size = new Size(231, 32),
+                BackColor = Color.Transparent,
+                Font = new Font("Times New Roman", 14, FontStyle.Regular),
+                TextAlign = ContentAlignment.MiddleLeft,
+            };
+
+            Label lbNamaLengkap = new Label
+            {
+                Text = user.full_name,
+                Location = new Point(280, 29),
+                Size = new Size(335, 32),
+                BackColor = Color.Transparent,
+                ForeColor = Color.FromArgb(100, 60, 20),
+                Font = new Font("Times New Roman", 14, FontStyle.Regular),
+                TextAlign = ContentAlignment.MiddleLeft,
+            };
+
+            Label lbRole = new Label
+            {
+                Text = user.role.ToString(),
+                Location = new Point(728, 30),
+                Size = new Size(143, 32),
+                BackColor = Color.Transparent,
+                Font = new Font("Times New Roman", 14, FontStyle.Bold),
+                TextAlign = ContentAlignment.MiddleCenter,
+            };
+
+            if (user.role.ToString().ToLower() == "admin")
+                lbRole.ForeColor = Color.DarkGoldenrod;
+            else
+                lbRole.ForeColor = Color.DodgerBlue;
+
+            Label lbStatus = new Label
+            {
+                Text = user.isactive ? "Aktif" : "Tidak Aktif",
+                Location = new Point(988, 28),
+                Size = new Size(144, 32),
+                BackColor = Color.Transparent,
+                ForeColor = user.isactive ? Color.MediumSeaGreen : Color.Red,
+                Font = new Font("Times New Roman", 14, FontStyle.Bold),
+                TextAlign = ContentAlignment.MiddleCenter,
+            };
+
+            Button buttonEdit = new Button
+            {
+                Location = new Point(1210, 26),
+                Size = new Size(125, 43),
+                Font = new Font("Times New Roman", 12, FontStyle.Regular),
+                BackColor = Color.DarkOrange,
+                ForeColor = Color.White,
+                Text = "Edit",
+                Cursor = Cursors.Hand
+            };
+            buttonEdit.Click += (sender, e) => EditUser(user);
+
+            Button buttonHapus = new Button
+            {
+                Location = new Point(1341, 26),
+                Size = new Size(125, 43),
+                Font = new Font("Times New Roman", 12, FontStyle.Regular),
+                BackColor = Color.Red,
+                ForeColor = Color.White,
+                Text = "Hapus",
+                Cursor = Cursors.Hand
+            };
+            buttonHapus.Click += (sender, e) => HapusUser(user);
+
+            panel.Controls.Add(lbUsername);
+            panel.Controls.Add(lbNamaLengkap);
+            panel.Controls.Add(lbRole);
+            panel.Controls.Add(lbStatus);
+            panel.Controls.Add(buttonEdit);
+            panel.Controls.Add(buttonHapus);
+
+            return panel;
+        }
+
+        // ============================================================
+        // LOAD DATA (Hanya user aktif)
+        // ============================================================
+        private void LoadData()
+        {
+            try
+            {
+                flpKelolaUser.Controls.Clear();
+                var users = authController.GetActiveUsers(); // Hanya yang aktif
+
+                foreach (User user in users)
+                {
+                    Panel rowPanel = CreateUserPanel(user);
+                    flpKelolaUser.Controls.Add(rowPanel);
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Gagal memuat data user: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        // ============================================================
+        // EDIT USER
+        // ============================================================
+        private void EditUser(User user)
+        {
+            MessageBox.Show("Fitur Edit User: " + user.username, "Informasi", MessageBoxButtons.OK, MessageBoxIcon.Information);
+        }
+
+        // ============================================================
+        // HAPUS USER (SOFT DELETE)
+        // ============================================================
+        private void HapusUser(User user)
+        {
+            DialogResult dialogResult = MessageBox.Show(
+                $"Yakin ingin menonaktifkan user '{user.username}'? (Data tetap tersimpan di database)",
+                "Konfirmasi Hapus",
+                MessageBoxButtons.YesNo,
+                MessageBoxIcon.Warning
+            );
+
+            if (dialogResult == DialogResult.Yes)
+            {
+                bool berhasil = authController.DeleteUser(user.id_user);
+                if (berhasil)
+                {
+                    MessageBox.Show("User berhasil dinonaktifkan.", "Sukses", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    LoadData(); // Refresh tampilan
+                }
+                else
+                {
+                    MessageBox.Show("Gagal menonaktifkan user.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+            }
+        }
+
+        // ============================================================
+        // NAVIGASI SIDEBAR
+        // ============================================================
         private void btDashboar_Click(object sender, EventArgs e)
         {
-            IProduk produkController = new ProdukController(); // buat instance controller
+            IProduk produkController = new ProdukController();
             AdminDashboardView frmDashboard = new AdminDashboardView(produkController);
             frmDashboard.FormClosed += (s, args) => this.Close();
             frmDashboard.Show();
@@ -60,7 +217,7 @@ namespace FinalProjek.View.Admin_View
 
         private void btKelolaAkunUser_Click(object sender, EventArgs e)
         {
-            
+            LoadData();
         }
 
         private void btLogout_Click(object sender, EventArgs e)
@@ -70,5 +227,27 @@ namespace FinalProjek.View.Admin_View
             frmLogin.Show();
             this.Hide();
         }
+
+        private void btTambahUser_Click(object sender, EventArgs e)
+        {
+            Register frmRegister = new Register();
+            frmRegister.ShowDialog();
+            LoadData();
+        }
+
+        private void btRefresh_Click(object sender, EventArgs e)
+        {
+            LoadData();
+        }
+
+        // ============================================================
+        // EVENT KOSONG (UNTUK DESIGNER)
+        // ============================================================
+        private void lbUsername_Click(object sender, EventArgs e) { }
+        private void lbNamaLengkapUser_Click(object sender, EventArgs e) { }
+        private void lbRoleUser_Click(object sender, EventArgs e) { }
+        private void lbstatusUser_Click(object sender, EventArgs e) { }
+        private void btEditUser_Click(object sender, EventArgs e) { }
+        private void btHapusUser_Click(object sender, EventArgs e) { }
     }
 }

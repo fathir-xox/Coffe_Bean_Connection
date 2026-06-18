@@ -29,7 +29,6 @@
         private void InitializeComponent()
         {
             panel1 = new Panel();
-            linkLabelRegister = new LinkLabel();
             txtPassword = new TextBox();
             txtUsername = new TextBox();
             btLogin = new Button();
@@ -45,7 +44,6 @@
             panel1.BackColor = Color.Transparent;
             panel1.BackgroundImage = Properties.Resources.LoginView1;
             panel1.BackgroundImageLayout = ImageLayout.Zoom;
-            panel1.Controls.Add(linkLabelRegister);
             panel1.Controls.Add(txtPassword);
             panel1.Controls.Add(txtUsername);
             panel1.Controls.Add(btLogin);
@@ -56,18 +54,6 @@
             panel1.Name = "panel1";
             panel1.Size = new Size(1259, 708);
             panel1.TabIndex = 0;
-            // 
-            // linkLabelRegister
-            // 
-            linkLabelRegister.AutoSize = true;
-            linkLabelRegister.Font = new Font("Times New Roman", 8F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            linkLabelRegister.Location = new Point(838, 471);
-            linkLabelRegister.Name = "linkLabelRegister";
-            linkLabelRegister.Size = new Size(176, 19);
-            linkLabelRegister.TabIndex = 6;
-            linkLabelRegister.TabStop = true;
-            linkLabelRegister.Text = "Belum punya  akun? Daftar.";
-            linkLabelRegister.LinkClicked += linkLabelRegister_LinkClicked;
             // 
             // txtPassword
             // 
@@ -165,6 +151,5 @@
         private Npgsql.NpgsqlCommandBuilder npgsqlCommandBuilder1;
         private TextBox txtUsername;
         private TextBox txtPassword;
-        private LinkLabel linkLabelRegister;
     }
 }

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Xml;
 
 namespace FinalProjek.Model
 {
@@ -10,6 +11,5 @@ namespace FinalProjek.Model
         public string nama_kategori { get; set; }
         public string deskripsi { get; set; }
         public bool isactive { get; set; }
-
     }
 }
