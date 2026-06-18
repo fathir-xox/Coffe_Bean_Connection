@@ -2,15 +2,12 @@
 {
     partial class V_TambahKategori
     {
-        /// <summary>
-        /// Required designer variable.
-        /// </summary>
         private System.ComponentModel.IContainer components = null;
+        private TextBox tbNamaKategori;
+        private Button btSIMPAN;
+        private Panel panel1;
+        private RichTextBox rtbDeskripsiKategori;
 
-        /// <summary>
-        /// Clean up any resources being used.
-        /// </summary>
-        /// <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
         protected override void Dispose(bool disposing)
         {
             if (disposing && (components != null))
@@ -20,12 +17,6 @@
             base.Dispose(disposing);
         }
 
-        #region Windows Form Designer generated code
-
-        /// <summary>
-        /// Required method for Designer support - do not modify
-        /// the contents of this method with the code editor.
-        /// </summary>
         private void InitializeComponent()
         {
             tbNamaKategori = new TextBox();
@@ -45,7 +36,7 @@
             // btSIMPAN
             // 
             btSIMPAN.BackColor = Color.FromArgb(100, 60, 20);
-            btSIMPAN.Font = new Font("Times New Roman", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            btSIMPAN.Font = new Font("Times New Roman", 12F, FontStyle.Bold);
             btSIMPAN.ForeColor = Color.OldLace;
             btSIMPAN.Location = new Point(521, 522);
             btSIMPAN.Name = "btSIMPAN";
@@ -66,7 +57,6 @@
             panel1.Name = "panel1";
             panel1.Size = new Size(1328, 719);
             panel1.TabIndex = 6;
-            panel1.Paint += panel1_Paint;
             // 
             // rtbDeskripsiKategori
             // 
@@ -83,18 +73,11 @@
             ClientSize = new Size(1258, 664);
             Controls.Add(panel1);
             Name = "V_TambahKategori";
-            Text = "V_TambahKategori";
+            Text = "Tambah Kategori";
             Load += V_TambahKategori_Load;
             panel1.ResumeLayout(false);
             panel1.PerformLayout();
             ResumeLayout(false);
         }
-
-        #endregion
-
-        private TextBox tbNamaKategori;
-        private Button btSIMPAN;
-        private Panel panel1;
-        private RichTextBox rtbDeskripsiKategori;
     }
 }

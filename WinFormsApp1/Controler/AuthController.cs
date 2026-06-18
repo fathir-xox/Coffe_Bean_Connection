@@ -3,11 +3,7 @@ using Npgsql;
 using FinalProjek.Model;
 using FinalProjek.Helper;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Windows.Forms;
-using FinalProjek.View.Admin_View;
 
 namespace FinalProjek.Controler
 {
@@ -17,35 +13,31 @@ namespace FinalProjek.Controler
 
         public AuthController()
         {
-           dbHelper = new DbContext();
+            dbHelper = new DbContext();
         }
 
-        //internal static void logout(AdminDashboardView adminDashboardView)
-        //{
-        //    throw new NotImplementedException();
-        //}
-
-        public User? login(User user)
+        public User login(User user)
         {
             try
             {
                 using NpgsqlConnection conn = new NpgsqlConnection(dbHelper.connStr);
+                conn.Open();
+
+                string query = @"
+                    SELECT role, full_name, username, password FROM users 
+                    WHERE username = @username AND isactive = true";
+
+                using (var cmd = new NpgsqlCommand(query, conn))
                 {
-                    conn.Open();
-                    string query = @"
-                            SELECT role,full_name, username, password FROM ""user"" 
-                            WHERE username = @username AND password = @password LIMIT 1";
+                    cmd.Parameters.AddWithValue("@username", user.username);
 
-                    string hashedPassword = PWhelper.HashPassword(user.password);
-
-                    using (var cmd = new NpgsqlCommand(query, conn))
+                    using (var read = cmd.ExecuteReader())
                     {
-                        cmd.Parameters.AddWithValue("@username", user.username);
-                        cmd.Parameters.AddWithValue("@password", hashedPassword);
-
-                        using (var read = cmd.ExecuteReader())
+                        if (read.Read())
                         {
-                            if (read.Read())
+                            string storedPassword = read.GetString(3);
+
+                            if (PWhelper.VerifyPassword(user.password, storedPassword))
                             {
                                 string role = read.GetString(0);
                                 UserRole roleEnum = (UserRole)Enum.Parse(typeof(UserRole), role, true);
@@ -55,11 +47,19 @@ namespace FinalProjek.Controler
                                     role = roleEnum,
                                     full_name = read.GetString(1),
                                     username = read.GetString(2),
-                                    password = read.GetString(3)
+                                    password = storedPassword
                                 };
                                 return loggedInuser;
                             }
-
+                            else
+                            {
+                                MessageBox.Show("Password salah!", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                                return null;
+                            }
+                        }
+                        else
+                        {
+                            MessageBox.Show($"Username '{user.username}' tidak ditemukan!", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                             return null;
                         }
                     }
@@ -79,11 +79,13 @@ namespace FinalProjek.Controler
                 using (var conn = new NpgsqlConnection(dbHelper.connStr))
                 {
                     conn.Open();
-                    string query = @"
-                    INSERT INTO ""user"" (username, password, role, full_name, isactive) 
-                    VALUES (@username, @password, @role::role_enum, @full_name, @isactive)";
 
-                    string hashedPassword = PWhelper.HashPassword(user.password ?? string.Empty); //ada tambah an ?? string.Empty
+                    string query = @"
+                        INSERT INTO users (username, password, role, full_name, isactive) 
+                        VALUES (@username, @password, @role, @full_name, @isactive)";
+
+                    string hashedPassword = PWhelper.HashPassword(user.password);
+
                     using (var cmd = new NpgsqlCommand(query, conn))
                     {
                         cmd.Parameters.AddWithValue("@username", user.username);
@@ -91,6 +93,7 @@ namespace FinalProjek.Controler
                         cmd.Parameters.AddWithValue("@role", user.role.ToString());
                         cmd.Parameters.AddWithValue("@full_name", user.full_name);
                         cmd.Parameters.AddWithValue("@isactive", true);
+
                         int result = cmd.ExecuteNonQuery();
                         return result > 0;
                     }
@@ -101,8 +104,6 @@ namespace FinalProjek.Controler
                 MessageBox.Show($"REGISTER ERROR: {ex}", "Connection Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return false;
             }
-
         }
     }
-
 }

@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Security.Cryptography;
 using System.Text;
 
@@ -15,6 +14,12 @@ namespace FinalProjek.Helper
                 var hash = sha.ComputeHash(bytes);
                 return Convert.ToBase64String(hash);
             }
+        }
+
+        public static bool VerifyPassword(string inputPassword, string storedHash)
+        {
+            string inputHash = HashPassword(inputPassword);
+            return inputHash == storedHash;
         }
     }
 }

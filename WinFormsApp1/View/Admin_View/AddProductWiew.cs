@@ -1,91 +1,110 @@
-﻿using FinalProjek.Interface;
-using FinalProjek.Controler;
+﻿using FinalProjek.Controler;
+using FinalProjek.Interface;
 using FinalProjek.Model;
-using FinalProjek.Helper;
 using System;
 using System.Drawing;
 using System.Windows.Forms;
-
 
 namespace FinalProjek.View.Admin_View
 {
     public partial class AddProductWiew : Form
     {
-        // Use the designer-created openFileDialog1; do not redeclare a second field here
         private IProduk produkController;
+        private IKategori kategoriController;
+        private byte[] imageBytes;
+
         public AddProductWiew()
         {
             InitializeComponent();
-            // openFileDialog1 is initialized in InitializeComponent(); do not re-create it here
-            produkController = new ProdukController(); // pastikan sudah ada implementasi ProdukController yang sesuai dengan IProduk
+            produkController = new ProdukController();
+            kategoriController = new KategoriController();
+            LoadKategoriCombo();
+
+            btnTambahGambar.Click += btnTambahGambar_Click;
+            btnSimpan.Click += btnSimpan_Click;
         }
 
-        private void btTambahGambar_Click(object sender, EventArgs e)
+        private void LoadKategoriCombo()
         {
-            if (openFileDialog1.ShowDialog() == DialogResult.OK)
+            var listKategori = kategoriController.GetActiveKategori();
+            cbIdKategori.DataSource = listKategori;
+            cbIdKategori.DisplayMember = "nama_kategori";
+            cbIdKategori.ValueMember = "id_kategori";
+        }
+
+        private void btnTambahGambar_Click(object sender, EventArgs e)
+        {
+            using (OpenFileDialog ofd = new OpenFileDialog())
             {
-                string selectedItem = openFileDialog1.FileName;
-                //gambarProduk.BackgroundImageLayout = ImageLayout.Zoom;
-                gambarProduk.SizeMode = PictureBoxSizeMode.Zoom;
-                gambarProduk.Image = Image.FromFile(selectedItem);
+                ofd.Filter = "Image Files|*.jpg;*.jpeg;*.png;*.bmp";
+                ofd.Title = "Pilih Gambar Produk";
+
+                if (ofd.ShowDialog() == DialogResult.OK)
+                {
+                    Image img = Image.FromFile(ofd.FileName);
+                    pbGambar.Image = img;
+
+                    using (var ms = new System.IO.MemoryStream())
+                    {
+                        img.Save(ms, System.Drawing.Imaging.ImageFormat.Png);
+                        imageBytes = ms.ToArray();
+                    }
+                }
             }
         }
 
-        // Fixed: standard event handler signature and use the form's tbKategoriProduk control (not an extra parameter)
-        private void BtSIMPAN_Click(object sender, EventArgs e)
+        private void btnSimpan_Click(object sender, EventArgs e)
         {
-            if (string.IsNullOrEmpty(openFileDialog1.FileName))
+            string nama = tbNamaProduk.Text.Trim();
+            string hargaText = tbHargaProduk.Text.Trim();
+            string stokText = tbStokProduk.Text.Trim();
+            string deskripsi = rtbDeskripsi.Text.Trim();
+
+            if (string.IsNullOrEmpty(nama))
             {
-                MessageBox.Show("Pilih gambar terlebih dahulu!!", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("Nama Produk harus diisi!", "Peringatan", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
 
-            Image GambarProduk = gambarProduk.Image;
-            string namaProduk = tbNamaProduk.Text;
-            int hargaProduk = int.Parse(tbHargaProduk.Text);
-            int stokProduk = int.Parse(tbStokProduk.Text);
-            string deskripsiProduk = rtbDeskripsiProduk.Text;
+            if (!double.TryParse(hargaText, out double harga) || harga <= 0)
+            {
+                MessageBox.Show("Harga Produk harus berupa angka positif!", "Peringatan", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
 
-            // Use the Text property of the tbKategoriProduk control on the form
-            int idKategori = int.Parse(tbKategoriProduk.Text);
+            if (!int.TryParse(stokText, out int stok) || stok < 0)
+            {
+                MessageBox.Show("Stok Produk harus berupa angka!", "Peringatan", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
+            if (cbIdKategori.SelectedValue == null)
+            {
+                MessageBox.Show("Pilih Kategori!", "Peringatan", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
 
             try
             {
                 Produk produk = new Produk
                 {
-                    imageproduk = Imagehelper.ImageToBinary(GambarProduk),
-                    nama_produk = namaProduk,
-                    harga = hargaProduk,
-                    stok = stokProduk,
-                    deskripsi = deskripsiProduk,
-                    id_kategori = idKategori
+                    nama_produk = nama,
+                    harga = harga,
+                    stok = stok,
+                    deskripsi = deskripsi,
+                    id_kategori = (int)cbIdKategori.SelectedValue,
+                    imageproduk = imageBytes
                 };
 
                 produkController.CreateProduk(produk);
-                MessageBox.Show("Produk berhasil ditambahkaan", "Berhasil", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBox.Show("Produk berhasil ditambahkan!", "Sukses", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                this.DialogResult = DialogResult.OK;
                 this.Close();
-
-                var adminDashboard = new AdminDashboardView(produkController);
             }
             catch (Exception ex)
             {
-                MessageBox.Show($"Gagal Menambahkan Produk {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show($"Error: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
-        }
-
-        private void tbKategoriProduk_TextChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void gambarProduk_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void panel1_Paint(object sender, PaintEventArgs e)
-        {
-
         }
     }
 }

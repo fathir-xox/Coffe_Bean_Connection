@@ -24,8 +24,8 @@ namespace FinalProjek.Controler
                 using (NpgsqlConnection connection = new NpgsqlConnection(dbHelper.connStr))
                 {
                     connection.Open();
-                    string query = @"INSERT INTO kategori (nama_kategori, deskripsi, is_active, created_at, updated_at) 
-                                     VALUES (@nama_kategori, @deskripsi, true, NOW(), NOW())";
+                    string query = @"INSERT INTO kategori (nama_kategori, deskripsi, isactive) 
+                                     VALUES (@nama_kategori, @deskripsi, true)";
                     using (NpgsqlCommand cmd = new NpgsqlCommand(query, connection))
                     {
                         cmd.Parameters.AddWithValue("@nama_kategori", kategori.nama_kategori);
@@ -48,7 +48,7 @@ namespace FinalProjek.Controler
                 using (NpgsqlConnection connection = new NpgsqlConnection(dbHelper.connStr))
                 {
                     connection.Open();
-                    string query = "SELECT id_kategori, nama_kategori, deskripsi, is_active, created_at, updated_at FROM kategori ORDER BY id_kategori";
+                    string query = "SELECT id_kategori, nama_kategori, deskripsi, isactive FROM kategori ORDER BY id_kategori";
                     using (NpgsqlCommand cmd = new NpgsqlCommand(query, connection))
                     using (NpgsqlDataReader reader = cmd.ExecuteReader())
                     {
@@ -59,8 +59,7 @@ namespace FinalProjek.Controler
                                 id_kategori = reader.GetInt32(0),
                                 nama_kategori = reader.GetString(1),
                                 deskripsi = reader.IsDBNull(2) ? null : reader.GetString(2),
-                                isactive = reader.GetBoolean(3),
-                                
+                                isactive = reader.GetBoolean(3)
                             });
                         }
                     }
@@ -81,7 +80,7 @@ namespace FinalProjek.Controler
                 using (NpgsqlConnection connection = new NpgsqlConnection(dbHelper.connStr))
                 {
                     connection.Open();
-                    string query = "SELECT id_kategori, nama_kategori, deskripsi FROM kategori WHERE is_active = true ORDER BY nama_kategori";
+                    string query = "SELECT id_kategori, nama_kategori, deskripsi, isactive FROM kategori WHERE isactive = true ORDER BY id_kategori";
                     using (NpgsqlCommand cmd = new NpgsqlCommand(query, connection))
                     using (NpgsqlDataReader reader = cmd.ExecuteReader())
                     {
@@ -92,7 +91,7 @@ namespace FinalProjek.Controler
                                 id_kategori = reader.GetInt32(0),
                                 nama_kategori = reader.GetString(1),
                                 deskripsi = reader.IsDBNull(2) ? null : reader.GetString(2),
-                                isactive = true
+                                isactive = reader.GetBoolean(3)
                             });
                         }
                     }
@@ -113,7 +112,7 @@ namespace FinalProjek.Controler
                 using (NpgsqlConnection connection = new NpgsqlConnection(dbHelper.connStr))
                 {
                     connection.Open();
-                    string query = "SELECT id_kategori, nama_kategori, deskripsi, is_active, created_at, updated_at FROM kategori WHERE id_kategori = @id";
+                    string query = "SELECT id_kategori, nama_kategori, deskripsi, isactive FROM kategori WHERE id_kategori = @id";
                     using (NpgsqlCommand cmd = new NpgsqlCommand(query, connection))
                     {
                         cmd.Parameters.AddWithValue("@id", id);
@@ -126,8 +125,7 @@ namespace FinalProjek.Controler
                                     id_kategori = reader.GetInt32(0),
                                     nama_kategori = reader.GetString(1),
                                     deskripsi = reader.IsDBNull(2) ? null : reader.GetString(2),
-                                    isactive = reader.GetBoolean(3),
-                                   
+                                    isactive = reader.GetBoolean(3)
                                 };
                             }
                         }
@@ -149,7 +147,7 @@ namespace FinalProjek.Controler
                 {
                     connection.Open();
                     string query = @"UPDATE kategori 
-                                     SET nama_kategori = @nama_kategori, deskripsi = @deskripsi, updated_at = NOW() 
+                                     SET nama_kategori = @nama_kategori, deskripsi = @deskripsi 
                                      WHERE id_kategori = @id";
                     using (NpgsqlCommand cmd = new NpgsqlCommand(query, connection))
                     {
@@ -176,7 +174,7 @@ namespace FinalProjek.Controler
                 using (NpgsqlConnection connection = new NpgsqlConnection(dbHelper.connStr))
                 {
                     connection.Open();
-                    string query = "UPDATE kategori SET is_active = false, updated_at = NOW() WHERE id_kategori = @id";
+                    string query = "UPDATE kategori SET isactive = false WHERE id_kategori = @id";
                     using (NpgsqlCommand cmd = new NpgsqlCommand(query, connection))
                     {
                         cmd.Parameters.AddWithValue("@id", kategoriId);
@@ -199,7 +197,7 @@ namespace FinalProjek.Controler
                 using (NpgsqlConnection connection = new NpgsqlConnection(dbHelper.connStr))
                 {
                     connection.Open();
-                    string query = "UPDATE kategori SET is_active = true, updated_at = NOW() WHERE id_kategori = @id";
+                    string query = "UPDATE kategori SET isactive = true WHERE id_kategori = @id";
                     using (NpgsqlCommand cmd = new NpgsqlCommand(query, connection))
                     {
                         cmd.Parameters.AddWithValue("@id", id);
