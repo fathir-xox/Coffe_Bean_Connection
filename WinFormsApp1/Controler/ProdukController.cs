@@ -58,8 +58,8 @@ namespace FinalProjek.Controler
                 {
                     connection.Open();
 
-                    // Saya sesuaikan juga di sini: tidak mengambil 'image' karena di bawahnya tidak ada reader untuk image
-                    string query = @"SELECT id_produk, nama_produk, harga, stok, deskripsi, imageproduk FROM produk WHERE isactive = true"; //tambah image dan is_active untuk hanya menampilkan produk yang aktif
+                    string query = @"SELECT id_produk, nama_produk, harga, stok, deskripsi, imageproduk, id_kategori 
+                                     FROM produk WHERE isactive = true";
 
                     using (NpgsqlCommand cmd = new NpgsqlCommand(query, connection))
                     {
@@ -74,7 +74,8 @@ namespace FinalProjek.Controler
                                     harga = reader.GetInt32(2),
                                     stok = reader.GetInt32(3),
                                     deskripsi = reader.GetString(4),
-                                    imageproduk = reader["imageproduk"] as byte[]
+                                    imageproduk = reader["imageproduk"] as byte[],
+                                    id_kategori = reader.IsDBNull(6) ? 0 : reader.GetInt32(6)
                                 };
                                 produks.Add(produk);
                             }
@@ -89,14 +90,6 @@ namespace FinalProjek.Controler
             return produks;
         }
 
-        internal void UpdateProduk(Produk produk)
-        {
-            throw new NotImplementedException();
-        }
-
-
-        // PERBAIKAN 4: Implementasi soft delete dengan mengubah is_active menjadi false
-        // Signature changed to match IProduk.DeleteProduk(object)
         public bool DeleteProduk(object id_produk)
         {
             try
@@ -105,18 +98,20 @@ namespace FinalProjek.Controler
                 if (id_produk is int i) id = i;
                 else
                 {
-                    // Try to convert common types (string, long, etc.)
                     id = Convert.ToInt32(id_produk);
                 }
 
-                using var conn = new NpgsqlConnection(dbHelper.connStr);
-                conn.Open();
-                // Soft delete: set is_active = false
-                string query = "UPDATE produk SET isactive = false, updated_at = NOW() WHERE id_produk = @id";
-                using var cmd = new NpgsqlCommand(query, conn);
-                cmd.Parameters.AddWithValue("@id", id);
-                int rowsAffected = cmd.ExecuteNonQuery();
-                return rowsAffected > 0;
+                using (NpgsqlConnection connection = new NpgsqlConnection(dbHelper.connStr))
+                {
+                    connection.Open();
+                    string query = "UPDATE produk SET isactive = false WHERE id_produk = @id";
+                    using (NpgsqlCommand cmd = new NpgsqlCommand(query, connection))
+                    {
+                        cmd.Parameters.AddWithValue("@id", id);
+                        int rowsAffected = cmd.ExecuteNonQuery();
+                        return rowsAffected > 0;
+                    }
+                }
             }
             catch (Exception ex)
             {
@@ -154,6 +149,36 @@ namespace FinalProjek.Controler
                 return false;
 
                 throw new Exception("Gagal mengupdate stok: " + ex.Message);
+            }
+        }
+
+        public bool UpdateProduk(Produk produk)
+        {
+            try
+            {
+                using (NpgsqlConnection connection = new NpgsqlConnection(dbHelper.connStr))
+                {
+                    connection.Open();
+                    string query = @"UPDATE produk 
+                                     SET nama_produk = @nama, harga = @harga, stok = @stok, 
+                                         deskripsi = @deskripsi, id_kategori = @id_kategori
+                                     WHERE id_produk = @id";
+                    using (NpgsqlCommand cmd = new NpgsqlCommand(query, connection))
+                    {
+                        cmd.Parameters.AddWithValue("@nama", produk.nama_produk);
+                        cmd.Parameters.AddWithValue("@harga", produk.harga);
+                        cmd.Parameters.AddWithValue("@stok", produk.stok);
+                        cmd.Parameters.AddWithValue("@deskripsi", produk.deskripsi ?? (object)DBNull.Value);
+                        cmd.Parameters.AddWithValue("@id_kategori", produk.id_kategori);
+                        cmd.Parameters.AddWithValue("@id", produk.id_produk);
+                        return cmd.ExecuteNonQuery() > 0;
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Update Produk Error: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return false;
             }
         }
     }

@@ -1,19 +1,18 @@
 ﻿using FinalProjek.Controler;
 using FinalProjek.Interface;
+using FinalProjek.Model;
 using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
 using System.Drawing;
-using System.Text;
+using System.IO;
 using System.Windows.Forms;
-using FinalProjek.Model;
 
 namespace FinalProjek.View.Admin_View
 {
     public partial class V_Produk : Form
     {
         IProduk produkController;
+
         public V_Produk(IProduk produkInterface)
         {
             InitializeComponent();
@@ -25,9 +24,11 @@ namespace FinalProjek.View.Admin_View
         {
         }
 
+        // ==================== NAVIGASI ====================
+
         private void btDashboar_Click(object sender, EventArgs e)
         {
-            IProduk produkController = new ProdukController(); // buat instance controller
+            IProduk produkController = new ProdukController();
             AdminDashboardView frmDashboard = new AdminDashboardView(produkController);
             frmDashboard.FormClosed += (s, args) => this.Close();
             frmDashboard.Show();
@@ -36,7 +37,7 @@ namespace FinalProjek.View.Admin_View
 
         private void btProduk_Click(object sender, EventArgs e)
         {
-
+            LoadProducts();
         }
 
         private void btKategori_Click(object sender, EventArgs e)
@@ -71,16 +72,27 @@ namespace FinalProjek.View.Admin_View
             this.Hide();
         }
 
-        private void NamaProduk_Click(object sender, EventArgs e)
+        private void btLogout_Click(object sender, EventArgs e)
         {
+            Login frmLogin = new Login();
+            frmLogin.FormClosed += (s, args) => this.Close();
+            frmLogin.Show();
+            this.Hide();
+        }
 
+        private void btRefresh_Click(object sender, EventArgs e)
+        {
+            LoadProducts();
         }
 
         private void btTambahProduk_Click(object sender, EventArgs e)
         {
             AddProductWiew tambahProduk = new AddProductWiew();
-            tambahProduk.Show();
+            tambahProduk.FormClosed += (s, args) => LoadProducts();
+            tambahProduk.ShowDialog();
         }
+
+        // ==================== CREATE PRODUCT PANEL ====================
 
         public Panel CreateProductPanel(Produk produk)
         {
@@ -100,7 +112,6 @@ namespace FinalProjek.View.Admin_View
                 SizeMode = PictureBoxSizeMode.Zoom,
             };
 
-
             if (produk.imageproduk != null && produk.imageproduk.Length > 0)
             {
                 using (var ms = new MemoryStream(produk.imageproduk))
@@ -111,7 +122,7 @@ namespace FinalProjek.View.Admin_View
             }
             else
             {
-                displayProduct.Image = Properties.Resources.Card; // default
+                displayProduct.Image = Properties.Resources.Card;
             }
 
             Label namaProduk = new Label
@@ -146,6 +157,7 @@ namespace FinalProjek.View.Admin_View
                 TextAlign = ContentAlignment.MiddleCenter,
             };
 
+            // Tombol Edit
             Button buttonEdit = new Button
             {
                 Location = new Point(36, 246),
@@ -153,8 +165,11 @@ namespace FinalProjek.View.Admin_View
                 Font = new Font("Times New Roman", 9, FontStyle.Regular),
                 BackColor = Color.Wheat,
                 Text = "Edit",
+                Tag = produk,
             };
+            buttonEdit.Click += BtnEdit_Click;
 
+            // Tombol Hapus
             Button buttonHapus = new Button
             {
                 Location = new Point(103, 246),
@@ -163,8 +178,9 @@ namespace FinalProjek.View.Admin_View
                 BackColor = Color.Red,
                 ForeColor = Color.White,
                 Text = "Hapus",
+                Tag = produk.id_produk,
             };
-            buttonHapus.Click += (sender, e) => produkController.GetAllProduk();
+            buttonHapus.Click += BtnHapus_Click;
 
             panel.Controls.Add(displayProduct);
             panel.Controls.Add(namaProduk);
@@ -172,10 +188,11 @@ namespace FinalProjek.View.Admin_View
             panel.Controls.Add(stokProduk);
             panel.Controls.Add(buttonEdit);
             panel.Controls.Add(buttonHapus);
-            //panel.Controls.Add()
 
             return panel;
         }
+
+        // ==================== LOAD PRODUCTS ====================
 
         public void LoadProducts()
         {
@@ -190,27 +207,100 @@ namespace FinalProjek.View.Admin_View
             }
         }
 
-        private void btLogout_Click(object sender, EventArgs e)
+        // ==================== EDIT PRODUK ====================
+
+        private void BtnEdit_Click(object sender, EventArgs e)
         {
-            Login frmLogin = new Login();
-            frmLogin.FormClosed += (s, args) => this.Close();
-            frmLogin.Show();
-            this.Hide();
+            Button btn = sender as Button;
+            Produk produk = btn.Tag as Produk;
+
+            if (produk == null) return;
+
+            string newNama = ShowInputDialog("Edit Produk", "Masukkan nama produk baru:", produk.nama_produk);
+
+            if (!string.IsNullOrEmpty(newNama) && newNama != produk.nama_produk)
+            {
+                produk.nama_produk = newNama;
+                produkController.UpdateProduk(produk);
+
+                MessageBox.Show("Produk berhasil diupdate!", "Sukses", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                LoadProducts();
+            }
         }
 
-        private void panel1_Paint(object sender, PaintEventArgs e)
-        {
+        // ==================== HAPUS PRODUK ====================
 
+        private void BtnHapus_Click(object sender, EventArgs e)
+        {
+            Button btn = sender as Button;
+            int idProduk = (int)btn.Tag;
+
+            DialogResult confirm = MessageBox.Show("Yakin ingin menghapus produk ini?", "Konfirmasi",
+                MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+
+            if (confirm == DialogResult.Yes)
+            {
+                bool success = produkController.DeleteProduk(idProduk);
+                if (success)
+                {
+                    MessageBox.Show("Produk berhasil dihapus!", "Sukses", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    LoadProducts();
+                }
+                else
+                {
+                    MessageBox.Show("Gagal menghapus produk!", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+            }
         }
 
-        private void Stok_Click(object sender, EventArgs e)
-        {
+        // ==================== INPUT DIALOG ====================
 
+        private string ShowInputDialog(string title, string prompt, string defaultValue = "")
+        {
+            Form dialog = new Form();
+            dialog.Text = title;
+            dialog.Size = new Size(400, 180);
+            dialog.StartPosition = FormStartPosition.CenterParent;
+            dialog.FormBorderStyle = FormBorderStyle.FixedDialog;
+            dialog.MaximizeBox = false;
+            dialog.MinimizeBox = false;
+
+            Label lblPrompt = new Label();
+            lblPrompt.Text = prompt;
+            lblPrompt.Location = new Point(20, 20);
+            lblPrompt.Size = new Size(350, 25);
+
+            TextBox txtInput = new TextBox();
+            txtInput.Text = defaultValue;
+            txtInput.Location = new Point(20, 50);
+            txtInput.Size = new Size(350, 25);
+
+            Button btnOK = new Button();
+            btnOK.Text = "OK";
+            btnOK.Location = new Point(200, 90);
+            btnOK.Size = new Size(80, 30);
+            btnOK.DialogResult = DialogResult.OK;
+
+            Button btnCancel = new Button();
+            btnCancel.Text = "Batal";
+            btnCancel.Location = new Point(290, 90);
+            btnCancel.Size = new Size(80, 30);
+            btnCancel.DialogResult = DialogResult.Cancel;
+
+            dialog.Controls.Add(lblPrompt);
+            dialog.Controls.Add(txtInput);
+            dialog.Controls.Add(btnOK);
+            dialog.Controls.Add(btnCancel);
+
+            if (dialog.ShowDialog() == DialogResult.OK)
+            {
+                return txtInput.Text;
+            }
+            return "";
         }
 
-        private void btRefresh_Click(object sender, EventArgs e)
-        {
-            LoadProducts();
-        }
+        private void panel1_Paint(object sender, PaintEventArgs e) { }
+        private void Stok_Click(object sender, EventArgs e) { }
+        private void NamaProduk_Click(object sender, EventArgs e) { }
     }
 }
