@@ -226,7 +226,6 @@
             lbTotalPenjualan.Size = new Size(36, 26);
             lbTotalPenjualan.TabIndex = 2;
             lbTotalPenjualan.Text = "55";
-            lbTotalPenjualan.Click += Label_totalPenjualan_Click;
             // 
             // lbTotalPenghasilan
             // 
@@ -239,7 +238,6 @@
             lbTotalPenghasilan.Size = new Size(150, 26);
             lbTotalPenghasilan.TabIndex = 3;
             lbTotalPenghasilan.Text = "Rp. 1.450.000";
-            lbTotalPenghasilan.Click += Label_totalPenghasilan_Click;
             // 
             // btTambahProduk
             // 

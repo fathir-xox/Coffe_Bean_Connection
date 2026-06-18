@@ -204,5 +204,45 @@ namespace FinalProjek.Controler
             catch (Exception ex) { throw new Exception("Gagal mengambil akumulasi statistik: " + ex.Message); }
             return (jumlah, totalItem, omzet);
         }
+        public List<Transaksi> GetAllTransaksi()
+        {
+            List<Transaksi> listTrx = new List<Transaksi>();
+            try
+            {
+                // Ganti dbHelper.connStr sesuai dengan cara Anda memanggil koneksi database
+                using (var conn = new Npgsql.NpgsqlConnection(dbHelper.connStr))
+                {
+                    conn.Open();
+
+                    // Mengambil semua data dari tabel transaksi
+                    string query = "SELECT * FROM transaksi";
+
+                    using (var cmd = new Npgsql.NpgsqlCommand(query, conn))
+                    using (var reader = cmd.ExecuteReader())
+                    {
+                        while (reader.Read())
+                        {
+                            Transaksi trx = new Transaksi();
+
+                            // Sesuaikan string di dalam reader["..."] dengan nama kolom di database Anda
+                            trx.id_transaksi = Convert.ToInt32(reader["id_transaksi"]);
+                            trx.id_user = Convert.ToInt32(reader["id_user"]);
+                            trx.total_harga = Convert.ToInt32(reader["total_harga"]);
+                            trx.jumlah_bayar = Convert.ToInt32(reader["jumlah_bayar"]);
+                            trx.metode_bayar = reader["metode_bayar"].ToString();
+                            trx.status_transaksi = reader["status_transaksi"].ToString();
+
+                            listTrx.Add(trx);
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Gagal mengambil data transaksi: " + ex.Message, "Error Sistem", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+
+            return listTrx;
+        }
     }
 }
