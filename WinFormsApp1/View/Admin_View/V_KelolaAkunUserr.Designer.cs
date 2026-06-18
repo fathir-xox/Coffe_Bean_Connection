@@ -36,7 +36,6 @@
             lbNamaLengkapUser = new Label();
             btHapusUser = new Button();
             lbUsername = new Label();
-            btEditUser = new Button();
             panel3 = new Panel();
             label4 = new Label();
             label3 = new Label();
@@ -52,6 +51,7 @@
             btProduk = new Button();
             btKelolaAkunUser = new Button();
             btDashboar = new Button();
+            buttonEdit = new Button();
             panel1.SuspendLayout();
             flpKelolaUser.SuspendLayout();
             pmonitorstok.SuspendLayout();
@@ -92,12 +92,12 @@
             // 
             pmonitorstok.BackgroundImage = Properties.Resources.CardMonitorStokdalam;
             pmonitorstok.BackgroundImageLayout = ImageLayout.Stretch;
+            pmonitorstok.Controls.Add(buttonEdit);
             pmonitorstok.Controls.Add(lbstatusUser);
             pmonitorstok.Controls.Add(lbRoleUser);
             pmonitorstok.Controls.Add(lbNamaLengkapUser);
             pmonitorstok.Controls.Add(btHapusUser);
             pmonitorstok.Controls.Add(lbUsername);
-            pmonitorstok.Controls.Add(btEditUser);
             pmonitorstok.Location = new Point(3, 3);
             pmonitorstok.Name = "pmonitorstok";
             pmonitorstok.Size = new Size(1495, 92);
@@ -163,19 +163,6 @@
             lbUsername.TabIndex = 20;
             lbUsername.Text = "Username              ";
             lbUsername.Click += lbUsername_Click;
-            // 
-            // btEditUser
-            // 
-            btEditUser.BackColor = Color.DarkOrange;
-            btEditUser.Font = new Font("Times New Roman", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            btEditUser.ForeColor = Color.White;
-            btEditUser.Location = new Point(1210, 26);
-            btEditUser.Name = "btEditUser";
-            btEditUser.Size = new Size(125, 43);
-            btEditUser.TabIndex = 19;
-            btEditUser.Text = "Edit";
-            btEditUser.UseVisualStyleBackColor = false;
-            btEditUser.Click += btEditUser_Click;
             // 
             // panel3
             // 
@@ -366,6 +353,10 @@
             btDashboar.UseVisualStyleBackColor = false;
             btDashboar.Click += btDashboar_Click;
             // 
+            // buttonEdit
+            // 
+           
+            // 
             // V_KelolaAkunUserr
             // 
             AutoScaleDimensions = new SizeF(10F, 25F);
@@ -401,7 +392,6 @@
         private Panel pmonitorstok;
         private Button btHapusUser;
         private Label lbUsername;
-        private Button btEditUser;
         private Panel panel3;
         private Label label3;
         private Label label2;
@@ -410,5 +400,6 @@
         private Label label4;
         private Label lbstatusUser;
         private Label lbRoleUser;
+        private Button buttonEdit;
     }
 }

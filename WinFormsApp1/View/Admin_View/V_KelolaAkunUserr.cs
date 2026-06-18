@@ -1,7 +1,7 @@
 ﻿using FinalProjek.Controler;
 using FinalProjek.Interface;
-using FinalProjek.View;
 using FinalProjek.Model;
+using FinalProjek.View;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
@@ -71,7 +71,7 @@ namespace FinalProjek.View.Admin_View
 
             Label lbStatus = new Label
             {
-                Text = user.isactive ? "Aktif" : "Tidak Aktif",
+                Text = user.isactive ? "Aktif" : "Non Aktif",
                 Location = new Point(988, 28),
                 Size = new Size(144, 32),
                 BackColor = Color.Transparent,
@@ -141,7 +141,14 @@ namespace FinalProjek.View.Admin_View
         // ============================================================
         private void EditUser(User user)
         {
-            MessageBox.Show("Fitur Edit User: " + user.username, "Informasi", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            // Membuka form Edit dan MELEMPAR data 'user' yang sedang diklik
+            V_EditUser formEdit = new V_EditUser(user);
+
+            // Jika user menekan tombol SIMPAN dan berhasil (DialogResult.OK)
+            if (formEdit.ShowDialog() == DialogResult.OK)
+            {
+                LoadData(); // Segarkan ulang tabel agar data baru langsung muncul!
+            }
         }
 
         // ============================================================
@@ -247,7 +254,6 @@ namespace FinalProjek.View.Admin_View
         private void lbNamaLengkapUser_Click(object sender, EventArgs e) { }
         private void lbRoleUser_Click(object sender, EventArgs e) { }
         private void lbstatusUser_Click(object sender, EventArgs e) { }
-        private void btEditUser_Click(object sender, EventArgs e) { }
         private void btHapusUser_Click(object sender, EventArgs e) { }
     }
 }

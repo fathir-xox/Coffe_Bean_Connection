@@ -83,7 +83,7 @@ namespace FinalProjek.Controler
 
                     string query = @"
                         INSERT INTO users (username, password, role, full_name, isactive) 
-                        VALUES (@username, @password, @role, @full_name, @isactive)";
+                        VALUES (@username, @password, @role::role_enum, @full_name, @isactive)";
 
                     string hashedPassword = PWhelper.HashPassword(user.password);
 
@@ -100,10 +100,14 @@ namespace FinalProjek.Controler
                     }
                 }
             }
+            catch (PostgresException ex) when (ex.SqlState == "23505")
+            {
+                // Ini akan menampilkan pesan error yang ramah kepada user
+                throw new Exception("Username ini sudah dipakai. Silakan pilih username lain!");
+            }
             catch (Exception ex)
             {
-                MessageBox.Show($"REGISTER ERROR: {ex}", "Connection Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                return false;
+                throw new Exception("Gagal mendaftarkan akun baru: " + ex.Message);
             }
         }
 
@@ -244,6 +248,42 @@ namespace FinalProjek.Controler
             catch (Exception ex)
             {
                 MessageBox.Show("Gagal mengaktifkan user: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return false;
+            }
+        }
+
+        public bool UpdateUser(User user)
+        {
+            try
+            {
+                using (var conn = new Npgsql.NpgsqlConnection(dbHelper.connStr))
+                {
+                    conn.Open();
+                    // Perhatikan penggunaan @role::role_enum agar sesuai dengan tipe data PostgreSQL Anda
+                    string query = @"
+                UPDATE users 
+                SET username = @username, 
+                    full_name = @full_name, 
+                    ""role"" = @role::role_enum, 
+                    isactive = @isactive 
+                WHERE id_user = @id_user";
+
+                    using (var cmd = new Npgsql.NpgsqlCommand(query, conn))
+                    {
+                        cmd.Parameters.AddWithValue("@username", user.username);
+                        cmd.Parameters.AddWithValue("@full_name", user.full_name);
+                        cmd.Parameters.AddWithValue("@role", user.role.ToString());
+                        cmd.Parameters.AddWithValue("@isactive", user.isactive);
+                        cmd.Parameters.AddWithValue("@id_user", user.id_user);
+
+                        int result = cmd.ExecuteNonQuery();
+                        return result > 0;
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Gagal mengupdate user: " + ex.Message, "Error Database", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return false;
             }
         }
