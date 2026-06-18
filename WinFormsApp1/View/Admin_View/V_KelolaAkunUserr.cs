@@ -4,17 +4,14 @@ using FinalProjek.View;
 using FinalProjek.Model;
 using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
 using System.Drawing;
-using System.Text;
 using System.Windows.Forms;
 
 namespace FinalProjek.View.Admin_View
 {
     public partial class V_KelolaAkunUserr : Form
     {
-        private AuthController kelolauser = new AuthController();
+        private AuthController authController = new AuthController();
 
         public V_KelolaAkunUserr()
         {
@@ -23,13 +20,15 @@ namespace FinalProjek.View.Admin_View
             LoadData();
         }
 
+        // ============================================================
+        // CREATE USER PANEL (Card per user)
+        // ============================================================
         public Panel CreateUserPanel(User user)
         {
             Panel panel = new Panel
             {
-                Size = new Size(1495, 92), // Sesuaikan tinggi dengan gambar background Anda
+                Size = new Size(1495, 92),
                 Margin = new Padding(3),
-                // UBAH "CardKelolaUser" dengan nama gambar background baris Anda di Resources
                 BackgroundImage = Properties.Resources.CardMonitorStokdalam,
                 BackgroundImageLayout = ImageLayout.Stretch,
             };
@@ -50,7 +49,7 @@ namespace FinalProjek.View.Admin_View
                 Location = new Point(280, 29),
                 Size = new Size(335, 32),
                 BackColor = Color.Transparent,
-                ForeColor = Color.FromArgb(100, 60, 20), // Warna Coklat Kopi
+                ForeColor = Color.FromArgb(100, 60, 20),
                 Font = new Font("Times New Roman", 14, FontStyle.Regular),
                 TextAlign = ContentAlignment.MiddleLeft,
             };
@@ -65,7 +64,6 @@ namespace FinalProjek.View.Admin_View
                 TextAlign = ContentAlignment.MiddleCenter,
             };
 
-            // Menyesuaikan warna font berdasarkan Role
             if (user.role.ToString().ToLower() == "admin")
                 lbRole.ForeColor = Color.DarkGoldenrod;
             else
@@ -77,7 +75,7 @@ namespace FinalProjek.View.Admin_View
                 Location = new Point(988, 28),
                 Size = new Size(144, 32),
                 BackColor = Color.Transparent,
-                ForeColor = Color.MediumSeaGreen,
+                ForeColor = user.isactive ? Color.MediumSeaGreen : Color.Red,
                 Font = new Font("Times New Roman", 14, FontStyle.Bold),
                 TextAlign = ContentAlignment.MiddleCenter,
             };
@@ -116,15 +114,15 @@ namespace FinalProjek.View.Admin_View
             return panel;
         }
 
+        // ============================================================
+        // LOAD DATA (Hanya user aktif)
+        // ============================================================
         private void LoadData()
         {
             try
             {
-                // Bersihkan kontrol lama pada FlowLayoutPanel
                 flpKelolaUser.Controls.Clear();
-
-                // Pastikan AuthController memiliki method GetAllUsers() yang mereturn List<User>
-                var users = kelolauser.GetAllUsers();
+                var users = authController.GetActiveUsers(); // Hanya yang aktif
 
                 foreach (User user in users)
                 {
@@ -138,27 +136,44 @@ namespace FinalProjek.View.Admin_View
             }
         }
 
+        // ============================================================
+        // EDIT USER
+        // ============================================================
         private void EditUser(User user)
         {
-            // Logika popup/form edit user di sini
-            MessageBox.Show("Edit user: " + user.username);
+            MessageBox.Show("Fitur Edit User: " + user.username, "Informasi", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
 
+        // ============================================================
+        // HAPUS USER (SOFT DELETE)
+        // ============================================================
         private void HapusUser(User user)
         {
-            // Logika konfirmasi hapus user di sini
-            DialogResult dialogResult = MessageBox.Show($"Yakin ingin menghapus user {user.username}?", "Hapus User", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+            DialogResult dialogResult = MessageBox.Show(
+                $"Yakin ingin menonaktifkan user '{user.username}'? (Data tetap tersimpan di database)",
+                "Konfirmasi Hapus",
+                MessageBoxButtons.YesNo,
+                MessageBoxIcon.Warning
+            );
+
             if (dialogResult == DialogResult.Yes)
             {
-                // kelolauser.DeleteUser(user.id_user);
-                // LoadData();
-                MessageBox.Show("User berhasil dihapus (Contoh).");
+                bool berhasil = authController.DeleteUser(user.id_user);
+                if (berhasil)
+                {
+                    MessageBox.Show("User berhasil dinonaktifkan.", "Sukses", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    LoadData(); // Refresh tampilan
+                }
+                else
+                {
+                    MessageBox.Show("Gagal menonaktifkan user.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
             }
         }
 
-        // ==============================================================
-        // LOGIKA NAVIGASI SIDEBAR
-        // ==============================================================
+        // ============================================================
+        // NAVIGASI SIDEBAR
+        // ============================================================
         private void btDashboar_Click(object sender, EventArgs e)
         {
             IProduk produkController = new ProdukController();
@@ -202,7 +217,7 @@ namespace FinalProjek.View.Admin_View
 
         private void btKelolaAkunUser_Click(object sender, EventArgs e)
         {
-            LoadData(); // Refresh halaman saat ini
+            LoadData();
         }
 
         private void btLogout_Click(object sender, EventArgs e)
@@ -217,7 +232,7 @@ namespace FinalProjek.View.Admin_View
         {
             Register frmRegister = new Register();
             frmRegister.ShowDialog();
-            LoadData(); // Otomatis refresh list setelah nambah user
+            LoadData();
         }
 
         private void btRefresh_Click(object sender, EventArgs e)
@@ -225,9 +240,9 @@ namespace FinalProjek.View.Admin_View
             LoadData();
         }
 
-        // ==============================================================
-        // EVENT KOSONG (Kabel dari Designer agar tidak error)
-        // ==============================================================
+        // ============================================================
+        // EVENT KOSONG (UNTUK DESIGNER)
+        // ============================================================
         private void lbUsername_Click(object sender, EventArgs e) { }
         private void lbNamaLengkapUser_Click(object sender, EventArgs e) { }
         private void lbRoleUser_Click(object sender, EventArgs e) { }

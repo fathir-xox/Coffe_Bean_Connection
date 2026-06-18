@@ -3,6 +3,7 @@ using Npgsql;
 using FinalProjek.Model;
 using FinalProjek.Helper;
 using System;
+using System.Collections.Generic;
 using System.Windows.Forms;
 
 namespace FinalProjek.Controler
@@ -16,6 +17,9 @@ namespace FinalProjek.Controler
             dbHelper = new DbContext();
         }
 
+        // ============================================================
+        // LOGIN
+        // ============================================================
         public User login(User user)
         {
             try
@@ -24,36 +28,36 @@ namespace FinalProjek.Controler
                 {
                     conn.Open();
 
-                    // TAMBAHKAN id_user DI SINI
                     string query = @"
-                    SELECT id_user, ""role""::text, full_name, username, password FROM users 
-                    WHERE username = @username AND password = @password LIMIT 1";
+                        SELECT id_user, ""role""::text, full_name, username, password 
+                        FROM users 
+                        WHERE username = @username AND password = @password 
+                        LIMIT 1";
 
                     string hashedPassword = PWhelper.HashPassword(user.password);
 
-                using (var cmd = new NpgsqlCommand(query, conn))
-                {
-                    cmd.Parameters.AddWithValue("@username", user.username);
+                    using (var cmd = new NpgsqlCommand(query, conn))
+                    {
+                        cmd.Parameters.AddWithValue("@username", user.username);
+                        cmd.Parameters.AddWithValue("@password", hashedPassword);
 
                         using (var read = cmd.ExecuteReader())
                         {
                             if (read.Read())
                             {
-                                // Urutan harus sama dengan SELECT di atas
-                                int idUserDb = read.GetInt32(0);     // 0: id_user
-                                string roleStr = read.GetString(1);  // 1: role
-
+                                int idUserDb = read.GetInt32(0);
+                                string roleStr = read.GetString(1);
                                 UserRole roleEnum = (UserRole)Enum.Parse(typeof(UserRole), roleStr, true);
 
-                                User loggedInuser = new User
+                                User loggedInUser = new User
                                 {
-                                    id_user = idUserDb,              // Masukkan ID yang diambil dari DB
+                                    id_user = idUserDb,
                                     role = roleEnum,
-                                    full_name = read.GetString(2),   // 2: full_name
-                                    username = read.GetString(3),    // 3: username
-                                    password = read.GetString(4)     // 4: password
+                                    full_name = read.GetString(2),
+                                    username = read.GetString(3),
+                                    password = read.GetString(4)
                                 };
-                                return loggedInuser;
+                                return loggedInUser;
                             }
                             return null;
                         }
@@ -66,7 +70,9 @@ namespace FinalProjek.Controler
             }
         }
 
-
+        // ============================================================
+        // REGISTER
+        // ============================================================
         public bool Register(User user)
         {
             try
@@ -75,21 +81,18 @@ namespace FinalProjek.Controler
                 {
                     conn.Open();
 
-                    // Gunakan @role::role_enum agar parameter C# diterjemahkan ke Enum PostgreSQL
                     string query = @"
-                            INSERT INTO users (username, password, ""role"", full_name, isactive) 
-                            VALUES (@username, @password, @role::role_enum, @full_name, @isactive)";
+                        INSERT INTO users (username, password, role, full_name, isactive) 
+                        VALUES (@username, @password, @role, @full_name, @isactive)";
+
+                    string hashedPassword = PWhelper.HashPassword(user.password);
 
                     using (var cmd = new NpgsqlCommand(query, conn))
                     {
                         cmd.Parameters.AddWithValue("@username", user.username);
                         cmd.Parameters.AddWithValue("@password", hashedPassword);
-
-                        // user.role.ToString() akan mengubah Enum C# menjadi string "Admin" atau "Kasir"
                         cmd.Parameters.AddWithValue("@role", user.role.ToString());
                         cmd.Parameters.AddWithValue("@full_name", user.full_name);
-
-                        // Saya biarkan @isactive true secara otomatis untuk setiap user baru
                         cmd.Parameters.AddWithValue("@isactive", true);
 
                         int result = cmd.ExecuteNonQuery();
@@ -99,9 +102,14 @@ namespace FinalProjek.Controler
             }
             catch (Exception ex)
             {
-                throw new Exception("Gagal mendaftarkan akun baru: " + ex.Message);
+                MessageBox.Show($"REGISTER ERROR: {ex}", "Connection Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return false;
             }
         }
+
+        // ============================================================
+        // GET ALL USERS (Semua user, termasuk yang nonaktif)
+        // ============================================================
         public List<User> GetAllUsers()
         {
             List<User> listUser = new List<User>();
@@ -111,30 +119,27 @@ namespace FinalProjek.Controler
                 {
                     conn.Open();
 
-                    // Ambil id_user, full_name, username, role, dan isactive
-                    string query = @"SELECT id_user, full_name, username, ""role""::text, isactive FROM users ORDER BY id_user ASC";
+                    string query = @"
+                        SELECT id_user, full_name, username, ""role""::text, isactive 
+                        FROM users 
+                        ORDER BY id_user ASC";
 
                     using (var cmd = new NpgsqlCommand(query, conn))
                     using (var reader = cmd.ExecuteReader())
                     {
                         while (reader.Read())
                         {
-                            // Parsing Enum Role seperti yang Anda lakukan di fungsi Login
                             string roleStr = reader.GetString(3);
                             UserRole roleEnum = (UserRole)Enum.Parse(typeof(UserRole), roleStr, true);
 
-                            User usr = new User
+                            listUser.Add(new User
                             {
                                 id_user = reader.GetInt32(0),
                                 full_name = reader.GetString(1),
                                 username = reader.GetString(2),
                                 role = roleEnum,
-                                // Jika ada property isactive di class User, Anda bisa tambahkan:
-                                //isactive = reader.GetBoolean(4)
-                                isactive = !reader.IsDBNull(4) && reader.GetBoolean(4)
-                            };
-
-                            listUser.Add(usr);
+                                isactive = reader.GetBoolean(4)
+                            });
                         }
                     }
                 }
@@ -143,8 +148,104 @@ namespace FinalProjek.Controler
             {
                 MessageBox.Show("Gagal mengambil daftar user: " + ex.Message, "Sistem Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
-
             return listUser;
+        }
+
+        // ============================================================
+        // GET ACTIVE USERS (Hanya user aktif)
+        // ============================================================
+        public List<User> GetActiveUsers()
+        {
+            List<User> listUser = new List<User>();
+            try
+            {
+                using (var conn = new NpgsqlConnection(dbHelper.connStr))
+                {
+                    conn.Open();
+
+                    string query = @"
+                        SELECT id_user, full_name, username, ""role""::text, isactive 
+                        FROM users 
+                        WHERE isactive = true
+                        ORDER BY id_user ASC";
+
+                    using (var cmd = new NpgsqlCommand(query, conn))
+                    using (var reader = cmd.ExecuteReader())
+                    {
+                        while (reader.Read())
+                        {
+                            string roleStr = reader.GetString(3);
+                            UserRole roleEnum = (UserRole)Enum.Parse(typeof(UserRole), roleStr, true);
+
+                            listUser.Add(new User
+                            {
+                                id_user = reader.GetInt32(0),
+                                full_name = reader.GetString(1),
+                                username = reader.GetString(2),
+                                role = roleEnum,
+                                isactive = reader.GetBoolean(4)
+                            });
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Gagal mengambil daftar user aktif: " + ex.Message, "Sistem Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            return listUser;
+        }
+
+        // ============================================================
+        // SOFT DELETE (Nonaktifkan user)
+        // ============================================================
+        public bool DeleteUser(int id_user)
+        {
+            try
+            {
+                using (var conn = new NpgsqlConnection(dbHelper.connStr))
+                {
+                    conn.Open();
+                    string query = "UPDATE users SET isactive = false WHERE id_user = @id";
+                    using (var cmd = new NpgsqlCommand(query, conn))
+                    {
+                        cmd.Parameters.AddWithValue("@id", id_user);
+                        int rowsAffected = cmd.ExecuteNonQuery();
+                        return rowsAffected > 0;
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Gagal menonaktifkan user: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return false;
+            }
+        }
+
+        // ============================================================
+        // RESTORE USER (Aktifkan kembali user)
+        // ============================================================
+        public bool RestoreUser(int id_user)
+        {
+            try
+            {
+                using (var conn = new NpgsqlConnection(dbHelper.connStr))
+                {
+                    conn.Open();
+                    string query = "UPDATE users SET isactive = true WHERE id_user = @id";
+                    using (var cmd = new NpgsqlCommand(query, conn))
+                    {
+                        cmd.Parameters.AddWithValue("@id", id_user);
+                        int rowsAffected = cmd.ExecuteNonQuery();
+                        return rowsAffected > 0;
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Gagal mengaktifkan user: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return false;
+            }
         }
     }
 }

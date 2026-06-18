@@ -48,6 +48,47 @@ namespace FinalProjek.Controler
                 throw new Exception($"Gagal menambah produk: {ex.Message}");
             }
         }
+        public List<Produk> GetByUserId(int id_user)
+        {
+            List<Produk> produks = new List<Produk>();
+
+            try
+            {
+                using (NpgsqlConnection connection = new NpgsqlConnection(dbHelper.connStr))
+                {
+                    connection.Open();
+                    string query = @"SELECT id_produk, nama_produk, harga, stok, deskripsi, id_kategori, imageproduk 
+                                     FROM produk WHERE isactive = true";
+
+                    using (NpgsqlCommand cmd = new NpgsqlCommand(query, connection))
+                    {
+                        cmd.Parameters.AddWithValue("@idUser", id_user);
+                        using (NpgsqlDataReader reader = cmd.ExecuteReader())
+                        {
+                            while (reader.Read())
+                            {
+                                Produk produk = new Produk
+                                {
+                                    id_produk = reader.GetInt32(0),
+                                    nama_produk = reader.GetString(1),
+                                    harga = reader.GetInt32(2),
+                                    stok = reader.GetInt32(3),
+                                    deskripsi = reader.GetString(4),
+                                    id_kategori = reader.GetInt32(5),
+                                    imageproduk = reader["imageproduk"] as byte[]
+                                };
+                                produks.Add(produk);
+                            }
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Get Product By User ID Error: {ex.Message}", "Connection Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            return produks;
+        }
         public List<Produk> GetAllProduk()
         {
             List<Produk> produks = new List<Produk>();

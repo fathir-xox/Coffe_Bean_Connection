@@ -89,7 +89,7 @@ namespace FinalProjek.View.Admin_View
                 Produk produk = new Produk
                 {
                     nama_produk = nama,
-                    harga = harga,
+                    harga = (int)harga,
                     stok = stok,
                     deskripsi = deskripsi,
                     id_kategori = (int)cbIdKategori.SelectedValue,

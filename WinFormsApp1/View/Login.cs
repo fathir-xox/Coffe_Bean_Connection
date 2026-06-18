@@ -112,10 +112,6 @@ namespace FinalProjek.View
 
         }
 
-        private void linkLabelRegister_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
-        {
-            Register frmRegister = new Register();
-            frmRegister.ShowDialog();
-        }
+        
     }
 }
