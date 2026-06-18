@@ -43,8 +43,8 @@
             label4 = new Label();
             label5 = new Label();
             label6 = new Label();
-            Label_totalPenjualan = new Label();
-            Label_totalPenghasilan = new Label();
+            lbTotalPenjualan = new Label();
+            lbTotalPenghasilan = new Label();
             btTambahProduk = new Button();
             panel6 = new Panel();
             btLogout = new Button();
@@ -245,29 +245,29 @@
             label6.TabIndex = 3;
             label6.Text = "Total Penghasilan";
             // 
-            // Label_totalPenjualan
+            // lbTotalPenjualan
             // 
-            Label_totalPenjualan.AutoSize = true;
-            Label_totalPenjualan.BackColor = Color.Transparent;
-            Label_totalPenjualan.Font = new Font("Times New Roman", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            Label_totalPenjualan.ForeColor = Color.FromArgb(100, 60, 20);
-            Label_totalPenjualan.Location = new Point(724, 214);
-            Label_totalPenjualan.Name = "Label_totalPenjualan";
-            Label_totalPenjualan.Size = new Size(36, 26);
-            Label_totalPenjualan.TabIndex = 2;
-            Label_totalPenjualan.Text = "55";
+            lbTotalPenjualan.AutoSize = true;
+            lbTotalPenjualan.BackColor = Color.Transparent;
+            lbTotalPenjualan.Font = new Font("Times New Roman", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            lbTotalPenjualan.ForeColor = Color.FromArgb(100, 60, 20);
+            lbTotalPenjualan.Location = new Point(724, 214);
+            lbTotalPenjualan.Name = "lbTotalPenjualan";
+            lbTotalPenjualan.Size = new Size(36, 26);
+            lbTotalPenjualan.TabIndex = 2;
+            lbTotalPenjualan.Text = "55";
             // 
-            // Label_totalPenghasilan
+            // lbTotalPenghasilan
             // 
-            Label_totalPenghasilan.AutoSize = true;
-            Label_totalPenghasilan.BackColor = Color.Transparent;
-            Label_totalPenghasilan.Font = new Font("Times New Roman", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            Label_totalPenghasilan.ForeColor = Color.FromArgb(100, 60, 20);
-            Label_totalPenghasilan.Location = new Point(1053, 214);
-            Label_totalPenghasilan.Name = "Label_totalPenghasilan";
-            Label_totalPenghasilan.Size = new Size(150, 26);
-            Label_totalPenghasilan.TabIndex = 3;
-            Label_totalPenghasilan.Text = "Rp. 1.450.000";
+            lbTotalPenghasilan.AutoSize = true;
+            lbTotalPenghasilan.BackColor = Color.Transparent;
+            lbTotalPenghasilan.Font = new Font("Times New Roman", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            lbTotalPenghasilan.ForeColor = Color.FromArgb(100, 60, 20);
+            lbTotalPenghasilan.Location = new Point(1053, 214);
+            lbTotalPenghasilan.Name = "lbTotalPenghasilan";
+            lbTotalPenghasilan.Size = new Size(150, 26);
+            lbTotalPenghasilan.TabIndex = 3;
+            lbTotalPenghasilan.Text = "Rp. 1.450.000";
             // 
             // btTambahProduk
             // 
@@ -291,9 +291,9 @@
             panel6.Controls.Add(btKategori);
             panel6.Controls.Add(btProduk);
             panel6.Controls.Add(btRefresh);
-            panel6.Controls.Add(Label_totalPenghasilan);
+            panel6.Controls.Add(lbTotalPenghasilan);
             panel6.Controls.Add(btTambahProduk);
-            panel6.Controls.Add(Label_totalPenjualan);
+            panel6.Controls.Add(lbTotalPenjualan);
             panel6.Controls.Add(label6);
             panel6.Controls.Add(Label_totalProduk);
             panel6.Controls.Add(label5);
@@ -394,9 +394,9 @@
         private FlowLayoutPanel flowLayoutPanel1;
         private Label Label_totalProduk;
         private Label label4;
-        private Label Label_totalPenjualan;
+        private Label lbTotalPenjualan;
         private Label label5;
-        private Label Label_totalPenghasilan;
+        private Label lbTotalPenghasilan;
         private Label label6;
         private Panel panel8;
         private PictureBox pictureBox1;

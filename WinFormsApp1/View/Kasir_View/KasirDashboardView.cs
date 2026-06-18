@@ -81,7 +81,7 @@ namespace FinalProjek.View.Kasir_View
 
                 Panel pnlItem = new Panel
                 {
-                    Size = new Size(lebarKartu, 75),
+                    Size = new Size(lebarKartu, 90),
                     Margin = new Padding(3, 3, 3, 5),
                     BackColor = Color.White,
                     BorderStyle = BorderStyle.FixedSingle
@@ -107,20 +107,20 @@ namespace FinalProjek.View.Kasir_View
 
                 // PERBAIKAN JARAK: Memberikan ruang napas yang sangat lega antar tombol
                 int posisiPlus = lebarKartu - 40;  // Tombol Plus aman 10px dari ujung kanan
-                int posisiQty = posisiPlus - 40;   // Jarak 40px untuk Angka Qty (Sangat Lega)
+                int posisiQty = posisiPlus - 45;   // Jarak 40px untuk Angka Qty (Sangat Lega)
                 int posisiMin = posisiQty - 35;    // Tombol Minus
 
                 Button btnMin = new Button
                 {
                     Text = "-",
-                    Location = new Point(posisiMin, 22),
+                    Location = new Point(posisiMin, 30),
                     Size = new Size(30, 30),
                     BackColor = Color.Crimson,
                     ForeColor = Color.White,
                     FlatStyle = FlatStyle.Flat,
-                    Font = new Font("Arial", 14, FontStyle.Bold),
+                    Font = new Font("Arial", 13, FontStyle.Bold),
                     TextAlign = ContentAlignment.MiddleCenter,
-                    Padding = new Padding(0, 0, 0, 2),
+                    Padding = new Padding(0, 2, 0, 0),
                     Cursor = Cursors.Hand
                 };
                 btnMin.FlatAppearance.BorderSize = 0;
@@ -135,24 +135,24 @@ namespace FinalProjek.View.Kasir_View
                 Label lblQty = new Label
                 {
                     Text = item.qty.ToString(),
-                    Location = new Point(posisiQty, 27),
-                    Size = new Size(35, 20), // LEBAR LEGA
-                    AutoSize = false, // Wajib false agar tetap di tengah
+                    Location = new Point(posisiQty, 30),
+                    Size = new Size(40, 30), 
+                    AutoSize = false, 
                     TextAlign = ContentAlignment.MiddleCenter,
-                    Font = new Font("Segoe UI", 11, FontStyle.Bold)
+                    Font = new Font("Segoe UI", 12, FontStyle.Bold)
                 };
 
                 Button btnPlus = new Button
                 {
                     Text = "+",
-                    Location = new Point(posisiPlus, 22),
+                    Location = new Point(posisiPlus, 30),
                     Size = new Size(30, 30),
                     BackColor = Color.MediumSeaGreen,
                     ForeColor = Color.White,
                     FlatStyle = FlatStyle.Flat,
-                    Font = new Font("Arial", 14, FontStyle.Bold),
+                    Font = new Font("Arial", 13, FontStyle.Bold),
                     TextAlign = ContentAlignment.MiddleCenter,
-                    Padding = new Padding(0, 0, 0, 2),
+                    Padding = new Padding(0, 2, 0, 0),
                     Cursor = Cursors.Hand
                 };
                 btnPlus.FlatAppearance.BorderSize = 0;

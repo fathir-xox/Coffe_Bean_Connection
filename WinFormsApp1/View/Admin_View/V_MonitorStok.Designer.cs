@@ -29,6 +29,7 @@
         private void InitializeComponent()
         {
             panel1 = new Panel();
+            flpMonitorStok = new FlowLayoutPanel();
             btLogout = new Button();
             btRiwayatTransaksi = new Button();
             btMonitorStok = new Button();
@@ -36,7 +37,6 @@
             btProduk = new Button();
             btKelolaAkunUser = new Button();
             btDashboar = new Button();
-            flpMonitorStok = new FlowLayoutPanel();
             panel1.SuspendLayout();
             SuspendLayout();
             // 
@@ -55,6 +55,16 @@
             panel1.Name = "panel1";
             panel1.Size = new Size(1898, 1027);
             panel1.TabIndex = 0;
+            // 
+            // flpMonitorStok
+            // 
+            flpMonitorStok.AllowDrop = true;
+            flpMonitorStok.AutoScroll = true;
+            flpMonitorStok.BackColor = Color.Transparent;
+            flpMonitorStok.Location = new Point(351, 258);
+            flpMonitorStok.Name = "flpMonitorStok";
+            flpMonitorStok.Size = new Size(1535, 754);
+            flpMonitorStok.TabIndex = 17;
             // 
             // btLogout
             // 
@@ -146,16 +156,6 @@
             btDashboar.Text = "Dashboard";
             btDashboar.UseVisualStyleBackColor = false;
             btDashboar.Click += btDashboar_Click;
-            // 
-            // flpMonitorStok
-            // 
-            flpMonitorStok.AllowDrop = true;
-            flpMonitorStok.AutoScroll = true;
-            flpMonitorStok.BackColor = Color.Transparent;
-            flpMonitorStok.Location = new Point(351, 152);
-            flpMonitorStok.Name = "flpMonitorStok";
-            flpMonitorStok.Size = new Size(1535, 860);
-            flpMonitorStok.TabIndex = 17;
             // 
             // V_MonitorStok
             // 
