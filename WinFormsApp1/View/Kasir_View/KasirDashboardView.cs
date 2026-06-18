@@ -71,73 +71,73 @@ namespace FinalProjek.View.Kasir_View
             flpKeranjang.Controls.Clear();
             totalBelanja = 0;
 
-            // PERBAIKAN FATAL: Kita kurangi 25 piksel (Jalur VIP untuk Scrollbar agar tidak menabrak tombol)
-            int lebarKartu = flpKeranjang.Width - 25;
-            if (lebarKartu < 200) lebarKartu = 320;
+            // Lebar kartu tetap, tidak usah dihitung manual
+            int lebarKartu = 350; // ukuran tetap, rapi
 
             foreach (var item in keranjangBelanja)
             {
                 totalBelanja += item.subtotal;
 
+                // Panel item dengan ukuran tetap
                 Panel pnlItem = new Panel
                 {
-                    Size = new Size(lebarKartu, 90),
-                    Margin = new Padding(3, 3, 3, 5),
+                    Width = lebarKartu,
+                    Height = 70,
+                    Margin = new Padding(5, 5, 5, 8),
                     BackColor = Color.White,
                     BorderStyle = BorderStyle.FixedSingle
                 };
 
+                // ---------- Kiri: Nama & Harga ----------
                 Label lblNama = new Label
                 {
                     Text = item.nama_produk,
-                    Location = new Point(10, 12),
-                    Size = new Size(lebarKartu - 150, 25), // Ruang teks dikurangi agar tidak menabrak minus
-                    AutoEllipsis = true,
-                    Font = new Font("Segoe UI", 11, FontStyle.Bold)
+                    Location = new Point(10, 8),
+                    Size = new Size(200, 25),
+                    Font = new Font("Segoe UI", 10, FontStyle.Bold)
                 };
 
                 Label lblSubtotal = new Label
                 {
                     Text = $"Rp {item.subtotal:N0}",
-                    Location = new Point(10, 40),
-                    AutoSize = true,
+                    Location = new Point(10, 38),
+                    Size = new Size(200, 25),
                     ForeColor = Color.DarkOrange,
                     Font = new Font("Segoe UI", 10, FontStyle.Bold)
                 };
 
-                // PERBAIKAN JARAK: Memberikan ruang napas yang sangat lega antar tombol
-                int posisiPlus = lebarKartu - 40;  // Tombol Plus aman 10px dari ujung kanan
-                int posisiQty = posisiPlus - 45;   // Jarak 40px untuk Angka Qty (Sangat Lega)
-                int posisiMin = posisiQty - 35;    // Tombol Minus
-
+                // ---------- Kanan: Tombol - Qty + ----------
                 Button btnMin = new Button
                 {
-                    Text = "-",
-                    Location = new Point(posisiMin, 30),
-                    Size = new Size(30, 30),
+                    Text = "−",
+                    Location = new Point(250, 18),
+                    Size = new Size(28, 28),
                     BackColor = Color.Crimson,
                     ForeColor = Color.White,
                     FlatStyle = FlatStyle.Flat,
-                    Font = new Font("Arial", 13, FontStyle.Bold),
-                    TextAlign = ContentAlignment.MiddleCenter,
-                    Padding = new Padding(0, 2, 0, 0),
+                    Font = new Font("Arial", 12, FontStyle.Bold),
                     Cursor = Cursors.Hand
                 };
                 btnMin.FlatAppearance.BorderSize = 0;
                 btnMin.Click += (s, e) =>
                 {
-                    if (item.qty > 1) { item.qty -= 1; item.subtotal = item.qty * item.harga; }
-                    else { keranjangBelanja.Remove(item); }
+                    if (item.qty > 1)
+                    {
+                        item.qty -= 1;
+                        item.subtotal = item.qty * item.harga;
+                    }
+                    else
+                    {
+                        keranjangBelanja.Remove(item);
+                    }
                     RefreshKeranjang();
                 };
 
-                // PERBAIKAN QTY: Lebar kotaknya dibesarkan dari 30 ke 35 agar angka tidak terpotong
                 Label lblQty = new Label
                 {
                     Text = item.qty.ToString(),
-                    Location = new Point(posisiQty, 30),
-                    Size = new Size(40, 30), 
-                    AutoSize = false, 
+                    Location = new Point(285, 18),
+                    Size = new Size(28, 28),
                     TextAlign = ContentAlignment.MiddleCenter,
                     Font = new Font("Segoe UI", 12, FontStyle.Bold)
                 };
@@ -145,38 +145,42 @@ namespace FinalProjek.View.Kasir_View
                 Button btnPlus = new Button
                 {
                     Text = "+",
-                    Location = new Point(posisiPlus, 30),
-                    Size = new Size(30, 30),
+                    Location = new Point(318, 18),
+                    Size = new Size(28, 28),
                     BackColor = Color.MediumSeaGreen,
                     ForeColor = Color.White,
                     FlatStyle = FlatStyle.Flat,
-                    Font = new Font("Arial", 13, FontStyle.Bold),
-                    TextAlign = ContentAlignment.MiddleCenter,
-                    Padding = new Padding(0, 2, 0, 0),
+                    Font = new Font("Arial", 12, FontStyle.Bold),
                     Cursor = Cursors.Hand
                 };
                 btnPlus.FlatAppearance.BorderSize = 0;
                 btnPlus.Click += (s, e) =>
                 {
                     var produkAsli = produkController.GetAllProduk().Find(p => p.id_produk == item.id_produk);
-                    if (produkAsli != null)
+                    if (produkAsli != null && item.qty + 1 <= produkAsli.stok)
                     {
-                        if (item.qty + 1 > produkAsli.stok)
-                        {
-                            MessageBox.Show("Stok habis!", "Peringatan", MessageBoxButtons.OK, MessageBoxIcon.Warning); return;
-                        }
-                        item.qty += 1; item.subtotal = item.qty * item.harga; RefreshKeranjang();
+                        item.qty += 1;
+                        item.subtotal = item.qty * item.harga;
+                        RefreshKeranjang();
+                    }
+                    else
+                    {
+                        MessageBox.Show("Stok habis!", "Peringatan", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                     }
                 };
 
-                pnlItem.Controls.Add(lblNama); pnlItem.Controls.Add(lblSubtotal);
-                pnlItem.Controls.Add(btnMin); pnlItem.Controls.Add(lblQty); pnlItem.Controls.Add(btnPlus);
+                pnlItem.Controls.Add(lblNama);
+                pnlItem.Controls.Add(lblSubtotal);
+                pnlItem.Controls.Add(btnMin);
+                pnlItem.Controls.Add(lblQty);
+                pnlItem.Controls.Add(btnPlus);
 
                 flpKeranjang.Controls.Add(pnlItem);
             }
 
+            // Update total
             lblSubTotal.Text = $"Rp {totalBelanja:N0}";
-            cmbMetodeBayar_SelectedIndexChanged(null, null);
+            txtUangDiterima_TextChanged(null, null);
         }
 
 

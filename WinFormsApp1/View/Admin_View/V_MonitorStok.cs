@@ -108,26 +108,90 @@ namespace FinalProjek.View.Admin_View
 
         private void ProsesUpdateStok(Produk produk, string aksi)
         {
-            // Form input sederhana
+            // Buat form dengan ukuran yang cukup
             Form prompt = new Form()
             {
-                Width = 350,
-                Height = 180,
+                Width = 550,              // Lebar lebih besar
+                Height = 200,
                 FormBorderStyle = FormBorderStyle.FixedDialog,
                 Text = aksi == "tambah" ? "Restok: " + produk.nama_produk : "Kurangi: " + produk.nama_produk,
                 StartPosition = FormStartPosition.CenterScreen,
-                MaximizeBox = false
+                MaximizeBox = false,
+                MinimizeBox = false
             };
 
-            Label textLabel = new Label() { Left = 20, Top = 20, Width = 300, Text = "Masukkan jumlah yang ingin di" + aksi + ":" };
-            NumericUpDown inputAngka = new NumericUpDown() { Left = 20, Top = 50, Width = 290, Maximum = 10000, Minimum = 1 };
-            Button confirmation = new Button() { Text = "Simpan", Left = 230, Width = 80, Top = 90, DialogResult = DialogResult.OK, BackColor = Color.Chocolate, ForeColor = Color.White, FlatStyle = FlatStyle.Flat };
+            // Label instruksi
+            Label textLabel = new Label()
+            {
+                Left = 20,
+                Top = 20,
+                Width = 500,
+                Height = 25,
+                Text = "Masukkan jumlah yang ingin di" + aksi + ":",
+                Font = new Font("Segoe UI", 10)
+            };
 
+            // NumericUpDown
+            NumericUpDown inputAngka = new NumericUpDown()
+            {
+                Left = 20,
+                Top = 55,
+                Width = 500,
+                Maximum = 10000,
+                Minimum = 1,
+                Value = 1,
+                Font = new Font("Segoe UI", 10)
+            };
+
+            // Panel untuk menampung tombol (agar rapi)
+            FlowLayoutPanel flowButtons = new FlowLayoutPanel()
+            {
+                Left = 20,
+                Top = 100,
+                Width = 500,
+                Height = 50,
+                FlowDirection = FlowDirection.RightToLeft, // Tombol dari kanan ke kiri
+                AutoSize = false
+            };
+
+            // Tombol Simpan
+            Button btnSimpan = new Button()
+            {
+                Text = "Simpan",
+                Width = 90,
+                Height = 35,
+                DialogResult = DialogResult.OK,
+                BackColor = Color.Chocolate,
+                ForeColor = Color.White,
+                FlatStyle = FlatStyle.Flat,
+                Cursor = Cursors.Hand
+            };
+
+            // Tombol Batal
+            Button btnBatal = new Button()
+            {
+                Text = "Batal",
+                Width = 90,
+                Height = 35,
+                DialogResult = DialogResult.Cancel,
+                FlatStyle = FlatStyle.Flat,
+                Cursor = Cursors.Hand
+            };
+
+            // Tambahkan tombol ke panel (urutan: Simpan dulu karena RightToLeft)
+            flowButtons.Controls.Add(btnSimpan);
+            flowButtons.Controls.Add(btnBatal);
+
+            // Tambahkan semua ke form
             prompt.Controls.Add(textLabel);
             prompt.Controls.Add(inputAngka);
-            prompt.Controls.Add(confirmation);
-            prompt.AcceptButton = confirmation;
+            prompt.Controls.Add(flowButtons);
 
+            // Atur tombol default
+            prompt.AcceptButton = btnSimpan;
+            prompt.CancelButton = btnBatal;
+
+            // Tampilkan dialog
             if (prompt.ShowDialog() == DialogResult.OK)
             {
                 int nilaiInput = (int)inputAngka.Value;
@@ -143,11 +207,10 @@ namespace FinalProjek.View.Admin_View
                 }
 
                 bool sukses = produkController.UpdateStok(produk.id_produk, nilaiInput);
-
                 if (sukses)
                 {
                     MessageBox.Show("Stok berhasil diperbarui!", "Sukses", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                    LoadDataStok(); // Refresh
+                    LoadDataStok();
                 }
                 else
                 {
