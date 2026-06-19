@@ -1,6 +1,5 @@
 ﻿using FinalProjek.Controler;
 using FinalProjek.Model;
-// Hapus using FinalProjek.Helper; karena kita tidak akan nge-hash di View
 using System;
 using System.Windows.Forms;
 
@@ -26,7 +25,6 @@ namespace FinalProjek.View
                 string fullName = tbFullNameRegister.Text;
                 string username = tbUsernameRegister.Text;
 
-                // PERBAIKAN: Ambil teks aslinya saja, JANGAN DI-HASH DI SINI!
                 string password = tbPasswordRegister.Text;
 
                 if (string.IsNullOrWhiteSpace(fullName) || string.IsNullOrWhiteSpace(username) || string.IsNullOrWhiteSpace(password))
@@ -40,7 +38,7 @@ namespace FinalProjek.View
                     {
                         full_name = fullName,
                         username = username,
-                        password = password, // Kirim teks password murni ke Controller
+                        password = password, 
                         role = UserRole.Kasir 
                     };
 
@@ -48,7 +46,7 @@ namespace FinalProjek.View
                     if (success)
                     {
                         MessageBox.Show("Registrasi berhasil! Silakan Login.", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                        this.Close(); // Langsung tutup form register setelah berhasil
+                        this.Close(); 
                     }
                 }
             }

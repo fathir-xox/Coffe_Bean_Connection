@@ -20,9 +20,6 @@ namespace FinalProjek.View.Admin_View
             LoadData();
         }
 
-        // ============================================================
-        // CREATE USER PANEL (Card per user)
-        // ============================================================
         public Panel CreateUserPanel(User user)
         {
             Panel panel = new Panel
@@ -114,15 +111,12 @@ namespace FinalProjek.View.Admin_View
             return panel;
         }
 
-        // ============================================================
-        // LOAD DATA (Hanya user aktif)
-        // ============================================================
         private void LoadData()
         {
             try
             {
                 flpKelolaUser.Controls.Clear();
-                var users = authController.GetActiveUsers(); // Hanya yang aktif
+                var users = authController.GetActiveUsers();
 
                 foreach (User user in users)
                 {
@@ -136,24 +130,15 @@ namespace FinalProjek.View.Admin_View
             }
         }
 
-        // ============================================================
-        // EDIT USER
-        // ============================================================
         private void EditUser(User user)
         {
-            // Membuka form Edit dan MELEMPAR data 'user' yang sedang diklik
             V_EditUser formEdit = new V_EditUser(user);
-
-            // Jika user menekan tombol SIMPAN dan berhasil (DialogResult.OK)
             if (formEdit.ShowDialog() == DialogResult.OK)
             {
-                LoadData(); // Segarkan ulang tabel agar data baru langsung muncul!
+                LoadData(); 
             }
         }
 
-        // ============================================================
-        // HAPUS USER (SOFT DELETE)
-        // ============================================================
         private void HapusUser(User user)
         {
             DialogResult dialogResult = MessageBox.Show(
@@ -169,7 +154,7 @@ namespace FinalProjek.View.Admin_View
                 if (berhasil)
                 {
                     MessageBox.Show("User berhasil dinonaktifkan.", "Sukses", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                    LoadData(); // Refresh tampilan
+                    LoadData(); 
                 }
                 else
                 {
@@ -178,9 +163,6 @@ namespace FinalProjek.View.Admin_View
             }
         }
 
-        // ============================================================
-        // NAVIGASI SIDEBAR
-        // ============================================================
         private void btDashboar_Click(object sender, EventArgs e)
         {
             IProduk produkController = new ProdukController();
@@ -247,9 +229,6 @@ namespace FinalProjek.View.Admin_View
             LoadData();
         }
 
-        // ============================================================
-        // EVENT KOSONG (UNTUK DESIGNER)
-        // ============================================================
         private void lbUsername_Click(object sender, EventArgs e) { }
         private void lbNamaLengkapUser_Click(object sender, EventArgs e) { }
         private void lbRoleUser_Click(object sender, EventArgs e) { }

@@ -26,9 +26,6 @@ namespace FinalProjek.View.Kasir_View
             keranjangBelanja = new List<DetailTransaksi>();
         }
 
-        // =======================================================
-        // EVENT SAAT APLIKASI KASIR PERTAMA DIBUKA
-        // =======================================================
         private void KasirDashboardView_Load(object sender, EventArgs e)
         {
 
@@ -60,25 +57,18 @@ namespace FinalProjek.View.Kasir_View
                 txtUangDiterima.ReadOnly = false;
                 lblKembalian.Text = "Rp 0";
             }
-            // PERBAIKAN: Pemanggilan berulang (infinite loop) dihapus dari sini!
         }
-
-        // =======================================================
-        // MENGGAMBAR KARTU KERANJANG DI FLOWLAYOUTPANEL
-        // =======================================================
         private void RefreshKeranjang()
         {
             flpKeranjang.Controls.Clear();
             totalBelanja = 0;
 
-            // Lebar kartu tetap, tidak usah dihitung manual
-            int lebarKartu = 350; // ukuran tetap, rapi
+            int lebarKartu = 350; 
 
             foreach (var item in keranjangBelanja)
             {
                 totalBelanja += item.subtotal;
 
-                // Panel item dengan ukuran tetap
                 Panel pnlItem = new Panel
                 {
                     Width = lebarKartu,
@@ -88,13 +78,12 @@ namespace FinalProjek.View.Kasir_View
                     BorderStyle = BorderStyle.FixedSingle
                 };
 
-                // ---------- Kiri: Nama & Harga ----------
                 Label lblNama = new Label
                 {
                     Text = item.nama_produk,
                     Location = new Point(10, 8),
                     Size = new Size(200, 25),
-                    Font = new Font("Segoe UI", 10, FontStyle.Bold)
+                    Font = new Font("Times New Roman", 10, FontStyle.Bold)
                 };
 
                 Label lblSubtotal = new Label
@@ -103,10 +92,9 @@ namespace FinalProjek.View.Kasir_View
                     Location = new Point(10, 38),
                     Size = new Size(200, 25),
                     ForeColor = Color.DarkOrange,
-                    Font = new Font("Segoe UI", 10, FontStyle.Bold)
+                    Font = new Font("Times New Roman", 10, FontStyle.Bold)
                 };
 
-                // ---------- Kanan: Tombol - Qty + ----------
                 Button btnMin = new Button
                 {
                     Text = "−",
@@ -115,7 +103,7 @@ namespace FinalProjek.View.Kasir_View
                     BackColor = Color.Crimson,
                     ForeColor = Color.White,
                     FlatStyle = FlatStyle.Flat,
-                    Font = new Font("Arial", 12, FontStyle.Bold),
+                    Font = new Font("Times New Roman", 12, FontStyle.Bold),
                     Cursor = Cursors.Hand
                 };
                 btnMin.FlatAppearance.BorderSize = 0;
@@ -139,7 +127,7 @@ namespace FinalProjek.View.Kasir_View
                     Location = new Point(285, 18),
                     Size = new Size(28, 28),
                     TextAlign = ContentAlignment.MiddleCenter,
-                    Font = new Font("Segoe UI", 12, FontStyle.Bold)
+                    Font = new Font("Times New Roman", 12, FontStyle.Bold)
                 };
 
                 Button btnPlus = new Button
@@ -150,7 +138,7 @@ namespace FinalProjek.View.Kasir_View
                     BackColor = Color.MediumSeaGreen,
                     ForeColor = Color.White,
                     FlatStyle = FlatStyle.Flat,
-                    Font = new Font("Arial", 12, FontStyle.Bold),
+                    Font = new Font("Times New Roman", 12, FontStyle.Bold),
                     Cursor = Cursors.Hand
                 };
                 btnPlus.FlatAppearance.BorderSize = 0;
@@ -183,10 +171,6 @@ namespace FinalProjek.View.Kasir_View
             txtUangDiterima_TextChanged(null, null);
         }
 
-
-        // =======================================================
-        // MENGGAMBAR KARTU PRODUK (Desain Kustom Anda)
-        // =======================================================
         private void LoadDataProduk()
         {
             try
@@ -196,7 +180,6 @@ namespace FinalProjek.View.Kasir_View
 
                 foreach (var produk in listProduk)
                 {
-                    // Panel dibuat tinggi (130) dan lebar memadai (230)
                     Panel card = new Panel
                     {
                         Size = new Size(230, 130),
@@ -205,34 +188,32 @@ namespace FinalProjek.View.Kasir_View
                         BorderStyle = BorderStyle.FixedSingle
                     };
 
-                    // Kotak teks nama dilegakan agar muat 2 baris jika namanya panjang
                     Label lblNama = new Label
                     {
                         Text = produk.nama_produk,
                         Location = new Point(10, 10),
                         Size = new Size(200, 40),
                         AutoEllipsis = true,
-                        Font = new Font("Segoe UI", 11, FontStyle.Bold)
+                        Font = new Font("Times New Roman", 11, FontStyle.Bold)
                     };
 
                     Label lblHarga = new Label
                     {
                         Text = $"Rp {produk.harga:N0}",
-                        Location = new Point(10, 60), // Posisi diturunkan
+                        Location = new Point(10, 60),
                         AutoSize = true,
                         ForeColor = Color.FromArgb(100, 60, 20),
-                        Font = new Font("Segoe UI", 11, FontStyle.Bold)
+                        Font = new Font("Times New Roman", 11, FontStyle.Bold)
                     };
 
                     Label lblStok = new Label
                     {
                         Text = $"Stok: {produk.stok}",
-                        Location = new Point(10, 90), // Posisi diturunkan
+                        Location = new Point(10, 90),
                         AutoSize = true,
-                        Font = new Font("Segoe UI", 9, FontStyle.Regular)
+                        Font = new Font("Times New Roman", 9, FontStyle.Regular)
                     };
 
-                    // Tombol orange dibuat kotak besar yang nyaman diklik
                     Button btnAdd = new Button
                     {
                         Text = "+",
@@ -241,7 +222,7 @@ namespace FinalProjek.View.Kasir_View
                         BackColor = Color.DarkOrange,
                         ForeColor = Color.White,
                         FlatStyle = FlatStyle.Flat,
-                        Font = new Font("Segoe UI", 14, FontStyle.Bold),
+                        Font = new Font("Times New Roman", 14, FontStyle.Bold),
                         Cursor = Cursors.Hand
                     };
                     btnAdd.FlatAppearance.BorderSize = 0;
@@ -262,10 +243,6 @@ namespace FinalProjek.View.Kasir_View
             catch (Exception ex) { MessageBox.Show("Gagal memuat produk: " + ex.Message); }
         }
 
-
-        // =======================================================
-        // FUNGSI MENAMBAH BARANG CERDAS
-        // =======================================================
         private void TambahKeKeranjang(Produk produk)
         {
             var item = keranjangBelanja.Find(x => x.id_produk == produk.id_produk);
@@ -325,9 +302,6 @@ namespace FinalProjek.View.Kasir_View
             }
         }
 
-        // =======================================================
-        // CHECKOUT
-        // =======================================================
         private void btnCheckout_Click(object sender, EventArgs e)
         {
             if (keranjangBelanja.Count == 0) return;
@@ -370,9 +344,6 @@ namespace FinalProjek.View.Kasir_View
             catch (Exception ex) { MessageBox.Show(ex.Message, "Error Sistem Checkout", MessageBoxButtons.OK, MessageBoxIcon.Error); }
         }
 
-        // =======================================================
-        // EVENT KOSONG (Kabel dari Designer agar tidak error)
-        // =======================================================
         private void btDashboar_Click(object sender, EventArgs e) { }
         private void btRiwayatTransaksi_Click(object sender, EventArgs e) { }
         private void panel2_Paint(object sender, PaintEventArgs e) { }
@@ -385,9 +356,7 @@ namespace FinalProjek.View.Kasir_View
         private void lblQty_Click(object sender, EventArgs e) { }
         private void btnMinus_Click(object sender, EventArgs e) { }
         private void lblSubTotal_Click(object sender, EventArgs e) { }
-        private void FormTransaksi_Load(object sender, EventArgs e) { } // Kosongkan yang lama
-
-        // Teruskan fungsi double-click Anda yang salah alamat ke fungsi aslinya
+        private void FormTransaksi_Load(object sender, EventArgs e) { } 
         private void label5_Click(object sender, EventArgs e) { }
         private void btnCheckout_Click_1(object sender, EventArgs e)
         {
@@ -396,23 +365,15 @@ namespace FinalProjek.View.Kasir_View
 
         private void btRiwayatTransaksi_Click_1(object sender, EventArgs e)
         {
-            // Memanggil dan membuka halaman Riwayat Saya
             V_RiwayatSaya frmRiwayat = new V_RiwayatSaya();
             frmRiwayat.Show();
-
-            // Menyembunyikan halaman Kasir yang sekarang
             this.Hide();
         }
 
         private void btDaftarProduk_Click(object sender, EventArgs e)
         {
-            // 1. Buat "cetakan" form Daftar Produk baru
             V_DaftarProduk formDaftarProduk = new V_DaftarProduk();
-
-            // 2. Tampilkan form Daftar Produk
             formDaftarProduk.Show();
-
-            // 3. Sembunyikan Dashboard Kasir (jangan di-Close agar sesinya tidak hilang)
             this.Hide();
         }
 

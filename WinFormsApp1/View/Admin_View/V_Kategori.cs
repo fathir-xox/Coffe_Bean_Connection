@@ -77,7 +77,6 @@ namespace FinalProjek.View.Admin_View
             card.BackgroundImageLayout = ImageLayout.Zoom;
             card.Tag = kategori.id_kategori;
 
-            // Nama Kategori
             Label lblNama = new Label();
             lblNama.Text = kategori.nama_kategori;
             lblNama.Font = new Font("Times New Roman", 14, FontStyle.Bold);
@@ -86,7 +85,6 @@ namespace FinalProjek.View.Admin_View
             lblNama.Size = new Size(220, 30);
             lblNama.BackColor = Color.Transparent;
 
-            // Jumlah Produk
             Label lblJumlah = new Label();
             int jumlahProduk = GetJumlahProdukByKategori(kategori.id_kategori);
             lblJumlah.Text = $"{jumlahProduk} Produk";
@@ -96,7 +94,6 @@ namespace FinalProjek.View.Admin_View
             lblJumlah.Size = new Size(150, 25);
             lblJumlah.BackColor = Color.Transparent;
 
-            // Deskripsi
             Label lblDeskripsi = new Label();
             string deskripsiText = string.IsNullOrEmpty(kategori.deskripsi) ? "" : kategori.deskripsi;
             lblDeskripsi.Text = deskripsiText;
@@ -107,7 +104,6 @@ namespace FinalProjek.View.Admin_View
             lblDeskripsi.BackColor = Color.Transparent;
             lblDeskripsi.AutoSize = false;
 
-            // Tombol Edit
             Button btnEdit = new Button();
             btnEdit.Text = "Edit";
             btnEdit.Font = new Font("Times New Roman", 10, FontStyle.Bold);
@@ -116,7 +112,6 @@ namespace FinalProjek.View.Admin_View
             btnEdit.Location = new Point(275, 15);
             btnEdit.Click += (sender, e) => EditKategori(kategori);
 
-            // Tombol Hapus
             Button btnHapus = new Button();
             btnHapus.Text = "Hapus";
             btnHapus.Font = new Font("Times New Roman", 10, FontStyle.Bold);
@@ -246,7 +241,6 @@ namespace FinalProjek.View.Admin_View
             return "";
         }
 
-        // ==================== BUTTON TAMBAH KATEGORI ====================
 
         private void btTambahKategori_Click(object sender, EventArgs e)
         {
@@ -267,7 +261,6 @@ namespace FinalProjek.View.Admin_View
             LoadKategori();
         }
 
-        // ==================== NAVIGASI ====================
 
         private void btDashboar_Click(object sender, EventArgs e)
         {

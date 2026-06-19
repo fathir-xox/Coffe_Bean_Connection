@@ -17,9 +17,6 @@ namespace FinalProjek.Controler
             dbHelper = new DbContext();
         }
 
-        // ============================================================
-        // LOGIN
-        // ============================================================
         public User login(User user)
         {
             try
@@ -70,9 +67,6 @@ namespace FinalProjek.Controler
             }
         }
 
-        // ============================================================
-        // REGISTER
-        // ============================================================
         public bool Register(User user)
         {
             try
@@ -102,7 +96,6 @@ namespace FinalProjek.Controler
             }
             catch (PostgresException ex) when (ex.SqlState == "23505")
             {
-                // Ini akan menampilkan pesan error yang ramah kepada user
                 throw new Exception("Username ini sudah dipakai. Silakan pilih username lain!");
             }
             catch (Exception ex)
@@ -111,9 +104,6 @@ namespace FinalProjek.Controler
             }
         }
 
-        // ============================================================
-        // GET ALL USERS (Semua user, termasuk yang nonaktif)
-        // ============================================================
         public List<User> GetAllUsers()
         {
             List<User> listUser = new List<User>();
@@ -155,9 +145,6 @@ namespace FinalProjek.Controler
             return listUser;
         }
 
-        // ============================================================
-        // GET ACTIVE USERS (Hanya user aktif)
-        // ============================================================
         public List<User> GetActiveUsers()
         {
             List<User> listUser = new List<User>();
@@ -200,9 +187,6 @@ namespace FinalProjek.Controler
             return listUser;
         }
 
-        // ============================================================
-        // SOFT DELETE (Nonaktifkan user)
-        // ============================================================
         public bool DeleteUser(int id_user)
         {
             try
@@ -226,9 +210,6 @@ namespace FinalProjek.Controler
             }
         }
 
-        // ============================================================
-        // RESTORE USER (Aktifkan kembali user)
-        // ============================================================
         public bool RestoreUser(int id_user)
         {
             try
@@ -259,7 +240,6 @@ namespace FinalProjek.Controler
                 using (var conn = new Npgsql.NpgsqlConnection(dbHelper.connStr))
                 {
                     conn.Open();
-                    // Perhatikan penggunaan @role::role_enum agar sesuai dengan tipe data PostgreSQL Anda
                     string query = @"
                 UPDATE users 
                 SET username = @username, 

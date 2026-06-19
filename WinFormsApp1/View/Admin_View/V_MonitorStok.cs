@@ -59,7 +59,7 @@ namespace FinalProjek.View.Admin_View
                 Text = "Restok",
                 Cursor = Cursors.Hand
             };
-            // REVISI: Menambahkan fungsi klik agar tombol Restok berfungsi
+
             buttonRestok.Click += (sender, e) => ProsesUpdateStok(produk, "tambah");
 
             Button buttonKurangi = new Button
@@ -72,12 +72,8 @@ namespace FinalProjek.View.Admin_View
                 Text = "Kurangi",
                 Cursor = Cursors.Hand
             };
-            // REVISI: Menambahkan fungsi klik agar tombol Kurangi berfungsi
             buttonKurangi.Click += (sender, e) => ProsesUpdateStok(produk, "kurang");
-
-            // panel.Controls.Add(displayProduct);
             panel.Controls.Add(namaProduk);
-            // panel.Controls.Add(hargaProduk);
             panel.Controls.Add(stokProduk);
             panel.Controls.Add(buttonRestok);
             panel.Controls.Add(buttonKurangi);
@@ -89,7 +85,6 @@ namespace FinalProjek.View.Admin_View
         {
             try
             {
-                // Bersihkan kontrol lama
                 flpMonitorStok.Controls.Clear();
 
                 var produks = produkController.GetAllProduk();
@@ -108,10 +103,9 @@ namespace FinalProjek.View.Admin_View
 
         private void ProsesUpdateStok(Produk produk, string aksi)
         {
-            // Buat form dengan ukuran yang cukup
             Form prompt = new Form()
             {
-                Width = 550,              // Lebar lebih besar
+                Width = 550,              
                 Height = 200,
                 FormBorderStyle = FormBorderStyle.FixedDialog,
                 Text = aksi == "tambah" ? "Restok: " + produk.nama_produk : "Kurangi: " + produk.nama_produk,
@@ -120,7 +114,6 @@ namespace FinalProjek.View.Admin_View
                 MinimizeBox = false
             };
 
-            // Label instruksi
             Label textLabel = new Label()
             {
                 Left = 20,
@@ -131,7 +124,6 @@ namespace FinalProjek.View.Admin_View
                 Font = new Font("Segoe UI", 10)
             };
 
-            // NumericUpDown
             NumericUpDown inputAngka = new NumericUpDown()
             {
                 Left = 20,
@@ -143,18 +135,16 @@ namespace FinalProjek.View.Admin_View
                 Font = new Font("Segoe UI", 10)
             };
 
-            // Panel untuk menampung tombol (agar rapi)
             FlowLayoutPanel flowButtons = new FlowLayoutPanel()
             {
                 Left = 20,
                 Top = 100,
                 Width = 500,
                 Height = 50,
-                FlowDirection = FlowDirection.RightToLeft, // Tombol dari kanan ke kiri
+                FlowDirection = FlowDirection.RightToLeft, 
                 AutoSize = false
             };
 
-            // Tombol Simpan
             Button btnSimpan = new Button()
             {
                 Text = "Simpan",
@@ -167,7 +157,6 @@ namespace FinalProjek.View.Admin_View
                 Cursor = Cursors.Hand
             };
 
-            // Tombol Batal
             Button btnBatal = new Button()
             {
                 Text = "Batal",
@@ -178,20 +167,16 @@ namespace FinalProjek.View.Admin_View
                 Cursor = Cursors.Hand
             };
 
-            // Tambahkan tombol ke panel (urutan: Simpan dulu karena RightToLeft)
             flowButtons.Controls.Add(btnSimpan);
             flowButtons.Controls.Add(btnBatal);
 
-            // Tambahkan semua ke form
             prompt.Controls.Add(textLabel);
             prompt.Controls.Add(inputAngka);
             prompt.Controls.Add(flowButtons);
 
-            // Atur tombol default
             prompt.AcceptButton = btnSimpan;
             prompt.CancelButton = btnBatal;
 
-            // Tampilkan dialog
             if (prompt.ShowDialog() == DialogResult.OK)
             {
                 int nilaiInput = (int)inputAngka.Value;
@@ -221,9 +206,6 @@ namespace FinalProjek.View.Admin_View
             prompt.Dispose();
         }
 
-        // ==============================================================
-        // BAGIAN 2: LOGIKA NAVIGASI SIDEBAR (sesuai dengan designer)
-        // ==============================================================
         private void btDashboar_Click(object sender, EventArgs e)
         {
             IProduk pc = new ProdukController();
@@ -251,7 +233,6 @@ namespace FinalProjek.View.Admin_View
 
         private void btMonitorStok_Click(object sender, EventArgs e)
         {
-            // Refresh halaman
             LoadDataStok();
         }
 
