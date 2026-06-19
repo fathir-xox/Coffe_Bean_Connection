@@ -19,7 +19,6 @@ namespace FinalProjek.View.Admin_View
     public partial class AdminDashboardView : Form
     {
         private IProduk produkController;
-        // Deklarasi TransaksiController untuk menghitung penjualan dan pendapatan
         private TransaksiController transaksiController;
 
         public AdminDashboardView(IProduk produkInterface)
@@ -35,25 +34,18 @@ namespace FinalProjek.View.Admin_View
                 produkController = new ProdukController();
             }
 
-            transaksiController = new TransaksiController(); // Inisialisasi controller transaksi
+            transaksiController = new TransaksiController(); 
 
             LoadProducts();
         }
 
-        // =======================================================
-        // FUNGSI MENGHITUNG STATISTIK DASHBOARD
-        // =======================================================
         private void LoadDashboardStats()
         {
             try
             {
-                // 1. Hitung Total Produk
                 List<Produk> listProduk = produkController.GetAllProduk();
-                // Pastikan nama label ini (Label_totalProduk) sesuai dengan yang ada di Properties desain Anda
                 Label_totalProduk.Text = listProduk.Count.ToString();
 
-                // 2. Hitung Total Penjualan & Penghasilan
-                // Pastikan Anda memiliki method GetAllTransaksi() di TransaksiController
                 var listTransaksi = transaksiController.GetAllTransaksi();
 
                 int totalPenjualan = listTransaksi.Count;
@@ -61,24 +53,18 @@ namespace FinalProjek.View.Admin_View
 
                 foreach (var trx in listTransaksi)
                 {
-                    // Menjumlahkan total pendapatan (pastikan trx.total_harga sesuai dengan model Transaksi Anda)
                     totalPenghasilan += trx.total_harga;
                 }
 
-                // Ganti nama label di bawah ini agar sesuai dengan (Name) label di form Design Anda
                 lbTotalPenjualan.Text = totalPenjualan.ToString();
                 lbTotalPenghasilan.Text = "Rp " + totalPenghasilan.ToString("N0");
             }
             catch (Exception ex)
             {
-                // Abaikan jika error agar form tetap bisa terbuka, atau bisa diberi log
                 Console.WriteLine("Gagal memuat statistik dashboard: " + ex.Message);
             }
         }
 
-        // =======================================================
-        // FUNGSI MEMUAT DESAIN CARD PRODUK
-        // =======================================================
         public Panel CreateProductPanel(Produk produk)
         {
             Panel panel = new Panel
@@ -138,58 +124,10 @@ namespace FinalProjek.View.Admin_View
                 TextAlign = ContentAlignment.MiddleCenter,
             };
 
-            //Button buttonEdit = new Button
-            //{
-            //    Location = new Point(36, 246),
-            //    Size = new Size(59, 37),
-            //    Font = new Font("Times New Roman", 9, FontStyle.Regular),
-            //    BackColor = Color.Wheat,
-            //    Text = "Edit",
-            //    Cursor = Cursors.Hand
-            //};
-
-            // Logika Edit (Contoh penerapan jika Anda sudah membuat Form Edit)
-            // buttonEdit.Click += (sender, e) => {
-            //     EditProductView formEdit = new EditProductView(produk);
-            //     formEdit.ShowDialog();
-            //     LoadProducts(); // Refresh setelah diedit
-            // };
-
-            //Button buttonHapus = new Button
-            //{
-            //    Location = new Point(103, 246),
-            //    Size = new Size(76, 37),
-            //    Font = new Font("Times New Roman", 9, FontStyle.Regular),
-            //    BackColor = Color.Red,
-            //    ForeColor = Color.White,
-            //    Text = "Hapus",
-            //    Cursor = Cursors.Hand
-            //};
-
-            //// ---> PERBAIKAN: Logika Tombol Hapus <---
-            //buttonHapus.Click += (sender, e) =>
-            //{
-            //    DialogResult dialogResult = MessageBox.Show($"Apakah Anda yakin ingin menghapus produk '{produk.nama_produk}'?", "Konfirmasi Hapus", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
-            //    if (dialogResult == DialogResult.Yes)
-            //    {
-            //        try
-            //        {
-            //            produkController.DeleteProduk(produk.id_produk);
-            //            LoadProducts(); // Refresh panel setelah dihapus
-            //        }
-            //        catch (Exception ex)
-            //        {
-            //            MessageBox.Show("Gagal menghapus produk: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            //        }
-            //    }
-            //};
-
             panel.Controls.Add(displayProduct);
             panel.Controls.Add(namaProduk);
             panel.Controls.Add(hargaProduk);
             panel.Controls.Add(stokProduk);
-            //panel.Controls.Add(buttonEdit);
-            //panel.Controls.Add(buttonHapus);
 
             return panel;
         }
@@ -200,7 +138,6 @@ namespace FinalProjek.View.Admin_View
             {
                 flowLayoutPanel1.Controls.Clear();
 
-                // Mencegah layar berkedip saat memuat ulang
                 flowLayoutPanel1.SuspendLayout();
 
                 List<Produk> produks = produkController.GetAllProduk();
@@ -213,7 +150,6 @@ namespace FinalProjek.View.Admin_View
 
                 flowLayoutPanel1.ResumeLayout();
 
-                // Panggil perhitungan statistik setiap kali produk dimuat ulang (termasuk saat form baru dibuka)
                 LoadDashboardStats();
             }
             catch (Exception ex)
@@ -222,14 +158,8 @@ namespace FinalProjek.View.Admin_View
             }
         }
 
-        // =======================================================
-        // EVENT TOMBOL
-        // =======================================================
         private void btTambahProduk_Click(object sender, EventArgs e)
         {
-            //AddProductWiew tambahProduk = new AddProductWiew();
-            //tambahProduk.ShowDialog(); // Gunakan ShowDialog agar form admin menunggu
-            //LoadProducts(); // Refresh data otomatis setelah form tambah ditutup!
         }
 
         private void btRefreshData_Click(object sender, EventArgs e)
@@ -244,9 +174,6 @@ namespace FinalProjek.View.Admin_View
             this.Hide();
         }
 
-        // =======================================================
-        // MENU NAVIGASI (SIDEBAR)
-        // =======================================================
         private void btKelolaAkunUser_Click(object sender, EventArgs e)
         {
             V_KelolaAkunUserr frmKelolaAkunUser = new V_KelolaAkunUserr();
@@ -282,9 +209,6 @@ namespace FinalProjek.View.Admin_View
             this.Hide();
         }
 
-        // =======================================================
-        // EVENT KOSONG BAWAAN DESIGNER (Biarkan saja)
-        // =======================================================
         private void label2_Click(object sender, EventArgs e) { }
         private void panel1_Paint(object sender, PaintEventArgs e) { }
         private void label1_Click(object sender, EventArgs e) { }
