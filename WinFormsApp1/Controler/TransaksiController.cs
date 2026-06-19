@@ -18,7 +18,6 @@ namespace FinalProjek.Controler
 
         public int CreateTransaksi(Transaksi transaksi)
         {
-            // TAMBAHAN: Validasi awal agar tidak mengirim ID 0 atau null ke database
             if (transaksi.id_user <= 0)
                 throw new Exception("ID User tidak valid. Harap pastikan Anda sudah login dengan benar.");
 
@@ -46,7 +45,6 @@ namespace FinalProjek.Controler
             }
             catch (NpgsqlException ex)
             {
-                // Tangkapan khusus untuk error database agar Anda tahu jika Foreign Key yang bermasalah
                 if (ex.SqlState == "23503")
                     throw new Exception("Data User tidak ditemukan di database (Foreign Key Violation). Cek apakah ID User " + transaksi.id_user + " terdaftar di tabel users.");
                 throw new Exception("Gagal membuat transaksi baru: " + ex.Message);
@@ -74,7 +72,6 @@ namespace FinalProjek.Controler
                         commandInsert.ExecuteNonQuery();
                     }
 
-                    // Logika otomatis untuk memotong kuantitas stok produk
                     string queryUpdateStok = "UPDATE produk SET stok = stok - @Qty WHERE id_produk = @IdProduk";
                     using (NpgsqlCommand commandUpdate = new NpgsqlCommand(queryUpdateStok, connection))
                     {
@@ -128,9 +125,6 @@ namespace FinalProjek.Controler
             return list;
         }
 
-
-
-        /// Mengambil semua riwayat transaksi (untuk admin)
         public DataTable GetAllRiwayatTransaksi()
         {
             DataTable dt = new DataTable();
@@ -209,12 +203,9 @@ namespace FinalProjek.Controler
             List<Transaksi> listTrx = new List<Transaksi>();
             try
             {
-                // Ganti dbHelper.connStr sesuai dengan cara Anda memanggil koneksi database
                 using (var conn = new Npgsql.NpgsqlConnection(dbHelper.connStr))
                 {
                     conn.Open();
-
-                    // Mengambil semua data dari tabel transaksi
                     string query = "SELECT * FROM transaksi";
 
                     using (var cmd = new Npgsql.NpgsqlCommand(query, conn))
@@ -224,7 +215,6 @@ namespace FinalProjek.Controler
                         {
                             Transaksi trx = new Transaksi();
 
-                            // Sesuaikan string di dalam reader["..."] dengan nama kolom di database Anda
                             trx.id_transaksi = Convert.ToInt32(reader["id_transaksi"]);
                             trx.id_user = Convert.ToInt32(reader["id_user"]);
                             trx.total_harga = Convert.ToInt32(reader["total_harga"]);
