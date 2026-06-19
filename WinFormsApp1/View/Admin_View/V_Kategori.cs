@@ -1,10 +1,6 @@
 ﻿using FinalProjek.Controler;
 using FinalProjek.Interface;
 using FinalProjek.Model;
-using System;
-using System.Collections.Generic;
-using System.Drawing;
-using System.Windows.Forms;
 
 namespace FinalProjek.View.Admin_View
 {
@@ -106,7 +102,7 @@ namespace FinalProjek.View.Admin_View
 
             Button btnEdit = new Button();
             btnEdit.Text = "Edit";
-            btnEdit.Font = new Font("Times New Roman", 10, FontStyle.Bold);
+            btnEdit.Font = new Font("Times New Roman", 10, FontStyle.Regular);
             btnEdit.BackColor = Color.Wheat;
             btnEdit.Size = new Size(85, 35);
             btnEdit.Location = new Point(275, 15);
@@ -114,7 +110,7 @@ namespace FinalProjek.View.Admin_View
 
             Button btnHapus = new Button();
             btnHapus.Text = "Hapus";
-            btnHapus.Font = new Font("Times New Roman", 10, FontStyle.Bold);
+            btnHapus.Font = new Font("Times New Roman", 10, FontStyle.Regular);
             btnHapus.BackColor = Color.Red;
             btnHapus.ForeColor = Color.White;
             btnHapus.Size = new Size(85, 35);
@@ -317,5 +313,10 @@ namespace FinalProjek.View.Admin_View
         }
 
         private void panel1_Paint(object sender, PaintEventArgs e) { }
+
+        private void btEdit_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }

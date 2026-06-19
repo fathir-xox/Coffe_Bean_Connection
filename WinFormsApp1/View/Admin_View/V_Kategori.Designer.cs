@@ -223,6 +223,7 @@
             btEdit.TabIndex = 8;
             btEdit.Text = "Edit";
             btEdit.UseVisualStyleBackColor = false;
+            btEdit.Click += btEdit_Click;
             // 
             // label3
             // 

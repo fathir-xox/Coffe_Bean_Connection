@@ -30,7 +30,6 @@
         {
             btKelolaAkunUser = new Button();
             btDashboar = new Button();
-            btRefresh = new Button();
             flowLayoutPanel1 = new FlowLayoutPanel();
             panel8 = new Panel();
             Stok = new Label();
@@ -43,7 +42,6 @@
             label6 = new Label();
             lbTotalPenjualan = new Label();
             lbTotalPenghasilan = new Label();
-            btTambahProduk = new Button();
             panel6 = new Panel();
             btLogout = new Button();
             btRiwayatTransaksi = new Button();
@@ -81,19 +79,6 @@
             btDashboar.Text = "Dashboard";
             btDashboar.UseVisualStyleBackColor = false;
             btDashboar.Click += btDashboar_Click;
-            // 
-            // btRefresh
-            // 
-            btRefresh.BackColor = Color.OldLace;
-            btRefresh.Font = new Font("Times New Roman", 10F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            btRefresh.ForeColor = Color.FromArgb(100, 60, 20);
-            btRefresh.Location = new Point(1773, 167);
-            btRefresh.Name = "btRefresh";
-            btRefresh.Size = new Size(101, 41);
-            btRefresh.TabIndex = 5;
-            btRefresh.Text = "Refresh";
-            btRefresh.UseVisualStyleBackColor = false;
-            btRefresh.Click += btRefreshData_Click;
             // 
             // flowLayoutPanel1
             // 
@@ -239,30 +224,15 @@
             lbTotalPenghasilan.TabIndex = 3;
             lbTotalPenghasilan.Text = "Rp. 1.450.000";
             // 
-            // btTambahProduk
-            // 
-            btTambahProduk.BackColor = Color.OldLace;
-            btTambahProduk.Font = new Font("Times New Roman", 10F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            btTambahProduk.ForeColor = Color.FromArgb(100, 60, 20);
-            btTambahProduk.Location = new Point(1549, 167);
-            btTambahProduk.Name = "btTambahProduk";
-            btTambahProduk.Size = new Size(164, 41);
-            btTambahProduk.TabIndex = 5;
-            btTambahProduk.Text = "Tambah Produk";
-            btTambahProduk.UseVisualStyleBackColor = false;
-            btTambahProduk.Click += btTambahProduk_Click;
-            // 
             // panel6
             // 
-            panel6.BackgroundImage = Properties.Resources.VDashboard;
+            panel6.BackgroundImage = Properties.Resources.TdashboardNew;
             panel6.Controls.Add(btLogout);
             panel6.Controls.Add(btRiwayatTransaksi);
             panel6.Controls.Add(btMonitorStok);
             panel6.Controls.Add(btKategori);
             panel6.Controls.Add(btProduk);
-            panel6.Controls.Add(btRefresh);
             panel6.Controls.Add(lbTotalPenghasilan);
-            panel6.Controls.Add(btTambahProduk);
             panel6.Controls.Add(lbTotalPenjualan);
             panel6.Controls.Add(label6);
             panel6.Controls.Add(Label_totalProduk);
@@ -373,8 +343,6 @@
         private Label NamaProduk;
         private Label HargaProduk;
         private Label Stok;
-        private Button btTambahProduk;
-        private Button btRefresh;
         private Button btKelolaAkunUser;
         private Panel panel6;
         private Button btMonitorStok;
