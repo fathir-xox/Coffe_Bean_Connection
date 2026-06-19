@@ -63,6 +63,7 @@ namespace FinalProjek.View.Admin_View
 
             if (user.role.ToString().ToLower() == "admin")
                 lbRole.ForeColor = Color.DarkGoldenrod;
+
             else
                 lbRole.ForeColor = Color.DodgerBlue;
 

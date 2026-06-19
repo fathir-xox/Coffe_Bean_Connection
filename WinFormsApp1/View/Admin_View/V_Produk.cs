@@ -22,9 +22,8 @@ namespace FinalProjek.View.Admin_View
 
         public V_Produk() : this(new ProdukController())
         {
-        }
 
-        // ==================== NAVIGASI ====================
+        }
 
         private void btDashboar_Click(object sender, EventArgs e)
         {
@@ -92,8 +91,6 @@ namespace FinalProjek.View.Admin_View
             tambahProduk.ShowDialog();
         }
 
-        // ==================== CREATE PRODUCT PANEL ====================
-
         public Panel CreateProductPanel(Produk produk)
         {
             Panel panel = new Panel
@@ -157,7 +154,6 @@ namespace FinalProjek.View.Admin_View
                 TextAlign = ContentAlignment.MiddleCenter,
             };
 
-            // Tombol Edit
             Button buttonEdit = new Button
             {
                 Location = new Point(36, 246),
@@ -169,7 +165,6 @@ namespace FinalProjek.View.Admin_View
             };
             buttonEdit.Click += BtnEdit_Click;
 
-            // Tombol Hapus
             Button buttonHapus = new Button
             {
                 Location = new Point(103, 246),
@@ -192,8 +187,6 @@ namespace FinalProjek.View.Admin_View
             return panel;
         }
 
-        // ==================== LOAD PRODUCTS ====================
-
         public void LoadProducts()
         {
             flowLayoutPanel1.Controls.Clear();
@@ -206,8 +199,6 @@ namespace FinalProjek.View.Admin_View
                 flowLayoutPanel1.Controls.Add(panelProduk);
             }
         }
-
-        // ==================== EDIT PRODUK ====================
 
         private void BtnEdit_Click(object sender, EventArgs e)
         {
@@ -227,8 +218,6 @@ namespace FinalProjek.View.Admin_View
                 LoadProducts();
             }
         }
-
-        // ==================== HAPUS PRODUK ====================
 
         private void BtnHapus_Click(object sender, EventArgs e)
         {
@@ -252,8 +241,6 @@ namespace FinalProjek.View.Admin_View
                 }
             }
         }
-
-        // ==================== INPUT DIALOG ====================
 
         private string ShowInputDialog(string title, string prompt, string defaultValue = "")
         {
