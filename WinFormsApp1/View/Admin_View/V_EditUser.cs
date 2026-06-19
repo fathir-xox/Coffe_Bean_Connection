@@ -1,7 +1,5 @@
 ﻿using FinalProjek.Controler;
 using FinalProjek.Model;
-using System;
-using System.Windows.Forms;
 
 namespace FinalProjek.View.Admin_View
 {

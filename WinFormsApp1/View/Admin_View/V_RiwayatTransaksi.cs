@@ -1,11 +1,6 @@
 ﻿using FinalProjek.Controler;
 using FinalProjek.Interface;
-using FinalProjek.Helper;
-using FinalProjek.Model;
-using System;
 using System.Data;
-using System.Drawing;
-using System.Windows.Forms;
 
 namespace FinalProjek.View.Admin_View
 {

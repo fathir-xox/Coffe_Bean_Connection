@@ -2,11 +2,6 @@
 using FinalProjek.Interface;
 using FinalProjek.Model;
 using FinalProjek.Helper;
-using System.Drawing.Printing;
-using System;
-using System.Collections.Generic;
-using System.Drawing;
-using System.Windows.Forms;
 
 namespace FinalProjek.View.Kasir_View
 {

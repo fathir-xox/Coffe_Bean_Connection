@@ -1,12 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.IO; 
-using System.Text;
-using System.Windows.Forms;
-using FinalProjek.Model;   
+﻿using FinalProjek.Model;   
 using FinalProjek.Controler;
 
 namespace FinalProjek.View.Kasir_View
