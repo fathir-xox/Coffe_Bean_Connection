@@ -87,7 +87,7 @@
             Stok.BackColor = Color.Transparent;
             Stok.Font = new Font("Times New Roman", 11F, FontStyle.Bold, GraphicsUnit.Point, 0);
             Stok.ForeColor = Color.FromArgb(100, 60, 20);
-            Stok.Location = new Point(47, 246);
+            Stok.Location = new Point(47, 258);
             Stok.Name = "Stok";
             Stok.RightToLeft = RightToLeft.Yes;
             Stok.Size = new Size(101, 25);
@@ -100,7 +100,7 @@
             NamaProduk.BackColor = Color.Transparent;
             NamaProduk.Font = new Font("Times New Roman", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
             NamaProduk.ForeColor = Color.Black;
-            NamaProduk.Location = new Point(8, 168);
+            NamaProduk.Location = new Point(8, 179);
             NamaProduk.Name = "NamaProduk";
             NamaProduk.Size = new Size(197, 26);
             NamaProduk.TabIndex = 2;
@@ -112,7 +112,7 @@
             HargaProduk.BackColor = Color.Transparent;
             HargaProduk.Font = new Font("Times New Roman", 11F, FontStyle.Bold, GraphicsUnit.Point, 0);
             HargaProduk.ForeColor = Color.FromArgb(100, 60, 20);
-            HargaProduk.Location = new Point(47, 206);
+            HargaProduk.Location = new Point(47, 219);
             HargaProduk.Name = "HargaProduk";
             HargaProduk.Size = new Size(112, 25);
             HargaProduk.TabIndex = 4;
@@ -121,9 +121,9 @@
             // pictureBox1
             // 
             pictureBox1.BackgroundImage = Properties.Resources.ArabikaC;
-            pictureBox1.Location = new Point(32, 21);
+            pictureBox1.Location = new Point(14, 15);
             pictureBox1.Name = "pictureBox1";
-            pictureBox1.Size = new Size(147, 122);
+            pictureBox1.Size = new Size(183, 147);
             pictureBox1.TabIndex = 0;
             pictureBox1.TabStop = false;
             // 
