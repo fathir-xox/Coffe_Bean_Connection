@@ -17,7 +17,6 @@ namespace FinalProjek.View.Admin_View
         {
             InitializeComponent();
             transaksiController = new TransaksiController();
-            // Pastikan event Load terhubung
             this.Load += V_RiwayatTransaksi_Load;
         }
 
@@ -61,7 +60,6 @@ namespace FinalProjek.View.Admin_View
             dgvRiwayat.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
         }
 
-        // Tombol navigasi
         private void btDashboar_Click(object sender, EventArgs e)
         {
             IProduk produkController = new ProdukController();
@@ -97,7 +95,7 @@ namespace FinalProjek.View.Admin_View
 
         private void btRiwayatTransaksi_Click(object sender, EventArgs e)
         {
-            LoadAllRiwayat(); // refresh data
+            LoadAllRiwayat(); 
         }
 
         private void btKelolaAkunUser_Click(object sender, EventArgs e)

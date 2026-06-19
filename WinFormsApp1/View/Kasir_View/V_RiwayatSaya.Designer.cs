@@ -93,6 +93,7 @@
             lblOmzet.AutoSize = true;
             lblOmzet.BackColor = Color.Transparent;
             lblOmzet.Font = new Font("Times New Roman", 14F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            lblOmzet.ForeColor = Color.FromArgb(100, 60, 20);
             lblOmzet.Location = new Point(42, 87);
             lblOmzet.Name = "lblOmzet";
             lblOmzet.Size = new Size(28, 32);
@@ -126,6 +127,7 @@
             lblTotalItem.AutoSize = true;
             lblTotalItem.BackColor = Color.Transparent;
             lblTotalItem.Font = new Font("Times New Roman", 14F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            lblTotalItem.ForeColor = Color.FromArgb(100, 60, 20);
             lblTotalItem.Location = new Point(40, 87);
             lblTotalItem.Name = "lblTotalItem";
             lblTotalItem.Size = new Size(28, 32);
@@ -159,6 +161,7 @@
             lblTotalTrx.AutoSize = true;
             lblTotalTrx.BackColor = Color.Transparent;
             lblTotalTrx.Font = new Font("Times New Roman", 14F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            lblTotalTrx.ForeColor = Color.FromArgb(100, 60, 20);
             lblTotalTrx.Location = new Point(31, 87);
             lblTotalTrx.Name = "lblTotalTrx";
             lblTotalTrx.Size = new Size(28, 32);
