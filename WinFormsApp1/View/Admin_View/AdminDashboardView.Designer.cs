@@ -152,11 +152,11 @@
             HargaProduk.BackColor = Color.Transparent;
             HargaProduk.Font = new Font("Times New Roman", 11F, FontStyle.Bold, GraphicsUnit.Point, 0);
             HargaProduk.ForeColor = Color.FromArgb(100, 60, 20);
-            HargaProduk.Location = new Point(47, 214);
+            HargaProduk.Location = new Point(35, 215);
             HargaProduk.Name = "HargaProduk";
-            HargaProduk.Size = new Size(112, 25);
+            HargaProduk.Size = new Size(142, 25);
             HargaProduk.TabIndex = 4;
-            HargaProduk.Text = "Rp. 55.000";
+            HargaProduk.Text = "Rp. 55.000     ";
             HargaProduk.Click += HargaProduk_Click;
             // 
             // pictureBox1

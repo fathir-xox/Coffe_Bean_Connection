@@ -48,7 +48,7 @@ namespace FinalProjek.View.Admin_View
                 BackColor = Color.Transparent,
                 ForeColor = Color.FromArgb(100, 60, 20),
                 Font = new Font("Times New Roman", 14, FontStyle.Regular),
-                TextAlign = ContentAlignment.MiddleLeft,
+                TextAlign = ContentAlignment.MiddleCenter,
             };
 
             Label lbRole = new Label

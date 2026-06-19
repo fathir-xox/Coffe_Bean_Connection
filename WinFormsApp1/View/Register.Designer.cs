@@ -37,14 +37,18 @@
             label3 = new Label();
             label1 = new Label();
             label2 = new Label();
+            lbRole = new Label();
+            cbRole = new ComboBox();
             panel1.SuspendLayout();
             SuspendLayout();
             // 
             // panel1
             // 
             panel1.BackColor = Color.Transparent;
-            panel1.BackgroundImage = Properties.Resources.RegisterView1;
+            panel1.BackgroundImage = Properties.Resources.TregistrasiR;
             panel1.BackgroundImageLayout = ImageLayout.Zoom;
+            panel1.Controls.Add(cbRole);
+            panel1.Controls.Add(lbRole);
             panel1.Controls.Add(tbPasswordRegister);
             panel1.Controls.Add(tbUsernameRegister);
             panel1.Controls.Add(tbFullNameRegister);
@@ -62,7 +66,7 @@
             // 
             tbPasswordRegister.BackColor = Color.White;
             tbPasswordRegister.ForeColor = Color.Black;
-            tbPasswordRegister.Location = new Point(490, 469);
+            tbPasswordRegister.Location = new Point(490, 401);
             tbPasswordRegister.Name = "tbPasswordRegister";
             tbPasswordRegister.Size = new Size(282, 31);
             tbPasswordRegister.TabIndex = 7;
@@ -71,7 +75,7 @@
             // 
             tbUsernameRegister.BackColor = Color.White;
             tbUsernameRegister.ForeColor = Color.Black;
-            tbUsernameRegister.Location = new Point(490, 369);
+            tbUsernameRegister.Location = new Point(490, 326);
             tbUsernameRegister.Name = "tbUsernameRegister";
             tbUsernameRegister.Size = new Size(282, 31);
             tbUsernameRegister.TabIndex = 6;
@@ -80,7 +84,7 @@
             // 
             tbFullNameRegister.BackColor = Color.White;
             tbFullNameRegister.ForeColor = Color.Black;
-            tbFullNameRegister.Location = new Point(490, 269);
+            tbFullNameRegister.Location = new Point(490, 251);
             tbFullNameRegister.Name = "tbFullNameRegister";
             tbFullNameRegister.Size = new Size(282, 31);
             tbFullNameRegister.TabIndex = 5;
@@ -90,9 +94,9 @@
             btRegister.BackColor = Color.Wheat;
             btRegister.Font = new Font("Times New Roman", 14F, FontStyle.Bold, GraphicsUnit.Point, 0);
             btRegister.ForeColor = Color.FromArgb(100, 60, 20);
-            btRegister.Location = new Point(482, 529);
+            btRegister.Location = new Point(479, 529);
             btRegister.Name = "btRegister";
-            btRegister.Size = new Size(294, 58);
+            btRegister.Size = new Size(298, 58);
             btRegister.TabIndex = 4;
             btRegister.Text = "Register";
             btRegister.UseVisualStyleBackColor = false;
@@ -103,7 +107,7 @@
             label4.AutoSize = true;
             label4.Font = new Font("Times New Roman", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
             label4.ForeColor = Color.FromArgb(100, 60, 20);
-            label4.Location = new Point(490, 232);
+            label4.Location = new Point(490, 214);
             label4.Name = "label4";
             label4.Size = new Size(159, 27);
             label4.TabIndex = 4;
@@ -115,7 +119,7 @@
             label3.AutoSize = true;
             label3.Font = new Font("Times New Roman", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
             label3.ForeColor = Color.FromArgb(100, 60, 20);
-            label3.Location = new Point(489, 432);
+            label3.Location = new Point(489, 364);
             label3.Name = "label3";
             label3.Size = new Size(104, 27);
             label3.TabIndex = 3;
@@ -126,7 +130,7 @@
             label1.AutoSize = true;
             label1.Font = new Font("Times New Roman", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
             label1.ForeColor = Color.FromArgb(100, 60, 20);
-            label1.Location = new Point(490, 332);
+            label1.Location = new Point(490, 289);
             label1.Name = "label1";
             label1.Size = new Size(108, 27);
             label1.TabIndex = 2;
@@ -137,12 +141,33 @@
             label2.AutoSize = true;
             label2.Font = new Font("Times New Roman", 16F, FontStyle.Bold, GraphicsUnit.Point, 0);
             label2.ForeColor = Color.FromArgb(100, 60, 20);
-            label2.Location = new Point(548, 166);
+            label2.Location = new Point(548, 153);
             label2.Name = "label2";
             label2.Size = new Size(177, 36);
             label2.TabIndex = 1;
             label2.Text = "REGISTER";
             label2.Click += label2_Click;
+            // 
+            // lbRole
+            // 
+            lbRole.AutoSize = true;
+            lbRole.Font = new Font("Times New Roman", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            lbRole.ForeColor = Color.FromArgb(100, 60, 20);
+            lbRole.Location = new Point(490, 439);
+            lbRole.Name = "lbRole";
+            lbRole.Size = new Size(57, 27);
+            lbRole.TabIndex = 8;
+            lbRole.Text = "Role";
+            lbRole.Click += lbRole_Click;
+            // 
+            // cbRole
+            // 
+            cbRole.FormattingEnabled = true;
+            cbRole.Location = new Point(492, 474);
+            cbRole.Name = "cbRole";
+            cbRole.Size = new Size(280, 33);
+            cbRole.TabIndex = 9;
+            cbRole.SelectedIndexChanged += cbRole_SelectedIndexChanged;
             // 
             // Register
             // 
@@ -168,5 +193,7 @@
         private TextBox tbPasswordRegister;
         private TextBox tbUsernameRegister;
         private TextBox tbFullNameRegister;
+        private ComboBox cbRole;
+        private Label lbRole;
     }
 }

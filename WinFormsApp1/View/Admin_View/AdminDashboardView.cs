@@ -105,8 +105,8 @@ namespace FinalProjek.View.Admin_View
             Label hargaProduk = new Label
             {
                 Text = "Rp " + produk.harga.ToString("N0"),
-                Location = new Point(47, 214),
-                Size = new Size(112, 25),
+                Location = new Point(35, 215),
+                Size = new Size(142, 25),
                 BackColor = Color.Transparent,
                 ForeColor = Color.FromArgb(100, 60, 20),
                 Font = new Font("Times New Roman", 11, FontStyle.Bold),
