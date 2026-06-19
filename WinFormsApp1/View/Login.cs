@@ -1,5 +1,4 @@
-﻿// WinFormsApp1\View\Login.cs
-using FinalProjek.Controler;
+﻿using FinalProjek.Controler;
 using FinalProjek.Helper;
 using FinalProjek.Interface;
 using FinalProjek.Model;
@@ -50,7 +49,6 @@ namespace FinalProjek.View
 
         private void button1_Click(object sender, EventArgs e)
         {
-            // Validasi: Mengecek TextBox txtUsername dan txtPassword tidak boleh kosong
             if (string.IsNullOrWhiteSpace(txtUsername.Text) || string.IsNullOrWhiteSpace(txtPassword.Text))
             {
                 MessageBox.Show("Username dan Password tidak boleh kosong!", "Peringatan", MessageBoxButtons.OK, MessageBoxIcon.Warning);
@@ -59,25 +57,20 @@ namespace FinalProjek.View
 
             try
             {
-                // 1. Ambil teks dari TextBox UI dan masukkan ke Model
                 User inputUser = new User
                 {
                     username = txtUsername.Text,
                     password = txtPassword.Text
                 };
 
-                // 2. Lempar ke Controller untuk dicek di Database
                 User loggedInUser = authcontroller.login(inputUser);
 
-                // 3. Jika berhasil login (data ditemukan)
                 if (loggedInUser != null)
                 {
-                    // --- PERBAIKAN: Menambahkan penyimpanan sesi global ---
                     APPSession.SetUser(loggedInUser);
 
                     MessageBox.Show($"Selamat datang, {loggedInUser.full_name}!", "Login Berhasil", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
-                    // --- LOGIKA PEMBAGIAN DASHBOARD ---
                     if (loggedInUser.role == UserRole.Admin)
                     {
                         AdminDashboardView formAdmin = new AdminDashboardView(produkInterface);

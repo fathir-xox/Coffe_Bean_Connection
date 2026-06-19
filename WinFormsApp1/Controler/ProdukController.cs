@@ -4,11 +4,9 @@ using FinalProjek.Interface;
 using FinalProjek.Model;
 using System;
 using System.Collections.Generic;
-// Hapus System.Windows.Forms karena UI tidak boleh ada di Controller
 
 namespace FinalProjek.Controler
 {
-    // Typo diperbaiki menjadi dua L: Controller
     public class ProdukController : IProduk
     {
         private DbContext dbHelper;
@@ -30,7 +28,6 @@ namespace FinalProjek.Controler
 
                     using (NpgsqlCommand cmd = new NpgsqlCommand(query, connection))
                     {
-                        // Disesuaikan dengan PascalCase dari C# conventions
                         cmd.Parameters.AddWithValue("@nama_produk", produk.nama_produk);
                         cmd.Parameters.AddWithValue("@harga", produk.harga);
                         cmd.Parameters.AddWithValue("@stok", produk.stok);
@@ -44,7 +41,6 @@ namespace FinalProjek.Controler
             }
             catch (Exception ex)
             {
-                // Melempar pesan error ke View (Form) agar form yang memunculkan MessageBox
                 throw new Exception($"Gagal menambah produk: {ex.Message}");
             }
         }
@@ -170,7 +166,6 @@ namespace FinalProjek.Controler
                 using (var conn = new NpgsqlConnection(dbHelper.connStr))
                 {
                     conn.Open();
-                    // Query ini akan menambahkan stok. Jika jumlahPerubahan bernilai minus (misal -5), maka stok akan berkurang.
                     string query = "UPDATE produk SET stok = stok + @Perubahan WHERE id_produk = @IdProduk";
 
                     using (var cmd = new NpgsqlCommand(query, conn))
