@@ -166,7 +166,6 @@ namespace FinalProjek.View.Kasir_View
                 flpKeranjang.Controls.Add(pnlItem);
             }
 
-            // Update total
             lblSubTotal.Text = $"Rp {totalBelanja:N0}";
             txtUangDiterima_TextChanged(null, null);
         }

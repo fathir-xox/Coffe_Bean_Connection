@@ -21,7 +21,6 @@ namespace FinalProjek.View
 
         }
 
-
         private void Login_Load(object sender, EventArgs e)
         {
 
@@ -104,7 +103,5 @@ namespace FinalProjek.View
         {
 
         }
-
-        
     }
 }

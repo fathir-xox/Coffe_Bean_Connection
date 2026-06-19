@@ -5,7 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Windows.Forms;
-using FinalProjek.View.Kasir_View; // Pastikan namespace ini benar
+using FinalProjek.View.Kasir_View; 
 
 namespace FinalProjek.View.Kasir_View
 {
@@ -19,12 +19,8 @@ namespace FinalProjek.View.Kasir_View
             transaksiController = new TransaksiController();
         }
 
-        // =======================================================
-        // SATU-SATUNYA EVENT LOAD YANG DIGUNAKAN
-        // =======================================================
         private void V_RiwayatSaya_Load(object sender, EventArgs e)
         {
-            // Pastikan APPSession sudah terisi saat login
             if (APPSession.CurrentUser != null)
             {
                 int idKasirAktif = APPSession.CurrentUser.id_user;
@@ -33,14 +29,10 @@ namespace FinalProjek.View.Kasir_View
             }
             else
             {
-                // Jika null, mungkin user belum login, arahkan ke login atau beri peringatan
                 MessageBox.Show("Sesi login tidak ditemukan. Silakan login kembali.", "Peringatan", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
         }
 
-        // =======================================================
-        // 1. MENGISI 3 KARTU ATAS (Statistik)
-        // =======================================================
         private void LoadStatistikCard(int idKasir)
         {
             try
@@ -56,9 +48,6 @@ namespace FinalProjek.View.Kasir_View
             }
         }
 
-        // =======================================================
-        // 2. MENGISI TABEL BAWAH (DataGridView)
-        // =======================================================
         private void LoadTabelRiwayat(int idUser)
         {
             try
@@ -86,7 +75,7 @@ namespace FinalProjek.View.Kasir_View
 
         private void SetupDesainTabel()
         {
-            if (dgvRiwayat.Columns.Count > 0) return; // Mencegah duplikasi kolom
+            if (dgvRiwayat.Columns.Count > 0) return; 
 
             dgvRiwayat.AutoGenerateColumns = false;
             dgvRiwayat.Columns.Add("ColNoTrx", "NO. TRX");
@@ -105,10 +94,6 @@ namespace FinalProjek.View.Kasir_View
             dgvRiwayat.RowTemplate.Height = 45;
             dgvRiwayat.ColumnHeadersHeight = 40;
         }
-
-        // =======================================================
-        // NAVIGASI
-        // =======================================================
         private void btTransaksi_Click(object sender, EventArgs e)
         {
             KasirDashboardView frmKasir = new KasirDashboardView();
@@ -116,7 +101,6 @@ namespace FinalProjek.View.Kasir_View
             this.Hide();
         }
 
-        // Abaikan fungsi kosong lainnya
         private void label3_Click(object sender, EventArgs e) { }
         private void label4_Click(object sender, EventArgs e) { }
         private void V_RiwayatSaya_Load_1(object sender, EventArgs e) { }
