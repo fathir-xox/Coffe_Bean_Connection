@@ -22,7 +22,7 @@ namespace FinalProjek.View.Admin_View
                 produkController = new ProdukController();
             }
 
-            transaksiController = new TransaksiController(); 
+            transaksiController = new TransaksiController();
 
             LoadProducts();
         }
