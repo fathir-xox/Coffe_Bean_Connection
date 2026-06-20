@@ -58,7 +58,7 @@ namespace FinalProjek.View.Kasir_View
             flpKeranjang.Controls.Clear();
             totalBelanja = 0;
 
-            int lebarKartu = 350; 
+            int lebarKartu = 405; 
 
             foreach (var item in keranjangBelanja)
             {
@@ -93,7 +93,7 @@ namespace FinalProjek.View.Kasir_View
                 Button btnMin = new Button
                 {
                     Text = "−",
-                    Location = new Point(250, 18),
+                    Location = new Point(292, 18),
                     Size = new Size(28, 28),
                     BackColor = Color.Crimson,
                     ForeColor = Color.White,
@@ -119,7 +119,7 @@ namespace FinalProjek.View.Kasir_View
                 Label lblQty = new Label
                 {
                     Text = item.qty.ToString(),
-                    Location = new Point(285, 18),
+                    Location = new Point(327, 18),
                     Size = new Size(28, 28),
                     TextAlign = ContentAlignment.MiddleCenter,
                     Font = new Font("Times New Roman", 12, FontStyle.Bold)
@@ -128,7 +128,7 @@ namespace FinalProjek.View.Kasir_View
                 Button btnPlus = new Button
                 {
                     Text = "+",
-                    Location = new Point(318, 18),
+                    Location = new Point(360, 18),
                     Size = new Size(28, 28),
                     BackColor = Color.MediumSeaGreen,
                     ForeColor = Color.White,
