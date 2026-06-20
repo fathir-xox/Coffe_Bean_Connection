@@ -147,7 +147,8 @@ namespace FinalProjek.Controler
                 {
                     connection.Open();
                     string query = @"UPDATE kategori 
-                                     SET nama_kategori = @nama_kategori, deskripsi = @deskripsi 
+                                     SET nama_kategori = @nama_kategori, 
+                                     deskripsi = @deskripsi 
                                      WHERE id_kategori = @id";
                     using (NpgsqlCommand cmd = new NpgsqlCommand(query, connection))
                     {

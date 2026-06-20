@@ -26,7 +26,11 @@ namespace FinalProjek.Controler
                     conn.Open();
 
                     string query = @"
-                        SELECT id_user, ""role""::text, full_name, username, password 
+                        SELECT id_user, 
+                        ""role""::text, 
+                        full_name, 
+                        username, 
+                        password 
                         FROM users 
                         WHERE username = @username AND password = @password 
                         LIMIT 1";
@@ -66,6 +70,7 @@ namespace FinalProjek.Controler
                 throw new Exception("Gagal melakukan proses login: " + ex.Message);
             }
         }
+
         public User login(string username, string password)
         {
             User tempUser = new User
@@ -124,7 +129,11 @@ namespace FinalProjek.Controler
                     conn.Open();
 
                     string query = @"
-                        SELECT id_user, full_name, username, ""role""::text, isactive 
+                        SELECT id_user, 
+                        full_name, 
+                        username, 
+                        ""role""::text, 
+                        isactive 
                         FROM users 
                         ORDER BY id_user ASC";
 
@@ -151,48 +160,6 @@ namespace FinalProjek.Controler
             catch (Exception ex)
             {
                 MessageBox.Show("Gagal mengambil daftar user: " + ex.Message, "Sistem Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-            return listUser;
-        }
-
-        public List<User> GetActiveUsers()
-        {
-            List<User> listUser = new List<User>();
-            try
-            {
-                using (var conn = new NpgsqlConnection(dbHelper.connStr))
-                {
-                    conn.Open();
-
-                    string query = @"
-                        SELECT id_user, full_name, username, ""role""::text, isactive 
-                        FROM users 
-                        WHERE isactive = true
-                        ORDER BY id_user ASC";
-
-                    using (var cmd = new NpgsqlCommand(query, conn))
-                    using (var reader = cmd.ExecuteReader())
-                    {
-                        while (reader.Read())
-                        {
-                            string roleStr = reader.GetString(3);
-                            UserRole roleEnum = (UserRole)Enum.Parse(typeof(UserRole), roleStr, true);
-
-                            listUser.Add(new User
-                            {
-                                id_user = reader.GetInt32(0),
-                                full_name = reader.GetString(1),
-                                username = reader.GetString(2),
-                                role = roleEnum,
-                                isactive = reader.GetBoolean(4)
-                            });
-                        }
-                    }
-                }
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show("Gagal mengambil daftar user aktif: " + ex.Message, "Sistem Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
             return listUser;
         }
@@ -251,12 +218,12 @@ namespace FinalProjek.Controler
                 {
                     conn.Open();
                     string query = @"
-                UPDATE users 
-                SET username = @username, 
+                    UPDATE users 
+                    SET username = @username, 
                     full_name = @full_name, 
                     ""role"" = @role::role_enum, 
                     isactive = @isactive 
-                WHERE id_user = @id_user";
+                    WHERE id_user = @id_user";
 
                     using (var cmd = new Npgsql.NpgsqlCommand(query, conn))
                     {

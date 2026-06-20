@@ -21,16 +21,6 @@ namespace FinalProjek.View
 
         }
 
-        private void Login_Load(object sender, EventArgs e)
-        {
-
-        }
-
-        private void label1_Click(object sender, EventArgs e)
-        {
-
-        }
-
         private void label2_Click(object sender, EventArgs e)
         {
 
@@ -41,11 +31,7 @@ namespace FinalProjek.View
 
         }
 
-        private void textBox1_TextChanged(object sender, EventArgs e)
-        {
-
-        }
-
+        
         private void button1_Click(object sender, EventArgs e)
         {
             if (string.IsNullOrWhiteSpace(txtUsername.Text) || string.IsNullOrWhiteSpace(txtPassword.Text))
@@ -56,15 +42,6 @@ namespace FinalProjek.View
 
             try
             {
-                //User inputUser = new User
-                //{
-                //    username = txtUsername.Text,
-                //    password = txtPassword.Text
-                //};
-
-                //User loggedInUser = authcontroller.login(inputUser);
-
-                // MENGGUNAKAN POLIMORFISME OVERLOADING
                 User loggedInUser = authcontroller.login(txtUsername.Text, txtPassword.Text);
 
                 if (loggedInUser != null)

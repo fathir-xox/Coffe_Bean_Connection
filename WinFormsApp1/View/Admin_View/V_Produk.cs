@@ -1,4 +1,5 @@
 ﻿using FinalProjek.Controler;
+using FinalProjek.Helper;
 using FinalProjek.Interface;
 using FinalProjek.Model;
 
@@ -68,10 +69,10 @@ namespace FinalProjek.View.Admin_View
 
         private void btLogout_Click(object sender, EventArgs e)
         {
+            APPSession.Logout();
             Login frmLogin = new Login();
-            frmLogin.FormClosed += (s, args) => this.Close();
             frmLogin.Show();
-            this.Hide();
+            this.Close();
         }
 
         private void btRefresh_Click(object sender, EventArgs e)

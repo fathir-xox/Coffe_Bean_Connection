@@ -156,8 +156,6 @@ namespace FinalProjek.Controler
                 return false;
             }
         }
-
-
       
         public bool UpdateStok(int idProduk, int jumlahPerubahan)
         {

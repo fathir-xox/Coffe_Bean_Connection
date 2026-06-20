@@ -15,11 +15,5 @@ namespace FinalProjek.Helper
                 return Convert.ToBase64String(hash);
             }
         }
-
-        public static bool VerifyPassword(string inputPassword, string storedHash)
-        {
-            string inputHash = HashPassword(inputPassword);
-            return inputHash == storedHash;
-        }
     }
 }

@@ -13,7 +13,5 @@ namespace FinalProjek.Model
         public int stok { get; set; }
         public string? deskripsi { get; set; }
         public byte[]? imageproduk { get; set; }
-        public DateTime created_at { get; set; }
-        public DateTime updated_at { get; set; }
     }
 }

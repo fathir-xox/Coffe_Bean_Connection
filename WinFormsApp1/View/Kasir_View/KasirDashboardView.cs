@@ -2,6 +2,8 @@
 using FinalProjek.Interface;
 using FinalProjek.Model;
 using FinalProjek.Helper;
+// === TAMBAHAN FITUR STRUK 1: Import Library Printing ===
+using System.Drawing.Printing;
 
 namespace FinalProjek.View.Kasir_View
 {
@@ -12,6 +14,12 @@ namespace FinalProjek.View.Kasir_View
         private List<DetailTransaksi> keranjangBelanja;
         private int totalBelanja = 0;
 
+        private PrintDocument strukDocument;
+        private PrintPreviewDialog strukPreview;
+        private List<DetailTransaksi> itemCetak = new List<DetailTransaksi>();
+        private int cetakTotal, cetakBayar, cetakKembali, cetakIdTrx;
+        private string cetakMetode;
+       
         public KasirDashboardView()
         {
             InitializeComponent();
@@ -19,6 +27,15 @@ namespace FinalProjek.View.Kasir_View
             produkController = new ProdukController();
             transaksiController = new TransaksiController();
             keranjangBelanja = new List<DetailTransaksi>();
+
+            strukDocument = new PrintDocument();
+            strukDocument.PrintPage += new PrintPageEventHandler(CetakHalamanStruk);
+
+            strukDocument.DefaultPageSettings.PaperSize = new PaperSize("Struk", 320, 600);
+
+            strukPreview = new PrintPreviewDialog();
+            strukPreview.Document = strukDocument;
+            ((Form)strukPreview).WindowState = FormWindowState.Maximized; 
         }
 
         private void KasirDashboardView_Load(object sender, EventArgs e)
@@ -58,7 +75,7 @@ namespace FinalProjek.View.Kasir_View
             flpKeranjang.Controls.Clear();
             totalBelanja = 0;
 
-            int lebarKartu = 405; 
+            int lebarKartu = 405;
 
             foreach (var item in keranjangBelanja)
             {
@@ -327,6 +344,16 @@ namespace FinalProjek.View.Kasir_View
                         transaksiController.AddDetail(item);
                     }
 
+                    // === TAMBAHAN FITUR STRUK 4: Menyiapkan Data & Memanggil Preview ===
+                    itemCetak = new List<DetailTransaksi>(keranjangBelanja);
+                    cetakTotal = totalBelanja;
+                    cetakBayar = uangDiterima;
+                    cetakKembali = uangDiterima - totalBelanja;
+                    cetakMetode = metodeTerpilih.ToUpper();
+                    cetakIdTrx = idTrx;
+
+                    strukPreview.ShowDialog(); 
+
                     MessageBox.Show($"Transaksi Berhasil!\nMetode: {metodeTerpilih.ToUpper()}\nKembalian: Rp {uangDiterima - totalBelanja:N0}", "Sukses", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
                     keranjangBelanja.Clear();
@@ -338,20 +365,67 @@ namespace FinalProjek.View.Kasir_View
             catch (Exception ex) { MessageBox.Show(ex.Message, "Error Sistem Checkout", MessageBoxButtons.OK, MessageBoxIcon.Error); }
         }
 
+        private void CetakHalamanStruk(object sender, PrintPageEventArgs e)
+        {
+            Graphics grafis = e.Graphics;
+            Font fontJudul = new Font("Courier New", 14, FontStyle.Bold);
+            Font fontBiasa = new Font("Courier New", 10, FontStyle.Regular);
+            Font fontTebal = new Font("Courier New", 10, FontStyle.Bold);
+
+            int y = 20;
+            int x = 10;
+
+            grafis.DrawString("COFFEE BEAN CONNECTION", fontJudul, Brushes.Black, x + 20, y);
+            y += 25;
+            grafis.DrawString("Jl. Kalimantan, Kampus Tegalboto", fontBiasa, Brushes.Black, x + 15, y);
+            y += 20;
+            grafis.DrawString("Jember, Jawa Timur", fontBiasa, Brushes.Black, x + 60, y);
+            y += 30;
+
+            grafis.DrawString("---------------------------------", fontBiasa, Brushes.Black, x, y);
+            y += 20;
+            grafis.DrawString($"No. Trx : #{cetakIdTrx:D4}", fontBiasa, Brushes.Black, x, y);
+            y += 20;
+            grafis.DrawString($"Tanggal : {DateTime.Now.ToString("dd/MM/yyyy HH:mm")}", fontBiasa, Brushes.Black, x, y);
+            y += 20;
+            grafis.DrawString($"Kasir   : {APPSession.CurrentUser?.full_name ?? "Kasir"}", fontBiasa, Brushes.Black, x, y);
+            y += 20;
+            grafis.DrawString("---------------------------------", fontBiasa, Brushes.Black, x, y);
+            y += 20;
+
+            foreach (var item in itemCetak)
+            {
+                grafis.DrawString(item.nama_produk, fontBiasa, Brushes.Black, x, y);
+                y += 20;
+                grafis.DrawString($"{item.qty} x Rp {item.harga:N0}", fontBiasa, Brushes.Black, x + 20, y);
+                grafis.DrawString($"Rp {item.subtotal:N0}", fontBiasa, Brushes.Black, x + 180, y);
+                y += 20;
+            }
+
+            grafis.DrawString("---------------------------------", fontBiasa, Brushes.Black, x, y);
+            y += 20;
+
+            grafis.DrawString("TOTAL   :", fontTebal, Brushes.Black, x, y);
+            grafis.DrawString($"Rp {cetakTotal:N0}", fontTebal, Brushes.Black, x + 180, y);
+            y += 20;
+
+            grafis.DrawString($"BAYAR ({cetakMetode}) :", fontBiasa, Brushes.Black, x, y);
+            grafis.DrawString($"Rp {cetakBayar:N0}", fontBiasa, Brushes.Black, x + 180, y);
+            y += 20;
+
+            grafis.DrawString("KEMBALI :", fontBiasa, Brushes.Black, x, y);
+            grafis.DrawString($"Rp {cetakKembali:N0}", fontBiasa, Brushes.Black, x + 180, y);
+            y += 30;
+
+            // Footer
+            grafis.DrawString("Terima Kasih Atas Kunjungan Anda!", fontBiasa, Brushes.Black, x + 10, y);
+        }
+
         private void btDashboar_Click(object sender, EventArgs e) { }
-        private void btRiwayatTransaksi_Click(object sender, EventArgs e) { }
         private void panel2_Paint(object sender, PaintEventArgs e) { }
         private void label1_Click(object sender, EventArgs e) { }
-        private void l_Click(object sender, EventArgs e) { }
-        private void panel8_Paint(object sender, PaintEventArgs e) { }
-        private void lblHarga_Click(object sender, EventArgs e) { }
-        private void lblNamaProduk_Click(object sender, EventArgs e) { }
-        private void lblPlus_Click(object sender, EventArgs e) { }
-        private void lblQty_Click(object sender, EventArgs e) { }
-        private void btnMinus_Click(object sender, EventArgs e) { }
-        private void lblSubTotal_Click(object sender, EventArgs e) { }
-        private void FormTransaksi_Load(object sender, EventArgs e) { } 
         private void label5_Click(object sender, EventArgs e) { }
+
         private void btnCheckout_Click_1(object sender, EventArgs e)
         {
             btnCheckout_Click(sender, e);
@@ -361,22 +435,22 @@ namespace FinalProjek.View.Kasir_View
         {
             V_RiwayatSaya frmRiwayat = new V_RiwayatSaya();
             frmRiwayat.Show();
-            this.Hide();
+            this.Close();
         }
 
         private void btDaftarProduk_Click(object sender, EventArgs e)
         {
             V_DaftarProduk formDaftarProduk = new V_DaftarProduk();
             formDaftarProduk.Show();
-            this.Hide();
+            this.Close();
         }
 
         private void btLogout_Click(object sender, EventArgs e)
         {
+            APPSession.Logout();
             Login frmLogin = new Login();
-            frmLogin.FormClosed += (s, args) => this.Close();
             frmLogin.Show();
-            this.Hide();
+            this.Close();
         }
     }
 }

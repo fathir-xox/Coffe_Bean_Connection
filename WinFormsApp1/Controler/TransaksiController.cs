@@ -134,18 +134,18 @@ namespace FinalProjek.Controler
                 {
                     connection.Open();
                     string query = @"
-                SELECT 
+                    SELECT 
                     t.id_transaksi AS ""NO. TRX"",
                     t.tanggal AS ""TANGGAL"",
                     COALESCE(SUM(dt.qty), 0) AS ""ITEM"",
                     t.total_harga AS ""TOTAL"",
                     t.metode_bayar::text AS ""METODE"",
                     u.full_name AS ""KASIR""
-                FROM transaksi t
-                LEFT JOIN detailtransaksi dt ON t.id_transaksi = dt.id_transaksi
-                LEFT JOIN ""users"" u ON t.id_user = u.id_user
-                GROUP BY t.id_transaksi, t.tanggal, t.total_harga, t.metode_bayar, u.full_name
-                ORDER BY t.tanggal DESC";
+                    FROM transaksi t
+                    LEFT JOIN detailtransaksi dt ON t.id_transaksi = dt.id_transaksi
+                    LEFT JOIN ""users"" u ON t.id_user = u.id_user
+                    GROUP BY t.id_transaksi, t.tanggal, t.total_harga, t.metode_bayar, u.full_name
+                    ORDER BY t.tanggal DESC";
 
                     using (NpgsqlDataAdapter adapter = new NpgsqlDataAdapter(query, connection))
                     {
@@ -159,7 +159,6 @@ namespace FinalProjek.Controler
             }
             return dt;
         }
-
 
         public (int jumlahTransaksi, int totalItem, int omzet) GetStatistikRiwayat(int idUser)
         {
@@ -198,6 +197,7 @@ namespace FinalProjek.Controler
             catch (Exception ex) { throw new Exception("Gagal mengambil akumulasi statistik: " + ex.Message); }
             return (jumlah, totalItem, omzet);
         }
+
         public List<Transaksi> GetAllTransaksi()
         {
             List<Transaksi> listTrx = new List<Transaksi>();

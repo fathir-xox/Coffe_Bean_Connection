@@ -1,6 +1,7 @@
 ﻿using FinalProjek.Controler;
-using FinalProjek.Model;
+using FinalProjek.Helper;
 using FinalProjek.Interface;
+using FinalProjek.Model;
 
 namespace FinalProjek.View.Admin_View
 {
@@ -148,9 +149,10 @@ namespace FinalProjek.View.Admin_View
 
         private void button1_Click(object sender, EventArgs e)
         {
+            APPSession.Logout();
             Login frmLogin = new Login();
             frmLogin.Show();
-            this.Hide();
+            this.Close();
         }
 
         private void btKelolaAkunUser_Click(object sender, EventArgs e)
@@ -188,22 +190,14 @@ namespace FinalProjek.View.Admin_View
             this.Hide();
         }
 
-        private void label2_Click(object sender, EventArgs e) { }
-        private void panel1_Paint(object sender, PaintEventArgs e) { }
-        private void label1_Click(object sender, EventArgs e) { }
+        
         private void label4_Click(object sender, EventArgs e) { }
         private void label8_Click(object sender, EventArgs e) { }
-        private void panel1_Paint_1(object sender, PaintEventArgs e) { }
-        private void label10_Click(object sender, EventArgs e) { }
-        private void button3_Click(object sender, EventArgs e) { }
         private void btDashboar_Click(object sender, EventArgs e) { }
-        private void btHapus_Click(object sender, EventArgs e) { }
         private void Label_totalProduk_Click(object sender, EventArgs e){ }
         private void panel6_Paint(object sender, PaintEventArgs e) { }
         private void panel8_Paint(object sender, PaintEventArgs e) { }
         private void HargaProduk_Click(object sender, EventArgs e) { }
         private void Stok_Click(object sender, EventArgs e) { }
-        private void Label_totalPenjualan_Click(object sender, EventArgs e) { }
-        private void Label_totalPenghasilan_Click(object sender, EventArgs e) { }
     }
 }
