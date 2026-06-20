@@ -85,24 +85,38 @@ namespace FinalProjek.View.Admin_View
             };
             buttonEdit.Click += (sender, e) => EditUser(user);
 
-            Button buttonHapus = new Button
+            Button buttonAksi = new Button
             {
                 Location = new Point(1341, 26),
                 Size = new Size(125, 43),
                 Font = new Font("Times New Roman", 12, FontStyle.Regular),
-                BackColor = Color.Red,
-                ForeColor = Color.White,
-                Text = "Hapus",
                 Cursor = Cursors.Hand
             };
-            buttonHapus.Click += (sender, e) => HapusUser(user);
+
+            if (user.isactive)
+            {
+                buttonAksi.BackColor = Color.Red;
+                buttonAksi.ForeColor = Color.White;
+                buttonAksi.Text = "Hapus";
+                buttonAksi.Click += (sender, e) => HapusUser(user);
+            }
+            else
+            {
+                buttonAksi.BackColor = Color.MediumSeaGreen;
+                buttonAksi.ForeColor = Color.White;
+                buttonAksi.Text = "Restore";
+                buttonAksi.Click += (sender, e) => RestoreUserUI(user);
+
+                buttonEdit.Enabled = false; // Matikan tombol edit jika user nonaktif
+                buttonEdit.BackColor = Color.Gray;
+            }
 
             panel.Controls.Add(lbUsername);
             panel.Controls.Add(lbNamaLengkap);
             panel.Controls.Add(lbRole);
             panel.Controls.Add(lbStatus);
             panel.Controls.Add(buttonEdit);
-            panel.Controls.Add(buttonHapus);
+            panel.Controls.Add(buttonAksi);
 
             return panel;
         }
@@ -112,7 +126,7 @@ namespace FinalProjek.View.Admin_View
             try
             {
                 flpKelolaUser.Controls.Clear();
-                var users = authController.GetActiveUsers();
+                var users = authController.GetAllUsers();
 
                 foreach (User user in users)
                 {
@@ -157,7 +171,33 @@ namespace FinalProjek.View.Admin_View
                     MessageBox.Show("Gagal menonaktifkan user.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
             }
+
         }
+        private void RestoreUserUI(User user)
+        {
+            DialogResult dialogResult = MessageBox.Show(
+                $"Yakin ingin mengaktifkan kembali user '{user.username}'?",
+                "Konfirmasi Restore",
+                MessageBoxButtons.YesNo,
+                MessageBoxIcon.Question
+            );
+
+            if (dialogResult == DialogResult.Yes)
+            {
+                bool berhasil = authController.RestoreUser(user.id_user);
+
+                if (berhasil)
+                {
+                    MessageBox.Show("User berhasil diaktifkan kembali!", "Sukses", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    LoadData(); 
+                }
+                else
+                {
+                    MessageBox.Show("Gagal mengaktifkan user.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+            }
+        }
+
 
         private void btDashboar_Click(object sender, EventArgs e)
         {
