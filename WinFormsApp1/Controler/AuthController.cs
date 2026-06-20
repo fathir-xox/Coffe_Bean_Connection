@@ -66,6 +66,16 @@ namespace FinalProjek.Controler
                 throw new Exception("Gagal melakukan proses login: " + ex.Message);
             }
         }
+        public User login(string username, string password)
+        {
+            User tempUser = new User
+            {
+                username = username,
+                password = password
+            };
+
+            return login(tempUser);
+        }
 
         public bool Register(User user)
         {

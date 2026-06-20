@@ -56,13 +56,16 @@ namespace FinalProjek.View
 
             try
             {
-                User inputUser = new User
-                {
-                    username = txtUsername.Text,
-                    password = txtPassword.Text
-                };
+                //User inputUser = new User
+                //{
+                //    username = txtUsername.Text,
+                //    password = txtPassword.Text
+                //};
 
-                User loggedInUser = authcontroller.login(inputUser);
+                //User loggedInUser = authcontroller.login(inputUser);
+
+                // MENGGUNAKAN POLIMORFISME OVERLOADING
+                User loggedInUser = authcontroller.login(txtUsername.Text, txtPassword.Text);
 
                 if (loggedInUser != null)
                 {
