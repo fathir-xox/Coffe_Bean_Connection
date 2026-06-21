@@ -4,7 +4,7 @@ using System.Text;
 
 namespace FinalProjek.Model
 {
-    public class Transaksi 
+    public class Transaksi
     {
         public int id_transaksi { get; set; }
         public int id_user { get; set; }
