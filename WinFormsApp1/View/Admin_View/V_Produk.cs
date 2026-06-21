@@ -1,4 +1,9 @@
-﻿using FinalProjek.Controler;
+﻿using System;
+using System.Drawing;
+using System.IO;
+using System.Windows.Forms;
+using System.Collections.Generic;
+using FinalProjek.Controler;
 using FinalProjek.Helper;
 using FinalProjek.Interface;
 using FinalProjek.Model;
@@ -196,6 +201,9 @@ namespace FinalProjek.View.Admin_View
             }
         }
 
+        // =========================================================
+        // KODINGAN UNTUK TOMBOL EDIT (NAMA & HARGA)
+        // =========================================================
         private void BtnEdit_Click(object sender, EventArgs e)
         {
             Button btn = sender as Button;
@@ -203,15 +211,28 @@ namespace FinalProjek.View.Admin_View
 
             if (produk == null) return;
 
-            string newNama = ShowInputDialog("Edit Produk", "Masukkan nama produk baru:", produk.nama_produk);
-
-            if (!string.IsNullOrEmpty(newNama) && newNama != produk.nama_produk)
+            // Memanggil popout dialog baru yang memiliki 2 kolom (Nama dan Harga)
+            if (ShowEditProdukDialog("Edit Produk", produk.nama_produk, produk.harga, out string newNama, out int newHarga))
             {
-                produk.nama_produk = newNama;
-                produkController.UpdateProduk(produk);
+                // Mengecek apakah ada perubahan data
+                if (newNama != produk.nama_produk || newHarga != produk.harga)
+                {
+                    if (string.IsNullOrEmpty(newNama))
+                    {
+                        MessageBox.Show("Nama produk tidak boleh kosong!", "Peringatan", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                        return;
+                    }
 
-                MessageBox.Show("Produk berhasil diupdate!", "Sukses", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                LoadProducts();
+                    // Update data ke objek produk
+                    produk.nama_produk = newNama;
+                    produk.harga = newHarga;
+
+                    // Simpan ke database
+                    produkController.UpdateProduk(produk);
+
+                    MessageBox.Show("Produk berhasil diupdate!", "Sukses", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    LoadProducts();
+                }
             }
         }
 
@@ -238,48 +259,82 @@ namespace FinalProjek.View.Admin_View
             }
         }
 
-        private string ShowInputDialog(string title, string prompt, string defaultValue = "")
+        // =========================================================
+        // POPOUT DIALOG BARU (MENDUKUNG 2 INPUT)
+        // =========================================================
+        private bool ShowEditProdukDialog(string title, string currentNama, int currentHarga, out string newNama, out int newHarga)
         {
+            newNama = currentNama;
+            newHarga = currentHarga;
+
             Form dialog = new Form();
             dialog.Text = title;
-            dialog.Size = new Size(400, 180);
+            dialog.Size = new Size(400, 250); // Ukuran form diperbesar ke bawah
             dialog.StartPosition = FormStartPosition.CenterParent;
             dialog.FormBorderStyle = FormBorderStyle.FixedDialog;
             dialog.MaximizeBox = false;
             dialog.MinimizeBox = false;
 
-            Label lblPrompt = new Label();
-            lblPrompt.Text = prompt;
-            lblPrompt.Location = new Point(20, 20);
-            lblPrompt.Size = new Size(350, 25);
+            // 1. Kolom Input Nama Produk
+            Label lblNama = new Label();
+            lblNama.Text = "Nama Produk:";
+            lblNama.Location = new Point(20, 20);
+            lblNama.Size = new Size(350, 25);
 
-            TextBox txtInput = new TextBox();
-            txtInput.Text = defaultValue;
-            txtInput.Location = new Point(20, 50);
-            txtInput.Size = new Size(350, 25);
+            TextBox txtNama = new TextBox();
+            txtNama.Text = currentNama;
+            txtNama.Location = new Point(20, 50);
+            txtNama.Size = new Size(350, 25);
 
+            // 2. Kolom Input Harga Produk (Pakai NumericUpDown agar anti-error)
+            Label lblHarga = new Label();
+            lblHarga.Text = "Harga Produk (Rp):";
+            lblHarga.Location = new Point(20, 90);
+            lblHarga.Size = new Size(350, 25);
+
+            NumericUpDown numHarga = new NumericUpDown();
+
+            // PERBAIKAN: Set Maximum dan Minimum DULU sebelum memasukkan Value
+            numHarga.Maximum = 100000000; // Batas maksimal harga 100 juta
+            numHarga.Minimum = 0;
+            numHarga.Value = currentHarga; // SEKARANG AMAN DARI ERROR!
+
+            numHarga.Location = new Point(20, 120);
+            numHarga.Size = new Size(350, 25);
+
+            // Tombol OK dan Batal
             Button btnOK = new Button();
             btnOK.Text = "OK";
-            btnOK.Location = new Point(200, 90);
+            btnOK.Location = new Point(200, 160);
             btnOK.Size = new Size(80, 30);
             btnOK.DialogResult = DialogResult.OK;
 
             Button btnCancel = new Button();
             btnCancel.Text = "Batal";
-            btnCancel.Location = new Point(290, 90);
+            btnCancel.Location = new Point(290, 160);
             btnCancel.Size = new Size(80, 30);
             btnCancel.DialogResult = DialogResult.Cancel;
 
-            dialog.Controls.Add(lblPrompt);
-            dialog.Controls.Add(txtInput);
+            // Memasukkan semuanya ke dalam form Popout
+            dialog.Controls.Add(lblNama);
+            dialog.Controls.Add(txtNama);
+            dialog.Controls.Add(lblHarga);
+            dialog.Controls.Add(numHarga);
             dialog.Controls.Add(btnOK);
             dialog.Controls.Add(btnCancel);
 
+            dialog.AcceptButton = btnOK; // Bisa tekan Enter untuk OK
+            dialog.CancelButton = btnCancel; // Bisa tekan Esc untuk Batal
+
+            // Jika user menekan tombol OK, ambil nilainya
             if (dialog.ShowDialog() == DialogResult.OK)
             {
-                return txtInput.Text;
+                newNama = txtNama.Text.Trim();
+                newHarga = (int)numHarga.Value;
+                return true;
             }
-            return "";
+
+            return false;
         }
 
         private void panel1_Paint(object sender, PaintEventArgs e) { }
