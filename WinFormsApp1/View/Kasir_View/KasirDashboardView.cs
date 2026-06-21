@@ -2,8 +2,12 @@
 using FinalProjek.Interface;
 using FinalProjek.Model;
 using FinalProjek.Helper;
-// === TAMBAHAN FITUR STRUK 1: Import Library Printing ===
 using System.Drawing.Printing;
+using System;
+using System.Collections.Generic;
+using System.Drawing;
+using System.Windows.Forms;
+using System.Linq; // tambahkan untuk menggunakan .Where pada TextChanged
 
 namespace FinalProjek.View.Kasir_View
 {
@@ -19,7 +23,7 @@ namespace FinalProjek.View.Kasir_View
         private List<DetailTransaksi> itemCetak = new List<DetailTransaksi>();
         private int cetakTotal, cetakBayar, cetakKembali, cetakIdTrx;
         private string cetakMetode;
-       
+
         public KasirDashboardView()
         {
             InitializeComponent();
@@ -35,12 +39,14 @@ namespace FinalProjek.View.Kasir_View
 
             strukPreview = new PrintPreviewDialog();
             strukPreview.Document = strukDocument;
-            ((Form)strukPreview).WindowState = FormWindowState.Maximized; 
+            ((Form)strukPreview).WindowState = FormWindowState.Maximized;
+
+            // ===== TAMBAHAN: Batasi input hanya angka =====
+            txtUangDiterima.KeyPress += txtUangDiterima_KeyPress;
         }
 
         private void KasirDashboardView_Load(object sender, EventArgs e)
         {
-
             LoadDataProduk();
             RefreshKeranjang();
 
@@ -70,6 +76,7 @@ namespace FinalProjek.View.Kasir_View
                 lblKembalian.Text = "Rp 0";
             }
         }
+
         private void RefreshKeranjang()
         {
             flpKeranjang.Controls.Clear();
@@ -119,7 +126,7 @@ namespace FinalProjek.View.Kasir_View
                     Cursor = Cursors.Hand
                 };
                 btnMin.FlatAppearance.BorderSize = 0;
-                btnMin.Click += (s, e) =>
+                btnMin.Click += (s, ev) =>
                 {
                     if (item.qty > 1)
                     {
@@ -154,7 +161,7 @@ namespace FinalProjek.View.Kasir_View
                     Cursor = Cursors.Hand
                 };
                 btnPlus.FlatAppearance.BorderSize = 0;
-                btnPlus.Click += (s, e) =>
+                btnPlus.Click += (s, ev) =>
                 {
                     var produkAsli = produkController.GetAllProduk().Find(p => p.id_produk == item.id_produk);
                     if (produkAsli != null && item.qty + 1 <= produkAsli.stok)
@@ -288,6 +295,17 @@ namespace FinalProjek.View.Kasir_View
             RefreshKeranjang();
         }
 
+        // ===== TAMBAHAN: Event KeyPress untuk membatasi input hanya angka =====
+        private void txtUangDiterima_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            // Izinkan digit, backspace, dan karakter kontrol (Ctrl+C, Ctrl+V, dll)
+            if (!char.IsDigit(e.KeyChar) && e.KeyChar != (char)Keys.Back && !char.IsControl(e.KeyChar))
+            {
+                e.Handled = true;
+                MessageBox.Show("Hanya angka yang diperbolehkan!", "Peringatan", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
+        }
+
         private void txtUangDiterima_TextChanged(object sender, EventArgs e)
         {
             if (string.IsNullOrWhiteSpace(txtUangDiterima.Text))
@@ -344,7 +362,7 @@ namespace FinalProjek.View.Kasir_View
                         transaksiController.AddDetail(item);
                     }
 
-                    // === TAMBAHAN FITUR STRUK 4: Menyiapkan Data & Memanggil Preview ===
+                    // Siapkan data untuk cetak struk
                     itemCetak = new List<DetailTransaksi>(keranjangBelanja);
                     cetakTotal = totalBelanja;
                     cetakBayar = uangDiterima;
@@ -352,7 +370,7 @@ namespace FinalProjek.View.Kasir_View
                     cetakMetode = metodeTerpilih.ToUpper();
                     cetakIdTrx = idTrx;
 
-                    strukPreview.ShowDialog(); 
+                    strukPreview.ShowDialog();
 
                     MessageBox.Show($"Transaksi Berhasil!\nMetode: {metodeTerpilih.ToUpper()}\nKembalian: Rp {uangDiterima - totalBelanja:N0}", "Sukses", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
@@ -417,10 +435,10 @@ namespace FinalProjek.View.Kasir_View
             grafis.DrawString($"Rp {cetakKembali:N0}", fontBiasa, Brushes.Black, x + 180, y);
             y += 30;
 
-            // Footer
             grafis.DrawString("Terima Kasih Atas Kunjungan Anda!", fontBiasa, Brushes.Black, x + 10, y);
         }
 
+        // ===== EVENT KOSONG (Kabel dari Designer) =====
         private void btDashboar_Click(object sender, EventArgs e) { }
         private void panel2_Paint(object sender, PaintEventArgs e) { }
         private void label1_Click(object sender, EventArgs e) { }
