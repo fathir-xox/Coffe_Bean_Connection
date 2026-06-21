@@ -34,6 +34,7 @@
             btnSimpan = new Button();
             panel1 = new Panel();
             pbGambar = new PictureBox();
+            label1 = new Label();
             panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)pbGambar).BeginInit();
             SuspendLayout();
@@ -101,8 +102,10 @@
             // 
             // panel1
             // 
-            panel1.BackgroundImage = Properties.Resources.VTambahProduk;
+            panel1.BackColor = Color.Transparent;
+            panel1.BackgroundImage = Properties.Resources.Ttambahproduknew;
             panel1.BackgroundImageLayout = ImageLayout.Zoom;
+            panel1.Controls.Add(label1);
             panel1.Controls.Add(pbGambar);
             panel1.Controls.Add(btnTambahGambar);
             panel1.Controls.Add(rtbDeskripsi);
@@ -127,6 +130,17 @@
             pbGambar.TabIndex = 6;
             pbGambar.TabStop = false;
             // 
+            // label1
+            // 
+            label1.AutoSize = true;
+            label1.Font = new Font("Times New Roman", 13F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            label1.ForeColor = Color.FromArgb(100, 60, 20);
+            label1.Location = new Point(754, 336);
+            label1.Name = "label1";
+            label1.Size = new Size(103, 29);
+            label1.TabIndex = 8;
+            label1.Text = "Kategori";
+            // 
             // AddProductWiew
             // 
             AutoScaleDimensions = new SizeF(10F, 25F);
@@ -140,5 +154,7 @@
             ((System.ComponentModel.ISupportInitialize)pbGambar).EndInit();
             ResumeLayout(false);
         }
+
+        private Label label1;
     }
 }

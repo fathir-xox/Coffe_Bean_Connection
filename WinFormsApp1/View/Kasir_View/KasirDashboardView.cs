@@ -3,11 +3,7 @@ using FinalProjek.Interface;
 using FinalProjek.Model;
 using FinalProjek.Helper;
 using System.Drawing.Printing;
-using System;
-using System.Collections.Generic;
-using System.Drawing;
-using System.Windows.Forms;
-using System.Linq; // tambahkan untuk menggunakan .Where pada TextChanged
+
 
 namespace FinalProjek.View.Kasir_View
 {
@@ -41,7 +37,6 @@ namespace FinalProjek.View.Kasir_View
             strukPreview.Document = strukDocument;
             ((Form)strukPreview).WindowState = FormWindowState.Maximized;
 
-            // ===== TAMBAHAN: Batasi input hanya angka =====
             txtUangDiterima.KeyPress += txtUangDiterima_KeyPress;
         }
 
@@ -295,10 +290,8 @@ namespace FinalProjek.View.Kasir_View
             RefreshKeranjang();
         }
 
-        // ===== TAMBAHAN: Event KeyPress untuk membatasi input hanya angka =====
         private void txtUangDiterima_KeyPress(object sender, KeyPressEventArgs e)
         {
-            // Izinkan digit, backspace, dan karakter kontrol (Ctrl+C, Ctrl+V, dll)
             if (!char.IsDigit(e.KeyChar) && e.KeyChar != (char)Keys.Back && !char.IsControl(e.KeyChar))
             {
                 e.Handled = true;
@@ -362,7 +355,6 @@ namespace FinalProjek.View.Kasir_View
                         transaksiController.AddDetail(item);
                     }
 
-                    // Siapkan data untuk cetak struk
                     itemCetak = new List<DetailTransaksi>(keranjangBelanja);
                     cetakTotal = totalBelanja;
                     cetakBayar = uangDiterima;
@@ -438,7 +430,6 @@ namespace FinalProjek.View.Kasir_View
             grafis.DrawString("Terima Kasih Atas Kunjungan Anda!", fontBiasa, Brushes.Black, x + 10, y);
         }
 
-        // ===== EVENT KOSONG (Kabel dari Designer) =====
         private void btDashboar_Click(object sender, EventArgs e) { }
         private void panel2_Paint(object sender, PaintEventArgs e) { }
         private void label1_Click(object sender, EventArgs e) { }
