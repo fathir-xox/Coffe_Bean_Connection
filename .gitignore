@@ -362,3 +362,6 @@ MigrationBackup/
 # Fody - auto-generated XML schema
 FodyWeavers.xsd
 /WinFormsApp1/Controler/Controler.cs
+/WinFormsApp1/Helper/IProduk.cs
+/.gitignore
+/WinFormsApp1/Helper/IKategori.cs
